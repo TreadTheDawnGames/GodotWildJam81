@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dw7mtb4hfionb"]
+
+[ext_resource type="Script" uid="uid://bkb34rxrs4no2" path="res://Scripts/UI/Cruiser.gd" id="1_h1va5"]
+
+[node name="Cruiser" type="Node2D"]
+script = ExtResource("1_h1va5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
