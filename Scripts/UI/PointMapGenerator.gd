@@ -62,7 +62,7 @@ func placePointsFromMap() -> void:
 		pointButton.pressed.connect(pointPressed.bind(point))
 	remove_child(pointsMap)
 
-func pointPressed(clickedPoint: TextureButton) -> void:
+func pointPressed(clickedPoint: Control) -> void:
 	print("TextureButton pressed!")
 	print("Global mouse position (when pressed): ", get_global_mouse_position()) # Might not be exactly over the button if the mouse moved slightly after press
 	moveCruiserToThisPoint(clickedPoint.global_position)
