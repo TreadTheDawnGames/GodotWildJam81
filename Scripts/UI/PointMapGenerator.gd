@@ -29,12 +29,13 @@ func makeMap() -> void:
 	mapDone = true
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed('click'):
-		for point in pointsConnectedToCruiserPoint():
-			var dist: float = get_global_mouse_position().distance_squared_to( point.global_position )
-			if dist < point.marg:
-				moveCruiserToThisPoint( point.global_position )
+#func _input(event: InputEvent) -> void:
+	#if event.is_action_pressed('click'):
+		#print(get_global_mouse_position())
+		#for point in pointsConnectedToCruiserPoint():
+			#var dist: float = get_global_mouse_position().distance_squared_to( point.global_position )
+			#if dist < point.marg:
+				#moveCruiserToThisPoint( point.global_position )
 
 
 func pointsConnectedToCruiserPoint() -> Array:
@@ -51,31 +52,37 @@ func moveCruiserToThisPoint(pos: Vector2) -> void:
 	cruiser.moveTo(pos)
 
 func placePointsFromMap() -> void:
-	var pitStopsMap: Node2D = pointMaps[ floor( pointMaps.size() * randf() ) ].instantiate()
-	add_child(pitStopsMap)
-	for pitStopOnPointMap in pitStopsMap.get_children():
-		var pitStop: Control = load("res://Scenes/UI/PitStopBtn.tscn").instantiate()
-		add_child(pitStop)
-		pitStop.global_position = pitStopOnPointMap.global_position + randAmtToAdd()
-	remove_child(pitStopsMap)
+	var pointsMap: Node2D = pointMaps[ floor( pointMaps.size() * randf() ) ].instantiate()
+	add_child(pointsMap)
+	for pointOnPointMap in pointsMap.get_children():
+		var point: Control = load("res://Scenes/UI/PitStopBtn.tscn").instantiate()
+		add_child(point)
+		var pointButton: TextureButton = point.get_node("TextureButton")
+		point.global_position = pointOnPointMap.global_position + randAmtToAdd()
+		pointButton.pressed.connect(pointPressed.bind(point))
+	remove_child(pointsMap)
 
+func pointPressed(clickedPoint: TextureButton) -> void:
+	print("TextureButton pressed!")
+	print("Global mouse position (when pressed): ", get_global_mouse_position()) # Might not be exactly over the button if the mouse moved slightly after press
+	moveCruiserToThisPoint(clickedPoint.global_position)
 
 func connectPointsOnMap(numToConnectWith: int = 1) -> void:
-	for pitStop in get_children():
-		var pitStopId: int = astar.get_available_point_id()
-		dictOfPoints[ pitStopId ] = pitStop
-		dictOfIds[ pitStop ] = pitStopId
-		astar.add_point( pitStopId, pitStop.global_position )
+	for point in get_children():
+		var pointId: int = astar.get_available_point_id()
+		dictOfPoints[ pointId ] = point
+		dictOfIds[ point ] = pointId
+		astar.add_point( pointId, point.global_position )
 
-	for pitStopId in astar.get_point_ids():
-		var pitStopPosition := astar.get_point_position( pitStopId )
+	for pointId in astar.get_point_ids():
+		var pointPosition := astar.get_point_position( pointId )
 		var arrOfPoints := []
 		var distOfPoints := []
 
 		for secondPointId in astar.get_point_ids():
-			if secondPointId != pitStopId:
+			if secondPointId != pointId:
 				var secondPointPosition: Vector2 = dictOfPoints[ secondPointId ].global_position
-				var dist := pitStopPosition.distance_squared_to(secondPointPosition)
+				var dist := pointPosition.distance_squared_to(secondPointPosition)
 				distOfPoints.append( dist )
 				arrOfPoints.append( secondPointId )
 
@@ -85,7 +92,7 @@ func connectPointsOnMap(numToConnectWith: int = 1) -> void:
 		for i in range(numToConnectWith):
 			var indexToUse := distOfPoints.find( sortedDistOfPoints[i] )
 			var idOfCurrentlyClosestPoint: int = arrOfPoints[ indexToUse ]
-			astar.connect_points( pitStopId, idOfCurrentlyClosestPoint, true )
+			astar.connect_points( pointId, idOfCurrentlyClosestPoint, true )
 
 func _draw() -> void:
 	if astar and mapDone:
