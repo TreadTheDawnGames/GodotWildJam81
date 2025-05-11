@@ -1,0 +1,92 @@
+[gd_scene load_steps=7 format=4 uid="uid://baqt4yd2q0fvy"]
+
+[ext_resource type="Texture2D" uid="uid://b081xhyg1yieh" path="res://Assets/Sprites/Placeholders/test-tilemap.png" id="1_blwmn"]
+[ext_resource type="PackedScene" uid="uid://chax0pgaodrnu" path="res://Scenes/Objects/crewmate.tscn" id="2_udih6"]
+
+[sub_resource type="GDScript" id="GDScript_udih6"]
+script/source = "extends Node2D
+
+var current_navpoint: Marker2D
+signal changed_navpoint(pos: Vector2)
+@onready var crewmate: Crewmate = $Crewmate
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if event.is_action_pressed(\"ui_up\"):
+			current_navpoint = $NavPoint1
+			changed_navpoint.emit(current_navpoint.position)
+		if event.is_action_pressed(\"ui_right\"):
+			current_navpoint = $NavPoint2
+			changed_navpoint.emit(current_navpoint.position)
+		if event.is_action_pressed(\"ui_down\"):
+			current_navpoint = $NavPoint3
+			changed_navpoint.emit(current_navpoint.position)
+		if event.is_action_pressed(\"ui_left\"):
+			current_navpoint = $NavPoint4
+			changed_navpoint.emit(current_navpoint.position)
+	pass
+"
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_udih6"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+agent_radius = 0.0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_udih6"]
+texture = ExtResource("1_blwmn")
+0:0/0 = 0
+1:0/0 = 0
+2:1/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+3:3/0 = 0
+3:4/0 = 0
+4:1/0 = 0
+4:0/0 = 0
+3:0/0 = 0
+2:0/0 = 0
+3:1/0 = 0
+2:4/0 = 0
+1:4/0 = 0
+0:4/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+0:3/0 = 0
+0:2/0 = 0
+0:1/0 = 0
+1:2/0 = 0
+1:1/next_alternative_id = 2
+1:1/0 = 0
+1:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_udih6")
+
+[sub_resource type="TileSet" id="TileSet_yfc8g"]
+navigation_layer_0/layers = 1
+sources/0 = SubResource("TileSetAtlasSource_udih6")
+
+[node name="CrewmateTest" type="Node2D"]
+script = SubResource("GDScript_udih6")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+scale = Vector2(3.07, 3.07)
+tile_map_data = PackedByteArray("AAAAAAAAAAABAAEAAAAAAP//AAABAAEAAAABAP//AAABAAEAAAABAAAAAAABAAEAAAACAAAAAAABAAEAAAACAP//AAABAAEAAAD/////AAABAAEAAAD+////AAABAAEAAAD9////AAABAAEAAAD9/wAAAAABAAEAAAD+/wAAAAABAAEAAAD//wAAAAABAAEAAAD//wEAAAABAAEAAAAAAAEAAAABAAEAAAAAAP7/AAABAAEAAAD///7/AAABAAEAAAD+/wEAAAABAAEAAAABAAEAAAABAAEAAAABAP7/AAABAAEAAAD+//7/AAABAAEAAAD///3/AAABAAEAAAAAAP3/AAABAAEAAAAAAAIAAAABAAEAAAD//wIAAAABAAEAAAA=")
+tile_set = SubResource("TileSet_yfc8g")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Crewmate" parent="." instance=ExtResource("2_udih6")]
+position = Vector2(0, 1)
+
+[node name="NavPoint1" type="Marker2D" parent="."]
+position = Vector2(0, -123)
+
+[node name="NavPoint2" type="Marker2D" parent="."]
+position = Vector2(123, 1)
+
+[node name="NavPoint3" type="Marker2D" parent="."]
+position = Vector2(0, 124)
+
+[node name="NavPoint4" type="Marker2D" parent="."]
+position = Vector2(-121, 1)
+
+[connection signal="changed_navpoint" from="." to="Crewmate" method="_debug_crewmate_test_changed_navpoint"]

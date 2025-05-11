@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://chax0pgaodrnu"]
+
+[ext_resource type="Script" uid="uid://c7u4sqqmin8" path="res://Scripts/crewmate.gd" id="1_rpagk"]
+[ext_resource type="Texture2D" uid="uid://cku1n6l0skf1t" path="res://Assets/Sprites/Placeholders/CrewmateSingle.png" id="2_js6w1"]
+[ext_resource type="Script" uid="uid://wcqwkfjsc6e5" path="res://Scripts/state_machine.gd" id="3_7kgws"]
+[ext_resource type="Script" uid="uid://c8g6rmdi5vc6b" path="res://Scripts/CrewmateStates/idle.gd" id="4_7kgws"]
+[ext_resource type="Script" uid="uid://bpo6ak3hlfru5" path="res://Scripts/CrewmateStates/walk.gd" id="5_5bwah"]
+
+[node name="Crewmate" type="Node2D" node_paths=PackedStringArray("state_machine")]
+script = ExtResource("1_rpagk")
+state_machine = NodePath("StateMachine")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_js6w1")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("_init_state")]
+script = ExtResource("3_7kgws")
+_init_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://wcqwkfjsc6e5"
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("4_7kgws")
+
+[node name="Walk" type="Node" parent="StateMachine"]
+script = ExtResource("5_5bwah")
+
+[node name="Work" type="Node" parent="StateMachine"]
+
+[node name="Repair" type="Node" parent="StateMachine"]
+
+[node name="Fight" type="Node" parent="StateMachine"]
+
+[node name="Injured" type="Node" parent="StateMachine"]
+
+[node name="Healing" type="Node" parent="StateMachine"]
+
+[node name="Dead" type="Node" parent="StateMachine"]

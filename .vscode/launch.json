@@ -8,6 +8,7 @@
             "name": "GDScript: Launch Project",
             "type": "godot",
             "request": "launch",
+            "scene": "${workspaceFolder}/Scenes/crewmate_test.tscn",
             "project": "${workspaceFolder}",
             "debug_collisions": false,
             "debug_paths": false,
