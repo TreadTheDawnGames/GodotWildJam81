@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://cjd0mg0f5nvk5"]
+
+[node name="ShipBuilder" type="Node2D"]

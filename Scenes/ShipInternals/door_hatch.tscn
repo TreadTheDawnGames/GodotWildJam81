@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://cw40dxbekvcc7"]
+
+[ext_resource type="Script" uid="uid://catpoopt73e16" path="res://Scripts/door_hatch.gd" id="1_akfhp"]
+[ext_resource type="Texture2D" uid="uid://byyaovmbtuvtr" path="res://Assets/Sprites/Placeholders/HatchOrDoor.png" id="1_p0fjf"]
+[ext_resource type="Script" path="res://addons/dragNdrop/card_goto_marker.gd" id="3_ivnct"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rnj7b"]
+size = Vector2(7, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_akfhp"]
+size = Vector2(20, 22)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ivnct"]
+size = Vector2(1, 22)
+
+[node name="DoorHatch" type="Area2D"]
+script = ExtResource("1_akfhp")
+metadata/_custom_type_script = "uid://e6s4cpiydw0p"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-6.5, 0)
+shape = SubResource("RectangleShape2D_rnj7b")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_p0fjf")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_akfhp")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_ivnct")
+
+[node name="TDCardPositionMarker2D" type="Marker2D" parent="."]
+script = ExtResource("3_ivnct")
+metadata/_custom_type_script = "uid://bjtekbx1mr6dq"

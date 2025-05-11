@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvc8y48q4mg3o"]
+
+[ext_resource type="Texture2D" uid="uid://c3m4lv3yvqhjc" path="res://Assets/Sprites/Placeholders/ConsoleStation.png" id="1_50rf5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_trjis"]
+size = Vector2(17, 11)
+
+[node name="ConsoleStation" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_50rf5")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_trjis")

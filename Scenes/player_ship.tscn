@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://dh7ft45elcq3i"]
+
+[ext_resource type="Texture2D" uid="uid://c3sj8h3fkas0j" path="res://Assets/Sprites/Placeholders/PlayerShipBody.png" id="1_ty8tg"]
+[ext_resource type="PackedScene" uid="uid://cw40dxbekvcc7" path="res://Scenes/ShipInternals/door_hatch.tscn" id="2_iitm4"]
+[ext_resource type="PackedScene" uid="uid://m78ghge7btvw" path="res://Scenes/engine.tscn" id="3_l6tvr"]
+[ext_resource type="PackedScene" uid="uid://bvc8y48q4mg3o" path="res://Scenes/ShipInternals/console_station.tscn" id="4_n4oq7"]
+
+[node name="PlayerShip" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ty8tg")
+
+[node name="DoorHatch" parent="." instance=ExtResource("2_iitm4")]
+position = Vector2(8.5, -8)
+interiorDoor = true
+
+[node name="DoorHatch2" parent="." instance=ExtResource("2_iitm4")]
+position = Vector2(-30, 3.5)
+rotation = 1.5708
+interiorDoor = true
+
+[node name="DoorHatch3" parent="." instance=ExtResource("2_iitm4")]
+position = Vector2(-11, 31.5)
+rotation = -1.5708
+
+[node name="Node2D" parent="." instance=ExtResource("3_l6tvr")]
+position = Vector2(-56, -14)
+
+[node name="ConsoleStation" parent="." instance=ExtResource("4_n4oq7")]
+position = Vector2(-46.5, -2.5)
+
+[node name="ConsoleStation2" parent="." instance=ExtResource("4_n4oq7")]
+position = Vector2(46.5, -2.5)
+scale = Vector2(-1, 1)
