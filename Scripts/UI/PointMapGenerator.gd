@@ -63,9 +63,12 @@ func placePointsFromMap() -> void:
 	remove_child(pointsMap)
 
 func pointPressed(clickedPoint: Control) -> void:
-	print("TextureButton pressed!")
-	print("Global mouse position (when pressed): ", get_global_mouse_position()) # Might not be exactly over the button if the mouse moved slightly after press
-	moveCruiserToThisPoint(clickedPoint.global_position)
+	for point in pointsConnectedToCruiserPoint():
+		if point == clickedPoint:
+			var dist: float = get_global_mouse_position().distance_squared_to( clickedPoint.global_position )
+			if dist > clickedPoint.marg:
+				moveCruiserToThisPoint( clickedPoint.global_position )
+				pass
 
 func connectPointsOnMap(numToConnectWith: int = 1) -> void:
 	for point in get_children():

@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://cdt1g5kb2a0dv"]
+[gd_scene load_steps=3 format=3 uid="uid://cdt1g5kb2a0dv"]
 
+[ext_resource type="Script" uid="uid://bgo8ae0f1av36" path="res://Scripts/UI/PitStop.gd" id="1_pruq7"]
 [ext_resource type="Texture2D" uid="uid://dtidrmibctya6" path="res://icon.svg" id="1_yko2o"]
 
 [node name="Button" type="Control"]
@@ -9,8 +10,10 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_pruq7")
 
 [node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
 offset_left = -20.0
 offset_top = -21.0
 offset_right = 20.0
