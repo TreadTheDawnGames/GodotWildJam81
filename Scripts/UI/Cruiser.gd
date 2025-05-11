@@ -2,7 +2,10 @@ extends Node2D
 
 signal doneMoving
 
-var cruiserTween: Tween = get_tree().create_tween()
+var cruiserTween: Tween
+
+func _ready() -> void:
+	cruiserTween = get_tree().create_tween().bind_node(self)
 
 func tweenDone() -> void:
 	doneMoving.emit()

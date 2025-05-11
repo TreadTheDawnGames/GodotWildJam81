@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://dnycrg3qoywj2"]
+[gd_scene load_steps=3 format=3 uid="uid://dnycrg3qoywj2"]
+
+[ext_resource type="PackedScene" uid="uid://dw7mtb4hfionb" path="res://Scenes/UI/Cruiser.tscn" id="1_ihlxe"]
+[ext_resource type="Script" uid="uid://bjxjlx8ds8eq3" path="res://Scripts/UI/PointMapGenerator.gd" id="2_pab8o"]
 
 [node name="SpaceMap" type="Control"]
 layout_mode = 3
@@ -11,3 +14,8 @@ offset_right = 2.0
 offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Cruiser" parent="." instance=ExtResource("1_ihlxe")]
+
+[node name="PointMapGenerator" type="Node2D" parent="."]
+script = ExtResource("2_pab8o")

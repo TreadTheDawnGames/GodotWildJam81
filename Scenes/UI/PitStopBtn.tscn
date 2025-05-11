@@ -1,0 +1,24 @@
+[gd_scene load_steps=2 format=3 uid="uid://cdt1g5kb2a0dv"]
+
+[ext_resource type="Texture2D" uid="uid://dtidrmibctya6" path="res://icon.svg" id="1_yko2o"]
+
+[node name="Button" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureButton" type="TextureButton" parent="."]
+offset_left = -20.0
+offset_top = -21.0
+offset_right = 20.0
+offset_bottom = 19.0
+
+[node name="Sprite2D" type="Sprite2D" parent="TextureButton"]
+position = Vector2(20, 20)
+scale = Vector2(0.300781, 0.300781)
+texture = ExtResource("1_yko2o")
+
+[node name="Marker2D" type="Marker2D" parent="."]
