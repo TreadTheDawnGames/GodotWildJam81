@@ -1,5 +1,11 @@
 extends Node2D
 
+# Many thanks to this Tut here for helping me figure this out. I only really had to translate some parts from Godot 3.5 to 4.4
+# https://www.youtube.com/watch?v=6NL7azkpNN4
+
+# Points here are our PitStops
+
+# These are templates that hold placeholder Marker2Ds for the TextureButtons to be placed in
 const pointMaps := [
 	preload("res://Scenes/UI/PointMaps/PointMap1.tscn"),
 	preload("res://Scenes/UI/PointMaps/PointMap2.tscn"),
@@ -9,6 +15,7 @@ const idealStartPos := Vector2( 0, 300 )
 const idealEndPos := Vector2( 1024, 300 )
 var marg := 25
 var cruiser: Node2D
+var lineHighlighter: Line2D
 var mapDone := false
 var astar := AStar2D.new()
 var dictOfPoints: Dictionary = {}
@@ -17,7 +24,8 @@ var dictOfIds: Dictionary = {}
 func _ready() -> void:
 	randomize()
 	cruiser = get_parent().get_node("Cruiser")
-	#cruiser.connect( 'doneMoving', doneMovingCruiser )
+	cruiser.connect('doneMoving', doneMovingCruiser)
+	lineHighlighter = $"../Line2D"
 	makeMap()
 
 
@@ -26,16 +34,8 @@ func makeMap() -> void:
 	connectPointsOnMap(2)
 	areLeftAndRightConnected()
 	placeCruiserOnLeftMostPoint()
+	pointsConnectedToCruiserPoint()
 	mapDone = true
-
-
-#func _input(event: InputEvent) -> void:
-	#if event.is_action_pressed('click'):
-		#print(get_global_mouse_position())
-		#for point in pointsConnectedToCruiserPoint():
-			#var dist: float = get_global_mouse_position().distance_squared_to( point.global_position )
-			#if dist < point.marg:
-				#moveCruiserToThisPoint( point.global_position )
 
 
 func pointsConnectedToCruiserPoint() -> Array:
@@ -46,10 +46,22 @@ func pointsConnectedToCruiserPoint() -> Array:
 	var arrOfPointIdThatAreConnectedToTheMainPoint = astar.get_point_connections( idOfPointToGetConnectionsOf )
 	for id in arrOfPointIdThatAreConnectedToTheMainPoint:
 		arrOfConnectedPoints.append( dictOfPoints[ id ] )
+		setLineHighlightToSomeLines( arrOfConnectedPoints, pointToGetConnectionsOf.global_position )
 	return arrOfConnectedPoints
 
 func moveCruiserToThisPoint(pos: Vector2) -> void:
 	cruiser.moveTo(pos)
+
+
+func setLineHighlightToSomeLines(arrOfPoses: Array, centerPos: Vector2) -> void:
+	lineHighlighter.clear_points()
+	var ind: int = 0
+	for pos in arrOfPoses:
+		lineHighlighter.add_point( pos.global_position, ind )
+		lineHighlighter.add_point( centerPos, ind + 1 )
+		ind += 2
+	pass
+
 
 func placePointsFromMap() -> void:
 	var pointsMap: Node2D = pointMaps[ floor( pointMaps.size() * randf() ) ].instantiate()
@@ -134,6 +146,12 @@ func getClosestPointToPosPassedIn(posToStartAt: Vector2) -> Control:
 			pointToReturn = point
 			maxDist = dist
 	return pointToReturn
+
+
+func doneMovingCruiser() -> void:
+	pointsConnectedToCruiserPoint()
+	pass
+	
 
 func randAmtToAdd() -> Vector2:
 	return Vector2( randf_range(-marg, marg) , randf_range(-marg, marg) )
