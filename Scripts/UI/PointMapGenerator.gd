@@ -11,7 +11,7 @@ var marg := 25
 var cruiser: Node2D
 var mapDone := false
 var astar := AStar2D.new()
-var dictOfPitStops: Dictionary = {}
+var dictOfPoints: Dictionary = {}
 var dictOfIds: Dictionary = {}
 
 func _ready() -> void:
@@ -24,13 +24,31 @@ func _ready() -> void:
 func makeMap() -> void:
 	placePointsFromMap()
 	connectPointsOnMap(2)
-	#await get_tree()
 	areLeftAndRightConnected()
-	#await get_tree()
-	#update()
-	#placeCruiserOnLeftMostPoint()
+	placeCruiserOnLeftMostPoint()
 	mapDone = true
 
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed('click'):
+		for point in pointsConnectedToCruiserPoint():
+			var dist: float = get_global_mouse_position().distance_squared_to( point.global_position )
+			if dist < point.marg:
+				moveCruiserToThisPoint( point.global_position )
+
+
+func pointsConnectedToCruiserPoint() -> Array:
+	var arrOfConnectedPoints: Array
+	var pointToGetConnectionsOf: Control = getClosestPointToPosPassedIn( cruiser.global_position )
+	var idOfPointToGetConnectionsOf: int = dictOfIds[ pointToGetConnectionsOf ]
+	
+	var arrOfPointIdThatAreConnectedToTheMainPoint = astar.get_point_connections( idOfPointToGetConnectionsOf )
+	for id in arrOfPointIdThatAreConnectedToTheMainPoint:
+		arrOfConnectedPoints.append( dictOfPoints[ id ] )
+	return arrOfConnectedPoints
+
+func moveCruiserToThisPoint(pos: Vector2) -> void:
+	cruiser.moveTo(pos)
 
 func placePointsFromMap() -> void:
 	var pitStopsMap: Node2D = pointMaps[ floor( pointMaps.size() * randf() ) ].instantiate()
@@ -45,28 +63,28 @@ func placePointsFromMap() -> void:
 func connectPointsOnMap(numToConnectWith: int = 1) -> void:
 	for pitStop in get_children():
 		var pitStopId: int = astar.get_available_point_id()
-		dictOfPitStops[ pitStopId ] = pitStop
+		dictOfPoints[ pitStopId ] = pitStop
 		dictOfIds[ pitStop ] = pitStopId
 		astar.add_point( pitStopId, pitStop.global_position )
 
 	for pitStopId in astar.get_point_ids():
 		var pitStopPosition := astar.get_point_position( pitStopId )
-		var arrOfPitStops := []
-		var distOfPitStops := []
+		var arrOfPoints := []
+		var distOfPoints := []
 
-		for secondPitStopId in astar.get_point_ids():
-			if secondPitStopId != pitStopId:
-				var secondPitStopPosition: Vector2 = dictOfPitStops[ secondPitStopId ].global_position
-				var dist := pitStopPosition.distance_squared_to(secondPitStopPosition)
-				distOfPitStops.append( dist )
-				arrOfPitStops.append( secondPitStopId )
+		for secondPointId in astar.get_point_ids():
+			if secondPointId != pitStopId:
+				var secondPointPosition: Vector2 = dictOfPoints[ secondPointId ].global_position
+				var dist := pitStopPosition.distance_squared_to(secondPointPosition)
+				distOfPoints.append( dist )
+				arrOfPoints.append( secondPointId )
 
-		var sortedDistOfPitStops := distOfPitStops.duplicate()
-		sortedDistOfPitStops.sort()
+		var sortedDistOfPoints := distOfPoints.duplicate()
+		sortedDistOfPoints.sort()
 
 		for i in range(numToConnectWith):
-			var indexToUse := distOfPitStops.find( sortedDistOfPitStops[i] )
-			var idOfCurrentlyClosestPoint: int = arrOfPitStops[ indexToUse ]
+			var indexToUse := distOfPoints.find( sortedDistOfPoints[i] )
+			var idOfCurrentlyClosestPoint: int = arrOfPoints[ indexToUse ]
 			astar.connect_points( pitStopId, idOfCurrentlyClosestPoint, true )
 
 func _draw() -> void:
@@ -88,6 +106,14 @@ func areLeftAndRightConnected() -> void:
 	if not(astar.get_point_path(leftMostId, rightMostId)):
 		get_tree().reload_current_scene() #clears everything and reloads the map :/ there's definitely a more elegant way to do this
 	pass
+
+
+func placeCruiserOnLeftMostPoint() -> void:
+	var leftMostPoint := getClosestPointToPosPassedIn( idealStartPos )
+	if is_instance_valid(cruiser):
+		if cruiser.has_method('setPos'):
+			cruiser.call('setPos', leftMostPoint.global_position)
+
 
 func getClosestPointToPosPassedIn(posToStartAt: Vector2) -> Control:
 	var maxDist = INF
