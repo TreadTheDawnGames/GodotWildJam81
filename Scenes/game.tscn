@@ -1,12 +1,15 @@
 [gd_scene load_steps=3 format=3 uid="uid://cme73ldydoe5f"]
 
-[ext_resource type="PackedScene" path="res://Scenes/player_ship.tscn" id="1_qxrlw"]
+[ext_resource type="PackedScene" uid="uid://brwabn5dnw7yo" path="res://Scenes/player_ship.tscn" id="1_qxrlw"]
 [ext_resource type="PackedScene" uid="uid://bgdmpjwnw1uva" path="res://Scenes/ShipRooms/small_room.tscn" id="2_wrm1d"]
 
 [node name="Game" type="Node2D"]
 
 [node name="PlayerShip" parent="." instance=ExtResource("1_qxrlw")]
-position = Vector2(323, 326)
+position = Vector2(329, 316)
 
 [node name="SmallRoom" parent="." instance=ExtResource("2_wrm1d")]
-position = Vector2(584, 495)
+position = Vector2(328, 450)
+
+[node name="SmallRoom2" parent="." instance=ExtResource("2_wrm1d")]
+position = Vector2(160, 457)

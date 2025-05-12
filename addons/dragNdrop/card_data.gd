@@ -12,8 +12,7 @@ func _init(cardName : String, playType : String) -> void:
 	return
 	
 func _to_string() -> String:
-	var other = "null"
-	return "Name: " + CardName + " | Value: " + other
+	return "Name: " + CardName + " | PlayType: " + PlayType
 
 func SpecialSetup(_card : TDCard):
 	#printerr("[CardData] CardData is intended to be used as an abstract class. Please create a new class and inherit it: SpecialSetup has not been implemented. card: " + CardName)
@@ -39,6 +38,9 @@ func GrabAction(_card : TDCard) -> void:
 func EnterUsable(_playArea : TDCardPlayArea, _card : TDCard) -> void:
 	return
 
+func WhileUsable(_playArea : TDCardPlayArea, _card : TDCard) -> void:
+	return
+
 func Preplay(_playArea : TDCardPlayArea, _card : TDCard) -> void:
 	return
 
@@ -49,10 +51,10 @@ func PlayCard(_playArea : TDCardPlayArea, _card : TDCard) -> void:
 func Postplay(_playArea : TDCardPlayArea, _card : TDCard) -> void:
 	return
 
-func ExitUsable(_card : TDCard) -> void:
+func ExitUsable(_playArea : TDCardPlayArea, _card : TDCard) -> void:
 	return
 
-func DropAction(_card : TDCard) -> void:
+func DropAction(_playArea : TDCardPlayArea, _card : TDCard) -> void:
 	#printerr("[CardData] CardData is intended to be used as an abstract class. Please create a new class and inherit it: DropAction has not been implemented. card: " + card.cardName)
 	return
 

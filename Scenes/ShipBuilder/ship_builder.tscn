@@ -1,3 +1,13 @@
-[gd_scene format=3 uid="uid://cjd0mg0f5nvk5"]
+[gd_scene load_steps=4 format=3 uid="uid://cjd0mg0f5nvk5"]
+
+[ext_resource type="Script" uid="uid://k8lm342br6h7" path="res://Scenes/ShipBuilder/ship_builder.gd" id="1_52mkc"]
+[ext_resource type="PackedScene" uid="uid://brwabn5dnw7yo" path="res://Scenes/player_ship.tscn" id="2_o8snd"]
+[ext_resource type="Script" uid="uid://b86xq610d61j6" path="res://addons/dragNdrop/card_board.gd" id="2_q1ubs"]
 
 [node name="ShipBuilder" type="Node2D"]
+script = ExtResource("1_52mkc")
+playerShip = ExtResource("2_o8snd")
+
+[node name="TDCardBoard" type="Node2D" parent="."]
+script = ExtResource("2_q1ubs")
+metadata/_custom_type_script = "uid://b86xq610d61j6"

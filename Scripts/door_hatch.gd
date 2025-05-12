@@ -1,10 +1,13 @@
-extends TDCardPlayArea
-class_name DoorHatch
+extends ConnectionPlayArea
 
-@onready var ConnectionSlot = $TDCardPositionMarker2D
-@export var interiorDoor = false
+@export var doorNormal : Texture2D
+@export var doorConnectable : Texture2D
 
-func _ready() -> void:
-	if(interiorDoor):
-		monitorable = false
-		monitoring = false
+
+func ValidConnection():
+	sprite.texture = doorConnectable #.blend(Color.BLACK)
+	return
+
+func ValidConnectionOff():
+	sprite.texture = doorNormal #.blend(Color.BLACK)
+	return

@@ -2,10 +2,10 @@ class_name ShipRoomData
 extends TDCardData
 
 var connections : Array[TDCardPlayArea]
+var hasValidWall : bool = false
 
 func _to_string() -> String:
-	var other = "null"
-	return "Name: " + CardName + " | Value: " + other
+	return "Name: " + CardName + " | Connections: " + str(connections)
 
 func SpecialSetup(_card : TDCard):
 	return
@@ -16,23 +16,27 @@ func Frame(card : TDCard, _delta : float) -> void:
 			card._hovered = false
 		else:
 			card._hovered = true
+	
+	
 	if(card._hovered):
 		if(card.grabbed):
 			if(not card.usable):
-				card.scale = card.scale.lerp(Vector2(1.33,1.33), 0.25)
-			else:
-				card.scale = card.scale.lerp(Vector2(1.5, 1.5), 0.25) 
+				card.modulate = card.modulate.blend(Color.WHITE) #.lerp(Vector2(1.33,1.33), 0.25)
+			#else:
+				#card.modulate = card.modulate.blend(Color.GREEN) #.lerp(Vector2(1.33,1.33), 0.25)
+				#card.scale = card.scale.lerp(Vector2(1.5, 1.5), 0.25) 
 		else:
-			card.scale = card.scale.lerp(Vector2(1.25,1.25), 0.25)
+			card.modulate = card.modulate.blend(Color.YELLOW) #.lerp(Vector2(1.33,1.33), 0.25)
+			#card.scale = card.scale.lerp(Vector2(1.25,1.25), 0.25)
 	else:
-		card.scale = card.scale.lerp(Vector2.ONE, 0.25)
+		card.modulate = card.modulate.blend(Color.WHITE) #.lerp(Vector2(1.33,1.33), 0.25)
+		#card.scale = card.scale.lerp(Vector2.ONE, 0.25)
 	return
 
 ## Called every frame while the cursor is hovered over the associated TDCard.
 func WhileHovered(_card : TDCard):
 	if(Input.is_action_just_pressed("rotate")):
 		#_card.position -= _card.get_local_mouse_position()
-		_card.rotate(deg_to_rad(90))
 		_card.Rotate()
 
 	
@@ -40,7 +44,6 @@ func WhileHovered(_card : TDCard):
 	return
 
 func HoverEnterAction(_card : TDCard) -> void:
-	print("hovered")
 	#printerr("[CardData] CardData is intended to be used as an abstract class. Please create a new class and inherit it: HoverEnterAction has not been implemented. card: " + card.CardName)
 	return
 
@@ -48,21 +51,46 @@ func GrabAction(_card : TDCard) -> void:
 	#printerr("[CardData] CardData is intended to be used as an abstract class. Please create a new class and inherit it:  GrabAction has not been implemented. card: " + card.CardName)
 	return
 
+func WhileUsable(_playArea : TDCardPlayArea, _card : TDCard) -> void:
+	var playArea = _playArea as ConnectionPlayArea
+	var card : ShipPart = _card as ShipPart
+	
+	var validChildren : Array[ConnectionPlayArea] = []
+	for connection : ConnectionMarker2D in card.Connections:
+		var child : ConnectionPlayArea = connection.get_children()[0]
+		if(child.cardinalWall + playArea.cardinalWall == 0):
+			validChildren.append(child)
+	
+	var nearestValid : ConnectionPlayArea
+	var distToNearest : float = INF
+	if(validChildren.size()>0):
+		hasValidWall = true
+		for valid in validChildren:
+			valid.ValidConnectionOff()
+			var dist = valid.global_position.distance_to(playArea.global_position)
+			if(dist < distToNearest):
+				nearestValid = valid
+				distToNearest = dist
+		nearestValid.ValidConnection()
+		playArea.ValidConnection()
+	if(nearestValid):
+		card.UpdateWhichWall(nearestValid.global_position)
+	card.usable = hasValidWall
+	
+	return
+
 func EnterUsable(_playArea : TDCardPlayArea, _card : TDCard) -> void:
-	#_card.usable = _playArea.ValidPlayType(PlayType)
-	#_card.rotation = _playArea.rotation
-	#_card.Rotate()
 	return
 
 func Preplay(_playArea : TDCardPlayArea, _card : TDCard) -> void:
 	return
 
-func PlayCard(_playArea : TDCardPlayArea, card : TDCard) -> void:
+func PlayCard(_playArea : TDCardPlayArea, _card : TDCard) -> void:
 	for enginePart in connections:
 		enginePart.monitorable = true
 		enginePart.monitoring = true
 		
-	card.UpdateWhichWall(_playArea.global_position)
+	var card : ShipPart = _card as ShipPart
 	
 	card.FillMarker(_playArea.ConnectionSlot)
 	print("Played")
@@ -71,16 +99,25 @@ func PlayCard(_playArea : TDCardPlayArea, card : TDCard) -> void:
 	card.SetUsable(false)
 	card.z_index = _playArea.z_index+1
 	card.reparent(_playArea.get_parent())
-	
+	card.grabbed = false
+	card.Unhovered()
 	return
 
 func Postplay(_playArea : TDCardPlayArea, _card : TDCard) -> void:
+	DropAction(_playArea, _card)
 	return
 
-func ExitUsable(_card : TDCard) -> void:
+func ExitUsable(_playArea : TDCardPlayArea, _card : TDCard) -> void:
+	DropAction(_playArea, _card)
 	return
 
-func DropAction(_card : TDCard) -> void:
+func DropAction(_playArea : TDCardPlayArea, _card : TDCard) -> void:
+	for connection : ConnectionMarker2D in _card.Connections:
+		for child in connection.get_children().filter(func(a): return a is ConnectionPlayArea):
+			child.ValidConnectionOff()
+	if(_playArea):
+		_playArea.ValidConnectionOff()
+	
 	#printerr("[CardData] CardData is intended to be used as an abstract class. Please create a new class and inherit it: DropAction has not been implemented. card: " + card.CardName)
 	return
 

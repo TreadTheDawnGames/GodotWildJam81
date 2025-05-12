@@ -1,20 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://3s6lgp8fseh3"]
+[gd_scene load_steps=5 format=3 uid="uid://8d4trlns65m5"]
 
-[ext_resource type="Texture2D" uid="uid://dk0igledyrj6d" path="res://Assets/Sprites/Placeholders/EngineCone.png" id="1_7wdnk"]
-[ext_resource type="Script" path="res://Scripts/engine.gd" id="1_y0ab4"]
-[ext_resource type="Script" uid="uid://bjtekbx1mr6dq" path="res://addons/dragNdrop/card_goto_marker.gd" id="3_y0ab4"]
+[ext_resource type="Script" uid="uid://bw7lkayh5aue3" path="res://Scripts/connection_play_area.gd" id="1_3imrs"]
+[ext_resource type="Texture2D" uid="uid://dk0igledyrj6d" path="res://Assets/Sprites/Placeholders/EngineCone.png" id="2_pfsul"]
+[ext_resource type="Script" uid="uid://bjtekbx1mr6dq" path="res://addons/dragNdrop/card_goto_marker.gd" id="3_c4spq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3t5be"]
 size = Vector2(14, 18)
 
 [node name="Engine" type="Area2D"]
-script = ExtResource("1_y0ab4")
+script = ExtResource("1_3imrs")
 _PlayType = "ShipPart"
 metadata/_custom_type_script = "uid://e6s4cpiydw0p"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-8, 0)
-texture = ExtResource("1_7wdnk")
+texture = ExtResource("2_pfsul")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-9, 0)
@@ -22,5 +22,5 @@ shape = SubResource("RectangleShape2D_3t5be")
 
 [node name="TDCardPositionMarker2D" type="Marker2D" parent="."]
 position = Vector2(0.5, 0)
-script = ExtResource("3_y0ab4")
+script = ExtResource("3_c4spq")
 metadata/_custom_type_script = "uid://bjtekbx1mr6dq"

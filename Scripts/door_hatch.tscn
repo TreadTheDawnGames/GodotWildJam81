@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cw40dxbekvcc7"]
+[gd_scene load_steps=8 format=3 uid="uid://cw40dxbekvcc7"]
 
-[ext_resource type="Script" uid="uid://catpoopt73e16" path="res://Scripts/door_hatch.gd" id="1_akfhp"]
-[ext_resource type="Texture2D" uid="uid://byyaovmbtuvtr" path="res://Assets/Sprites/Placeholders/HatchOrDoor.png" id="1_p0fjf"]
-[ext_resource type="Script" path="res://addons/dragNdrop/card_goto_marker.gd" id="3_ivnct"]
+[ext_resource type="Script" uid="uid://cea4lm2u4t6tb" path="res://Scripts/door_hatch.gd" id="1_vy6su"]
+[ext_resource type="Texture2D" uid="uid://dtm6vodelfng8" path="res://Assets/Sprites/Placeholders/HatchOrDoor.png" id="2_5puex"]
+[ext_resource type="Texture2D" uid="uid://dfbjik0goh8io" path="res://Assets/Sprites/Placeholders/HatchDoorConnection.png" id="3_5puex"]
+[ext_resource type="Script" uid="uid://bjtekbx1mr6dq" path="res://addons/dragNdrop/card_goto_marker.gd" id="3_nba7c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rnj7b"]
 size = Vector2(7, 22)
@@ -14,7 +15,9 @@ size = Vector2(20, 22)
 size = Vector2(1, 22)
 
 [node name="DoorHatch" type="Area2D"]
-script = ExtResource("1_akfhp")
+script = ExtResource("1_vy6su")
+doorNormal = ExtResource("2_5puex")
+doorConnectable = ExtResource("3_5puex")
 metadata/_custom_type_script = "uid://e6s4cpiydw0p"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -22,7 +25,7 @@ position = Vector2(-6.5, 0)
 shape = SubResource("RectangleShape2D_rnj7b")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_p0fjf")
+texture = ExtResource("2_5puex")
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -35,5 +38,5 @@ shape = SubResource("RectangleShape2D_akfhp")
 shape = SubResource("RectangleShape2D_ivnct")
 
 [node name="TDCardPositionMarker2D" type="Marker2D" parent="."]
-script = ExtResource("3_ivnct")
+script = ExtResource("3_nba7c")
 metadata/_custom_type_script = "uid://bjtekbx1mr6dq"

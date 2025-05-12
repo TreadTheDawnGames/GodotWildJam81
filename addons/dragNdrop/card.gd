@@ -33,17 +33,13 @@ var _Played : bool
 
 var GoToOffset : Vector2
 
-func _ready()->void:
-	SetUp(ShipRoomData.new("TheFirstPart", "ShipPart"), false, false)
-	SetUsable(true)
 
 func SetUp(data : TDCardData, isUsable : bool, useGoToPos : bool = false, goToOffset : Vector2 = Vector2.ZERO, marker : TDCardPositionMarker2D = null) -> void:
 	area_entered.connect(CardEnteredZone)
 	area_exited.connect(CardExitedZone)
 	grab_area = get_node("GrabArea")
-	if(not isUsable):
-		mouse_entered.connect(Hovered)
-		mouse_exited.connect(Unhovered)
+	mouse_entered.connect(Hovered)
+	mouse_exited.connect(Unhovered)
 	_OGMask = collision_mask
 	SetUsable(isUsable)
 	DoGoToPositionMarker = useGoToPos
@@ -88,17 +84,17 @@ func _DragDropLogic(delta : float) -> void:
 		elif(not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and grabbed):
 			grabbed = false
 			if(Data):
-				Data.DropAction(self)
+				Data.DropAction(_PlayZone, self)
 		_lastMousePos = get_global_mouse_position()
 
 	if(_PlayZone and !usable):
 		usable = true
-		if(Data):
-			Data.EnterUsable(_PlayZone, self)
 	elif(!_PlayZone and usable):
 		usable = false
+		
+	if(usable):
 		if(Data):
-			Data.ExitUsable(self)
+			Data.WhileUsable(_PlayZone, self)
 		
 	if(grabbed):
 		global_position = get_global_mouse_position() + _grabbedOffset
@@ -106,9 +102,9 @@ func _DragDropLogic(delta : float) -> void:
 		if(LocationMarker):
 			if(global_position.distance_to(LocationMarker.global_position) > 0.01):
 				if(returnSpeed < 0):
-					global_position = LocationMarker.global_position + GoToOffset
+					global_position = LocationMarker.global_position - GoToOffset
 				else:
-					global_position = global_position.lerp(LocationMarker.global_position + GoToOffset, returnSpeed * delta)
+					global_position = global_position.lerp(LocationMarker.global_position - GoToOffset, returnSpeed * delta)
 	return
 
 func _process(delta: float) -> void:
@@ -145,12 +141,16 @@ func CardEnteredZone(node : Node2D) -> void:
 	if(node is not TDCardPlayArea):
 		return
 	_PlayZone = node
+	if(Data):
+		Data.EnterUsable(_PlayZone, self)
 	return
 	
 func CardExitedZone(node : Node2D) -> void:
 	if(node is not TDCardPlayArea):
 		return
 	if(node == _PlayZone):
+		if(Data):
+			Data.ExitUsable(_PlayZone, self)
 		_PlayZone = null
 	return
 	

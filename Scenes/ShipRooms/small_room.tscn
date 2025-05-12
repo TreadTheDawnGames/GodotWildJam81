@@ -1,15 +1,15 @@
 [gd_scene load_steps=8 format=3 uid="uid://bgdmpjwnw1uva"]
 
 [ext_resource type="Script" uid="uid://bxjt3p87d0j70" path="res://Scripts/ship_part.gd" id="1_p3jg3"]
-[ext_resource type="Texture2D" uid="uid://ci5nkvtqokyy3" path="res://Assets/Sprites/Placeholders/shipParts/SmallRoom.png" id="2_p3jg3"]
-[ext_resource type="PackedScene" uid="uid://m78ghge7btvw" path="res://Scenes/engine.tscn" id="3_y8nby"]
+[ext_resource type="Texture2D" uid="uid://csdkjvh1gjnwj" path="res://Assets/Sprites/Placeholders/shipParts/SmallRoom.png" id="2_p3jg3"]
+[ext_resource type="PackedScene" uid="uid://8d4trlns65m5" path="res://Scripts/engine.tscn" id="3_y8nby"]
 [ext_resource type="PackedScene" uid="uid://bvc8y48q4mg3o" path="res://Scenes/ShipInternals/console_station.tscn" id="4_tar1n"]
-[ext_resource type="PackedScene" uid="uid://cw40dxbekvcc7" path="res://Scenes/ShipInternals/door_hatch.tscn" id="5_p3jg3"]
-[ext_resource type="Script" uid="uid://bngliuo4ycft2" path="res://Scripts/connection_marker.gd" id="6_y8nby"]
+[ext_resource type="PackedScene" uid="uid://cw40dxbekvcc7" path="res://Scripts/door_hatch.tscn" id="5_p3jg3"]
+[ext_resource type="Script" path="res://Scripts/connection_marker.gd" id="6_y8nby"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sdkyt"]
 resource_local_to_scene = true
-size = Vector2(64, 30)
+size = Vector2(60, 30)
 
 [node name="SmallRoom" type="Area2D"]
 script = ExtResource("1_p3jg3")
@@ -25,27 +25,35 @@ shape = SubResource("RectangleShape2D_sdkyt")
 texture = ExtResource("2_p3jg3")
 
 [node name="ConsoleStation" parent="." instance=ExtResource("4_tar1n")]
-position = Vector2(-22.5, 8.5)
+position = Vector2(-20, 8)
 
 [node name="Right" type="Marker2D" parent="."]
-position = Vector2(32, 0.5)
+position = Vector2(30, 0)
 rotation = -3.14159
 script = ExtResource("6_y8nby")
 metadata/_custom_type_script = "uid://bngliuo4ycft2"
 
 [node name="Bottom" type="Marker2D" parent="."]
-position = Vector2(2, 15)
+position = Vector2(15, 15)
 rotation = -1.5708
 script = ExtResource("6_y8nby")
 metadata/_custom_type_script = "uid://bngliuo4ycft2"
 
 [node name="Top" type="Marker2D" parent="."]
-position = Vector2(2, -14)
+position = Vector2(-15, -15)
+rotation = 1.5708
+script = ExtResource("6_y8nby")
+metadata/_custom_type_script = "uid://bngliuo4ycft2"
+
+[node name="TopAgain" type="Marker2D" parent="."]
+position = Vector2(15, -15)
 rotation = 1.5708
 script = ExtResource("6_y8nby")
 metadata/_custom_type_script = "uid://bngliuo4ycft2"
 
 [node name="Left" type="Marker2D" parent="."]
-position = Vector2(-31, 0.5)
+position = Vector2(-30, 0)
 script = ExtResource("6_y8nby")
 metadata/_custom_type_script = "uid://bngliuo4ycft2"
+
+[node name="NonRotator" type="Marker2D" parent="."]
