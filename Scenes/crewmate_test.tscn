@@ -1,43 +1,8 @@
 [gd_scene load_steps=7 format=4 uid="uid://baqt4yd2q0fvy"]
 
 [ext_resource type="Texture2D" uid="uid://b081xhyg1yieh" path="res://Assets/Sprites/Placeholders/test-tilemap.png" id="1_blwmn"]
+[ext_resource type="Script" uid="uid://dibnuv2lxbqt5" path="res://Scenes/crewmate_test.gd" id="1_yfc8g"]
 [ext_resource type="PackedScene" uid="uid://chax0pgaodrnu" path="res://Scenes/Objects/crewmate.tscn" id="2_udih6"]
-
-[sub_resource type="GDScript" id="GDScript_udih6"]
-script/source = "extends Node2D
-
-var current_navpoint: Marker2D
-
-@onready var crewmate: Crewmate = $Crewmate
-@onready var label: Label = $Label
-@onready var camera: Camera2D = $Camera2D
-@onready var tilemap: TileMapLayer = $TileMapLayer
-
-signal changed_navpoint(pos: Vector2)
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		if event.is_action_pressed(\"ui_up\"):
-			current_navpoint = $NavPoint1
-			changed_navpoint.emit(current_navpoint.position)
-		if event.is_action_pressed(\"ui_right\"):
-			current_navpoint = $NavPoint2
-			changed_navpoint.emit(current_navpoint.position)
-		if event.is_action_pressed(\"ui_down\"):
-			current_navpoint = $NavPoint3
-			changed_navpoint.emit(current_navpoint.position)
-		if event.is_action_pressed(\"ui_left\"):
-			current_navpoint = $NavPoint4
-			changed_navpoint.emit(current_navpoint.position)
-	
-	if event is InputEventMouse:
-		if event.is_action_pressed(\"AOS.debug_left_click\"):
-			var mousepos = Global.mouse_position_to_local(event, camera)
-			label.text = str(mousepos)
-			var cell: Vector2i = tilemap.local_to_map(tilemap.to_local(mousepos))
-			print(tilemap.get_cell_source_id(cell) >= 0)
-		pass
-"
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_udih6"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -77,7 +42,7 @@ navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_udih6")
 
 [node name="CrewmateTest" type="Node2D"]
-script = SubResource("GDScript_udih6")
+script = ExtResource("1_yfc8g")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 scale = Vector2(2, 2)
@@ -87,7 +52,7 @@ tile_set = SubResource("TileSet_yfc8g")
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="Crewmate" parent="." instance=ExtResource("2_udih6")]
-position = Vector2(0, 1)
+position = Vector2(-15, -15)
 
 [node name="NavPoint1" type="Marker2D" parent="."]
 position = Vector2(0, -123)

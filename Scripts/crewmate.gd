@@ -5,18 +5,22 @@ enum Alliance { ALLIANCE_NONE, ALLIANCE_PLAYER, ALLIANCE_ENEMY }
 
 @export var state_machine: StateMachine
 @export var alliance: Alliance
-@export var _navigation_agent: NavigationAgent2D:
-	get:
-		return _nav_agent
-	set(value):
-		_nav_agent = value
-
-var _nav_agent: NavigationAgent2D
 var _walk_pos: Vector2
+var _path: Array[Vector2]
+
+var movement_speed: float = 200.0
+var movement_target_position: Vector2 = Vector2(60.0,180.0)
 
 
 func _ready() -> void:
-	pass # Replace with function body.
+	# Make sure to not await during _ready.
+	actor_setup.call_deferred()
+	
+
+func actor_setup():
+	# TODO: Set up _path
+	
+	pass
 
 
 func _physics_process(delta: float) -> void:
