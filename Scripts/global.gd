@@ -1,5 +1,7 @@
 extends Node
 
+const TILEMAP_DATA_LAYER_BOOLEAN_NAVIGATION = "BooleanNavigation"
+
 
 func mouse_position_to_local(input: InputEventMouse, camera: Camera2D) -> Vector2:
 	var vp_size = Vector2.ZERO
