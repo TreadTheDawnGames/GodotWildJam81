@@ -6,6 +6,9 @@ var current_navpoint: Marker2D
 @onready var label: Label = $Label
 @onready var camera: Camera2D = $Camera2D
 @onready var tilemap: TileMapLayer = $TileMapLayer
+@export var trail_texture: Texture2D
+
+var _trail: Node2D
 
 signal changed_navpoint(pos: Vector2)
 
@@ -30,8 +33,23 @@ func _unhandled_input(event: InputEvent) -> void:
 			label.text = str(mousepos)
 			var from: Vector2i = _global_to_tilemap(crewmate.position)
 			var to: Vector2i = _global_to_tilemap(mousepos)
-			print(_pathfinding(from, to))
+			var path = _pathfinding(from, to)
+			print(path)
+			_create_trail.call_deferred(path)
 		pass
+
+
+func _create_trail(path):
+	if _trail:
+		_trail.queue_free()
+	_trail = Node2D.new()
+	for i: Vector2i in path:
+		var sp: Sprite2D = Sprite2D.new()
+		sp.texture = trail_texture
+		sp.scale = 0.1 * Vector2.ONE
+		sp.position = tilemap.map_to_local(i) * tilemap.scale
+		_trail.add_child(sp)
+	add_child(_trail)
 
 
 func _global_to_tilemap(v: Vector2) -> Vector2i:
@@ -58,6 +76,7 @@ func _pathfinding(from: Vector2i, to: Vector2i) -> Array[Vector2i]:
 		# Push any of the unvisited cells into the node
 		var surround: Array[Vector2i] = tilemap.get_surrounding_cells(v)
 		var filtered: Array[Vector2i] = surround.filter(func(i): return tilemap.get_cell_source_id(i) >= 0 && !path.has(i))
+		filtered.sort_custom(func(a, b): return a.distance_to(to) > b.distance_to(to))
 		if !filtered.is_empty():
 			filtered.all(func(i): stack.push_back(i); return true)
 
