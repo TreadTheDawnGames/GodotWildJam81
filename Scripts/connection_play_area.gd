@@ -6,11 +6,13 @@ enum WallDirection {none, north = -2, south = 2, east = -1, west = 1}
 var cardinalWall : int
 @export var manualWall : WallDirection
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var collisionShape: CollisionShape2D = $CollisionShape2D
 
 func _ready():
 	ConnectionSlot = get_node("TDCardPositionMarker2D")
 	if(manualWall != WallDirection.none):
 		SetCardinalWall(manualWall)
+	area_exited.connect(func(a): ValidConnectionOff())
 	return
 	
 func SetCardinalWall(direction : WallDirection):

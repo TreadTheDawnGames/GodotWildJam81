@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bcv43we6ugmrw"
-path="res://.godot/imported/PlayerShipBody.png-ec7ef8f07e9f5da7a2499729cd37ab54.ctex"
+uid="uid://dsibcfh1wbnwa"
+path="res://.godot/imported/ShopPanel.png-17d7dbe02b11c5d3662aa8dafed083c2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Placeholders/PlayerShipBody.png"
-dest_files=["res://.godot/imported/PlayerShipBody.png-ec7ef8f07e9f5da7a2499729cd37ab54.ctex"]
+source_file="res://ShopPanel.png"
+dest_files=["res://.godot/imported/ShopPanel.png-17d7dbe02b11c5d3662aa8dafed083c2.ctex"]
 
 [params]
 

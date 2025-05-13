@@ -6,18 +6,22 @@ var _selectedCards : Array[TDCard]
 @export
 var cardSceneSource : PackedScene
 
-func AddCard(data : TDCardData, isAesthetic : bool, useGoToPos : bool = false, goToPos : TDCardPositionMarker2D = null) -> TDCard:
+func AddCard(card : TDCard):
+	add_child(card)
+	_board.push_back(card)
+	return
+
+func CreateCard(data : TDCardData, isAesthetic : bool, useGoToPos : bool = false, goToPos : TDCardPositionMarker2D = null) -> TDCard:
 	var card = CreateCardFromData(data, isAesthetic, useGoToPos, goToPos)
 	if(!card):
 		printerr("[TDCardBoard] Unable to create card to add to board.")
 		return
 	add_child(card)
 	card.SetUsable(true)
-	card.scale *= 4
 	_board.push_back(card)
 	return card
 
-func AddCardFromSource(source : PackedScene, data : TDCardData, isAesthetic : bool, useGoToPos : bool = false, goToPos : TDCardPositionMarker2D = null) -> TDCard:
+func CreateCardFromSource(source : PackedScene, data : TDCardData, isAesthetic : bool, useGoToPos : bool = false, goToPos : TDCardPositionMarker2D = null) -> TDCard:
 	var card = CreateCardFromData(data, isAesthetic, useGoToPos, goToPos, source)
 	if(!card):
 		return

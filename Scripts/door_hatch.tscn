@@ -6,10 +6,10 @@
 [ext_resource type="Script" uid="uid://bjtekbx1mr6dq" path="res://addons/dragNdrop/card_goto_marker.gd" id="3_nba7c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rnj7b"]
-size = Vector2(7, 22)
+size = Vector2(27, 30)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_akfhp"]
-size = Vector2(20, 22)
+size = Vector2(16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ivnct"]
 size = Vector2(1, 22)
@@ -21,7 +21,7 @@ doorConnectable = ExtResource("3_5puex")
 metadata/_custom_type_script = "uid://e6s4cpiydw0p"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-6.5, 0)
+position = Vector2(-16.5, 0)
 shape = SubResource("RectangleShape2D_rnj7b")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

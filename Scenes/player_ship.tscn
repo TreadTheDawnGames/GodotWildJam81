@@ -1,45 +1,63 @@
 [gd_scene load_steps=5 format=3 uid="uid://brwabn5dnw7yo"]
 
-[ext_resource type="Texture2D" uid="uid://bcv43we6ugmrw" path="res://Assets/Sprites/Placeholders/PlayerShipBody.png" id="1_ty8tg"]
-[ext_resource type="PackedScene" uid="uid://cw40dxbekvcc7" path="res://Scripts/door_hatch.tscn" id="2_iitm4"]
-[ext_resource type="PackedScene" uid="uid://8d4trlns65m5" path="res://Scripts/engine.tscn" id="3_l6tvr"]
+[ext_resource type="Script" uid="uid://by0qum424xkyg" path="res://Scenes/player_ship.gd" id="1_iitm4"]
+[ext_resource type="Texture2D" uid="uid://bcv43we6ugmrw" path="res://Assets/Sprites/Placeholders/shipParts/PlayerShipBody.png" id="1_ty8tg"]
 [ext_resource type="PackedScene" uid="uid://bvc8y48q4mg3o" path="res://Scenes/ShipInternals/console_station.tscn" id="4_n4oq7"]
+[ext_resource type="Script" uid="uid://bngliuo4ycft2" path="res://Scripts/connection_marker.gd" id="6_l6tvr"]
 
 [node name="PlayerShip" type="Node2D"]
+script = ExtResource("1_iitm4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_ty8tg")
 
-[node name="DoorHatch" parent="." instance=ExtResource("2_iitm4")]
-position = Vector2(1, -12)
-
-[node name="DoorHatch2" parent="." instance=ExtResource("2_iitm4")]
-position = Vector2(-25, 1)
-rotation = 1.5708
-
-[node name="DoorHatch3" parent="." instance=ExtResource("2_iitm4")]
-position = Vector2(-41, 29)
-rotation = -1.5708
-manualWall = 2
-_PlayType = "ShipPart"
-
-[node name="Node2D" parent="." instance=ExtResource("3_l6tvr")]
-position = Vector2(-60, -15)
-manualWall = 1
-
 [node name="ConsoleStation" parent="." instance=ExtResource("4_n4oq7")]
-position = Vector2(-50, -7)
+position = Vector2(-54, -7)
 
 [node name="ConsoleStation2" parent="." instance=ExtResource("4_n4oq7")]
-position = Vector2(50, -7)
+position = Vector2(54, -7)
 rotation = 3.14159
 scale = Vector2(1, -1)
 
-[node name="Engine" parent="." instance=ExtResource("3_l6tvr")]
-position = Vector2(-60, 15)
-manualWall = 1
+[node name="Ltop" type="Marker2D" parent="."]
+position = Vector2(-64, -16)
+script = ExtResource("6_l6tvr")
 
-[node name="DoorHatch4" parent="." instance=ExtResource("2_iitm4")]
-position = Vector2(-3, 29)
+[node name="Lbottom" type="Marker2D" parent="."]
+position = Vector2(-64, 16)
+script = ExtResource("6_l6tvr")
+
+[node name="Bright" type="Marker2D" parent="."]
+position = Vector2(48, 32)
 rotation = -1.5708
-manualWall = 2
+script = ExtResource("6_l6tvr")
+
+[node name="BrightMid" type="Marker2D" parent="."]
+position = Vector2(16, 32)
+rotation = -1.5708
+script = ExtResource("6_l6tvr")
+
+[node name="BleftMid" type="Marker2D" parent="."]
+position = Vector2(-16, 32)
+rotation = -1.5708
+script = ExtResource("6_l6tvr")
+
+[node name="Bleft" type="Marker2D" parent="."]
+position = Vector2(-48, 32)
+rotation = -1.5708
+script = ExtResource("6_l6tvr")
+
+[node name="Tleft" type="Marker2D" parent="."]
+position = Vector2(-48, -32)
+rotation = 1.5708
+script = ExtResource("6_l6tvr")
+
+[node name="Tmid" type="Marker2D" parent="."]
+position = Vector2(-16, -32)
+rotation = 1.5708
+script = ExtResource("6_l6tvr")
+
+[node name="Tright" type="Marker2D" parent="."]
+position = Vector2(16, -32)
+rotation = 1.5708
+script = ExtResource("6_l6tvr")

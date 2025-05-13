@@ -35,6 +35,9 @@ func GrabAction(_card : TDCard) -> void:
 	#printerr("[CardData] CardData is intended to be used as an abstract class. Please create a new class and inherit it:  GrabAction has not been implemented. card: " + card.cardName)
 	return
 
+func WhileGrabbed(_card : TDCard) -> void:
+	return
+
 func EnterUsable(_playArea : TDCardPlayArea, _card : TDCard) -> void:
 	return
 

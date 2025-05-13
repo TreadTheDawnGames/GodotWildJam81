@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://8d4trlns65m5" path="res://Scripts/engine.tscn" id="3_y8nby"]
 [ext_resource type="PackedScene" uid="uid://bvc8y48q4mg3o" path="res://Scenes/ShipInternals/console_station.tscn" id="4_tar1n"]
 [ext_resource type="PackedScene" uid="uid://cw40dxbekvcc7" path="res://Scripts/door_hatch.tscn" id="5_p3jg3"]
-[ext_resource type="Script" path="res://Scripts/connection_marker.gd" id="6_y8nby"]
+[ext_resource type="Script" uid="uid://bngliuo4ycft2" path="res://Scripts/connection_marker.gd" id="6_y8nby"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sdkyt"]
 resource_local_to_scene = true
@@ -15,6 +15,8 @@ size = Vector2(60, 30)
 script = ExtResource("1_p3jg3")
 engine = ExtResource("3_y8nby")
 door = ExtResource("5_p3jg3")
+price = 50
+partName = "Small Room"
 returnSpeed = -1.0
 metadata/_custom_type_script = "uid://b2ly22oubeuou"
 
@@ -25,35 +27,30 @@ shape = SubResource("RectangleShape2D_sdkyt")
 texture = ExtResource("2_p3jg3")
 
 [node name="ConsoleStation" parent="." instance=ExtResource("4_tar1n")]
-position = Vector2(-20, 8)
+position = Vector2(-22, 9)
 
 [node name="Right" type="Marker2D" parent="."]
-position = Vector2(30, 0)
+position = Vector2(32, 0)
 rotation = -3.14159
 script = ExtResource("6_y8nby")
-metadata/_custom_type_script = "uid://bngliuo4ycft2"
 
 [node name="Bottom" type="Marker2D" parent="."]
-position = Vector2(15, 15)
+position = Vector2(16, 16)
 rotation = -1.5708
 script = ExtResource("6_y8nby")
-metadata/_custom_type_script = "uid://bngliuo4ycft2"
 
 [node name="Top" type="Marker2D" parent="."]
-position = Vector2(-15, -15)
+position = Vector2(-16, -16)
 rotation = 1.5708
 script = ExtResource("6_y8nby")
-metadata/_custom_type_script = "uid://bngliuo4ycft2"
 
 [node name="TopAgain" type="Marker2D" parent="."]
-position = Vector2(15, -15)
+position = Vector2(16, -16)
 rotation = 1.5708
 script = ExtResource("6_y8nby")
-metadata/_custom_type_script = "uid://bngliuo4ycft2"
 
 [node name="Left" type="Marker2D" parent="."]
-position = Vector2(-30, 0)
+position = Vector2(-32, 0)
 script = ExtResource("6_y8nby")
-metadata/_custom_type_script = "uid://bngliuo4ycft2"
 
 [node name="NonRotator" type="Marker2D" parent="."]

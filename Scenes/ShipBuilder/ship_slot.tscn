@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cg3syuv8v87wt"]
+
+[ext_resource type="Script" uid="uid://r5322iqdtrya" path="res://Scenes/ShipBuilder/ship_part_shop_slot.gd" id="1_5n0w0"]
+[ext_resource type="Script" uid="uid://bjtekbx1mr6dq" path="res://addons/dragNdrop/card_goto_marker.gd" id="1_i8rnm"]
+
+[node name="ShipPartShopSlot" type="Node2D"]
+script = ExtResource("1_5n0w0")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -142.0
+offset_top = -59.0
+offset_right = 143.0
+offset_bottom = -23.0
+text = "This is the cost"
+horizontal_alignment = 1
+
+[node name="TDCardPositionMarker2D" type="Marker2D" parent="."]
+position = Vector2(0, 20)
+script = ExtResource("1_i8rnm")
+metadata/_custom_type_script = "uid://bjtekbx1mr6dq"

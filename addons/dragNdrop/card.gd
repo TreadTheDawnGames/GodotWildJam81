@@ -12,6 +12,8 @@ var DoGoToPositionMarker : bool = false
 @export
 var returnSpeed : float = 5
 
+var returnAccuracy : float = 0.01
+
 static var hoveredCards : Array[TDCard]
 
 var _grabbedOffset : Vector2;
@@ -86,6 +88,11 @@ func _DragDropLogic(delta : float) -> void:
 			if(Data):
 				Data.DropAction(_PlayZone, self)
 		_lastMousePos = get_global_mouse_position()
+		
+		if(grabbed):
+			if(Data):
+				Data.WhileGrabbed(self)
+
 
 	if(_PlayZone and !usable):
 		usable = true
@@ -100,7 +107,7 @@ func _DragDropLogic(delta : float) -> void:
 		global_position = get_global_mouse_position() + _grabbedOffset
 	elif DoGoToPositionMarker:
 		if(LocationMarker):
-			if(global_position.distance_to(LocationMarker.global_position) > 0.01):
+			if(global_position.distance_to(LocationMarker.global_position) > returnAccuracy):
 				if(returnSpeed < 0):
 					global_position = LocationMarker.global_position - GoToOffset
 				else:

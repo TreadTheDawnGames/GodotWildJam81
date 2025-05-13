@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bjtekbx1mr6dq" path="res://addons/dragNdrop/card_goto_marker.gd" id="3_c4spq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3t5be"]
-size = Vector2(14, 18)
+size = Vector2(26, 29)
 
 [node name="Engine" type="Area2D"]
 script = ExtResource("1_3imrs")
@@ -17,7 +17,7 @@ position = Vector2(-8, 0)
 texture = ExtResource("2_pfsul")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-9, 0)
+position = Vector2(-15, -0.5)
 shape = SubResource("RectangleShape2D_3t5be")
 
 [node name="TDCardPositionMarker2D" type="Marker2D" parent="."]

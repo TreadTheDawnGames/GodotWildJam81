@@ -1,15 +1,20 @@
-[gd_scene load_steps=3 format=3 uid="uid://cme73ldydoe5f"]
+[gd_scene load_steps=4 format=3 uid="uid://cme73ldydoe5f"]
 
 [ext_resource type="PackedScene" uid="uid://brwabn5dnw7yo" path="res://Scenes/player_ship.tscn" id="1_qxrlw"]
+[ext_resource type="Script" uid="uid://lxhjr80bvxww" path="res://Scripts/Debug/debug.gd" id="1_wrm1d"]
 [ext_resource type="PackedScene" uid="uid://bgdmpjwnw1uva" path="res://Scenes/ShipRooms/small_room.tscn" id="2_wrm1d"]
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_wrm1d")
 
 [node name="PlayerShip" parent="." instance=ExtResource("1_qxrlw")]
-position = Vector2(329, 316)
+position = Vector2(405, 291)
+
+[node name="SmallRoom3" parent="." instance=ExtResource("2_wrm1d")]
+position = Vector2(526, 410)
 
 [node name="SmallRoom" parent="." instance=ExtResource("2_wrm1d")]
-position = Vector2(328, 450)
+position = Vector2(222, 292)
 
 [node name="SmallRoom2" parent="." instance=ExtResource("2_wrm1d")]
-position = Vector2(160, 457)
+position = Vector2(378, 478)
