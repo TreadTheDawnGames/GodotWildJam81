@@ -35,3 +35,5 @@ script = ExtResource("5_5bwah")
 [node name="Healing" type="Node" parent="StateMachine"]
 
 [node name="Dead" type="Node" parent="StateMachine"]
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
