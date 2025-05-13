@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://bvgm2u6i57e17" path="res://Scripts/UI/PopupSlot.gd" id="1_jc2m3"]
 
 [node name="PopupSlot" type="PanelContainer"]
+custom_minimum_size = Vector2(40, 40)
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_jc2m3")
