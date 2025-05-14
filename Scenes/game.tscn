@@ -1,3 +1,26 @@
-[gd_scene format=3 uid="uid://cme73ldydoe5f"]
+[gd_scene load_steps=6 format=3 uid="uid://cme73ldydoe5f"]
+
+[ext_resource type="PackedScene" uid="uid://c0u5fyv7pcj4o" path="res://Scenes/ShipTilemapScenes/TRoom.tscn" id="2_wrm1d"]
+[ext_resource type="PackedScene" uid="uid://urmba5pugfvv" path="res://Scenes/ShipTilemapScenes/URoom.tscn" id="3_3dryh"]
+[ext_resource type="PackedScene" uid="uid://dn1fqh38t1biq" path="res://Scenes/ShipTilemapScenes/small_room.tscn" id="4_3dryh"]
+[ext_resource type="PackedScene" uid="uid://bhjrdpdfo87g1" path="res://Scenes/ShipTilemapScenes/Player_Ship.tscn" id="5_i6g32"]
+[ext_resource type="PackedScene" uid="uid://dx5pk3o5psm5b" path="res://Scenes/ShipTilemapScenes/long_room.tscn" id="5_wowpa"]
 
 [node name="Game" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PlayerShip" parent="." instance=ExtResource("5_i6g32")]
+position = Vector2(-349, -121)
+
+[node name="ShipRoom" parent="." instance=ExtResource("5_wowpa")]
+position = Vector2(253, -151)
+
+[node name="SmallRoom" parent="." instance=ExtResource("4_3dryh")]
+position = Vector2(263, -85)
+
+[node name="ShipRoom2" parent="." instance=ExtResource("2_wrm1d")]
+position = Vector2(247, -19)
+
+[node name="ShipRoom3" parent="." instance=ExtResource("3_3dryh")]
+position = Vector2(249, 116)

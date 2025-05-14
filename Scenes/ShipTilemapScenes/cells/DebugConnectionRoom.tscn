@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=4 uid="uid://dy1d3exibh42v"]
+
+[ext_resource type="PackedScene" uid="uid://c1orf4r8byd2g" path="res://Scenes/ShipTilemapScenes/ship_room.tscn" id="1_xcde8"]
+
+[node name="ShipRoom" instance=ExtResource("1_xcde8")]
+tile_map_data = PackedByteArray("AAD8/wAAAAAAAAAAAQD9/wAAAAAAAAAAAwD7/wAAAAAAAAAAAQD6/wAAAAAAAAAAAQD6////AAAAAAAAAwD8/wEAAAAAAAAAAwD8////AAAAAAAAAwD7/wEAAAAAAAAAAgD7////AAAAAAAAAgA=")

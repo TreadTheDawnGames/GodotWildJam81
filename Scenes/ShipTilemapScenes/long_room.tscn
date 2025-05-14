@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dx5pk3o5psm5b"]
+
+[ext_resource type="PackedScene" uid="uid://c1orf4r8byd2g" path="res://Scenes/ShipTilemapScenes/ship_room.tscn" id="1_rrf07"]
+[ext_resource type="Texture2D" uid="uid://b7r1hipk8rpkh" path="res://Assets/Sprites/LongRoom.png" id="2_4ssd4"]
+
+[node name="LongRoom" instance=ExtResource("1_rrf07")]
+tile_map_data = PackedByteArray(0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0)
+
+[node name="LongRoom2" type="Sprite2D" parent="." index="0"]
+position = Vector2(48, 16)
+texture = ExtResource("2_4ssd4")
