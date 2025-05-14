@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://d2ikh2m8s5n8j" path="res://Assets/Sprites/TRoom.png" id="2_aos2q"]
 
 [node name="TRoom" instance=ExtResource("1_imcy6")]
-tile_map_data = PackedByteArray(0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0)
+tile_map_data = PackedByteArray(0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0)
 
-[node name="TRoom" type="Sprite2D" parent="." index="0"]
-position = Vector2(48, 48)
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(16, 16)
 texture = ExtResource("2_aos2q")

@@ -5,7 +5,8 @@ var Map : ShipRoom
 var loadOrder : int = 0
 
 func Init():
-	Map = get_parent()
+	Map=get_node("..")
+	#Map = get_parent()
 	myCoords = Map.local_to_map(Map.to_local(global_position))
 	return
 
@@ -14,3 +15,6 @@ func GetNeighbors() -> Array[Vector2i]:
 
 func AssignLoadOrder():
 	loadOrder = 0
+
+#func _draw() -> void:
+	#draw_circle(Map.local_to_map(position), 16, Color.YELLOW)

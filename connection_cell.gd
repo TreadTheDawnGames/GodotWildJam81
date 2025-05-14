@@ -1,7 +1,7 @@
 extends Cell
 class_name ConnectionCell
 
-enum Direction {North, South, East, West}
+enum Direction {North, East, South, West}
 var validConnections : Array[Direction]
 @onready var grabArea: Area2D = $Area2D
 
@@ -32,7 +32,6 @@ func Init():
 	grabArea.mouse_exited.connect(Unhovered)
 	
 	DoDebugSprites()
-	print("myCoords: ", myCoords)
 
 func DoDebugSprites():
 	if(!isDebug):
@@ -65,22 +64,16 @@ func AddSurroundingTiles():
 	#print(myPos, ": ", surroundingCells)
 	for cell in surroundingCells:
 		if(!Map.positionIndexedChildren.has(cell)):
-			print("Map does not have: ", cell, " (",DirectionString(cell-myCoords),")")
 			continue
 		match(cell - myCoords):
 			Vector2i.LEFT:
 				AddConnection(Direction.West)
-				print("SurroundingAdd: West")
 			Vector2i.RIGHT:
 				AddConnection(Direction.East)
-				print("SurroundingAdd: East")
-				
 			Vector2i.UP:
 				AddConnection(Direction.North)
-				print("SurroundingAdd: North")
 			Vector2i.DOWN:
 				AddConnection(Direction.South)
-				print("SurroundingAdd: South")
 	
 	
 	return
@@ -91,16 +84,37 @@ func IsOnTop() -> bool:
 	else:
 		return false
 		
+func Rotate():
+		print("-----")
+		var rotatedConnects : Array[Direction] = []
+		for validConnection in validConnections:
+			var valCon : int = int(validConnection)
+			print("Before ", DirectionStringFromEnum(validConnection))
+			valCon += 1
+			if(valCon == 4):
+				valCon = 0
+			rotatedConnects.append(valCon as Direction)
+			print("after ", DirectionStringFromEnum(valCon as Direction))
+		validConnections = rotatedConnects
+		#DoDebugSprites()
 
 func _process(delta: float) -> void:
-	if(!Map.dragNDrop):
-		return
 	if(hovered and Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT)):
 		var stringCons : Array[String]
 		for con in validConnections:
 			stringCons.append(Direction.find_key(con))
 		print(stringCons)
 	
+	if(!Map.dragNDrop):
+		return
+	
+	#if(Input.is_action_just_pressed("rotate") and grabbed):
+		#Map.rotate(deg_to_rad(90))
+		
+		#for child : ConnectionCell in Map.positionIndexedChildren.values().filter(func(a): return a is ConnectionCell):
+			#child.Rotate()
+		#DoDebugSprites()
+		
 	if(Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and not grabbed):
 		if(IsOnTop()):
 			_grabbedOffset = Map.global_position - get_global_mouse_position()
@@ -134,16 +148,15 @@ func Unhovered() -> void:
 	hovered = false
 	return
 
-func Rotate():
-	
-	return
 
 func AddRandomConnections():
 	var extraDoors : int = 0
 	while(extraDoors==0):
-		for i in randWeight:
-			if(randi() % randWeight == 0):
-				print("Random add ", Direction.find_key(i))
+		for i in 4:
+			var weight = randWeight
+			if(DirectionStringFromEnum(i) == "West"):
+				weight /=2
+			if(randi() % weight == 0):
 				AddConnection(i)
 				extraDoors+=1
 	return
@@ -162,7 +175,10 @@ func RemoveConnection(direction : Direction):
 		DoDebugSprites()
 	return
 
-func DirectionString(dir : Vector2i) -> String:
+func DirectionStringFromEnum(dir : Direction) -> String:
+	return Direction.find_key(dir)
+
+func DirectionStringFromVec2i(dir : Vector2i) -> String:
 	match(dir):
 		Vector2i.LEFT:
 			return ("West")
@@ -173,3 +189,70 @@ func DirectionString(dir : Vector2i) -> String:
 		Vector2i.DOWN:
 			return ("South")
 	return "Error"
+	
+
+func CanConnectTo(direction : Direction, neighborCell : ConnectionCell) -> bool:
+	var can : bool
+	match(direction):
+		Direction.East:
+			can = neighborCell.validConnections.has(Direction.West) and validConnections.has(Direction.East)
+		Direction.West:
+			can = neighborCell.validConnections.has(Direction.East) and validConnections.has(Direction.West)
+		Direction.South:
+			can = neighborCell.validConnections.has(Direction.North) and validConnections.has(Direction.South)
+		Direction.North:
+			can = neighborCell.validConnections.has(Direction.South) and validConnections.has(Direction.North)
+	return can
+
+func SetNewMap(newMap : ShipRoom):
+	Map = newMap
+	Map.SetChildByCoords(self, Map.local_to_map(position))
+
+func RecalculateConnections():
+	var eraseMe : Array[Direction] = []
+	for con in 4:
+		var neighborInDir : Cell = GetNeighborInDirection(con)
+		if(neighborInDir and neighborInDir is ConnectionCell):
+			var theNeighbor : ConnectionCell = neighborInDir as ConnectionCell
+			if(!CanConnectTo(con, GetNeighborInDirection(con))):
+				eraseMe.append(con)
+				theNeighbor.validConnections.erase(OppositeDirection(con))
+				theNeighbor.DoDebugSprites()
+				#theNeighbor.RecalculateConnections()
+				pass
+	for erase in eraseMe:
+		validConnections.erase(erase)
+	DoDebugSprites()
+	
+	return
+
+func OppositeDirection(dir : Direction) -> Direction:
+	match(dir):
+		Direction.North:
+			return Direction.South
+		Direction.East:
+			return Direction.West
+		Direction.South:
+			return Direction.North
+		Direction.West:
+			return Direction.East
+		_: 
+			printerr("Somehow picking opposite direction is broken")
+			return dir
+
+
+func Vector2iFromDirection(dir : Direction) -> Vector2i:
+	match(dir):
+		Direction.North:
+			return Vector2i.UP
+		Direction.East:
+			return Vector2i.RIGHT
+		Direction.South:
+			return Vector2i.DOWN
+		Direction.West:
+			return Vector2i.LEFT
+		_: 
+			return Vector2i.ZERO
+
+func GetNeighborInDirection(dir : Direction) -> Cell:
+	return Map.GetChildByCoords(myCoords + Vector2iFromDirection(dir))

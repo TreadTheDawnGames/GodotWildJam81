@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://ds5oif7tal0dc" path="res://Assets/Sprites/URoom.png" id="2_0k3le"]
 
 [node name="ShipRoom" instance=ExtResource("1_xvbxe")]
-tile_map_data = PackedByteArray(0, 0, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 255, 255, 255, 255, 0, 0, 0, 0, 0, 0, 1, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 255, 255, 0, 0, 0, 0, 0, 0, 1, 0)
 
-[node name="URoom" type="Sprite2D" parent="." index="0"]
-position = Vector2(48, 16)
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(16, 0)
 texture = ExtResource("2_0k3le")

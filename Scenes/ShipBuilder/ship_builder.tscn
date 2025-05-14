@@ -1,0 +1,44 @@
+[gd_scene load_steps=10 format=3 uid="uid://dv4kwxgdofcnk"]
+
+[ext_resource type="Script" uid="uid://c6sabckhh7itc" path="res://ship_builder.gd" id="1_52mkc"]
+[ext_resource type="Texture2D" uid="uid://dx5p0yy61fmtg" path="res://Assets/Sprites/ShipBuilder/ShopPanel.png" id="2_q1ubs"]
+[ext_resource type="PackedScene" uid="uid://bhjrdpdfo87g1" path="res://Scenes/ShipTilemapScenes/Player_Ship.tscn" id="3_smr6m"]
+[ext_resource type="PackedScene" uid="uid://dx5pk3o5psm5b" path="res://Scenes/ShipTilemapScenes/long_room.tscn" id="4_m4s5n"]
+[ext_resource type="PackedScene" uid="uid://dn1fqh38t1biq" path="res://Scenes/ShipTilemapScenes/small_room.tscn" id="5_y71oy"]
+[ext_resource type="PackedScene" uid="uid://c0u5fyv7pcj4o" path="res://Scenes/ShipTilemapScenes/TRoom.tscn" id="6_36s0u"]
+[ext_resource type="PackedScene" uid="uid://dy1d3exibh42v" path="res://Scenes/ShipTilemapScenes/cells/DebugConnectionRoom.tscn" id="7_smr6m"]
+[ext_resource type="PackedScene" uid="uid://urmba5pugfvv" path="res://Scenes/ShipTilemapScenes/URoom.tscn" id="7_vd78c"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o8snd"]
+size = Vector2(681.5, 581)
+
+[node name="ShipBuilder" type="Node2D"]
+script = ExtResource("1_52mkc")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(384.25, 307.5)
+shape = SubResource("RectangleShape2D_o8snd")
+
+[node name="ShopPanel" type="Sprite2D" parent="."]
+position = Vector2(990, 313)
+texture = ExtResource("2_q1ubs")
+
+[node name="LongRoom" parent="ShopPanel" instance=ExtResource("4_m4s5n")]
+position = Vector2(-61, 221)
+
+[node name="SmallRoom" parent="ShopPanel" instance=ExtResource("5_y71oy")]
+position = Vector2(48, 181)
+
+[node name="TRoom" parent="ShopPanel" instance=ExtResource("6_36s0u")]
+position = Vector2(-40, -53)
+
+[node name="ShipRoom" parent="ShopPanel" instance=ExtResource("7_vd78c")]
+position = Vector2(-29, 96)
+
+[node name="PlayerShip" parent="." instance=ExtResource("3_smr6m")]
+position = Vector2(393, 267)
+
+[node name="ShipRoom" parent="." instance=ExtResource("7_smr6m")]
+position = Vector2(951, 43)

@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://bo2c2qw4afg1o" path="res://Assets/Sprites/2Room.png" id="2_uc0um"]
 
 [node name="SmallRoom" instance=ExtResource("1_l4bgp")]
-tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0)
 
-[node name="2Room" type="Sprite2D" parent="." index="0"]
-position = Vector2(32, 16)
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, 16)
 texture = ExtResource("2_uc0um")

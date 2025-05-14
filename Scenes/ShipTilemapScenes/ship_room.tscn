@@ -17,3 +17,5 @@ sources/0 = SubResource("TileSetScenesCollectionSource_neb1g")
 [node name="ShipRoom" type="TileMapLayer"]
 tile_set = SubResource("TileSet_drvej")
 script = ExtResource("1_dsb16")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
