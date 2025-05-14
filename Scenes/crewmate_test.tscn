@@ -53,8 +53,9 @@ tile_set = SubResource("TileSet_yfc8g")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-[node name="Crewmate" parent="." instance=ExtResource("2_udih6")]
+[node name="Crewmate" parent="." node_paths=PackedStringArray("navigation_tilemap") instance=ExtResource("2_udih6")]
 position = Vector2(-15, -15)
+navigation_tilemap = NodePath("../TileMapLayer")
 
 [node name="NavPoint1" type="Marker2D" parent="."]
 position = Vector2(0, -123)
