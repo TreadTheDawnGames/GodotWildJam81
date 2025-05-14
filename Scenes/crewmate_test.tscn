@@ -52,22 +52,119 @@ tile_map_data = PackedByteArray("AAD8////AAABAAEAAAD8/wAAAAABAAEAAAD8/wEAAAABAAE
 tile_set = SubResource("TileSet_yfc8g")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(181, -55)
 
-[node name="Crewmate" parent="." node_paths=PackedStringArray("navigation_tilemap") instance=ExtResource("2_udih6")]
+[node name="Crewmate" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
+z_index = 2
 position = Vector2(-15, -15)
 navigation_tilemap = NodePath("../TileMapLayer")
+navpoints = NodePath("../Navpoints")
 
-[node name="NavPoint1" type="Marker2D" parent="."]
-position = Vector2(0, -123)
+[node name="Crewmate2" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
+z_index = 2
+position = Vector2(-15, -15)
+navigation_tilemap = NodePath("../TileMapLayer")
+navpoints = NodePath("../Navpoints")
 
-[node name="NavPoint2" type="Marker2D" parent="."]
-position = Vector2(123, 1)
+[node name="Crewmate3" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
+z_index = 2
+position = Vector2(-15, -15)
+navigation_tilemap = NodePath("../TileMapLayer")
+navpoints = NodePath("../Navpoints")
 
-[node name="NavPoint3" type="Marker2D" parent="."]
-position = Vector2(0, 124)
+[node name="Crewmate4" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
+z_index = 2
+position = Vector2(-15, -15)
+navigation_tilemap = NodePath("../TileMapLayer")
+navpoints = NodePath("../Navpoints")
 
-[node name="NavPoint4" type="Marker2D" parent="."]
-position = Vector2(-121, 1)
+[node name="Crewmate5" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
+z_index = 2
+position = Vector2(-15, -15)
+navigation_tilemap = NodePath("../TileMapLayer")
+navpoints = NodePath("../Navpoints")
+
+[node name="Crewmate6" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
+z_index = 2
+position = Vector2(-15, -15)
+navigation_tilemap = NodePath("../TileMapLayer")
+navpoints = NodePath("../Navpoints")
+
+[node name="Crewmate7" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
+z_index = 2
+position = Vector2(-15, -15)
+navigation_tilemap = NodePath("../TileMapLayer")
+navpoints = NodePath("../Navpoints")
+
+[node name="Crewmate8" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
+z_index = 2
+position = Vector2(-15, -15)
+navigation_tilemap = NodePath("../TileMapLayer")
+navpoints = NodePath("../Navpoints")
+
+[node name="Crewmate9" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
+z_index = 2
+position = Vector2(-15, -15)
+navigation_tilemap = NodePath("../TileMapLayer")
+navpoints = NodePath("../Navpoints")
+
+[node name="Crewmate10" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
+z_index = 2
+position = Vector2(-15, -15)
+navigation_tilemap = NodePath("../TileMapLayer")
+navpoints = NodePath("../Navpoints")
+
+[node name="Navpoints" type="Node2D" parent="."]
+
+[node name="NavPoint1" type="Sprite2D" parent="Navpoints"]
+position = Vector2(-79, -143)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_2y5pk")
+
+[node name="NavPoint2" type="Sprite2D" parent="Navpoints"]
+position = Vector2(242, -47)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_2y5pk")
+
+[node name="NavPoint3" type="Sprite2D" parent="Navpoints"]
+position = Vector2(337, 48)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_2y5pk")
+
+[node name="NavPoint4" type="Sprite2D" parent="Navpoints"]
+position = Vector2(83, 112)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_2y5pk")
+
+[node name="NavPoint5" type="Sprite2D" parent="Navpoints"]
+position = Vector2(-78, 47)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_2y5pk")
+
+[node name="NavPoint6" type="Sprite2D" parent="Navpoints"]
+position = Vector2(179, -142)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_2y5pk")
+
+[node name="NavPoint7" type="Sprite2D" parent="Navpoints"]
+position = Vector2(208, -274)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_2y5pk")
+
+[node name="NavPoint8" type="Sprite2D" parent="Navpoints"]
+position = Vector2(51, -207)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_2y5pk")
+
+[node name="NavPoint9" type="Sprite2D" parent="Navpoints"]
+position = Vector2(338, -208)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_2y5pk")
+
+[node name="NavPoint10" type="Sprite2D" parent="Navpoints"]
+position = Vector2(465, -78)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_2y5pk")
 
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0

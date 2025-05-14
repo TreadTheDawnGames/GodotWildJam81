@@ -12,30 +12,20 @@ var _trail: Node2D
 
 signal changed_navpoint(pos: Vector2)
 
-func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		if event.is_action_pressed("ui_up"):
-			current_navpoint = $NavPoint1
-			changed_navpoint.emit(current_navpoint.position)
-		if event.is_action_pressed("ui_right"):
-			current_navpoint = $NavPoint2
-			changed_navpoint.emit(current_navpoint.position)
-		if event.is_action_pressed("ui_down"):
-			current_navpoint = $NavPoint3
-			changed_navpoint.emit(current_navpoint.position)
-		if event.is_action_pressed("ui_left"):
-			current_navpoint = $NavPoint4
-			changed_navpoint.emit(current_navpoint.position)
+func _input(event: InputEvent) -> void:
 	
+	var _scroll: bool = false
 	if event is InputEventMouse:
+		_scroll = event.is_action("AOS.debug_right_click")
 		if event.is_action_pressed("AOS.debug_left_click"):
 			var mousepos = Global.mouse_position_to_local(event, camera)
 			label.text = str(mousepos)
-			crewmate.walk_to(mousepos)
+			crewmate._walk_to(mousepos)
 			# var path = _pathfinding(from, to)
 			# print(path)
 			# _create_trail.call_deferred(path)
-		pass
+	if event is InputEventMouseMotion && _scroll:
+		camera.position += event.velocity / 1.0
 
 
 func _create_trail(path):

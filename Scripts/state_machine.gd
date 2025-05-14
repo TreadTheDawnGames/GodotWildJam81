@@ -6,6 +6,10 @@ class_name StateMachine
 
 @export var _init_state: StateNode
 
+var _init = false
+var initialized: bool:
+	get: return _init
+
 @onready var __st: StateNode = _init_state
 var current_state: String:
 	get:
@@ -13,7 +17,8 @@ var current_state: String:
 
 
 func _ready() -> void:
-	__st._state_init()
+	__st._state_init({})
+	_init = true
 
 
 ### Executes the current state of the FSM
@@ -24,13 +29,19 @@ func process_states(delta: float) -> void:
 
 ### Transitions to a new state for the FSM
 #	new_state: The state you want to transition to
-func transition(new_state: String, data = null) -> void:
-	if !new_state.is_empty():
-		var override: String = __st._state_transition(new_state, data)
-		if override.is_empty():
-			__st = get_node(new_state)
+func transition_old(new_state: String, data = null) -> void:
+	return transition({"new_state": new_state, "data": data})
+
+
+### Transitions to a new state for the FSM
+#	data: Parameters for transitioning into a new state
+func transition(data: Dictionary) -> void:
+	if data.has("new_state"):
+		var override: Dictionary = __st._state_transition(data)
+		if !override.is_empty() && override.has("new_state"):
+			__st = get_node(override["new_state"])
 		else:
-			__st = get_node(override)
+			__st = get_node(data["new_state"])
 		__st._state_init(data)
 
 #   Rage against the state machine
