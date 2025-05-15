@@ -4,10 +4,20 @@ class_name ShipRoom
 @onready var sprite: Sprite2D = $Sprite2D
 var positionIndexedChildren : Dictionary[Vector2i, Cell]
 var dragNDrop : bool = true
-var pivotPoint : Vector2
+var LocationMarker : Marker2D = null
+var returnToHome : bool = false
+var goToOffset : Vector2
+var returnSpeed : float = 5
+var _grabbedOffset : Vector2
+var globalMouse : Vector2
+var grabbed : bool
+
+@export var Price : int = 0
 
 func _ready():
 	Setup.call_deferred()
+	returnToHome = true
+	goToOffset = -sprite.texture.get_size()/2
 
 func Setup():
 	sprite = get_node("Sprite2D")
@@ -18,30 +28,10 @@ func Setup():
 		#print(child)
 	for cell : Cell in positionIndexedChildren.values():
 		cell.AssignLoadOrder()
-	pivotPoint = CalculatePivot()
 	var sortedChildren = positionIndexedChildren.values()
 	sortedChildren.sort_custom(func(a,b): return a.loadOrder < b.loadOrder)
 	for child : Cell in sortedChildren:
 		child.Init()
-
-var timesRotated : int = 0
-#func Rotate():
-		#RemoveChildByCoords(cell.myCoords)
-		#var originCoords : Vector2 = Vector2(cell.myCoords) - pivotPoint
-		#originCoords = Vector2(originCoords.y, -originCoords.x)
-		#originCoords += pivotPoint
-		#cell.myCoords = Vector2(originCoords)
-		#print("OriginCoords: ", originCoords)
-		#print("myCoords: ", cell.myCoords)
-		#SetChildByCoords(cell, cell.myCoords)
-		#cell.position = map_to_local(cell.myCoords)
-		#
-	#timesRotated+=1
-	#if timesRotated == 4:
-		#timesRotated = 0
-	#for cell : ConnectionCell in positionIndexedChildren.values().filter(func(a): return a is ConnectionCell):
-		#cell.Rotate()
-	#rotate(deg_to_rad(90))
 
 func CalculatePivot() -> Vector2:
 	var maxX : float = 1
@@ -92,3 +82,26 @@ func GetChildByCoords(pos : Vector2i) -> Cell:
 func RemoveChildByCoords(pos:Vector2i):
 	positionIndexedChildren.erase(pos)
 	return
+	
+func Ungrab():
+	for cell :  ConnectionCell in positionIndexedChildren.values().filter(func(a): return a is ConnectionCell):
+		cell.Map.grabbed = false
+		cell.hovered = false
+
+func _process(delta: float) -> void:
+	globalMouse = get_global_mouse_position()
+
+	
+	if(grabbed):
+		global_position = globalMouse + _grabbedOffset
+	elif returnToHome:
+		Return(delta)
+	return
+
+func Return(delta):
+	if(LocationMarker):
+		if(int((global_position - goToOffset).distance_to(LocationMarker.global_position) * 100) > 2):
+			global_position = global_position.lerp(LocationMarker.global_position + goToOffset, returnSpeed * delta)
+		elif(Vector2i(global_position) != Vector2i(LocationMarker.global_position+ goToOffset)):
+			print(Vector2i(global_position),Vector2i(LocationMarker.global_position+ goToOffset))
+			global_position = LocationMarker.global_position + goToOffset

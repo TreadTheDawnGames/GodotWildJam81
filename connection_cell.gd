@@ -15,12 +15,6 @@ const DOOR = preload("res://Assets/Sprites/ConnectionSprites/door.png")
 @export var isDebug : bool = true
 @export var randWeight : int = 4
 static var hoveredParts : Array[ConnectionCell]
-var _lastMousePos : Vector2
-var grabbed : bool
-var _grabbedOffset : Vector2
-var LocationMarker : Marker2D = null
-var returnToHome : bool = false
-var returnSpeed : float = 5
 var hovered : bool = false
 @onready var debugSpritesParent : Node2D = $DebugSprites
 
@@ -113,21 +107,6 @@ func IsOnTop() -> bool:
 	else:
 		return false
 		
-func Rotate():
-	print("-----")
-	var rotatedConnects : Array[Direction] = []
-	for validConnection in validConnections:
-		var valCon : int = int(validConnection)
-		print("Before ", DirectionStringFromEnum(validConnection))
-		valCon += 1
-		if(valCon == 4):
-			valCon = 0
-		rotatedConnects.append(valCon as Direction)
-		print("after ", DirectionStringFromEnum(valCon as Direction))
-	validConnections = rotatedConnects
-	myCoords = Vector2i(-myCoords.y, myCoords.x)
-	position = Map.map_to_local(myCoords)
-	#DoDebugSprites()
 
 func _process(delta: float) -> void:
 	if(hovered and Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT)):
@@ -139,30 +118,19 @@ func _process(delta: float) -> void:
 	if(!Map.dragNDrop):
 		return
 	
-	if(Input.is_action_just_pressed("rotate") and grabbed):
-		DoDebugSprites()
-		#Map.Rotate()
-		#pass
-		#Map.rotate(deg_to_rad(90))
-		
-		#for child : ConnectionCell in Map.positionIndexedChildren.values().filter(func(a): return a is ConnectionCell):
-			#child.Rotate()
-		
-	if(Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and not grabbed):
+	
+	if(Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and not Map.grabbed):
 		if(IsOnTop()):
-			_grabbedOffset = Map.global_position - get_global_mouse_position()
-			grabbed = true
+			print("grab")
+			Map._grabbedOffset = Map.global_position - Map.globalMouse
+			Map.grabbed = true
 			
-	elif(not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and grabbed):
-		grabbed = false
-	_lastMousePos = get_global_mouse_position()
+	elif(not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and Map.grabbed):
+		Unhovered()
+		Map.grabbed = false
+		#_grabbedOffset = Vector2.ZERO
 		
-	if(grabbed):
-		Map.global_position = get_global_mouse_position() + _grabbedOffset
-	elif returnToHome:
-		if(LocationMarker):
-			if(Map.global_position.distance_to(LocationMarker.global_position) > 0.01):
-				Map.global_position = Map.global_position.lerp(LocationMarker.Map.global_position, returnSpeed * delta)
+
 	return
 	
 func Hovered() -> void:

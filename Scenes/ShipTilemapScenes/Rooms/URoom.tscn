@@ -5,6 +5,7 @@
 
 [node name="ShipRoom" instance=ExtResource("1_t3qgq")]
 tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0)
+Price = 8
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(48, 32)

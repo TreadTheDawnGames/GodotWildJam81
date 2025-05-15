@@ -7,9 +7,9 @@ var slots : Array
 @export var RoomDirectory : String = "res://Scenes/ShipTilemapScenes/Rooms/"
 
 func _ready() -> void:
-	slots = get_children().filter(func(a): return a is Marker2D)
+	slots = get_children().filter(func(a): return a is ShopSlot)
 	
-	for slot : Marker2D in slots:
+	for slot : ShopSlot in slots:
 		ChooseRoom(slot)
 
 func _process(_delta: float) -> void:
@@ -17,9 +17,12 @@ func _process(_delta: float) -> void:
 		_ready()
 
 		
-func ChooseRoom(marker : Marker2D):
+func ChooseRoom(marker : ShopSlot):
 	var files = Array(DirAccess.get_files_at(RoomDirectory))
 	files.shuffle()
-	var scene = load(RoomDirectory + files.pick_random()).instantiate()
-	marker.add_child(scene)
+	var scene : ShipRoom = load(RoomDirectory + files.pick_random()).instantiate() as ShipRoom
+	add_child(scene)
+	scene.position = marker.position - scene.sprite.texture.get_size()/2
+	scene.LocationMarker = marker
+	marker.setPrice(scene.Price)
 	return

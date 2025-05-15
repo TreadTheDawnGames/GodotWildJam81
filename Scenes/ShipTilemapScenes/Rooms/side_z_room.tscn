@@ -5,6 +5,7 @@
 
 [node name="SideZRoom" instance=ExtResource("1_q34lt")]
 tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 1, 0)
+Price = 3
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(48, 48)

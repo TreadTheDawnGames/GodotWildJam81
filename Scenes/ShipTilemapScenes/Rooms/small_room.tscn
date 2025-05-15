@@ -5,6 +5,7 @@
 
 [node name="SmallRoom" instance=ExtResource("1_wdiew")]
 tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0)
+Price = 4
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(32, 16)

@@ -5,6 +5,7 @@
 
 [node name="Virt2Room" instance=ExtResource("1_c3isl")]
 tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0)
+Price = 9
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(16, 32)

@@ -26,9 +26,6 @@ func AbleToConnectPiece(roomToAdd : ShipRoom, roomPosition : Vector2i) -> bool:
 					able = true
 	return able
 
-func _process(_delta: float) -> void:
-	
-	return
 
 func _draw():
 	for item : Cell in positionIndexedChildren.values():
