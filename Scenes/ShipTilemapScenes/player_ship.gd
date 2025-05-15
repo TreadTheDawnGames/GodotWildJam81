@@ -5,31 +5,26 @@ static var grabbedRoom : ShipRoom = null
 
 func _ready() -> void:
 	dragNDrop = false
-	super._ready()
-
-func CombineParts(roomToAdd : ShipRoom):
-	DoCombine(roomToAdd)
-	return
+	#super._ready()
+	Setup.call_deferred()
 	
 func DoCombine(roomToAdd : ShipRoom):
 	roomToAdd.AddToMap(self)
 	roomToAdd = null
-		
-		
-	print("AttemptingToConnect")
 	pass
 
 func AbleToConnectPiece(roomToAdd : ShipRoom, roomPosition : Vector2i) -> bool:
+	var able : bool = false
 	for cell : ConnectionCell in roomToAdd.positionIndexedChildren.values().filter(func(a): return a is ConnectionCell):
 		var cellCoords : Vector2i = cell.myCoords + roomPosition
-		if(positionIndexedChildren.has(cellCoords)):
+		if(HasCell(cellCoords)):
 			return false
 		for neighbor in get_surrounding_cells(cellCoords):
 			var neighborDirection : ConnectionCell.Direction = ConnectionCell.Direction.get(cell.DirectionStringFromVec2i(neighbor-cellCoords))
 			if(positionIndexedChildren.has(neighbor)):
 				if(cell.CanConnectTo(neighborDirection, GetChildByCoords(neighbor))):
-					return true
-	return false
+					able = true
+	return able
 
 func _process(_delta: float) -> void:
 	

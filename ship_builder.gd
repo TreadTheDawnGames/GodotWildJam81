@@ -26,21 +26,29 @@ func ReturnToShop(otherArea : Area2D):
 		print("Exited")
 		#addingRoom.reparent.call_deferred(ShopPanel)
 		addingRoom.global_position.x = 400
+		addingRoom.modulate = Color.WHITE
 		addingRoom = null
 	return
 	
 func _process(_delta: float) -> void:
+	var addingLocation = playerShip.local_to_map(playerShip.to_local(addingRoom.global_position if addingRoom else Vector2.ZERO).snapped(Vector2(32,32)))
 	if(addingRoom and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)):
 		After.call_deferred()
-	elif(addingRoom):
-		var addingLocation = playerShip.local_to_map(playerShip.to_local(addingRoom.global_position).snapped(Vector2(32,32)))
 		if(playerShip.AbleToConnectPiece(addingRoom, addingLocation)):
-			playerShip.CombineParts(addingRoom)
+			addingRoom.modulate = Color.GREEN
+		else:
+			addingRoom.modulate = Color.RED
+			
+	elif(addingRoom):
+		if(playerShip.AbleToConnectPiece(addingRoom, addingLocation)):
+			playerShip.DoCombine(addingRoom)
 			addingRoomCell = null
 			addingRoom = null
-		#addingRoom.global_position.x = 400
-		#addingRoomCell.Unhovered()
-		#addingRoom = null
+		else:
+			addingRoom.global_position.x = 400
+			addingRoomCell.Unhovered()
+			addingRoom.modulate = Color.WHITE
+			addingRoom = null
 
 func After():
 	addingRoom.global_position = playerShip.to_global(playerShip.to_local(addingRoom.global_position).snapped(Vector2(32,32)))

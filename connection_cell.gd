@@ -2,11 +2,15 @@ extends Cell
 class_name ConnectionCell
 
 enum Direction {North, East, South, West}
-var validConnections : Array[Direction]
+@export var validConnections : Array[Direction]
 @onready var grabArea: Area2D = $Area2D
 
 var hasMouse : bool = false
 
+const ICON = preload("res://icon.svg")
+const ENGINE = preload("res://Assets/Sprites/ConnectionSprites/engine.png")
+const HATCH = preload("res://Assets/Sprites/ConnectionSprites/hatch.png")
+const DOOR = preload("res://Assets/Sprites/ConnectionSprites/door.png")
 
 @export var isDebug : bool = true
 @export var randWeight : int = 4
@@ -20,6 +24,7 @@ var returnSpeed : float = 5
 var hovered : bool = false
 @onready var debugSpritesParent : Node2D = $DebugSprites
 
+
 func AssignLoadOrder():
 	loadOrder = 0
 
@@ -30,10 +35,10 @@ func Init():
 	AddSurroundingTiles()
 	grabArea.mouse_entered.connect(Hovered)
 	grabArea.mouse_exited.connect(Unhovered)
-	
 	DoDebugSprites()
 
-func DoDebugSprites():
+
+func DoDebugSprites(recurse : bool = false):
 	if(!isDebug):
 		return
 
@@ -41,23 +46,47 @@ func DoDebugSprites():
 		sprite.queue_free()
 		
 	for con in validConnections:
-		const ICON = preload("res://icon.svg")
 		var sprite = Sprite2D.new()
-		sprite.texture = ICON
-		sprite.scale *= 0.1
-		debugSpritesParent.add_child(sprite)
 		sprite.name += "DEBUG"
 		var pos : Vector2 = Vector2.ZERO
+		var addY:int = 0
+		var addX:int = 0
+		sprite.texture = ICON
+		sprite.scale *= 0.1
+		var neighborCell = GetNeighborInDirection(con)
+		#if(!neighborCell or neighborCell is not ConnectionCell):
 		match(con):
 			Direction.North:
+				#sprite.texture = HATCH
 				pos = Vector2.UP
+				addY=3
+				sprite.modulate = Color.RED
 			Direction.South:
+				#sprite.texture = HATCH
 				pos = Vector2.DOWN
+				sprite.modulate = Color.GREEN
+				addY=-3
 			Direction.West:
+				#sprite.texture = ENGINE
+				sprite.modulate = Color.BLUE
+				addX=3
 				pos = Vector2.LEFT
 			Direction.East:
+				#sprite.texture = DOOR
+				sprite.modulate = Color.YELLOW
 				pos = Vector2.RIGHT
-		sprite.position = pos * 16
+				addX=-3
+		sprite.position = (pos * 16) + Vector2(addX, addY)
+		if (neighborCell and Map.HasCell(neighborCell.myCoords) and neighborCell is ConnectionCell):
+			sprite.modulate.a = 0.25
+		
+		if(neighborCell and neighborCell is ConnectionCell and !recurse):
+			neighborCell.DoDebugSprites(true)
+		
+		if(sprite.texture):
+			debugSpritesParent.add_child(sprite)
+		else:
+			sprite.queue_free()
 
 func AddSurroundingTiles():
 	var surroundingCells = GetNeighbors()
@@ -85,35 +114,39 @@ func IsOnTop() -> bool:
 		return false
 		
 func Rotate():
-		print("-----")
-		var rotatedConnects : Array[Direction] = []
-		for validConnection in validConnections:
-			var valCon : int = int(validConnection)
-			print("Before ", DirectionStringFromEnum(validConnection))
-			valCon += 1
-			if(valCon == 4):
-				valCon = 0
-			rotatedConnects.append(valCon as Direction)
-			print("after ", DirectionStringFromEnum(valCon as Direction))
-		validConnections = rotatedConnects
-		#DoDebugSprites()
+	print("-----")
+	var rotatedConnects : Array[Direction] = []
+	for validConnection in validConnections:
+		var valCon : int = int(validConnection)
+		print("Before ", DirectionStringFromEnum(validConnection))
+		valCon += 1
+		if(valCon == 4):
+			valCon = 0
+		rotatedConnects.append(valCon as Direction)
+		print("after ", DirectionStringFromEnum(valCon as Direction))
+	validConnections = rotatedConnects
+	myCoords = Vector2i(-myCoords.y, myCoords.x)
+	position = Map.map_to_local(myCoords)
+	#DoDebugSprites()
 
 func _process(delta: float) -> void:
 	if(hovered and Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT)):
 		var stringCons : Array[String]
 		for con in validConnections:
 			stringCons.append(Direction.find_key(con))
-		print(stringCons)
+		print(stringCons, ", ", Map.HasCell(myCoords))
 	
 	if(!Map.dragNDrop):
 		return
 	
-	#if(Input.is_action_just_pressed("rotate") and grabbed):
+	if(Input.is_action_just_pressed("rotate") and grabbed):
+		DoDebugSprites()
+		#Map.Rotate()
+		#pass
 		#Map.rotate(deg_to_rad(90))
 		
 		#for child : ConnectionCell in Map.positionIndexedChildren.values().filter(func(a): return a is ConnectionCell):
 			#child.Rotate()
-		#DoDebugSprites()
 		
 	if(Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and not grabbed):
 		if(IsOnTop()):
@@ -155,7 +188,11 @@ func AddRandomConnections():
 		for i in 4:
 			var weight = randWeight
 			if(DirectionStringFromEnum(i) == "West"):
-				weight /=2
+				AddConnection(i)
+			if(DirectionStringFromEnum(i) == "East"):
+				if(randi()%weight/2.0 == 0):
+					AddConnection(i)
+					
 			if(randi() % weight == 0):
 				AddConnection(i)
 				extraDoors+=1
@@ -193,6 +230,8 @@ func DirectionStringFromVec2i(dir : Vector2i) -> String:
 
 func CanConnectTo(direction : Direction, neighborCell : ConnectionCell) -> bool:
 	var can : bool
+	if(!neighborCell):
+		return false
 	match(direction):
 		Direction.East:
 			can = neighborCell.validConnections.has(Direction.West) and validConnections.has(Direction.East)
