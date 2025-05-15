@@ -20,6 +20,7 @@ var mapDone := false
 var astar := AStar2D.new()
 var dictOfPoints: Dictionary = {}
 var dictOfIds: Dictionary = {}
+var dictOfLevelInfos: Dictionary = {} #uses the points as indices for the levelinfo
 
 func _ready() -> void:
 	randomize()
@@ -69,11 +70,18 @@ func placePointsFromMap() -> void:
 	for pointOnPointMap in pointsMap.get_children():
 		var point: Control = load("res://Scenes/UI/PitStopBtn.tscn").instantiate()
 
+		var levelInfo = LevelInfo.generateRandomLevel()
+		var popupText = levelInfo.makePopupText(levelInfo.TimeToReach, levelInfo.Reputation, levelInfo.SpaceDust, levelInfo.Pirates, levelInfo.AsteroidDensity)
+
 		add_child(point)
+		dictOfLevelInfos[ point ] = levelInfo
+
 		var pointButton: TextureButton = point.get_node("TextureButton")
 		if pointButton:
 			point.global_position = pointOnPointMap.global_position + randAmtToAdd()
 			pointButton.pressed.connect(pointPressed.bind(point))
+			pointButton.mouse_entered.connect(Callable(Popups, "showPitStopPopup").bind(Rect2i(Vector2i(point.global_position), Vector2i(point.size)), popupText))
+			pointButton.mouse_exited.connect(Callable(Popups, "hidePitStopPopup"))
 		else:
 			printerr("Error: Could not find TextureButton in PitStopBtn.tscn")
 			point.queue_free()
