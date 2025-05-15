@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://dv4kwxgdofcnk"]
+
+[ext_resource type="Script" uid="uid://c6sabckhh7itc" path="res://ship_builder.gd" id="1_52mkc"]
+[ext_resource type="Texture2D" uid="uid://dgmilvislq0j8" path="res://Assets/Sprites/ShipBuilder/MoneyPanel.png" id="2_b6jpb"]
+[ext_resource type="Texture2D" uid="uid://dx5p0yy61fmtg" path="res://Assets/Sprites/ShipBuilder/ShopPanel.png" id="2_q1ubs"]
+[ext_resource type="Script" uid="uid://26mnybypchly" path="res://Scripts/ShipContruction/room_chooser.gd" id="3_o8snd"]
+[ext_resource type="PackedScene" uid="uid://bhjrdpdfo87g1" path="res://Scenes/ShipTilemapScenes/Player_Ship.tscn" id="3_smr6m"]
+[ext_resource type="PackedScene" uid="uid://ghqjwywqkr1k" path="res://Scenes/ShipBuilder/shop_slot.tscn" id="4_mniq6"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_mniq6"]
+normal = Vector2(90, 0)
+distance = 9.10851
+
+[node name="ShipBuilder" type="Node2D"]
+script = ExtResource("1_52mkc")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-1, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("WorldBoundaryShape2D_mniq6")
+
+[node name="MoneyPanel" type="Sprite2D" parent="."]
+position = Vector2(995, 20)
+texture = ExtResource("2_b6jpb")
+
+[node name="MoneyLabel" type="RichTextLabel" parent="MoneyPanel"]
+offset_left = -111.0
+offset_top = -16.0
+offset_right = -4.0
+offset_bottom = 9.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "Money: ERRR"
+
+[node name="CrewCountLabel" type="RichTextLabel" parent="MoneyPanel"]
+offset_left = 12.0
+offset_top = -16.0
+offset_right = 109.0
+offset_bottom = 10.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "Crew: ERRR"
+
+[node name="FirepowerLabel" type="RichTextLabel" parent="MoneyPanel"]
+offset_left = 9.0
+offset_top = 8.0
+offset_right = 111.0
+offset_bottom = 41.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "FirPwr: ERRR"
+
+[node name="SpeedLabel" type="RichTextLabel" parent="MoneyPanel"]
+offset_left = -108.0
+offset_top = 9.0
+offset_right = -8.0
+offset_bottom = 38.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "Speed: ERRR"
+
+[node name="ShopPanel" type="Sprite2D" parent="."]
+position = Vector2(995, 357)
+texture = ExtResource("2_q1ubs")
+script = ExtResource("3_o8snd")
+
+[node name="ShopSlot1" parent="ShopPanel" instance=ExtResource("4_mniq6")]
+position = Vector2(0, -134)
+
+[node name="ShopSlot2" parent="ShopPanel" instance=ExtResource("4_mniq6")]
+position = Vector2(0, 31)
+
+[node name="ShopSlot3" parent="ShopPanel" instance=ExtResource("4_mniq6")]
+position = Vector2(0, 195)
+
+[node name="PlayerShip" parent="." instance=ExtResource("3_smr6m")]
+position = Vector2(339, 280)
+
+[node name="ShipPositioner" type="Marker2D" parent="."]
+position = Vector2(387, 313)

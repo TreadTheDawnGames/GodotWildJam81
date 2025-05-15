@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://dk65srebflc4"]
+
+[ext_resource type="Script" uid="uid://l5sj1gc1yinb" path="res://Scripts/ShipContruction/cells/guaranteed_connection.gd" id="1_qyunw"]
+[ext_resource type="Texture2D" uid="uid://c2nyk0nyvs6ec" path="res://Assets/Sprites/Debug/AlwaysConnectDebugSprite.png" id="2_q4v04"]
+
+[node name="GuarenteedConnectionCell" type="Node2D"]
+script = ExtResource("1_qyunw")
+
+[node name="DebugSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_q4v04")
