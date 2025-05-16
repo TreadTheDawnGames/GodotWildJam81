@@ -5,15 +5,15 @@ extends Node
 class_name StateNode
 
 
-func _state_init(data: Dictionary) -> void:
+func _state_init(_data: Dictionary) -> void:
 	pass
 
 
-func _state_process(delta: float) -> Dictionary:
+func _state_process(_delta: float) -> Dictionary:
 	return {}
 
 
-func _state_transition(data: Dictionary) -> Dictionary:
+func _state_transition(_data: Dictionary) -> Dictionary:
 	return {}
 
 

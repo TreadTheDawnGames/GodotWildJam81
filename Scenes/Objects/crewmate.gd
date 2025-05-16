@@ -73,7 +73,7 @@ func _pathfinding(from: Vector2i, to: Vector2i) -> Array[Vector2i]:
 
 	# A function that determines whether a given cell is accessible
 	var filter_connected_rooms = func(i: Vector2i) -> bool:
-		var tiledata: TileData = navigation_tilemap.get_cell_tile_data(i)
+		var _tiledata: TileData = navigation_tilemap.get_cell_tile_data(i)
 		return true
 	
 	var prioritize_branches = func(a: Vector2i, b: Vector2i) -> bool:

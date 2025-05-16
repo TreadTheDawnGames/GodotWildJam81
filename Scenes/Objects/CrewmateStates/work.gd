@@ -20,7 +20,7 @@ func _state_process(delta: float) -> Dictionary:
 	return {}
 
 
-func _state_transition(data: Dictionary) -> Dictionary:
+func _state_transition(_data: Dictionary) -> Dictionary:
 	_flash = false
 	crewmate.modulate = Color.WHITE
 	return {}

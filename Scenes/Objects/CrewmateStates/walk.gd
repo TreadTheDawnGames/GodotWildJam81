@@ -28,7 +28,7 @@ func _state_process(delta: float) -> Dictionary:
 	return {}
 
 
-func _state_transition(data: Dictionary) -> Dictionary:
+func _state_transition_(_data: Dictionary) -> Dictionary:
 	if !_path.is_empty():
 		return {"new_state": "Walk"}
 	return {}

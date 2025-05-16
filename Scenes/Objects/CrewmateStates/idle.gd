@@ -1,7 +1,7 @@
 extends "common.gd"
 
 
-func _state_process(delta: float) -> Dictionary:
+func _state_process(_delta: float) -> Dictionary:
 	if crewmate.navpoints:
 		return {
 			"new_state": "Walk",
