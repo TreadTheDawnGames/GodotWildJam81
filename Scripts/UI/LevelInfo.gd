@@ -11,7 +11,7 @@ func _init(timeToReach: int, reputation: int, spaceDust: int, pirates: int, aste
 
 const idealStartPos := Vector2( 0, 300 )
 var distanceToStart: float
-var distanceFactor = remap(distanceToStart, 0.0, 1000.0, 0.0, 1.5)
+var DistanceFactor = remap(distanceToStart, 0.0, 1000.0, 0.0, 1.5)
 		  
 const minReputation = 50
 const maxReputation = 300
@@ -27,7 +27,7 @@ static func generateRandomLevel(nebula = false) -> LevelInfo:
 	return LevelInfo.new(getRandomTimeToReach(), getRandomReputation(), getRandomSpaceDust(), getRandomPirateChance(), getRandomAsteroidDensity(), nebula)
 
 func makePopupText(timeToReach: int, reputation: int, spaceDust: int, pirates: int, asteroidDensity: int, nebula: bool = false) -> String:
-	var popupText: String
+	var popupText: String = ""
 	var timeToTravel = str(timeToReach)
 	popupText += "Time to Travel: " + timeToTravel + " Seconds\n"
 	var reputationAmt = str(reputation)
@@ -46,19 +46,19 @@ func makePopupText(timeToReach: int, reputation: int, spaceDust: int, pirates: i
 	return popupText
 
 static func getRandomTimeToReach() -> int:
-	return randi_range(180.0, 300.0) # 3 to 5 minutes is aight I think
+	return randi_range(180, 300) # 3 to 5 minutes is aight I think
 
 static func getRandomReputation() -> int:
 	return randi_range(minReputation, maxReputation)
 
 static func getRandomPirateChance() -> int:
-	return randi_range(0.0, 100.0) 
+	return randi_range(0, 100) 
 	
 static func getRandomAsteroidDensity() -> int:
-	return randi_range(0.0, 60.0)
+	return randi_range(0, 60)
 
 static func getRandomSpaceDust() -> int:
-	return randi_range(0.0, 100.0)
+	return randi_range(0, 100)
 
 static func calculateDifficulty(time: float, reputation: int, pirateChance: int, spaceDust: int, distanceFactor: float = 1.0) -> int: # camelCase
 	var difficulty = 0

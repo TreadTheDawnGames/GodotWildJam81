@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cme73ldydoe5f"]
+[gd_scene load_steps=4 format=3 uid="uid://cme73ldydoe5f"]
 
-[ext_resource type="Script" path="res://Scenes/debug.gd" id="1_qxrlw"]
+[ext_resource type="Script" uid="uid://cpt8iweygokjs" path="res://Scenes/debug.gd" id="1_qxrlw"]
 [ext_resource type="PackedScene" path="res://PlayerShip.tscn" id="2_wrm1d"]
+[ext_resource type="PackedScene" uid="uid://dnycrg3qoywj2" path="res://Scenes/UI/SpaceMap.tscn" id="3_wrm1d"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_qxrlw")
@@ -10,3 +11,5 @@ script = ExtResource("1_qxrlw")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 324)
+
+[node name="SpaceMap" parent="." instance=ExtResource("3_wrm1d")]
