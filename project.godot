@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+GlobalPlayerInfo="*res://Scripts/Globals/GlobalPlayerInfo.gd"
 Popups="*res://Scenes/UI/Popups.tscn"
 
 [input]
@@ -54,5 +55,6 @@ DEBUG-AddMoney={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
