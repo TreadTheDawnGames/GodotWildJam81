@@ -7,7 +7,8 @@ func _ready() -> void:
 	dragNDrop = false
 	#super._ready()
 	Setup.call_deferred()
-	
+	GlobalPlayerInfo.SetPlayerShip(self)
+
 func DoCombine(roomToAdd : ShipRoom):
 	roomToAdd.AddToMap(self)
 	roomToAdd = null
@@ -27,6 +28,27 @@ func AbleToConnectPiece(roomToAdd : ShipRoom, roomPosition : Vector2i) -> bool:
 	return able
 
 
-func _draw():
-	for item : Cell in positionIndexedChildren.values():
-		item.queue_redraw()
+#func _draw():
+	#for item : Cell in positionIndexedChildren.values():
+		#if(item):
+			#item.queue_redraw()
+
+func GetFirepower() -> int:
+	#TODO Calculate Firepower based on number of weapon cells
+	return 0
+	
+func GetCrewCount() -> int:
+	#TODO Calculate number of crew members
+	return 0
+
+func GetSpeed() -> int:
+	var engineCount : int = 0
+	for cell : ConnectionCell in positionIndexedChildren.values().filter(func(a): return a is ConnectionCell):
+		if(!HasCell(cell.myCoords + cell.Vector2iFromDirection(ConnectionCell.Direction.West))):
+			engineCount +=1
+	return engineCount
+
+func EnterStorage():
+	global_position = Vector2(9999, 9999)
+	process_mode = Node.PROCESS_MODE_DISABLED
+	return

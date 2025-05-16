@@ -19,4 +19,5 @@ func Init():
 					neighborCell.RemoveConnection(neighborCell.Direction.South)
 					
 	Map.RemoveChildByCoords(myCoords)
+	Map.set_cell(myCoords, -1)
 	queue_free()

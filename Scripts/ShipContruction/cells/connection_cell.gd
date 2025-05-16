@@ -24,12 +24,14 @@ func AssignLoadOrder():
 
 func Init():
 	super.Init()
+	
 	debugSpritesParent = get_node("DebugSprites")
 	AddRandomConnections()
 	AddSurroundingTiles()
 	grabArea.mouse_entered.connect(Hovered)
 	grabArea.mouse_exited.connect(Unhovered)
 	DoDebugSprites()
+	
 
 
 func DoDebugSprites(recurse : bool = false):
@@ -108,13 +110,14 @@ func IsOnTop() -> bool:
 		return false
 		
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if(hovered and Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT)):
 		var stringCons : Array[String]
 		for con in validConnections:
 			stringCons.append(Direction.find_key(con))
 		print(stringCons, ", ", Map.HasCell(myCoords))
-	
+	if(!Map):
+		return
 	if(!Map.dragNDrop):
 		return
 	

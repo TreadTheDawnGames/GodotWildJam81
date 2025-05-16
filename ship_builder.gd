@@ -5,13 +5,15 @@ extends Node2D
 var playerShip : PlayerShip
 var addingRoom : ShipRoom
 var addingRoomCell : ConnectionCell
+var textInfo : GameInfoPanel
 
 func _ready() -> void:
-	playerShip = get_node("PlayerShip")
+	playerShip = GlobalPlayerInfo.ShipExitStorage(get_node("ShipPositioner").global_position)
 	ShopPanel = get_node("ShopPanel")
+	textInfo = get_node("MoneyPanel")
 	BuildArea.area_entered.connect(SnapToPlayerShip)
 	BuildArea.area_exited.connect(ReturnToShop)
-	
+	get_node("CloseButton").pressed.connect(CloseShipyard)
 	
 func SnapToPlayerShip(otherArea : Area2D):
 	if(!addingRoom and otherArea.owner is ConnectionCell and otherArea.owner.Map!=playerShip):
@@ -37,13 +39,14 @@ func _process(_delta: float) -> void:
 		#After.call_deferred()
 		if(playerShip.AbleToConnectPiece(addingRoom, addingLocation)):
 			addingRoom.modulate = Color.GREEN
-			After.call_deferred()
+			SnapToShipGrid.call_deferred()
 		else:
 			addingRoom.modulate = Color.RED
 	#if there is a room to add
 	elif(addingRoom):
 		if(playerShip.AbleToConnectPiece(addingRoom, addingLocation)):
 			playerShip.DoCombine(addingRoom)
+			textInfo.UpdateText()
 			addingRoomCell = null
 			addingRoom = null
 		else:
@@ -51,6 +54,10 @@ func _process(_delta: float) -> void:
 			addingRoom.Ungrab()
 			addingRoom = null
 
-func After():
+func SnapToShipGrid():
 	addingRoom.global_position = playerShip.to_global(playerShip.to_local(addingRoom.global_position).snapped(Vector2(32,32)))
 	
+func CloseShipyard():
+	playerShip.EnterStorage()
+	queue_free()
+	print("Closing")

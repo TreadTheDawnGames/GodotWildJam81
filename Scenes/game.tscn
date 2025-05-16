@@ -1,10 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://cme73ldydoe5f"]
+[gd_scene load_steps=3 format=3 uid="uid://cme73ldydoe5f"]
 
-[ext_resource type="PackedScene" uid="uid://dv4kwxgdofcnk" path="res://Scenes/ShipBuilder/ship_builder.tscn" id="1_ebmjs"]
+[ext_resource type="Script" uid="uid://cpt8iweygokjs" path="res://Scenes/debug.gd" id="1_qxrlw"]
+[ext_resource type="PackedScene" uid="uid://g7utiny8mr8a" path="res://PlayerShip.tscn" id="2_wrm1d"]
 
 [node name="Game" type="Node2D"]
+script = ExtResource("1_qxrlw")
+
+[node name="PlayerShip" parent="." instance=ExtResource("2_wrm1d")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="ShipBuilder" parent="." instance=ExtResource("1_ebmjs")]
-position = Vector2(-575, -326)
+position = Vector2(576, 324)

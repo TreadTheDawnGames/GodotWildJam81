@@ -1,0 +1,50 @@
+[gd_scene load_steps=8 format=4 uid="uid://g7utiny8mr8a"]
+
+[ext_resource type="PackedScene" uid="uid://dej32hvfh1kc5" path="res://Scenes/ShipTilemapScenes/cells/connection_cell.tscn" id="1_7dmsk"]
+[ext_resource type="PackedScene" uid="uid://cdrdoi7dbkthq" path="res://Scenes/ShipTilemapScenes/cells/dissallowed_connection_cell.tscn" id="2_t02xd"]
+[ext_resource type="PackedScene" uid="uid://dk65srebflc4" path="res://Scenes/ShipTilemapScenes/cells/GuarenteedConnectionCell.tscn" id="3_0f8a3"]
+[ext_resource type="Script" uid="uid://dq4fsivlhgui7" path="res://Scenes/ShipTilemapScenes/player_ship.gd" id="4_wcakh"]
+[ext_resource type="Texture2D" uid="uid://kj1qgmschcrq" path="res://Assets/Sprites/ship_base.png" id="5_opug3"]
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_neb1g"]
+scenes/1/scene = ExtResource("1_7dmsk")
+scenes/2/scene = ExtResource("2_t02xd")
+scenes/3/scene = ExtResource("3_0f8a3")
+
+[sub_resource type="TileSet" id="TileSet_drvej"]
+tile_size = Vector2i(32, 32)
+sources/0 = SubResource("TileSetScenesCollectionSource_neb1g")
+
+[node name="PlayerShip" type="TileMapLayer"]
+position = Vector2(339, 280)
+tile_map_data = PackedByteArray("AAABAAEAAAAAAAAAAQACAAAAAAAAAAAAAQACAAIAAAAAAAAAAwADAAEAAAAAAAAAAwABAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAQABAAIAAAAAAAAAAwAAAAIAAAAAAAAAAwD//wEAAAAAAAAAAwD//wAAAAAAAAAAAwABAP//AAAAAAAAAwADAAAAAAAAAAAAAgACAP//AAAAAAAAAgAAAP//AAAAAAAAAwACAAEAAAAAAAAAAQA=")
+tile_set = SubResource("TileSet_drvej")
+script = ExtResource("4_wcakh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(48, 32)
+texture = ExtResource("5_opug3")
+
+[node name="ConnectionCell" parent="." instance=ExtResource("1_7dmsk")]
+position = Vector2(48, 48)
+validConnections = Array[int]([0, 2, 3, 1])
+
+[node name="@Node2D@9" parent="." instance=ExtResource("1_7dmsk")]
+position = Vector2(80, 16)
+validConnections = Array[int]([3, 2])
+
+[node name="@Node2D@11" parent="." instance=ExtResource("1_7dmsk")]
+position = Vector2(48, 16)
+validConnections = Array[int]([3, 0, 1, 2])
+
+[node name="@Node2D@12" parent="." instance=ExtResource("1_7dmsk")]
+position = Vector2(16, 16)
+validConnections = Array[int]([3, 1, 2, 0])
+
+[node name="@Node2D@13" parent="." instance=ExtResource("1_7dmsk")]
+position = Vector2(16, 48)
+validConnections = Array[int]([0, 3, 1, 2])
+
+[node name="@Node2D@21" parent="." instance=ExtResource("1_7dmsk")]
+position = Vector2(80, 48)
+validConnections = Array[int]([3, 1, 2, 0])

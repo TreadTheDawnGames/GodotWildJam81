@@ -20,4 +20,5 @@ func Init():
 				Vector2i.UP:
 					neighborCell.AddConnection(neighborCell.Direction.North)
 	Map.RemoveChildByCoords(myCoords)
+	Map.set_cell(myCoords, -1)
 	queue_free()

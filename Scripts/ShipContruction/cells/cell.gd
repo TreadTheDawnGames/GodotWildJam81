@@ -7,6 +7,7 @@ var loadOrder : int = 0
 func Init():
 	Map=get_node("..")
 	#Map = get_parent()
+	reparent(Map)
 	myCoords = Map.local_to_map(Map.to_local(global_position))
 	return
 
