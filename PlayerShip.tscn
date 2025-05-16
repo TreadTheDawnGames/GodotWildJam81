@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=4 uid="uid://g7utiny8mr8a"]
+[gd_scene load_steps=9 format=4 uid="uid://g7utiny8mr8a"]
 
 [ext_resource type="PackedScene" uid="uid://dej32hvfh1kc5" path="res://Scenes/ShipTilemapScenes/cells/connection_cell.tscn" id="1_7dmsk"]
 [ext_resource type="PackedScene" uid="uid://cdrdoi7dbkthq" path="res://Scenes/ShipTilemapScenes/cells/dissallowed_connection_cell.tscn" id="2_t02xd"]
 [ext_resource type="PackedScene" uid="uid://dk65srebflc4" path="res://Scenes/ShipTilemapScenes/cells/GuarenteedConnectionCell.tscn" id="3_0f8a3"]
 [ext_resource type="Script" uid="uid://dq4fsivlhgui7" path="res://Scenes/ShipTilemapScenes/player_ship.gd" id="4_wcakh"]
 [ext_resource type="Texture2D" uid="uid://kj1qgmschcrq" path="res://Assets/Sprites/ship_base.png" id="5_opug3"]
+[ext_resource type="PackedScene" uid="uid://chax0pgaodrnu" path="res://Scenes/Objects/crewmate.tscn" id="6_7dmsk"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_neb1g"]
 scenes/1/scene = ExtResource("1_7dmsk")
@@ -16,7 +17,6 @@ tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetScenesCollectionSource_neb1g")
 
 [node name="PlayerShip" type="TileMapLayer"]
-position = Vector2(339, 280)
 tile_map_data = PackedByteArray("AAABAAEAAAAAAAAAAQACAAAAAAAAAAAAAQACAAIAAAAAAAAAAwADAAEAAAAAAAAAAwABAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAQABAAIAAAAAAAAAAwAAAAIAAAAAAAAAAwD//wEAAAAAAAAAAwD//wAAAAAAAAAAAwABAP//AAAAAAAAAwADAAAAAAAAAAAAAgACAP//AAAAAAAAAgAAAP//AAAAAAAAAwACAAEAAAAAAAAAAQA=")
 tile_set = SubResource("TileSet_drvej")
 script = ExtResource("4_wcakh")
@@ -48,3 +48,21 @@ validConnections = Array[int]([0, 3, 1, 2])
 [node name="@Node2D@21" parent="." instance=ExtResource("1_7dmsk")]
 position = Vector2(80, 48)
 validConnections = Array[int]([3, 1, 2, 0])
+
+[node name="Crewmate" parent="." instance=ExtResource("6_7dmsk")]
+position = Vector2(16, 16)
+
+[node name="Crewmate2" parent="." instance=ExtResource("6_7dmsk")]
+position = Vector2(48, 16)
+
+[node name="Crewmate3" parent="." instance=ExtResource("6_7dmsk")]
+position = Vector2(79, 16)
+
+[node name="Crewmate4" parent="." instance=ExtResource("6_7dmsk")]
+position = Vector2(16, 51)
+
+[node name="Crewmate5" parent="." instance=ExtResource("6_7dmsk")]
+position = Vector2(47, 46)
+
+[node name="Crewmate6" parent="." instance=ExtResource("6_7dmsk")]
+position = Vector2(80, 47)

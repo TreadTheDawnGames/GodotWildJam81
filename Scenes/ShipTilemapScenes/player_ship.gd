@@ -38,8 +38,7 @@ func GetFirepower() -> int:
 	return 0
 	
 func GetCrewCount() -> int:
-	#TODO Calculate number of crew members
-	return 0
+	return get_children().filter(func(c): return c is Crewmate).size()
 
 func GetSpeed() -> int:
 	var engineCount : int = 0

@@ -21,6 +21,7 @@ var movement_target_position: Vector2 = Vector2(60.0,180.0)
 
 
 func _ready() -> void:
+	if owner is TileMapLayer: navigation_tilemap = owner
 	$Sprite2D.position = (Vector2(randf(), randf()) - Vector2(.5, .5)) * 16.0
 	
 
@@ -70,6 +71,14 @@ func _pathfinding(from: Vector2i, to: Vector2i) -> Array[Vector2i]:
 	var stack: Array[Vector2i]
 	stack.push_back(from)
 
+	# A function that determines whether a given cell is accessible
+	var filter_connected_rooms = func(i: Vector2i) -> bool:
+		var tiledata: TileData = navigation_tilemap.get_cell_tile_data(i)
+		return true
+	
+	var prioritize_branches = func(a: Vector2i, b: Vector2i) -> bool:
+		return a.distance_to(to) > b.distance_to(to)
+
 	# Recursively find a path
 	while !stack.is_empty():
 		var v: Vector2i = stack.pop_back()
@@ -80,8 +89,10 @@ func _pathfinding(from: Vector2i, to: Vector2i) -> Array[Vector2i]:
 
 		# Push any of the unvisited cells into the node
 		var surround: Array[Vector2i] = navigation_tilemap.get_surrounding_cells(v)
-		var filtered: Array[Vector2i] = surround.filter(func(i): return navigation_tilemap.get_cell_source_id(i) >= 0 && !path.has(i))
-		filtered.sort_custom(func(a, b): return a.distance_to(to) > b.distance_to(to))
+		var accessible: Array[Vector2i] = surround.filter(func(i): return navigation_tilemap.get_cell_source_id(i) >= 0 && !path.has(i))
+
+		var filtered: Array[Vector2i] = accessible.filter(filter_connected_rooms)
+		filtered.sort_custom(prioritize_branches)
 		if !filtered.is_empty():
 			filtered.all(func(i): stack.push_back(i); return true)
 

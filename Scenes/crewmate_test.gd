@@ -16,8 +16,8 @@ func _input(event: InputEvent) -> void:
 	
 	var _scroll: bool = false
 	if event is InputEventMouse:
-		_scroll = event.is_action("AOS.debug_right_click")
-		if event.is_action_pressed("AOS.debug_left_click"):
+		_scroll = false
+		if event.is_action_pressed("click"):
 			var mousepos = Global.mouse_position_to_local(event, camera)
 			label.text = str(mousepos)
 			crewmate._walk_to(mousepos)
