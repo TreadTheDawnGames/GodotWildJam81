@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://ghqjwywqkr1k"]
+
+[ext_resource type="Script" uid="uid://oam3nubf67ce" path="res://Scenes/ShipBuilder/shop_slot.gd" id="1_ta1yw"]
+
+[node name="ShopSlot1" type="Marker2D"]
+script = ExtResource("1_ta1yw")
+
+[node name="Panel" type="Panel" parent="."]
+offset_left = -60.0
+offset_top = -82.0
+offset_right = 60.0
+offset_bottom = -57.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_right = 120.0
+offset_bottom = 26.0
+text = "Price: $ERR"
+horizontal_alignment = 1

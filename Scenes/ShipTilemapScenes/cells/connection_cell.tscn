@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dej32hvfh1kc5"]
+
+[ext_resource type="Script" path="res://Scripts/ShipContruction/cells/connection_cell.gd" id="1_4qv6h"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_m14t5"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vrco3"]
+size = Vector2(32, 32)
+
+[node name="ConnectionCell" type="Node2D"]
+script = ExtResource("1_4qv6h")
+
+[node name="DebugSprite" type="Sprite2D" parent="."]
+visible = false
+texture = SubResource("PlaceholderTexture2D_m14t5")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_vrco3")
+
+[node name="DebugSprites" type="Node2D" parent="."]
