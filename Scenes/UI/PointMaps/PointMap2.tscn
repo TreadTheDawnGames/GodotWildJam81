@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://dpe2jgj53sm8t"]
+
+[node name="PointMap2" type="Node2D"]
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(89, 317)
+
+[node name="Marker2D2" type="Marker2D" parent="."]
+position = Vector2(302, 102)
+
+[node name="Marker2D3" type="Marker2D" parent="."]
+position = Vector2(1077, 288)
+
+[node name="Marker2D4" type="Marker2D" parent="."]
+position = Vector2(238, 318)
+
+[node name="Marker2D5" type="Marker2D" parent="."]
+position = Vector2(332, 502)
+
+[node name="Marker2D6" type="Marker2D" parent="."]
+position = Vector2(528, 488)
+
+[node name="Marker2D7" type="Marker2D" parent="."]
+position = Vector2(873, 275)
+
+[node name="Marker2D8" type="Marker2D" parent="."]
+position = Vector2(696, 341)
+
+[node name="Marker2D9" type="Marker2D" parent="."]
+position = Vector2(835, 494)
+
+[node name="Marker2D10" type="Marker2D" parent="."]
+position = Vector2(490, 288)
