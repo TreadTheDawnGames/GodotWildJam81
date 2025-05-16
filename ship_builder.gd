@@ -38,13 +38,17 @@ func _process(_delta: float) -> void:
 	if(addingRoom and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)):
 		#After.call_deferred()
 		if(playerShip.AbleToConnectPiece(addingRoom, addingLocation)):
-			addingRoom.modulate = Color.GREEN
+			if(!GlobalPlayerInfo.CanRemoveMoney(addingRoom.Price)):
+				addingRoom.modulate = Color.YELLOW
+			else:
+				addingRoom.modulate = Color.GREEN
 			SnapToShipGrid.call_deferred()
 		else:
 			addingRoom.modulate = Color.RED
 	#if there is a room to add
 	elif(addingRoom):
-		if(playerShip.AbleToConnectPiece(addingRoom, addingLocation)):
+		if(playerShip.AbleToConnectPiece(addingRoom, addingLocation) and GlobalPlayerInfo.CanRemoveMoney(addingRoom.Price)):
+			GlobalPlayerInfo.RemoveMoney(addingRoom.Price)
 			playerShip.DoCombine(addingRoom)
 			textInfo.UpdateText()
 			addingRoomCell = null

@@ -11,3 +11,5 @@ func _process(_delta: float) -> void:
 		print("Spawning ship")
 	if(Input.is_action_just_pressed("DEBUG-openShop")):
 		add_child(shopScene.instantiate())
+	if(Input.is_action_just_pressed("DEBUG-AddMoney")):
+		GlobalPlayerInfo.AddMoney(20)
