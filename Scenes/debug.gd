@@ -18,11 +18,15 @@ func _process(_delta: float) -> void:
 		GlobalPlayerInfo.AddMoney(20)
 	if(Input.is_action_just_pressed("DEBUG-RandomLevel")):
 		if(DEBUGcurrentLevel):
+			GlobalPlayerInfo.UnsetActiveLevel()
 			DEBUGcurrentLevel.queue_free()
 		DEBUGcurrentLevel = LEVEL.instantiate()
 		DEBUGcurrentLevel.info = LevelInfo.generateRandomLevel(randi()%2==0)
 		add_child(DEBUGcurrentLevel)
+		GlobalPlayerInfo.SetActiveLevel(DEBUGcurrentLevel)
+		
 	if(Input.is_action_just_pressed("DEBUG-CloseLevel")):
+		GlobalPlayerInfo.UnsetActiveLevel()
 		if(DEBUGcurrentLevel):
 			DEBUGcurrentLevel.queue_free()
 		Background.StopScroll()

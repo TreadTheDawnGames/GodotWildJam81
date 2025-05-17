@@ -1,6 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://bp0pyqbmssdgb"]
+[gd_scene load_steps=5 format=3 uid="uid://bp0pyqbmssdgb"]
 
 [ext_resource type="Script" uid="uid://nhcq7w6jr5r0" path="res://Scripts/ShipContruction/cells/laser_cell.gd" id="1_umsfn"]
+[ext_resource type="PackedScene" uid="uid://vq2v0mbbgqnx" path="res://Scenes/projectiles/laser.tscn" id="2_rf6v0"]
+[ext_resource type="Texture2D" uid="uid://v2txdedh82lb" path="res://Assets/Sprites/Debug/LaserCell.png" id="2_yp7oj"]
+
+[sub_resource type="Curve" id="Curve_rf6v0"]
+_limits = [0.0, 2.5, 0.0, 1.0]
+_data = [Vector2(0, 0.25), 0.0, 2.25, 0, 1, Vector2(1, 2.5), 2.25, 0.0, 1, 0]
+point_count = 2
 
 [node name="LaserCell" type="Node2D"]
 script = ExtResource("1_umsfn")
+AMMO = ExtResource("2_rf6v0")
+curve = SubResource("Curve_rf6v0")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_yp7oj")
+
+[node name="LaserInstantiationPoint" type="Marker2D" parent="."]
+position = Vector2(18, 0)

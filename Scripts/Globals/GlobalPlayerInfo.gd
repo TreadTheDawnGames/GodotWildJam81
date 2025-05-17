@@ -1,6 +1,7 @@
 extends Node
 
 var ThePlayerShip : PlayerShip
+var ActiveLevel : Level
 var Money : int
 
 func AddMoney(amount : int):
@@ -13,7 +14,13 @@ func RemoveMoney(amount : int):
 		AddMoney(-amount)
 		return true
 	return false
+
+func SetActiveLevel(level : Level):
+	ActiveLevel = level
 	
+func UnsetActiveLevel():
+	ActiveLevel = null
+
 func CanRemoveMoney(amount : int) -> bool:
 	return Money - amount >= 0
 	

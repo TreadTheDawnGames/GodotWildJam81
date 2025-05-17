@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://vq2v0mbbgqnx"]
+
+[ext_resource type="Script" uid="uid://3o6lb5brsd12" path="res://Scenes/projectiles/projectile.gd" id="1_xf8fr"]
+[ext_resource type="Texture2D" uid="uid://derce00etgfrj" path="res://Assets/Sprites/Asteroids/Laser.png" id="2_3jpic"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5fvfs"]
+size = Vector2(16, 4)
+
+[node name="Laser" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_xf8fr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_5fvfs")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(8, 0)
+texture = ExtResource("2_3jpic")

@@ -17,5 +17,5 @@ func GetNeighbors() -> Array[Vector2i]:
 func AssignLoadOrder():
 	loadOrder = 0
 
-#func _draw() -> void:
-	#draw_circle(Map.local_to_map(position), 16, Color.YELLOW)
+func ConnectedToShipFunc():
+	return

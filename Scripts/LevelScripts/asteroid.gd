@@ -18,7 +18,6 @@ var speed : int = 50
 
 func _ready() -> void:
 	debug.pressed.connect(TakeDamage.bind(1))
-
 	sprite = get_node("Sprite2D")
 	if(isSmall):
 		sprite.texture = SmallAsteroids.pick_random()
@@ -56,26 +55,17 @@ func TakeDamage(amount : int):
 				var ast = ASTEROID.instantiate()
 				ast.isSmall = true
 				ast.position = Vector2(randf_range(-25, 25), randf_range(-25,25)) + global_position
-				get_parent().add_child(ast)
+				get_parent().add_child.call_deferred(ast)
 				queue_free()
 #func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	#return
 func HitSomething(area : Area2D):
-	print("hit")
 	if area.owner is ConnectionCell:
-		print("hit con cell")
 		var cell : ConnectionCell = area.owner
 		if(!area.owner.Map):
-			print("no map")
 			return
 		if(area.owner.Map.Faction == ShipRoom.ShipFaction.Player):
-			print("hit player")
 			if(area.owner.Map is ShipRoom):
 				var hitShip : ShipRoom = cell.get_parent()
-				print("hit a shiproom: ", hitShip)
 				hitShip.DamageRoom(1)
 				queue_free()
-		else:
-			print("not a valid faction")
-	else:
-		print("owner is not connection cellwwwwwwdaa")

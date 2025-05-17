@@ -88,7 +88,7 @@ func ChildStuff(map):
 		SetChildByCoords(child, map.local_to_map(map.to_local(child.global_position)))
 		map.SetChildByCoords(child, map.local_to_map(map.to_local(child.global_position)))
 		child.reparent.call_deferred(self, true)
-		
+		child.ConnectedToShipFunc.call_deferred()
 		
 	for prevIndex in previousChildrenIndexes:
 		positionIndexedChildren.erase(prevIndex)

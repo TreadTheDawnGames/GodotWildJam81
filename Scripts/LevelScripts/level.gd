@@ -21,6 +21,7 @@ func _ready():
 	Dust.spread = 0.0
 	Dust.gravity = Vector2(-clamp(float(GlobalPlayerInfo.ThePlayerShip.GetSpeed())/5.0, 0.1, 20)*10,0)
 	Dust.initial_velocity_min = Dust.gravity.length()
+	Dust.color = Color.RED
 	#Dust.radial_accel_max = 8.0
 	#Dust.radial_accel_max = -8.0
 	#Dust.tangential_accel_max = 5.0

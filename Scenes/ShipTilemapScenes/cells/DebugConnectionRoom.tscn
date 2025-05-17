@@ -1,14 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdfn3fphqnpka"]
+[gd_scene load_steps=4 format=3 uid="uid://bdfn3fphqnpka"]
 
-[ext_resource type="PackedScene" uid="uid://c1orf4r8byd2g" path="res://Scenes/ShipBuilder/ship_room.tscn" id="1_xcde8"]
+[ext_resource type="PackedScene" uid="uid://qstxmf8vj5hp" path="res://Scenes/ShipBuilder/ship_room.tscn" id="1_xcde8"]
+[ext_resource type="Texture2D" uid="uid://v2txdedh82lb" path="res://Assets/Sprites/Debug/LaserCell.png" id="2_pa20s"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_xcde8"]
 size = Vector2(32, 96)
 
 [node name="DebugRoom" instance=ExtResource("1_xcde8")]
-tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 3, 0)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 4, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0)
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(16, 16)
 scale = Vector2(1, 0.333333)
 texture = SubResource("PlaceholderTexture2D_xcde8")
+
+[node name="LaserCell2" type="Sprite2D" parent="." index="1"]
+position = Vector2(16, -16)
+texture = ExtResource("2_pa20s")
+
+[node name="LaserCell3" type="Sprite2D" parent="." index="2"]
+position = Vector2(16, 48)
+scale = Vector2(1, -1)
+texture = ExtResource("2_pa20s")
