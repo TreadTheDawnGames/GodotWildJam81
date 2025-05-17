@@ -11,8 +11,6 @@ script = ExtResource("1_qxrlw")
 [node name="SpaceMap" parent="." instance=ExtResource("3_wrm1d")]
 visible = false
 
-[node name="PlayerShip" parent="." instance=ExtResource("2_wrm1d")]
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 324)
 

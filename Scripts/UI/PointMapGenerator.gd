@@ -32,27 +32,63 @@ func _ready() -> void:
 
 func makeMap() -> void:
 	placePointsFromMap()
-	connectPointsOnMap(2)
+	connectPointsOnMap()
 	areLeftAndRightConnected()
 	placeCruiserOnLeftMostPoint()
 	pointsConnectedToCruiserPoint()
 	mapDone = true
 
-
-func pointsConnectedToCruiserPoint() -> Array:
+# hasVisionUpgrade allows popups on connections to possible routes
+# however the popups are still recreated, that should be reworked if we manage to work in the upgrade
+func pointsConnectedToCruiserPoint(hasVisionUpgrade: bool = false) -> Array:
 	var arrOfConnectedPoints: Array
 	var pointToGetConnectionsOf: Control = getClosestPointToPosPassedIn( cruiser.global_position )
 	var idOfPointToGetConnectionsOf: int = dictOfIds[ pointToGetConnectionsOf ]
 	
 	var arrOfPointIdThatAreConnectedToTheMainPoint = astar.get_point_connections( idOfPointToGetConnectionsOf )
 	for id in arrOfPointIdThatAreConnectedToTheMainPoint:
-		arrOfConnectedPoints.append( dictOfPoints[ id ] )
-		setLineHighlightToSomeLines( arrOfConnectedPoints, pointToGetConnectionsOf.global_position )
+		var point = dictOfPoints[ id ]
+		var pointButton: TextureButton = point.get_node("TextureButton")
+		if point.global_position.distance_to(idealStartPos) < pointToGetConnectionsOf.global_position.distance_to(idealStartPos):
+			pointButton.disabled
+			pointButton.disconnect('mouse_entered', Callable(Popups, "showPitStopPopup"))
+			pointButton.disconnect('pressed', pointPressed)
+		else:
+			point = setPopupsOnButton(id)
+			arrOfConnectedPoints.append( point )
+			setLineHighlightToSomeLines( arrOfConnectedPoints, pointToGetConnectionsOf.global_position )
+			if hasVisionUpgrade:
+				var arrayOfConnectionsToConnectedPoint: Array = astar.get_point_connections( id )
+				for secondId in arrayOfConnectionsToConnectedPoint:
+					var secondPoint = setPopupsOnButton( secondId )
+	if arrOfConnectedPoints.size() == 0:
+		for id in arrOfPointIdThatAreConnectedToTheMainPoint:
+			var point = setPopupsOnButton(id)
+			arrOfConnectedPoints.append( point )
+			setLineHighlightToSomeLines( arrOfConnectedPoints, pointToGetConnectionsOf.global_position )
+			if hasVisionUpgrade:
+				var arrayOfConnectionsToConnectedPoint: Array = astar.get_point_connections( id )
+				for secondId in arrayOfConnectionsToConnectedPoint:
+					var secondPoint = setPopupsOnButton( secondId )
 	return arrOfConnectedPoints
+
 
 func moveCruiserToThisPoint(pos: Vector2) -> void:
 	cruiser.moveTo(pos)
 
+func setPopupsOnButton(id: int) -> Control:
+	var point = dictOfPoints[ id ]
+	var pointButton: TextureButton = point.get_node("TextureButton")
+	pointButton.disconnect('mouse_entered', Callable(Popups, "showPitStopPopup"))
+	var pointPosition: Vector2 = point.global_position + randAmtToAdd()
+	var levelInfo = LevelInfo.generateRandomLevel(false, pointPosition, false, false)
+	var popupText = levelInfo.makePopupText(levelInfo.TimeToReach, levelInfo.Reputation, levelInfo.SpaceDust, levelInfo.Pirates, levelInfo.AsteroidDensity)
+	dictOfLevelInfos[ point ] = levelInfo
+
+	pointButton.mouse_entered.connect(Callable(Popups, "showPitStopPopup").bind(Rect2i(Vector2i(point.global_position), Vector2i(point.size)), popupText))
+	pointButton.mouse_exited.connect(Callable(Popups, "hidePitStopPopup"))
+	pointButton.pressed.connect(pointPressed.bind(point))
+	return point
 
 func setLineHighlightToSomeLines(arrOfPoses: Array, centerPos: Vector2) -> void:
 	lineHighlighter.clear_points()
@@ -69,19 +105,13 @@ func placePointsFromMap() -> void:
 	add_child(pointsMap)
 	for pointOnPointMap in pointsMap.get_children():
 		var point: Control = load("res://Scenes/UI/PitStopBtn.tscn").instantiate()
-
-		var levelInfo = LevelInfo.generateRandomLevel()
-		var popupText = levelInfo.makePopupText(levelInfo.TimeToReach, levelInfo.Reputation, levelInfo.SpaceDust, levelInfo.Pirates, levelInfo.AsteroidDensity)
-
+		var pointPosition: Vector2 = pointOnPointMap.global_position + randAmtToAdd()
 		add_child(point)
-		dictOfLevelInfos[ point ] = levelInfo
 
 		var pointButton: TextureButton = point.get_node("TextureButton")
 		if pointButton:
-			point.global_position = pointOnPointMap.global_position + randAmtToAdd()
+			point.global_position = pointPosition
 			pointButton.pressed.connect(pointPressed.bind(point))
-			pointButton.mouse_entered.connect(Callable(Popups, "showPitStopPopup").bind(Rect2i(Vector2i(point.global_position), Vector2i(point.size)), popupText))
-			pointButton.mouse_exited.connect(Callable(Popups, "hidePitStopPopup"))
 		else:
 			printerr("Error: Could not find TextureButton in PitStopBtn.tscn")
 			point.queue_free()
@@ -95,7 +125,7 @@ func pointPressed(clickedPoint: Control) -> void:
 				moveCruiserToThisPoint( clickedPoint.global_position )
 				pass
 
-func connectPointsOnMap(numToConnectWith: int = 1) -> void:
+func connectPointsOnMap() -> void:
 	for point in get_children():
 		var pointId: int = astar.get_available_point_id()
 		dictOfPoints[ pointId ] = point
@@ -117,7 +147,7 @@ func connectPointsOnMap(numToConnectWith: int = 1) -> void:
 		var sortedDistOfPoints := distOfPoints.duplicate()
 		sortedDistOfPoints.sort()
 
-		for i in range(numToConnectWith):
+		for i in range(randi_range(2, 3)):
 			var indexToUse := distOfPoints.find( sortedDistOfPoints[i] )
 			var idOfCurrentlyClosestPoint: int = arrOfPoints[ indexToUse ]
 			astar.connect_points( pointId, idOfCurrentlyClosestPoint, true )
