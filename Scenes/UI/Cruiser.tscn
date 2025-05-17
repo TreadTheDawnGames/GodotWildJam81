@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dw7mtb4hfionb"]
+[gd_scene load_steps=4 format=3 uid="uid://dw7mtb4hfionb"]
 
 [ext_resource type="Script" uid="uid://bkb34rxrs4no2" path="res://Scripts/UI/Cruiser.gd" id="1_h1va5"]
 [ext_resource type="Texture2D" uid="uid://dtidrmibctya6" path="res://icon.svg" id="2_qy3fh"]
+[ext_resource type="AudioStream" uid="uid://c80vs1nufr5ap" path="res://Assets/Audio/UI/SwooshOnSpaceMap.wav" id="3_aoi6r"]
 
 [node name="Cruiser" type="Node2D"]
 script = ExtResource("1_h1va5")
@@ -10,3 +11,6 @@ script = ExtResource("1_h1va5")
 rotation = 2.03331
 skew = -0.567232
 texture = ExtResource("2_qy3fh")
+
+[node name="MoveCruiserSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_aoi6r")

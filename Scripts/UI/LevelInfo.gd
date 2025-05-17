@@ -52,43 +52,43 @@ func makePopupText(timeToReach: int, reputation: int, spaceDust: int, pirates: i
 
 static func getRandomTimeToReach(levelPosition: Vector2 = IdealStartPos) -> int:
 	var distance = levelPosition.distance_to(IdealStartPos)
-	var min = 180
-	var max = 300
-	var distanceFactor = remap(distance, 0.0, 1000.0, min, max)
-	return clamp(distanceFactor, min, max)
-	#return randi_range(180, 300) # 3 to 5 minutes is aight I think
+	var minValue = 180
+	var maxValue = 300
+	var distanceFactor = remap(distance, 0.0, 1000.0, minValue, maxValue)
+	return clamp(distanceFactor, minValue, maxValue)
+	#return randi_range(180, 300) # 3 to 5 minValueutes is aight I think
 
 static func getRandomReputation(levelPosition: Vector2 = IdealStartPos) -> int:
 	var distance = levelPosition.distance_to(IdealStartPos)
-	var min = 150
-	var max = 350
-	var distanceFactor = remap(distance, 0.0, 1000.0, min, max)
-	return clamp(distanceFactor, min, max)
-	#return randi_range(minReputation, maxReputation)
+	var minValue = 150
+	var maxValue = 350
+	var distanceFactor = remap(distance, 0.0, 1000.0, minValue, maxValue)
+	return clamp(distanceFactor, minValue, maxValue)
+	#return randi_range(minReputation, maxValueReputation)
 
 static func getRandomPirateChance(levelPosition: Vector2 = IdealStartPos) -> int:
 	#var distance = levelPosition.distance_to(IdealStartPos)
-	#var min = 0
-	#var max = randi_range(40, 70)
-	#var distanceFactor = remap(distance, 0.0, 1000.0, min, max)
-	#return clamp(distanceFactor, min, max)
+	#var minValue = 0
+	#var maxValue = randi_range(40, 70)
+	#var distanceFactor = remap(distance, 0.0, 1000.0, minValue, maxValue)
+	#return clamp(distanceFactor, minValue, maxValue)
 	return randi_range(0, 100) 
 	
 static func getRandomAsteroidDensity(levelPosition: Vector2 = IdealStartPos, canBeAsteroidRoute: bool = false, dumbMode: bool = false) -> int:
 	var distance = levelPosition.distance_to(IdealStartPos)
-	var min = 0
-	var max = 60
+	var minValue = 0
+	var maxValue = 60
 	if canBeAsteroidRoute and dumbMode:
-		min = 100
-		max = 100
+		minValue = 100
+		maxValue = 100
 	elif dumbMode:
-		min = 60
-		max = 100
+		minValue = 60
+		maxValue = 100
 	elif canBeAsteroidRoute:
-		min = 60
-		max = 80
-	var distanceFactor = remap(distance, 0.0, 1000.0, min, max)
-	return clamp(distanceFactor, min, max)
+		minValue = 60
+		maxValue = 80
+	var distanceFactor = remap(distance, 0.0, 1000.0, minValue, maxValue)
+	return clamp(distanceFactor, minValue, maxValue)
 
 static func getRandomSpaceDust() -> int:
 	return randi_range(0, 100)

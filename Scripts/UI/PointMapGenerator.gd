@@ -72,6 +72,7 @@ func pointsConnectedToCruiserPoint(hasVisionUpgrade: bool = false) -> Array:
 					var secondPoint = setPopupsOnButton( secondId )
 	return arrOfConnectedPoints
 
+
 func moveCruiserToThisPoint(pos: Vector2) -> void:
 	cruiser.moveTo(pos)
 
