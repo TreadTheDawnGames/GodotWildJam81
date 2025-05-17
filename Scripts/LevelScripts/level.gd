@@ -10,10 +10,10 @@ var info : LevelInfo
 
 func _ready():
 	Background.useNeb = info.Nebula
-	info.SpaceDust = 100
 	var playerSpeed : float = float(GlobalPlayerInfo.ThePlayerShip.GetSpeed())
 	var Dust : CPUParticles2D = CPUParticles2D.new()
-	Dust.amount = 250.0 * float(info.SpaceDust * playerSpeed)/100.0
+	@warning_ignore("integer_division")
+	Dust.amount = 250 * (info.SpaceDust * int(playerSpeed))/100
 	Dust.lifetime = 15.0 * playerSpeed
 	Dust.preprocess = 15.0* playerSpeed
 	Dust.emission_shape = CPUParticles2D.EMISSION_SHAPE_RECTANGLE

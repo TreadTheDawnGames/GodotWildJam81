@@ -40,7 +40,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	global_position.x -= speed * delta * (GlobalPlayerInfo.ThePlayerShip.GetSpeed() / 2)
+	global_position.x -= speed * delta * float(GlobalPlayerInfo.ThePlayerShip.GetSpeed() / 2.0)
 	if(global_position.x < -50):
 		queue_free()
 		
@@ -70,18 +70,11 @@ func HitSomething(area : Area2D):
 			return
 		if(area.owner.Map.Faction == ShipRoom.ShipFaction.Player):
 			print("hit player")
-			if(area.owner.Map is PlayerShip):
-				print("hit the ship")
-				var hitShip : PlayerShip = cell.Map
-				for room in hitShip.SubMaps:
-					print("submapping")
-					if(room.positionIndexedChildren.has(cell.myCoords)):
-						print("hit room: ", room)
-						if(room.DamageRoom(1)):
-							hitShip.SubMaps.erase(room)
-						queue_free()
-					else:
-						print(room, " does not have ", cell.myCoords)
+			if(area.owner.Map is ShipRoom):
+				var hitShip : ShipRoom = cell.get_parent()
+				print("hit a shiproom: ", hitShip)
+				hitShip.DamageRoom(1)
+				queue_free()
 		else:
 			print("not a valid faction")
 	else:

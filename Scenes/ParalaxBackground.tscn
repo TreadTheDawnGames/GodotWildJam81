@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ebt2na8ty5e3"]
+[gd_scene load_steps=6 format=3 uid="uid://csluuenw1cdr4"]
 
 [ext_resource type="Script" uid="uid://d3lxg037vnxpe" path="res://Scenes/LevelScenes/color_rect.gd" id="1_64flk"]
 [ext_resource type="Material" uid="uid://nvr11w02gjep" path="res://VFX/StarsScrollingMaterial.tres" id="2_xbw5s"]

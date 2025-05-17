@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://ma5misc0fo5f"]
+
+[ext_resource type="PackedScene" uid="uid://b3ou0ys527w25" path="res://Scenes/ShipTilemapScenes/Player_Ship.tscn" id="1_e2o6t"]
+[ext_resource type="Script" uid="uid://cpt8iweygokjs" path="res://Scenes/debug.gd" id="1_feb5d"]
+[ext_resource type="PackedScene" uid="uid://dnycrg3qoywj2" path="res://Scenes/UI/SpaceMap.tscn" id="2_feb5d"]
+[ext_resource type="PackedScene" uid="uid://dxyq5ccvvdfax" path="res://GameInfoPanel.tscn" id="4_fc0e3"]
+
+[node name="game" type="Node2D"]
+script = ExtResource("1_feb5d")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_right = 725.0
+offset_bottom = 648.0
+
+[node name="PlayerShip" parent="." instance=ExtResource("1_e2o6t")]
+gameArea = Vector2(725, 648)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(576, 324)
+
+[node name="SpaceMap" parent="." instance=ExtResource("2_feb5d")]
+visible = false
+
+[node name="MoneyPanel" parent="." instance=ExtResource("4_fc0e3")]
+position = Vector2(995, 20)

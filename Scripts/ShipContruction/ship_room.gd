@@ -17,7 +17,7 @@ var isSetup : bool = false
 enum ShipFaction {Player, Enemy}
 var Faction : ShipFaction
 
-@export var hitpoints : int = 5
+@export var hitpoints : int = 2
 
 @export var Price : int = 0
 
@@ -57,6 +57,7 @@ func CalculatePivot() -> Vector2:
 
 func AddToMap(map : ShipRoom):
 	
+	ChildStuff(map)
 	grabbed = false
 	returnToHome = false
 	modulate = Color.WHITE
@@ -66,7 +67,6 @@ func AddToMap(map : ShipRoom):
 	for cell in get_used_cells():
 		set_cell(cell, -1)
 		#if(child is Sprite2D):
-	ChildStuff(map)
 			#continue
 	#queue_free()
 	return
@@ -74,18 +74,25 @@ func AddToMap(map : ShipRoom):
 func ChildStuff(map):
 	var conCells : Array[ConnectionCell]
 	
+	var previousChildrenIndexes : Array[Vector2i] = positionIndexedChildren.keys()
+	
 	for child : Cell in positionIndexedChildren.values():
 		if(child is ConnectionCell):
 			conCells.append(child)
 			child.grabArea.monitorable = false
 		
+		child.reparent(map, true)
 		child.Map = map
-		#child.reparent(map, true)
 		#sprite.reparent(map, true)
 		#sprite.get_parent().move_child(sprite, 0)
+		SetChildByCoords(child, map.local_to_map(map.to_local(child.global_position)))
 		map.SetChildByCoords(child, map.local_to_map(map.to_local(child.global_position)))
+		child.reparent.call_deferred(self, true)
 		
 		
+	for prevIndex in previousChildrenIndexes:
+		positionIndexedChildren.erase(prevIndex)
+	
 	for conCell : ConnectionCell in conCells:
 		conCell.RecalculateConnections()
 		conCell.grabArea.monitorable = true
@@ -102,8 +109,12 @@ func SetChildByCoords(child : Cell, pos : Vector2i):
 	return
 
 func GetChildByCoords(pos : Vector2i) -> Cell:
-	return positionIndexedChildren.get(pos)
-
+	var cell = positionIndexedChildren.get(pos)
+	if(is_instance_valid(cell)):
+		return positionIndexedChildren.get(pos)
+	else:
+		positionIndexedChildren.erase(pos)
+		return null
 func RemoveChildByCoords(pos:Vector2i):
 	positionIndexedChildren.erase(pos)
 	return
@@ -141,10 +152,14 @@ func GetCellWithValidOpeningInDirection(dir : ConnectionCell.Direction):
 
 func DamageRoom(amount : int) -> bool:
 	hitpoints -= amount
+	print("self: ", self)
 	if(hitpoints <=0):
 		for cell : Cell in positionIndexedChildren.values():
-			cell.Map.SetChildByCoords(null, cell.myCoords)
+			print("Cell.Map: ", cell.Map)
+			cell.Map.positionIndexedChildren.erase(cell.myCoords)
 			cell.queue_free()
+		#if(get_parent() is PlayerShip):
+			#get_parent().ClearInvalidValues()
 		queue_free()
 		return true
 	return false

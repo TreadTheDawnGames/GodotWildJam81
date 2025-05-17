@@ -4,6 +4,9 @@ class_name PlayerShip
 static var grabbedRoom : ShipRoom = null
 
 var SubMaps : Array[ShipRoom] = []
+var editing = false
+
+@export var gameArea : Vector2
 
 func _ready() -> void:
 	dragNDrop = false
@@ -42,7 +45,7 @@ func GetCrewCount() -> int:
 
 func GetSpeed() -> int:
 	var engineCount : int = 0
-	for cell : ConnectionCell in positionIndexedChildren.values().filter(func(a): return a is ConnectionCell):
+	for cell : ConnectionCell in positionIndexedChildren.values().filter(func(a): return is_instance_valid(a) and a is ConnectionCell):
 		if(!HasCell(cell.myCoords + cell.Vector2iFromDirection(ConnectionCell.Direction.West))):
 			engineCount +=1
 	return engineCount
@@ -53,8 +56,42 @@ func EnterStorage():
 	return
 
 func _process(delta: float) -> void:
+	if(editing):
+		return
 	var moveDir = Vector2(Input.get_axis("shipLEFT", "shipRIGHT"), Input.get_axis("shipUP", "shipDOWN")).normalized() * GetSpeed() * 50 * delta
 	global_position += moveDir
+	
+	var stuff : Array = positionIndexedChildren.keys()
+	stuff.sort_custom(func(a,b): return a.x > b.x)
+	var maxX : float = stuff[0].x
+	stuff.sort_custom(func(a,b): return a.y > b.y)
+	var maxY : float = stuff[0].y
+	stuff.sort_custom(func(a,b): return a.x < b.x)
+	var minX : float = stuff[0].x
+	stuff.sort_custom(func(a,b): return a.y < b.y)
+	var minY : float = stuff[0].y
+	
+	var shipSizeMax : Vector2 = Vector2((maxX+1) *32,(maxY+1) *32)
+	var shipSizeMin : Vector2 = Vector2(minX*32, minY*32)
+	global_position = global_position.clamp(Vector2.ZERO - shipSizeMin, gameArea - shipSizeMax)
+	
 	return
 	
-	
+#func ClearInvalidValues():
+	#var invalid : Array = []
+	#for cell in positionIndexedChildren.values().filter(func(a): return !is_instance_valid(a)):
+		#invalid.append(positionIndexedChildren.find_key(cell))
+	#for invalidCell in invalid:
+		#positionIndexedChildren.erase(invalidCell)
+
+func DamageRoom(_amount : int) -> bool:
+	#hitpoints -= amount
+	#if(hitpoints <=0):
+		#for cell : Cell in positionIndexedChildren.values():
+			#cell.Map.positionIndexedChildren.erase(cell.myCoords)
+			#cell.queue_free()
+		#if(get_parent() is PlayerShip):
+			#get_parent().ClearInvalidValues()
+		#queue_free()
+		#return true
+	return false

@@ -7,12 +7,12 @@ class_name ShipBuilder
 var playerShip : PlayerShip
 var addingRoom : ShipRoom
 var addingRoomCell : ConnectionCell
-var textInfo : GameInfoPanel
 
 func _ready() -> void:
 	playerShip = GlobalPlayerInfo.ShipExitStorage(get_node("ShipPositioner").global_position)
+	#playerShip.ClearInvalidValues()
+	playerShip.editing = true
 	ShopPanel = get_node("ShopPanel")
-	textInfo = get_node("MoneyPanel")
 	BuildArea = get_node("Area2D")
 	BuildArea.area_entered.connect(SnapToPlayerShip)
 	BuildArea.area_exited.connect(ReturnToShop)
@@ -53,7 +53,6 @@ func _process(_delta: float) -> void:
 		if(playerShip.AbleToConnectPiece(addingRoom, addingLocation) and GlobalPlayerInfo.CanRemoveMoney(addingRoom.Price)):
 			GlobalPlayerInfo.RemoveMoney(addingRoom.Price)
 			playerShip.DoCombine(addingRoom)
-			textInfo.UpdateText()
 			addingRoomCell = null
 			addingRoom = null
 		else:
@@ -66,5 +65,6 @@ func SnapToShipGrid():
 	
 func CloseShipyard():
 	playerShip.EnterStorage()
+	playerShip.editing = false
 	queue_free()
 	print("Closing")

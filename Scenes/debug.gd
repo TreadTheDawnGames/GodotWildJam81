@@ -1,6 +1,6 @@
 extends Node2D
 
-const shopScene = preload("res://Scenes/ShipBuilder/ship_builder.tscn")
+const shopScene = preload("res://Scenes/ShipBuilder/shipyard.tscn")
 const LEVEL = preload("res://Scenes/LevelScenes/level.tscn")
 
 var DEBUGcurrentLevel
@@ -22,4 +22,7 @@ func _process(_delta: float) -> void:
 		DEBUGcurrentLevel = LEVEL.instantiate()
 		DEBUGcurrentLevel.info = LevelInfo.generateRandomLevel(randi()%2==0)
 		add_child(DEBUGcurrentLevel)
-		
+	if(Input.is_action_just_pressed("DEBUG-CloseLevel")):
+		if(DEBUGcurrentLevel):
+			DEBUGcurrentLevel.queue_free()
+		Background.StopScroll()

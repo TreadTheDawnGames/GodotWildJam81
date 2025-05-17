@@ -1,4 +1,5 @@
 extends ColorRect
+class_name ParalaxBackground
 @onready var stars: TextureRect = $Stars
 @onready var nebula: TextureRect = $Nebula
 
@@ -15,7 +16,8 @@ func SetScrollSpeed(amount : float):
 
 func StopScroll():
 	stars.material.set_shader_parameter("speed", 0)
-
+	nebula.hide()
+	
 func ShipScroll():
 	stars.material.set_shader_parameter("speed", clamp(float(GlobalPlayerInfo.ThePlayerShip.GetSpeed())/5.0, 0.1, 20))
 	if(useNeb):

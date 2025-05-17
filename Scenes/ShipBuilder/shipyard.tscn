@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://dv4kwxgdofcnk"]
+
+[ext_resource type="Script" uid="uid://c6sabckhh7itc" path="res://Scripts/ShipContruction/ship_builder.gd" id="1_qqxrl"]
+[ext_resource type="Texture2D" uid="uid://dx5p0yy61fmtg" path="res://Assets/Sprites/ShipBuilder/ShopPanel.png" id="2_irld4"]
+[ext_resource type="Script" uid="uid://26mnybypchly" path="res://Scripts/ShipContruction/room_chooser.gd" id="3_smhu5"]
+[ext_resource type="PackedScene" path="res://Scenes/ShipBuilder/shop_slot.tscn" id="4_gwoxb"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_mniq6"]
+normal = Vector2(90, 0)
+distance = 9.10851
+
+[node name="Shipyard" type="Node2D"]
+script = ExtResource("1_qqxrl")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-1, 0)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("WorldBoundaryShape2D_mniq6")
+
+[node name="ShopPanel" type="Sprite2D" parent="."]
+position = Vector2(995, 357)
+texture = ExtResource("2_irld4")
+script = ExtResource("3_smhu5")
+
+[node name="ShopSlot1" parent="ShopPanel" instance=ExtResource("4_gwoxb")]
+position = Vector2(0, -134)
+
+[node name="ShopSlot2" parent="ShopPanel" instance=ExtResource("4_gwoxb")]
+position = Vector2(0, 31)
+
+[node name="ShopSlot3" parent="ShopPanel" instance=ExtResource("4_gwoxb")]
+position = Vector2(0, 195)
+
+[node name="ShipPositioner" type="Marker2D" parent="."]
+position = Vector2(387, 313)
+
+[node name="CloseButton" type="Button" parent="."]
+offset_left = 19.0
+offset_top = 598.0
+offset_right = 112.0
+offset_bottom = 629.0
+text = "Close Shop
+"

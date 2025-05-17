@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://urmba5pugfvv"]
 
-[ext_resource type="PackedScene" uid="uid://c1orf4r8byd2g" path="res://Scenes/ShipBuilder/ship_room.tscn" id="1_t3qgq"]
+[ext_resource type="PackedScene" uid="uid://qstxmf8vj5hp" path="res://Scenes/ShipBuilder/ship_room.tscn" id="1_t3qgq"]
 [ext_resource type="Texture2D" uid="uid://ds5oif7tal0dc" path="res://Assets/Sprites/URoom.png" id="2_20hic"]
 
 [node name="ShipRoom" instance=ExtResource("1_t3qgq")]

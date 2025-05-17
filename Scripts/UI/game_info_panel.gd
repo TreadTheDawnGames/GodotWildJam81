@@ -15,9 +15,11 @@ func UpdateText():
 	if(!ship):
 		printerr("There is no global playership!")
 		return
-	print("Text updated")
 	money_label.text = "Money: " + str(GlobalPlayerInfo.Money)
 	crew_count_label.text = "Crew: " + str(ship.GetCrewCount())
 	firepower_label.text = "Firepower: " + str(ship.GetFirepower())
 	speed_label.text = "Speed: " + str(ship.GetSpeed())
 	return
+
+func _process(_delta: float) -> void:
+	UpdateText()

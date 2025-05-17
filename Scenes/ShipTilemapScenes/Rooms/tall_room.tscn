@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bhd1w6abmhmc5"]
 
-[ext_resource type="PackedScene" uid="uid://c1orf4r8byd2g" path="res://Scenes/ShipBuilder/ship_room.tscn" id="1_xlbl5"]
+[ext_resource type="PackedScene" uid="uid://qstxmf8vj5hp" path="res://Scenes/ShipBuilder/ship_room.tscn" id="1_xlbl5"]
 [ext_resource type="Texture2D" uid="uid://bi1pgmwj2if48" path="res://Assets/Sprites/TallRoom.png" id="2_hok8k"]
 
 [node name="TallRoom" instance=ExtResource("1_xlbl5")]
