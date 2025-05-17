@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dv4kwxgdofcnk"]
+[gd_scene load_steps=6 format=3 uid="uid://dv4kwxgdofcnk"]
 
 [ext_resource type="Script" uid="uid://c6sabckhh7itc" path="res://Scripts/ShipContruction/ship_builder.gd" id="1_qqxrl"]
 [ext_resource type="Texture2D" uid="uid://dx5p0yy61fmtg" path="res://Assets/Sprites/ShipBuilder/ShopPanel.png" id="2_irld4"]
 [ext_resource type="Script" uid="uid://26mnybypchly" path="res://Scripts/ShipContruction/room_chooser.gd" id="3_smhu5"]
 [ext_resource type="PackedScene" path="res://Scenes/ShipBuilder/shop_slot.tscn" id="4_gwoxb"]
-[ext_resource type="PackedScene" uid="uid://bdfn3fphqnpka" path="res://Scenes/ShipTilemapScenes/cells/DebugConnectionRoom.tscn" id="5_irld4"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_mniq6"]
 normal = Vector2(90, 0)
@@ -45,6 +44,3 @@ offset_right = 112.0
 offset_bottom = 629.0
 text = "Close Shop
 "
-
-[node name="DebugRoom" parent="." instance=ExtResource("5_irld4")]
-position = Vector2(841, 325)

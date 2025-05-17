@@ -24,6 +24,7 @@ var Faction : ShipFaction
 func _ready():
 	Setup.call_deferred()
 	returnToHome = true
+	sprite = get_node("Sprite2D")
 	goToOffset = -sprite.texture.get_size()/2
 
 func Setup():

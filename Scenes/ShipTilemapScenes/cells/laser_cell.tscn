@@ -17,7 +17,6 @@ curve = SubResource("Curve_rf6v0")
 [node name="Timer" type="Timer" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
 texture = ExtResource("2_yp7oj")
 
 [node name="LaserInstantiationPoint" type="Marker2D" parent="."]

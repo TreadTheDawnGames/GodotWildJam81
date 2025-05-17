@@ -32,7 +32,12 @@ func Init() -> void:
 func ShootLaser():
 	if(Map is PlayerShip and Map.editing):
 		return
-	var laser = AMMO.instantiate()
+	var laser : Laser = AMMO.instantiate()
+	
+	if(Map is PirateShip):
+		laser.direction = -1
+		laser.scale.x *=-1
+	
 	#(clamp(
 	var speedMultiplier : float = curve.sample((float(GlobalPlayerInfo.ActiveLevel.info.SpaceDust)/100.0 ) if GlobalPlayerInfo.ActiveLevel else 0)
 	shotTimer.wait_time = fireRate * speedMultiplier
