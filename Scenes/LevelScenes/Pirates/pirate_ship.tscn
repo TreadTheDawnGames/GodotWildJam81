@@ -23,6 +23,8 @@ material = SubResource("ShaderMaterial_4ts8t")
 tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAQABAAAAAAAAAAAAAQACAAAAAAAAAAAAAQACAAEAAAAAAAAAAQABAAEAAAAAAAAAAQAAAAEAAAAAAAAAAQACAAIAAAAAAAAAAwABAAIAAAAAAAAAAwAAAAIAAAAAAAAAAwD//wEAAAAAAAAAAwD//wAAAAAAAAAAAwAAAP//AAAAAAAAAwABAP//AAAAAAAAAwADAAEAAAAAAAAAAwADAAAAAAAAAAAAAgACAP//AAAAAAAAAgA=")
 tile_set = SubResource("TileSet_drvej")
 script = ExtResource("4_yq5qd")
+gameArea = Vector2(860, 416)
+gameAreaOffset = Vector2(860, 96)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(48, 32)
@@ -45,3 +47,5 @@ position = Vector2(47, 46)
 
 [node name="Crewmate6" parent="." instance=ExtResource("6_7dmsk")]
 position = Vector2(80, 47)
+
+[node name="MoveTimer" type="Timer" parent="."]

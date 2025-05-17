@@ -13,8 +13,14 @@ visible = false
 offset_right = 725.0
 offset_bottom = 648.0
 
+[node name="ColorRect2" type="ColorRect" parent="."]
+visible = false
+offset_left = 725.0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
+
 [node name="PlayerShip" parent="." instance=ExtResource("1_e2o6t")]
-gameArea = Vector2(725, 648)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 324)

@@ -8,6 +8,8 @@ var editing = false
 
 @export var gameArea : Vector2
 
+@export var gameAreaOffset : Vector2
+
 func _ready() -> void:
 	dragNDrop = false
 	Faction = ShipFaction.Player
@@ -30,7 +32,7 @@ func AbleToConnectPiece(roomToAdd : ShipRoom, roomPosition : Vector2i) -> bool:
 			return false
 		for neighbor in get_surrounding_cells(cellCoords):
 			var neighborDirection : ConnectionCell.Direction = ConnectionCell.Direction.get(ConnectionCell.DirectionStringFromVec2i(neighbor-cellCoords))
-			if(positionIndexedChildren.has(neighbor)):
+			if(positionIndexedChildren.has(neighbor) and positionIndexedChildren.get(neighbor) is ConnectionCell):
 				if(cell.CanConnectTo(neighborDirection, GetChildByCoords(neighbor))):
 					able = true
 	
@@ -61,6 +63,12 @@ func _process(delta: float) -> void:
 	var moveDir = Vector2(Input.get_axis("shipLEFT", "shipRIGHT"), Input.get_axis("shipUP", "shipDOWN")).normalized() * GetSpeed() * 50 * delta
 	global_position += moveDir
 	
+	ClampPosition()
+	
+	return
+	
+	
+func ClampPosition():
 	var stuff : Array = positionIndexedChildren.keys()
 	stuff.sort_custom(func(a,b): return a.x > b.x)
 	var maxX : float = stuff[0].x
@@ -70,13 +78,10 @@ func _process(delta: float) -> void:
 	var minX : float = stuff[0].x
 	stuff.sort_custom(func(a,b): return a.y < b.y)
 	var minY : float = stuff[0].y
-	
 	var shipSizeMax : Vector2 = Vector2((maxX+1) *32,(maxY+1) *32)
 	var shipSizeMin : Vector2 = Vector2(minX*32, minY*32)
-	global_position = global_position.clamp(Vector2.ZERO - shipSizeMin, gameArea - shipSizeMax)
-	
+	global_position = global_position.clamp(Vector2.ZERO - shipSizeMin + gameAreaOffset, gameArea - shipSizeMax + gameAreaOffset)
 	return
-	
 #func ClearInvalidValues():
 	#var invalid : Array = []
 	#for cell in positionIndexedChildren.values().filter(func(a): return !is_instance_valid(a)):

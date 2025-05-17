@@ -10,7 +10,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	global_position.x += speed * delta * direction
-	if(global_position.x > 1150):
+	if(global_position.x > 1150 or global_position .x < -50):
 		queue_free()
 
 func HitSomething(area : Area2D):

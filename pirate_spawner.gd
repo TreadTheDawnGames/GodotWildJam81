@@ -65,3 +65,4 @@ func DoConnection(roomToAdd : ShipRoom, posi : int):
 func AttemptFlip():
 	if(completeness == difficulty):
 		playerShip.scale.x *=-1
+		playerShip.editing = false

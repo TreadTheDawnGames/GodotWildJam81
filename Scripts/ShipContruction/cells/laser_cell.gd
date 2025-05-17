@@ -7,6 +7,9 @@ var active : bool = false
 
 @export var AMMO : PackedScene
 @export var curve : Curve
+func AssignLoadOrder():
+	loadOrder = 3
+
 func Init() -> void:
 	super.Init()
 	var neighbors = GetNeighbors()
@@ -39,7 +42,7 @@ func ShootLaser():
 		laser.scale.x *=-1
 	
 	#(clamp(
-	var speedMultiplier : float = curve.sample((float(GlobalPlayerInfo.ActiveLevel.info.SpaceDust)/100.0 ) if GlobalPlayerInfo.ActiveLevel else 0)
+	var speedMultiplier : float = curve.sample((float(GlobalPlayerInfo.ActiveLevel.info.SpaceDust)/100.0 ) if GlobalPlayerInfo.ActiveLevel else 0.0)
 	shotTimer.wait_time = fireRate * speedMultiplier
 	laser.global_position = laserInstantiationPoint.global_position
 	get_tree().root.add_child(laser)

@@ -7,4 +7,4 @@
 script = ExtResource("1_1sy4w")
 
 [node name="PirateShip" parent="." instance=ExtResource("2_sn3oq")]
-position = Vector2(15, 15)
+position = Vector2(1257, 306)

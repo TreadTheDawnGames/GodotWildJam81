@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=4 uid="uid://d3h6ue3f1hj0m"]
+
+[ext_resource type="PackedScene" uid="uid://qstxmf8vj5hp" path="res://Scenes/ShipBuilder/ship_room.tscn" id="1_q7nfy"]
+[ext_resource type="Texture2D" uid="uid://5u03onf23llo" path="res://Assets/Sprites/LaserT.png" id="2_8uhoi"]
+
+[node name="TLaser" instance=ExtResource("1_q7nfy")]
+tile_map_data = PackedByteArray("AAACAAIAAAAAAAAABAACAAAAAAAAAAAABAACAAEAAAAAAAAAAQABAAEAAAAAAAAAAQAAAAEAAAAAAAAAAQABAAAAAAAAAAAAAQABAAIAAAAAAAAAAQA=")
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(48, 48)
+texture = ExtResource("2_8uhoi")

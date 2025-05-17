@@ -8,10 +8,9 @@
 script = ExtResource("1_t13wm")
 
 [node name="PirateSpawner" parent="." instance=ExtResource("3_f0wf7")]
-position = Vector2(931, 302)
 
 [node name="pirateTimer" type="Timer" parent="PirateSpawner"]
-wait_time = 0.1
+wait_time = 30.0
 autostart = true
 
 [node name="AsteroidSpawner" parent="." instance=ExtResource("2_54rtb")]
