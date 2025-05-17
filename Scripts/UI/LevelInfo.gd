@@ -1,17 +1,20 @@
 class_name  LevelInfo
 
-func _init(timeToReach: int, reputation: int, spaceDust: int, pirates: int, asteroidDensity: int, nebula: bool = false):
+func _init(timeToReach: int, reputation: int, spaceDust: int, pirates: int, asteroidDensity: int, asteroidRoute: bool = false, nebula: bool = false, levelPosition: Vector2 = IdealStartPos):
 	TimeToReach = timeToReach
 	Reputation = reputation
 	SpaceDust = spaceDust
 	Pirates = pirates
 	AsteroidDensity = asteroidDensity
+	AsteroidRoute = asteroidRoute
 	Nebula = nebula
+	
+	var distanceToStart: float = levelPosition.distance_squared_to(IdealStartPos)
+	DistanceFactor = remap(distanceToStart, 0.0, 1000.0, 0.0, 1.5)
+	
 	return 
 
-const idealStartPos := Vector2( 0, 300 )
-var distanceToStart: float
-var DistanceFactor = remap(distanceToStart, 0.0, 1000.0, 0.0, 1.5)
+const IdealStartPos := Vector2( 0, 300 )
 		  
 const minReputation = 50
 const maxReputation = 300
@@ -21,10 +24,12 @@ var Reputation: int
 var SpaceDust: int
 var Pirates: int
 var AsteroidDensity: int
+var AsteroidRoute: bool
 var Nebula: bool
+var DistanceFactor: Variant
 
-static func generateRandomLevel(nebula = false) -> LevelInfo:
-	return LevelInfo.new(getRandomTimeToReach(), getRandomReputation(), getRandomSpaceDust(), getRandomPirateChance(), getRandomAsteroidDensity(), nebula)
+static func generateRandomLevel(nebula: bool = false, levelPosition: Vector2 = IdealStartPos, canBeAsteroidRoute: bool = false, dumbMode: bool = false) -> LevelInfo:
+	return LevelInfo.new(getRandomTimeToReach(levelPosition), getRandomReputation(levelPosition), getRandomSpaceDust(), getRandomPirateChance(levelPosition), getRandomAsteroidDensity(levelPosition, canBeAsteroidRoute, dumbMode), nebula)
 
 func makePopupText(timeToReach: int, reputation: int, spaceDust: int, pirates: int, asteroidDensity: int, nebula: bool = false) -> String:
 	var popupText: String = ""
@@ -45,17 +50,45 @@ func makePopupText(timeToReach: int, reputation: int, spaceDust: int, pirates: i
 	
 	return popupText
 
-static func getRandomTimeToReach() -> int:
-	return randi_range(180, 300) # 3 to 5 minutes is aight I think
+static func getRandomTimeToReach(levelPosition: Vector2 = IdealStartPos) -> int:
+	var distance = levelPosition.distance_to(IdealStartPos)
+	var minValue = 180
+	var maxValue = 300
+	var distanceFactor = remap(distance, 0.0, 1000.0, minValue, maxValue)
+	return clamp(distanceFactor, minValue, maxValue)
+	#return randi_range(180, 300) # 3 to 5 minValueutes is aight I think
 
-static func getRandomReputation() -> int:
-	return randi_range(minReputation, maxReputation)
+static func getRandomReputation(levelPosition: Vector2 = IdealStartPos) -> int:
+	var distance = levelPosition.distance_to(IdealStartPos)
+	var minValue = 150
+	var maxValue = 350
+	var distanceFactor = remap(distance, 0.0, 1000.0, minValue, maxValue)
+	return clamp(distanceFactor, minValue, maxValue)
+	#return randi_range(minReputation, maxValueReputation)
 
-static func getRandomPirateChance() -> int:
+static func getRandomPirateChance(levelPosition: Vector2 = IdealStartPos) -> int:
+	#var distance = levelPosition.distance_to(IdealStartPos)
+	#var minValue = 0
+	#var maxValue = randi_range(40, 70)
+	#var distanceFactor = remap(distance, 0.0, 1000.0, minValue, maxValue)
+	#return clamp(distanceFactor, minValue, maxValue)
 	return randi_range(0, 100) 
 	
-static func getRandomAsteroidDensity() -> int:
-	return randi_range(0, 60)
+static func getRandomAsteroidDensity(levelPosition: Vector2 = IdealStartPos, canBeAsteroidRoute: bool = false, dumbMode: bool = false) -> int:
+	var distance = levelPosition.distance_to(IdealStartPos)
+	var minValue = 0
+	var maxValue = 60
+	if canBeAsteroidRoute and dumbMode:
+		minValue = 100
+		maxValue = 100
+	elif dumbMode:
+		minValue = 60
+		maxValue = 100
+	elif canBeAsteroidRoute:
+		minValue = 60
+		maxValue = 80
+	var distanceFactor = remap(distance, 0.0, 1000.0, minValue, maxValue)
+	return clamp(distanceFactor, minValue, maxValue)
 
 static func getRandomSpaceDust() -> int:
 	return randi_range(0, 100)
@@ -64,7 +97,7 @@ static func calculateDifficulty(time: float, reputation: int, pirateChance: int,
 	var difficulty = 0
 
 	difficulty += int(remap(time, 300.0, 180.0, 0, 30))
-	difficulty += int(remap(float(reputation), float(maxReputation), float(minReputation), 0, 30))
+	difficulty += int(remap(int(reputation), int(maxReputation), int(minReputation), 0, 30))
 	difficulty += int(pirateChance * 0.3)
 	difficulty += int(spaceDust * 0.1)
 	difficulty += int(distanceFactor * 20)

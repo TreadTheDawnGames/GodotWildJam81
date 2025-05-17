@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cghjap0uk4qof"
+path="res://.godot/imported/Wild Jam TEST 3.mp3-1be0832dd9f6cdf79c6df45e43cbfb19.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Wild Jam TEST 3.mp3"
+dest_files=["res://.godot/imported/Wild Jam TEST 3.mp3-1be0832dd9f6cdf79c6df45e43cbfb19.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
