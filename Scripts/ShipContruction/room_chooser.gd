@@ -21,6 +21,7 @@ func ChooseRoom(marker : ShopSlot):
 	var files = Array(DirAccess.get_files_at(RoomDirectory))
 	files.shuffle()
 	var scene : ShipRoom = load(RoomDirectory + files.pick_random()).instantiate() as ShipRoom
+	
 	add_child(scene)
 	scene.position = marker.position - scene.sprite.texture.get_size()/2
 	scene.LocationMarker = marker
