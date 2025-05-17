@@ -8,6 +8,8 @@ var playerShip : PlayerShip
 var addingRoom : ShipRoom
 var addingRoomCell : ConnectionCell
 
+signal ShopClosed
+
 func _ready() -> void:
 	playerShip = GlobalPlayerInfo.ShipExitStorage(get_node("ShipPositioner").global_position)
 	#playerShip.ClearInvalidValues()
@@ -66,5 +68,6 @@ func SnapToShipGrid():
 func CloseShipyard():
 	playerShip.EnterStorage()
 	playerShip.editing = false
+	ShopClosed.emit()
 	queue_free()
 	print("Closing")

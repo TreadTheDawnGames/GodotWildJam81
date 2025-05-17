@@ -15,6 +15,7 @@ AMMO = ExtResource("2_rf6v0")
 curve = SubResource("Curve_rf6v0")
 
 [node name="Timer" type="Timer" parent="."]
+ignore_time_scale = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_yp7oj")

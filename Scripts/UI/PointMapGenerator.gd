@@ -50,7 +50,7 @@ func pointsConnectedToCruiserPoint(hasVisionUpgrade: bool = false) -> Array:
 		var point = dictOfPoints[ id ]
 		var pointButton: TextureButton = point.get_node("TextureButton")
 		if point.global_position.distance_to(idealStartPos) < pointToGetConnectionsOf.global_position.distance_to(idealStartPos):
-			pointButton.disabled
+			#pointButton.disabled #This doesn't do anything unless you set it to true or false
 			pointButton.disconnect('mouse_entered', Callable(Popups, "showPitStopPopup"))
 			pointButton.disconnect('pressed', pointPressed)
 		else:
@@ -60,7 +60,7 @@ func pointsConnectedToCruiserPoint(hasVisionUpgrade: bool = false) -> Array:
 			if hasVisionUpgrade:
 				var arrayOfConnectionsToConnectedPoint: Array = astar.get_point_connections( id )
 				for secondId in arrayOfConnectionsToConnectedPoint:
-					var secondPoint = setPopupsOnButton( secondId )
+					var _secondPoint = setPopupsOnButton( secondId )
 	if arrOfConnectedPoints.size() == 0:
 		for id in arrOfPointIdThatAreConnectedToTheMainPoint:
 			var point = setPopupsOnButton(id)
@@ -69,7 +69,7 @@ func pointsConnectedToCruiserPoint(hasVisionUpgrade: bool = false) -> Array:
 			if hasVisionUpgrade:
 				var arrayOfConnectionsToConnectedPoint: Array = astar.get_point_connections( id )
 				for secondId in arrayOfConnectionsToConnectedPoint:
-					var secondPoint = setPopupsOnButton( secondId )
+					var _secondPoint = setPopupsOnButton( secondId )
 	return arrOfConnectedPoints
 
 
@@ -123,6 +123,7 @@ func pointPressed(clickedPoint: Control) -> void:
 			var dist: float = get_global_mouse_position().distance_squared_to( clickedPoint.global_position )
 			if dist > clickedPoint.marg:
 				moveCruiserToThisPoint( clickedPoint.global_position )
+				GlobalPlayerInfo.SetActiveLevelInfo(dictOfLevelInfos.get(point))
 				pass
 
 func connectPointsOnMap() -> void:

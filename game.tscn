@@ -1,32 +1,26 @@
-[gd_scene load_steps=5 format=3 uid="uid://ma5misc0fo5f"]
+[gd_scene load_steps=6 format=3 uid="uid://ma5misc0fo5f"]
 
 [ext_resource type="PackedScene" uid="uid://b3ou0ys527w25" path="res://Scenes/ShipTilemapScenes/Player_Ship.tscn" id="1_e2o6t"]
 [ext_resource type="Script" uid="uid://cpt8iweygokjs" path="res://Scenes/debug.gd" id="1_feb5d"]
 [ext_resource type="PackedScene" uid="uid://dnycrg3qoywj2" path="res://Scenes/UI/SpaceMap.tscn" id="2_feb5d"]
+[ext_resource type="Script" uid="uid://bbo65ha7vpc3w" path="res://ScreenShake.gd" id="3_7jktm"]
 [ext_resource type="PackedScene" uid="uid://dxyq5ccvvdfax" path="res://GameInfoPanel.tscn" id="4_fc0e3"]
 
 [node name="game" type="Node2D"]
 script = ExtResource("1_feb5d")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-offset_right = 725.0
-offset_bottom = 648.0
-
-[node name="ColorRect2" type="ColorRect" parent="."]
-visible = false
-offset_left = 725.0
-offset_right = 1152.0
-offset_bottom = 648.0
-color = Color(0, 0, 0, 1)
-
 [node name="PlayerShip" parent="." instance=ExtResource("1_e2o6t")]
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="GameCamera" type="Camera2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(576, 324)
+script = ExtResource("3_7jktm")
 
 [node name="SpaceMap" parent="." instance=ExtResource("2_feb5d")]
 visible = false
 
 [node name="MoneyPanel" parent="." instance=ExtResource("4_fc0e3")]
-position = Vector2(995, 20)
+position = Vector2(995, 34)
+
+[node name="playerShipSpawn" type="Marker2D" parent="."]
+position = Vector2(283, 325)

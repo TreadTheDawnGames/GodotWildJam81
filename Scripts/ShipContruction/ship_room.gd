@@ -140,15 +140,12 @@ func Return(delta):
 		if(int((global_position - goToOffset).distance_to(LocationMarker.global_position) * 100) > 2):
 			global_position = global_position.lerp(LocationMarker.global_position + goToOffset, returnSpeed * delta)
 		elif(Vector2i(global_position) != Vector2i(LocationMarker.global_position+ goToOffset)):
-			print(Vector2i(global_position),Vector2i(LocationMarker.global_position+ goToOffset))
 			global_position = LocationMarker.global_position + goToOffset
 
 func GetCellWithValidOpeningInDirection(dir : ConnectionCell.Direction):
 	for cell : ConnectionCell in positionIndexedChildren.values().filter(func(a): return a is ConnectionCell and a.validConnections.has(dir)):
 		if(!cell.GetNeighborInDirection(dir)):
-			print("Cell doesn't exist")
 			return cell
-	print("Cell DOES exist")
 	return null
 
 func DamageRoom(amount : int) -> bool:
@@ -156,7 +153,6 @@ func DamageRoom(amount : int) -> bool:
 	print("self: ", self)
 	if(hitpoints <=0):
 		for cell : Cell in positionIndexedChildren.values():
-			print("Cell.Map: ", cell.Map)
 			cell.Map.positionIndexedChildren.erase(cell.myCoords)
 			cell.queue_free()
 		#if(get_parent() is PlayerShip):

@@ -39,8 +39,11 @@ func AbleToConnectPiece(roomToAdd : ShipRoom, roomPosition : Vector2i) -> bool:
 	return able
 
 func GetFirepower() -> int:
-	#TODO Calculate Firepower based on number of weapon cells
-	return 0
+	var firepower : int = 0
+	for room in SubMaps:
+		if(is_instance_valid(room)):
+			firepower += room.get_children(true).filter(func(a): return a is LaserCell).size()
+	return firepower
 	
 func GetCrewCount() -> int:
 	return get_children().filter(func(c): return c is Crewmate).size()
@@ -60,10 +63,12 @@ func EnterStorage():
 func _process(delta: float) -> void:
 	if(editing):
 		return
-	var moveDir = Vector2(Input.get_axis("shipLEFT", "shipRIGHT"), Input.get_axis("shipUP", "shipDOWN")).normalized() * GetSpeed() * 50 * delta
+	var moveDir = Vector2(Input.get_axis("shipLEFT", "shipRIGHT"), Input.get_axis("shipUP", "shipDOWN")).normalized() * 50 * delta# * GetSpeed()
 	global_position += moveDir
 	
 	ClampPosition()
+	
+	Engine.time_scale = GetSpeed()/2.0
 	
 	return
 	
@@ -89,14 +94,12 @@ func ClampPosition():
 	#for invalidCell in invalid:
 		#positionIndexedChildren.erase(invalidCell)
 
-func DamageRoom(_amount : int) -> bool:
-	#hitpoints -= amount
-	#if(hitpoints <=0):
-		#for cell : Cell in positionIndexedChildren.values():
-			#cell.Map.positionIndexedChildren.erase(cell.myCoords)
-			#cell.queue_free()
-		#if(get_parent() is PlayerShip):
-			#get_parent().ClearInvalidValues()
-		#queue_free()
-		#return true
+func DamageRoom(amount : int) -> bool:
+	%GameCamera.Shake()
+	hitpoints -= amount
+	
+	if(hitpoints <=0):
+		print("YOU LOSE")
+		queue_free()
+		return true
 	return false

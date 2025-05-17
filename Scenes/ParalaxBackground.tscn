@@ -7,8 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://sjvvuri7xn2m" path="res://Assets/Sprites/Asteroids/Nebula.png" id="5_0u2ay"]
 
 [node name="ColorRect" type="ColorRect"]
-offset_right = 1151.0
-offset_bottom = 647.0
+offset_left = -76.0
+offset_top = -47.0
+offset_right = 1286.0
+offset_bottom = 755.0
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 script = ExtResource("1_64flk")
@@ -18,18 +20,20 @@ useNeb = true
 texture_repeat = 2
 material = ExtResource("2_xbw5s")
 layout_mode = 0
-offset_right = 1151.0
-offset_bottom = 647.0
+offset_top = 1.0
+offset_right = 1364.0
+offset_bottom = 832.0
 mouse_filter = 2
 texture = ExtResource("3_4uopt")
 stretch_mode = 1
 
 [node name="Nebula" type="TextureRect" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0.709804)
 material = ExtResource("4_d2qb2")
 layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 648.0
+offset_left = -1.0
+offset_top = -1.0
+offset_right = 1362.0
+offset_bottom = 800.0
 texture = ExtResource("5_0u2ay")
 stretch_mode = 1

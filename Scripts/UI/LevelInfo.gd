@@ -8,7 +8,7 @@ func _init(timeToReach: int, reputation: int, spaceDust: int, pirates: int, aste
 	AsteroidDensity = asteroidDensity
 	AsteroidRoute = asteroidRoute
 	Nebula = nebula
-	
+	moneyAmt = round(reputation * 0.2)
 	var distanceToStart: float = levelPosition.distance_squared_to(IdealStartPos)
 	DistanceFactor = remap(distanceToStart, 0.0, 1000.0, 0.0, 1.5)
 	
@@ -27,18 +27,19 @@ var AsteroidDensity: int
 var AsteroidRoute: bool
 var Nebula: bool
 var DistanceFactor: Variant
+var moneyAmt : int
 
 static func generateRandomLevel(nebula: bool = false, levelPosition: Vector2 = IdealStartPos, canBeAsteroidRoute: bool = false, dumbMode: bool = false) -> LevelInfo:
 	return LevelInfo.new(getRandomTimeToReach(levelPosition), getRandomReputation(levelPosition), getRandomSpaceDust(), getRandomPirateChance(levelPosition), getRandomAsteroidDensity(levelPosition, canBeAsteroidRoute, dumbMode), nebula)
 
 func makePopupText(timeToReach: int, reputation: int, spaceDust: int, pirates: int, asteroidDensity: int, nebula: bool = false) -> String:
 	var popupText: String = ""
-	var timeToTravel = str(timeToReach)
-	popupText += "Time to Travel: " + timeToTravel + " Seconds\n"
+		#https://forum.godotengine.org/t/how-to-show-on-a-label-how-much-time-from-a-timer-is-left/13594
+	var timeString = "%d:%02d" % [floor(timeToReach / 60.0), int(timeToReach) % 60] +"\n"
+	popupText += "Time to Travel: " + timeString
 	var reputationAmt = str(reputation)
 	popupText += "Reputation: " + reputationAmt + "\n"
-	var moneyAmt = str(round(reputation * 0.2))
-	popupText += "Money: $" + moneyAmt + "\n"
+	popupText += "Money: $" + str(moneyAmt) + "\n"
 	var spaceDustText = str(spaceDust)
 	popupText += "Space Dust: " + spaceDustText + "%\n"
 	var pirateChance = str(pirates)
@@ -66,7 +67,7 @@ static func getRandomReputation(levelPosition: Vector2 = IdealStartPos) -> int:
 	return clamp(distanceFactor, minValue, maxValue)
 	#return randi_range(minReputation, maxValueReputation)
 
-static func getRandomPirateChance(levelPosition: Vector2 = IdealStartPos) -> int:
+static func getRandomPirateChance(_levelPosition: Vector2 = IdealStartPos) -> int:
 	#var distance = levelPosition.distance_to(IdealStartPos)
 	#var minValue = 0
 	#var maxValue = randi_range(40, 70)

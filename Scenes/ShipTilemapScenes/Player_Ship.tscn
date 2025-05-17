@@ -9,6 +9,7 @@ tile_map_data = PackedByteArray("AAABAAEAAAAAAAAAAQACAAAAAAAAAAAAAQACAAIAAAAAAAA
 script = ExtResource("2_ptsrm")
 gameArea = Vector2(725, 648)
 gameAreaOffset = Vector2(0, 0)
+hitpoints = 7
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(48, 32)

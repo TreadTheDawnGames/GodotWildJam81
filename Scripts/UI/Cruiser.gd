@@ -1,5 +1,7 @@
 extends Node2D
 
+class_name Cruiser
+
 signal doneMoving
 
 func tweenDone() -> void:

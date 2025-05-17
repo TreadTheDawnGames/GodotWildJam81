@@ -1,4 +1,5 @@
 extends Cell
+class_name LaserCell
 
 var active : bool = false
 @export var fireRate : float = 1.0

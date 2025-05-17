@@ -1,4 +1,5 @@
 extends Node2D
+class_name AsteroidSpawner
 
 var Density : int
 
@@ -25,7 +26,7 @@ func SpawnAsteroid():
 	return
 
 func AttemptToSpawn():
-	spawnTimer.start(1.0 / (float(Density) / 40.0 + GlobalPlayerInfo.ThePlayerShip.GetSpeed()))
+	spawnTimer.start(1.0 / (float(Density) / 40.0))# + GlobalPlayerInfo.ThePlayerShip.GetSpeed()))
 	if(randi()%100+1 < Density):
 		SpawnAsteroid()
 

@@ -24,9 +24,8 @@ func _process(delta: float) -> void:
 	if(global_position.y > -324):
 		if(goDirection.y > 1):
 			goDirection*=-1
-	var moveDir = goDirection.normalized() * GetSpeed() * 25 * delta
+	var moveDir = goDirection.normalized()  * 25 * delta  * (GetSpeed()/5.0)
 	global_position += moveDir
-	print(GetSpeed())
 	ClampPosition()
 	return
 

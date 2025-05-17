@@ -14,3 +14,5 @@ wait_time = 30.0
 autostart = true
 
 [node name="AsteroidSpawner" parent="." instance=ExtResource("2_54rtb")]
+
+[node name="LevelTimer" type="Timer" parent="."]

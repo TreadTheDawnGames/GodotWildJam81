@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dxyq5ccvvdfax"]
 
 [ext_resource type="Texture2D" uid="uid://dgmilvislq0j8" path="res://Assets/Sprites/ShipBuilder/MoneyPanel.png" id="1_yh2sq"]
-[ext_resource type="Script" uid="uid://doba1boiwmuj1" path="res://Scripts/UI/game_info_panel.gd" id="2_1x43a"]
+[ext_resource type="Script" uid="uid://dolsv1u3uubem" path="res://Scripts/UI/game_info_panel.gd" id="2_1x43a"]
 
 [node name="MoneyPanel" type="Sprite2D"]
 texture = ExtResource("1_yh2sq")
@@ -9,32 +9,48 @@ script = ExtResource("2_1x43a")
 
 [node name="MoneyLabel" type="RichTextLabel" parent="."]
 offset_left = -111.0
-offset_top = -16.0
+offset_top = -33.0
 offset_right = -4.0
-offset_bottom = 9.0
+offset_bottom = -8.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 text = "Money: ERRR"
 
 [node name="CrewCountLabel" type="RichTextLabel" parent="."]
 offset_left = 12.0
-offset_top = -16.0
+offset_top = -33.0
 offset_right = 109.0
-offset_bottom = 10.0
+offset_bottom = -7.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 text = "Crew: ERRR"
 
 [node name="FirepowerLabel" type="RichTextLabel" parent="."]
 offset_left = 9.0
-offset_top = 8.0
+offset_top = -9.0
 offset_right = 111.0
-offset_bottom = 41.0
+offset_bottom = 24.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 text = "FirPwr: ERRR"
 
 [node name="SpeedLabel" type="RichTextLabel" parent="."]
 offset_left = -108.0
-offset_top = 9.0
+offset_top = -8.0
 offset_right = -8.0
-offset_bottom = 38.0
+offset_bottom = 21.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 text = "Speed: ERRR"
+
+[node name="TimeLeft" type="RichTextLabel" parent="."]
+offset_left = -73.0
+offset_top = 16.0
+offset_right = -33.0
+offset_bottom = 56.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "E:RR"
+
+[node name="DustLabel" type="RichTextLabel" parent="."]
+offset_left = 9.0
+offset_top = 14.0
+offset_right = 110.0
+offset_bottom = 54.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "Dust: ERR%"

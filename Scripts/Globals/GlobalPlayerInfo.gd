@@ -1,8 +1,13 @@
 extends Node
 
 var ThePlayerShip : PlayerShip
+var ActiveLevelInfo : LevelInfo
 var ActiveLevel : Level
 var Money : int
+var Reputation : int
+
+func AddRep(amount : int):
+	Reputation += amount
 
 func AddMoney(amount : int):
 	Money += amount
@@ -15,8 +20,8 @@ func RemoveMoney(amount : int):
 		return true
 	return false
 
-func SetActiveLevel(level : Level):
-	ActiveLevel = level
+func SetActiveLevelInfo(level : LevelInfo):
+	ActiveLevelInfo = level
 	
 func UnsetActiveLevel():
 	ActiveLevel = null
