@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://wayd6pnsnfp"]
 
 [ext_resource type="Script" uid="uid://6k6ul5d837hi" path="res://Scripts/UI/Popups.gd" id="1_m3gyv"]
-[ext_resource type="AudioStream" uid="uid://b72jl42bh31oj" path="res://Assets/Audio/UI/Popup.wav" id="2_m3gyv"]
+[ext_resource type="AudioStream" uid="uid://bmxdhg4g5jpwn" path="res://Assets/Audio/UI/Oui.wav" id="2_m3gyv"]
 
 [node name="Popups" type="Control"]
 layout_mode = 3
