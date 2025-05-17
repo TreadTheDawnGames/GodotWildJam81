@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://b811qksdb0w4k"]
+
+[ext_resource type="Script" uid="uid://djkmhvjudkkoc" path="res://pirate_spawner.gd" id="1_1sy4w"]
+[ext_resource type="PackedScene" uid="uid://g7utiny8mr8a" path="res://Scenes/LevelScenes/Pirates/pirate_ship.tscn" id="2_sn3oq"]
+
+[node name="PirateSpawner" type="Node2D"]
+script = ExtResource("1_1sy4w")
+
+[node name="PirateShip" parent="." instance=ExtResource("2_sn3oq")]
+position = Vector2(15, 15)

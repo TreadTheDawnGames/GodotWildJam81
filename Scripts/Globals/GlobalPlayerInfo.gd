@@ -24,8 +24,10 @@ func ShipEnterStorage():
 	ThePlayerShip.EnterStorage()
 	
 func ShipExitStorage(position : Vector2) -> PlayerShip:
+	if(!ThePlayerShip):
+		printerr("THERE IS NO PLAYER SHIP")
+		return
 	ThePlayerShip.global_position = position
-		#ship.reparent(self)
 	ThePlayerShip.process_mode = Node.PROCESS_MODE_PAUSABLE
 	print("Spawned ship")
 	return ThePlayerShip

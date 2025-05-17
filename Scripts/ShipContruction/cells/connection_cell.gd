@@ -24,7 +24,7 @@ func AssignLoadOrder():
 
 func Init():
 	super.Init()
-	
+	grabArea = get_node("Area2D")
 	debugSpritesParent = get_node("DebugSprites")
 	AddRandomConnections()
 	AddSurroundingTiles()
@@ -115,7 +115,6 @@ func _process(_delta: float) -> void:
 		var stringCons : Array[String]
 		for con in validConnections:
 			stringCons.append(Direction.find_key(con))
-		print(stringCons, ", ", Map.HasCell(myCoords))
 	if(!Map):
 		return
 	if(!Map.dragNDrop):
@@ -124,7 +123,6 @@ func _process(_delta: float) -> void:
 	
 	if(Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and not Map.grabbed):
 		if(IsOnTop()):
-			print("grab")
 			Map._grabbedOffset = Map.global_position - Map.globalMouse
 			Map.grabbed = true
 			
@@ -183,10 +181,10 @@ func RemoveConnection(direction : Direction):
 		DoDebugSprites()
 	return
 
-func DirectionStringFromEnum(dir : Direction) -> String:
+static func DirectionStringFromEnum(dir : Direction) -> String:
 	return Direction.find_key(dir)
 
-func DirectionStringFromVec2i(dir : Vector2i) -> String:
+static func DirectionStringFromVec2i(dir : Vector2i) -> String:
 	match(dir):
 		Vector2i.LEFT:
 			return ("West")

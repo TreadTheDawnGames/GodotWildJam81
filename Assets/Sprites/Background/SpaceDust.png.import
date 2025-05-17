@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://gq5rvbugkamv"
-path="res://.godot/imported/Virt2Room.png-246ba772d25fff8562e591bcb23752b3.ctex"
+uid="uid://4a3q2267t6ow"
+path="res://.godot/imported/SpaceDust.png-813b3b605ce1a3d5bbf5867a34297740.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Virt2Room.png"
-dest_files=["res://.godot/imported/Virt2Room.png-246ba772d25fff8562e591bcb23752b3.ctex"]
+source_file="res://Assets/Sprites/Background/SpaceDust.png"
+dest_files=["res://.godot/imported/SpaceDust.png-813b3b605ce1a3d5bbf5867a34297740.ctex"]
 
 [params]
 

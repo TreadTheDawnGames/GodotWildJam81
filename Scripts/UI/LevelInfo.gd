@@ -70,3 +70,6 @@ static func calculateDifficulty(time: float, reputation: int, pirateChance: int,
 	difficulty += int(distanceFactor * 20)
 	#giving difficulty an arbitrary number for now, can't think of a good grading system atm
 	return clamp(difficulty, 0, 100)
+
+func _to_string() -> String:
+	return makePopupText(TimeToReach, Reputation, SpaceDust, Pirates, AsteroidDensity, Nebula)

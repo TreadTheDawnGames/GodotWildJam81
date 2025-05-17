@@ -1,6 +1,8 @@
 extends Node2D
-@onready var BuildArea: Area2D = $Area2D
-@onready var ShopPanel: Sprite2D = $ShopPanel
+class_name ShipBuilder
+
+@onready var BuildArea: Area2D
+@onready var ShopPanel: Sprite2D
 
 var playerShip : PlayerShip
 var addingRoom : ShipRoom
@@ -11,6 +13,7 @@ func _ready() -> void:
 	playerShip = GlobalPlayerInfo.ShipExitStorage(get_node("ShipPositioner").global_position)
 	ShopPanel = get_node("ShopPanel")
 	textInfo = get_node("MoneyPanel")
+	BuildArea = get_node("Area2D")
 	BuildArea.area_entered.connect(SnapToPlayerShip)
 	BuildArea.area_exited.connect(ReturnToShop)
 	get_node("CloseButton").pressed.connect(CloseShipyard)

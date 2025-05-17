@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://cme73ldydoe5f"]
 
 [ext_resource type="Script" uid="uid://cpt8iweygokjs" path="res://Scenes/debug.gd" id="1_qxrlw"]
-[ext_resource type="PackedScene" uid="uid://g7utiny8mr8a" path="res://PlayerShip.tscn" id="2_wrm1d"]
 [ext_resource type="PackedScene" uid="uid://dnycrg3qoywj2" path="res://Scenes/UI/SpaceMap.tscn" id="3_wrm1d"]
+[ext_resource type="PackedScene" uid="uid://b3ou0ys527w25" path="res://Scenes/ShipTilemapScenes/Player_Ship.tscn" id="4_wowpa"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_qxrlw")
@@ -10,7 +10,8 @@ script = ExtResource("1_qxrlw")
 [node name="SpaceMap" parent="." instance=ExtResource("3_wrm1d")]
 visible = false
 
-[node name="PlayerShip" parent="." instance=ExtResource("2_wrm1d")]
-
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(576, 324)
+
+[node name="PlayerShip" parent="." instance=ExtResource("4_wowpa")]
+position = Vector2(122, 104)

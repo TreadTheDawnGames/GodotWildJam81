@@ -1,0 +1,48 @@
+[gd_scene load_steps=12 format=3 uid="uid://b5iucknrvobeb"]
+
+[ext_resource type="Script" uid="uid://cm4qa2aqqel8s" path="res://Scripts/LevelScripts/asteroid.gd" id="1_6kneo"]
+[ext_resource type="Texture2D" uid="uid://b1e1crvxp312h" path="res://Assets/Sprites/Asteroids/Asteroid1.png" id="2_nhd0e"]
+[ext_resource type="Texture2D" uid="uid://byjdqe8bap7v1" path="res://Assets/Sprites/Asteroids/Asteroid2.png" id="3_uj0sv"]
+[ext_resource type="Texture2D" uid="uid://cwy4e38i5ccam" path="res://Assets/Sprites/Asteroids/Asteroid3.png" id="4_wgx0p"]
+[ext_resource type="Texture2D" uid="uid://cu3kfxitanuh4" path="res://Assets/Sprites/Asteroids/Asteroid4.png" id="5_wojl4"]
+[ext_resource type="Texture2D" uid="uid://bvtu6om0gqbsw" path="res://Assets/Sprites/Asteroids/SmallAsteroid2.png" id="6_uxvjv"]
+[ext_resource type="Texture2D" uid="uid://bxmrjrl1r236t" path="res://Assets/Sprites/Asteroids/SmallAsteroid3.png" id="7_5wj5m"]
+[ext_resource type="Texture2D" uid="uid://duvfox05yg8ru" path="res://Assets/Sprites/Asteroids/SmallAsteroid4.png" id="8_2myt5"]
+[ext_resource type="Texture2D" uid="uid://flwpo5fb2ryo" path="res://Assets/Sprites/Asteroids/SmallAsteroid.png" id="9_bb0dr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nq64u"]
+radius = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nlmno"]
+radius = 16.0
+
+[node name="Asteroid" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_6kneo")
+LargeAsteroids = Array[Texture2D]([ExtResource("2_nhd0e"), ExtResource("3_uj0sv"), ExtResource("4_wgx0p"), ExtResource("5_wojl4")])
+SmallAsteroids = Array[Texture2D]([ExtResource("6_uxvjv"), ExtResource("7_5wj5m"), ExtResource("8_2myt5"), ExtResource("9_bb0dr")])
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("6_uxvjv")
+
+[node name="LShape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_nq64u")
+
+[node name="SShape" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_nlmno")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -15.0
+offset_top = -54.0
+offset_right = 25.0
+offset_bottom = -14.0
+mouse_filter = 2
+text = "asdf"
+metadata/_edit_use_anchors_ = true
+
+[node name="Debug" type="Button" parent="."]
+offset_left = -14.0
+offset_top = -49.0
+offset_right = 19.0
+offset_bottom = -33.0

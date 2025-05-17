@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bawqv2qua68at"]
+
+[ext_resource type="Shader" uid="uid://ejyhyml1lnc" path="res://VFX/starScroller.gdshader" id="1_jehmw"]
+
+[resource]
+shader = ExtResource("1_jehmw")
+shader_parameter/speed = 0.1

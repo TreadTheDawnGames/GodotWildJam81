@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://ebt2na8ty5e3"]
+
+[ext_resource type="Script" uid="uid://d3lxg037vnxpe" path="res://Scenes/LevelScenes/color_rect.gd" id="1_64flk"]
+[ext_resource type="Material" uid="uid://nvr11w02gjep" path="res://VFX/StarsScrollingMaterial.tres" id="2_xbw5s"]
+[ext_resource type="Texture2D" uid="uid://d21p8l01b5lkt" path="res://Assets/Sprites/Background/StarBackgroundTile.png" id="3_4uopt"]
+[ext_resource type="Material" uid="uid://bawqv2qua68at" path="res://VFX/NebulaScrollingMaterial.tres" id="4_d2qb2"]
+[ext_resource type="Texture2D" uid="uid://sjvvuri7xn2m" path="res://Assets/Sprites/Asteroids/Nebula.png" id="5_0u2ay"]
+
+[node name="ColorRect" type="ColorRect"]
+offset_right = 1151.0
+offset_bottom = 647.0
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+script = ExtResource("1_64flk")
+useNeb = true
+
+[node name="Stars" type="TextureRect" parent="."]
+texture_repeat = 2
+material = ExtResource("2_xbw5s")
+layout_mode = 0
+offset_right = 1151.0
+offset_bottom = 647.0
+mouse_filter = 2
+texture = ExtResource("3_4uopt")
+stretch_mode = 1
+
+[node name="Nebula" type="TextureRect" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.709804)
+material = ExtResource("4_d2qb2")
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("5_0u2ay")
+stretch_mode = 1

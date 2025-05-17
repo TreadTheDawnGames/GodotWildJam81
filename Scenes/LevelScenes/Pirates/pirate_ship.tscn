@@ -1,11 +1,13 @@
-[gd_scene load_steps=9 format=4 uid="uid://g7utiny8mr8a"]
+[gd_scene load_steps=10 format=4 uid="uid://g7utiny8mr8a"]
 
 [ext_resource type="PackedScene" uid="uid://dej32hvfh1kc5" path="res://Scenes/ShipTilemapScenes/cells/connection_cell.tscn" id="1_7dmsk"]
 [ext_resource type="PackedScene" uid="uid://cdrdoi7dbkthq" path="res://Scenes/ShipTilemapScenes/cells/dissallowed_connection_cell.tscn" id="2_t02xd"]
 [ext_resource type="PackedScene" uid="uid://dk65srebflc4" path="res://Scenes/ShipTilemapScenes/cells/GuarenteedConnectionCell.tscn" id="3_0f8a3"]
-[ext_resource type="Script" uid="uid://dq4fsivlhgui7" path="res://Scenes/ShipTilemapScenes/player_ship.gd" id="4_wcakh"]
-[ext_resource type="Texture2D" uid="uid://kj1qgmschcrq" path="res://Assets/Sprites/ship_base.png" id="5_opug3"]
+[ext_resource type="Script" uid="uid://4blmd8umom0p" path="res://Scenes/LevelScenes/Pirates/pirate_ship.gd" id="4_yq5qd"]
+[ext_resource type="Texture2D" uid="uid://ba3n0m10d0i16" path="res://Assets/Sprites/PirateShip.png" id="5_yq5qd"]
 [ext_resource type="PackedScene" uid="uid://chax0pgaodrnu" path="res://Scenes/Objects/crewmate.tscn" id="6_7dmsk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4ts8t"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_neb1g"]
 scenes/1/scene = ExtResource("1_7dmsk")
@@ -16,38 +18,15 @@ scenes/3/scene = ExtResource("3_0f8a3")
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetScenesCollectionSource_neb1g")
 
-[node name="PlayerShip" type="TileMapLayer"]
-tile_map_data = PackedByteArray("AAABAAEAAAAAAAAAAQACAAAAAAAAAAAAAQACAAIAAAAAAAAAAwADAAEAAAAAAAAAAwABAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAQABAAIAAAAAAAAAAwAAAAIAAAAAAAAAAwD//wEAAAAAAAAAAwD//wAAAAAAAAAAAwABAP//AAAAAAAAAwADAAAAAAAAAAAAAgACAP//AAAAAAAAAgAAAP//AAAAAAAAAwACAAEAAAAAAAAAAQA=")
+[node name="PirateShip" type="TileMapLayer"]
+material = SubResource("ShaderMaterial_4ts8t")
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAQABAAAAAAAAAAAAAQACAAAAAAAAAAAAAQACAAEAAAAAAAAAAQABAAEAAAAAAAAAAQAAAAEAAAAAAAAAAQACAAIAAAAAAAAAAwABAAIAAAAAAAAAAwAAAAIAAAAAAAAAAwD//wEAAAAAAAAAAwD//wAAAAAAAAAAAwAAAP//AAAAAAAAAwABAP//AAAAAAAAAwADAAEAAAAAAAAAAwADAAAAAAAAAAAAAgACAP//AAAAAAAAAgA=")
 tile_set = SubResource("TileSet_drvej")
-script = ExtResource("4_wcakh")
+script = ExtResource("4_yq5qd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(48, 32)
-texture = ExtResource("5_opug3")
-
-[node name="ConnectionCell" parent="." instance=ExtResource("1_7dmsk")]
-position = Vector2(48, 48)
-validConnections = Array[int]([0, 2, 3, 1])
-
-[node name="@Node2D@9" parent="." instance=ExtResource("1_7dmsk")]
-position = Vector2(80, 16)
-validConnections = Array[int]([3, 2])
-
-[node name="@Node2D@11" parent="." instance=ExtResource("1_7dmsk")]
-position = Vector2(48, 16)
-validConnections = Array[int]([3, 0, 1, 2])
-
-[node name="@Node2D@12" parent="." instance=ExtResource("1_7dmsk")]
-position = Vector2(16, 16)
-validConnections = Array[int]([3, 1, 2, 0])
-
-[node name="@Node2D@13" parent="." instance=ExtResource("1_7dmsk")]
-position = Vector2(16, 48)
-validConnections = Array[int]([0, 3, 1, 2])
-
-[node name="@Node2D@21" parent="." instance=ExtResource("1_7dmsk")]
-position = Vector2(80, 48)
-validConnections = Array[int]([3, 1, 2, 0])
+texture = ExtResource("5_yq5qd")
 
 [node name="Crewmate" parent="." instance=ExtResource("6_7dmsk")]
 position = Vector2(16, 16)

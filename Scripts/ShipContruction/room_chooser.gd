@@ -4,7 +4,7 @@ class_name RoomChooser
 ### Marker2D array
 var slots : Array
 
-@export var RoomDirectory : String = "res://Scenes/ShipTilemapScenes/Rooms/"
+static var RoomDirectory : String = "res://Scenes/ShipTilemapScenes/Rooms/"
 
 func _ready() -> void:
 	slots = get_children().filter(func(a): return a is ShopSlot)
@@ -18,11 +18,15 @@ func _process(_delta: float) -> void:
 
 		
 func ChooseRoom(marker : ShopSlot):
-	var files = Array(DirAccess.get_files_at(RoomDirectory))
-	files.shuffle()
-	var scene : ShipRoom = load(RoomDirectory + files.pick_random()).instantiate() as ShipRoom
+	var scene = GetRandomAvailableRoom()
 	add_child(scene)
 	scene.position = marker.position - scene.sprite.texture.get_size()/2
 	scene.LocationMarker = marker
 	marker.setPrice(scene.Price)
 	return
+
+static func GetRandomAvailableRoom() -> ShipRoom:
+	var files = Array(DirAccess.get_files_at(RoomDirectory))
+	files.shuffle()
+	var scene : ShipRoom = load(RoomDirectory + files.pick_random()).instantiate() as ShipRoom
+	return scene

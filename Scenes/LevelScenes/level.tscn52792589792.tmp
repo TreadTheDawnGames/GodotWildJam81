@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0tav4fm5jwt1"]
+
+[ext_resource type="Script" uid="uid://bxnrgk5dsq5td" path="res://Scripts/LevelScripts/level.gd" id="1_t13wm"]
+[ext_resource type="PackedScene" uid="uid://egkl8ceuwlma" path="res://Scenes/Level Scenes/asteroid_spawner.tscn" id="2_54rtb"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_t13wm")
+
+[node name="AsteroidSpawner" parent="." instance=ExtResource("2_54rtb")]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dcyhhofu2e73n"]
 
-[ext_resource type="PackedScene" uid="uid://c1orf4r8byd2g" path="res://Scenes/ShipTilemapScenes/ship_room.tscn" id="1_q34lt"]
+[ext_resource type="PackedScene" uid="uid://c1orf4r8byd2g" path="res://Scenes/ShipBuilder/ship_room.tscn" id="1_q34lt"]
 [ext_resource type="Texture2D" uid="uid://ch6xnjyrkg6na" path="res://Assets/Sprites/SideZRoom.png" id="2_pm28r"]
 
 [node name="SideZRoom" instance=ExtResource("1_q34lt")]

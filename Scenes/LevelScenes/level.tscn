@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0tav4fm5jwt1"]
+
+[ext_resource type="Script" uid="uid://bxnrgk5dsq5td" path="res://Scripts/LevelScripts/level.gd" id="1_t13wm"]
+[ext_resource type="PackedScene" uid="uid://egkl8ceuwlma" path="res://Scenes/LevelScenes/asteroid_spawner.tscn" id="2_54rtb"]
+[ext_resource type="PackedScene" uid="uid://b811qksdb0w4k" path="res://Scenes/LevelScenes/Pirates/pirate_spawner.tscn" id="3_f0wf7"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_t13wm")
+
+[node name="PirateSpawner" parent="." instance=ExtResource("3_f0wf7")]
+position = Vector2(1499, 328)
+
+[node name="pirateTimer" type="Timer" parent="PirateSpawner"]
+wait_time = 30.0
+autostart = true
+
+[node name="AsteroidSpawner" parent="." instance=ExtResource("2_54rtb")]
