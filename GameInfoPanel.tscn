@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dxyq5ccvvdfax"]
 
 [ext_resource type="Texture2D" uid="uid://dgmilvislq0j8" path="res://Assets/Sprites/ShipBuilder/MoneyPanel.png" id="1_yh2sq"]
-[ext_resource type="Script" uid="uid://doba1boiwmuj1" path="res://game_info_panel.gd" id="2_1x43a"]
+[ext_resource type="Script" uid="uid://dolsv1u3uubem" path="res://game_info_panel.gd" id="2_1x43a"]
 
 [node name="MoneyPanel" type="Sprite2D"]
 texture = ExtResource("1_yh2sq")
