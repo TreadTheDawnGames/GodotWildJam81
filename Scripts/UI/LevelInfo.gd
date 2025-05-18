@@ -30,8 +30,8 @@ var DistanceFactor: Variant
 var moneyAmt : int
 var FinalLevel : bool = false
 
-static func generateRandomLevel(nebula: bool = false, levelPosition: Vector2 = IdealStartPos, canBeAsteroidRoute: bool = false, dumbMode: bool = false) -> LevelInfo:
-	return LevelInfo.new(getRandomTimeToReach(levelPosition), getRandomReputation(levelPosition), getRandomSpaceDust(), getRandomPirateChance(levelPosition), getRandomAsteroidDensity(levelPosition, canBeAsteroidRoute, dumbMode), nebula)
+static func generateRandomLevel(nebula: bool = false, levelPosition: Vector2 = IdealStartPos, isAsteroidRoute: bool = false, dumbMode: bool = false) -> LevelInfo:
+	return LevelInfo.new(getRandomTimeToReach(levelPosition), getRandomReputation(levelPosition), getRandomSpaceDust(), getRandomPirateChance(levelPosition), getRandomAsteroidDensity(levelPosition, isAsteroidRoute, dumbMode), nebula)
 
 func makePopupText(timeToReach: int, reputation: int, spaceDust: int, pirates: int, asteroidDensity: int, nebula: bool = false) -> String:
 	var popupText: String = ""
@@ -76,17 +76,17 @@ static func getRandomPirateChance(_levelPosition: Vector2 = IdealStartPos) -> in
 	#return clamp(distanceFactor, minValue, maxValue)
 	return randi_range(0, 100) 
 	
-static func getRandomAsteroidDensity(levelPosition: Vector2 = IdealStartPos, canBeAsteroidRoute: bool = false, dumbMode: bool = false) -> int:
+static func getRandomAsteroidDensity(levelPosition: Vector2 = IdealStartPos, isAsteroidRoute: bool = false, dumbMode: bool = false) -> int:
 	var distance = levelPosition.distance_to(IdealStartPos)
 	var minValue = 0
 	var maxValue = 60
-	if canBeAsteroidRoute and dumbMode:
+	if isAsteroidRoute and dumbMode:
 		minValue = 100
 		maxValue = 100
 	elif dumbMode:
 		minValue = 60
 		maxValue = 100
-	elif canBeAsteroidRoute:
+	elif isAsteroidRoute:
 		minValue = 60
 		maxValue = 80
 	var distanceFactor = remap(distance, 0.0, 1000.0, minValue, maxValue)

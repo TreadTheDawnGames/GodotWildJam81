@@ -24,10 +24,16 @@ position = Vector2(576, 322.5)
 scale = Vector2(1.158, 1.075)
 texture = ExtResource("3_pab8o")
 
+[node name="lineHighlighter" type="Line2D" parent="."]
+
+[node name="astLineHighlighter" type="Line2D" parent="."]
+
+[node name="nebLineHighlighter" type="Line2D" parent="."]
+
+[node name="nebAstLineHighlighter" type="Line2D" parent="."]
+
 [node name="PointMapGenerator" type="Node2D" parent="."]
 script = ExtResource("2_pab8o")
-
-[node name="Line2D" type="Line2D" parent="."]
 
 [node name="Cruiser" parent="." instance=ExtResource("1_ihlxe")]
 
