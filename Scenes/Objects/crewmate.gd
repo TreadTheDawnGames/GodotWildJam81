@@ -67,8 +67,8 @@ func _pathfinding(from: Vector2i, to: Vector2i) -> Array[Vector2i]:
 		return[]
 		
 	# Prepare the stack
-	var path: Array[Vector2i]
-	var stack: Array[Vector2i]
+	var path: Array[Vector2i] = []
+	var stack: Array[Vector2i] = []
 	var con_cell: ConnectionCell = null
 	stack.push_back(from)
 
