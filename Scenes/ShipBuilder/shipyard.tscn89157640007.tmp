@@ -1,11 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://dv4kwxgdofcnk"]
+[gd_scene load_steps=16 format=3 uid="uid://dv4kwxgdofcnk"]
 
 [ext_resource type="Script" uid="uid://o7b4rrhaxf2g" path="res://Scripts/ShipContruction/ship_builder.gd" id="1_qqxrl"]
 [ext_resource type="Texture2D" uid="uid://dx5p0yy61fmtg" path="res://Assets/Sprites/ShipBuilder/ShopPanel.png" id="2_irld4"]
 [ext_resource type="Script" uid="uid://26mnybypchly" path="res://Scripts/ShipContruction/room_chooser.gd" id="3_smhu5"]
 [ext_resource type="PackedScene" uid="uid://dx5pk3o5psm5b" path="res://Scenes/ShipTilemapScenes/Rooms/long_room.tscn" id="4_0uaff"]
 [ext_resource type="PackedScene" path="res://Scenes/ShipBuilder/shop_slot.tscn" id="4_gwoxb"]
-[ext_resource type="PackedScene" uid="uid://bdfn3fphqnpka" path="res://Scenes/ShipTilemapScenes/cells/DebugConnectionRoom.tscn" id="5_irld4"]
 [ext_resource type="PackedScene" uid="uid://bw34tde0irtv5" path="res://Scenes/ShipTilemapScenes/Rooms/side_s_room.tscn" id="5_qcrg2"]
 [ext_resource type="PackedScene" uid="uid://dcyhhofu2e73n" path="res://Scenes/ShipTilemapScenes/Rooms/side_z_room.tscn" id="6_0f23b"]
 [ext_resource type="PackedScene" uid="uid://dn1fqh38t1biq" path="res://Scenes/ShipTilemapScenes/Rooms/small_room.tscn" id="7_acan7"]
@@ -56,6 +55,3 @@ offset_right = 112.0
 offset_bottom = 629.0
 text = "Close Shop
 "
-
-[node name="DebugRoom" parent="." instance=ExtResource("5_irld4")]
-position = Vector2(859, 338)

@@ -30,22 +30,14 @@ gameAreaOffset = Vector2(860, 96)
 position = Vector2(48, 32)
 texture = ExtResource("5_yq5qd")
 
-[node name="Crewmate" parent="." instance=ExtResource("6_7dmsk")]
+[node name="CapnHal" parent="." instance=ExtResource("6_7dmsk")]
 position = Vector2(16, 16)
+processStates = false
 
 [node name="Crewmate2" parent="." instance=ExtResource("6_7dmsk")]
 position = Vector2(48, 16)
 
 [node name="Crewmate3" parent="." instance=ExtResource("6_7dmsk")]
 position = Vector2(79, 16)
-
-[node name="Crewmate4" parent="." instance=ExtResource("6_7dmsk")]
-position = Vector2(16, 51)
-
-[node name="Crewmate5" parent="." instance=ExtResource("6_7dmsk")]
-position = Vector2(47, 46)
-
-[node name="Crewmate6" parent="." instance=ExtResource("6_7dmsk")]
-position = Vector2(80, 47)
 
 [node name="MoveTimer" type="Timer" parent="."]

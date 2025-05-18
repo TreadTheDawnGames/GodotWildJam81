@@ -38,7 +38,7 @@ func SetNewLocation():
 	move_timer.start(randf_range(0.5,1.0))
 	return
 
-func DamageRoom(amount : int):
+func DamageRoom(amount : int, _checkParent : bool = false):
 	hitpoints -= amount
 	
 	if(hitpoints <=0):
