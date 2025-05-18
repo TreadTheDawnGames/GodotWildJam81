@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://qstxmf8vj5hp"]
+[gd_scene load_steps=9 format=3 uid="uid://qstxmf8vj5hp"]
 
 [ext_resource type="PackedScene" uid="uid://dej32hvfh1kc5" path="res://Scenes/ShipTilemapScenes/cells/connection_cell.tscn" id="1_drvej"]
 [ext_resource type="Script" uid="uid://bratu44wuwsgf" path="res://Scripts/ShipContruction/ship_room.gd" id="1_dsb16"]
 [ext_resource type="PackedScene" uid="uid://cdrdoi7dbkthq" path="res://Scenes/ShipTilemapScenes/cells/dissallowed_connection_cell.tscn" id="2_neb1g"]
 [ext_resource type="PackedScene" uid="uid://dk65srebflc4" path="res://Scenes/ShipTilemapScenes/cells/GuarenteedConnectionCell.tscn" id="3_v3svi"]
 [ext_resource type="PackedScene" uid="uid://bp0pyqbmssdgb" path="res://Scenes/ShipTilemapScenes/cells/laser_cell.tscn" id="4_kiyv8"]
+[ext_resource type="AudioStream" uid="uid://dq7hdygl7yx3s" path="res://Assets/Audio/Level/Crash into Asteroid.mp3" id="6_67hri"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_neb1g"]
 scenes/1/scene = ExtResource("1_drvej")
@@ -21,3 +22,6 @@ tile_set = SubResource("TileSet_drvej")
 script = ExtResource("1_dsb16")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CrashIntoAsteroid" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_67hri")

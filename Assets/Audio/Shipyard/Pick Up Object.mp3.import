@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c14fjken7t844"
+path="res://.godot/imported/Pick Up Object.mp3-f4f25e6a92065588569c21aaa92ddb3c.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Shipyard/Pick Up Object.mp3"
+dest_files=["res://.godot/imported/Pick Up Object.mp3-f4f25e6a92065588569c21aaa92ddb3c.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

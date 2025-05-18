@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://g7utiny8mr8a"]
+[gd_scene load_steps=11 format=4 uid="uid://g7utiny8mr8a"]
 
 [ext_resource type="PackedScene" uid="uid://dej32hvfh1kc5" path="res://Scenes/ShipTilemapScenes/cells/connection_cell.tscn" id="1_7dmsk"]
 [ext_resource type="PackedScene" uid="uid://cdrdoi7dbkthq" path="res://Scenes/ShipTilemapScenes/cells/dissallowed_connection_cell.tscn" id="2_t02xd"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://4blmd8umom0p" path="res://Scenes/LevelScenes/Pirates/pirate_ship.gd" id="4_yq5qd"]
 [ext_resource type="Texture2D" uid="uid://ba3n0m10d0i16" path="res://Assets/Sprites/PirateShip.png" id="5_yq5qd"]
 [ext_resource type="PackedScene" uid="uid://chax0pgaodrnu" path="res://Scenes/Objects/crewmate.tscn" id="6_7dmsk"]
+[ext_resource type="AudioStream" uid="uid://dq7hdygl7yx3s" path="res://Assets/Audio/Level/Crash into Asteroid.mp3" id="7_w1tuh"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4ts8t"]
 
@@ -44,3 +45,6 @@ position = Vector2(79, 16)
 alliance = 2
 
 [node name="MoveTimer" type="Timer" parent="."]
+
+[node name="CrashIntoAsteroid" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_w1tuh")

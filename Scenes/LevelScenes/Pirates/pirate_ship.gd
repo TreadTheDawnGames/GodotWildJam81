@@ -44,6 +44,7 @@ func DamageRoom(amount : int, _checkParent : bool = false):
 
 	if(hitpoints <=0):
 		GlobalPlayerInfo.Shake()
+		$CrashIntoAsteroid.play()
 		queue_free()
 		return true
 	return

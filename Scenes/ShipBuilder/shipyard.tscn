@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://dv4kwxgdofcnk"]
+[gd_scene load_steps=44 format=3 uid="uid://dv4kwxgdofcnk"]
 
 [ext_resource type="Script" uid="uid://o7b4rrhaxf2g" path="res://Scripts/ShipContruction/ship_builder.gd" id="1_qqxrl"]
 [ext_resource type="Texture2D" uid="uid://dx5p0yy61fmtg" path="res://Assets/Sprites/ShipBuilder/ShopPanel.png" id="2_irld4"]
@@ -40,6 +40,8 @@
 [ext_resource type="PackedScene" uid="uid://bmejo1h1q8l4f" path="res://Scenes/ShipTilemapScenes/Rooms/t_4l.tscn" id="35_xc33l"]
 [ext_resource type="PackedScene" uid="uid://f2t63b6egcsn" path="res://Scenes/ShipTilemapScenes/Rooms/z_1l.tscn" id="37_jkclg"]
 [ext_resource type="PackedScene" uid="uid://c62qo7piir2xf" path="res://Scenes/ShipTilemapScenes/Rooms/z_2l.tscn" id="39_37yg4"]
+[ext_resource type="AudioStream" uid="uid://bjxifp541xctx" path="res://Assets/Audio/Shipyard/Place Object.mp3" id="41_hs3ok"]
+[ext_resource type="AudioStream" uid="uid://dq7hdygl7yx3s" path="res://Assets/Audio/Level/Crash into Asteroid.mp3" id="42_027qa"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_mniq6"]
 normal = Vector2(90, 0)
@@ -82,3 +84,11 @@ offset_right = 112.0
 offset_bottom = 629.0
 text = "Close Shop
 "
+
+[node name="PlaceShipPart" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("41_hs3ok")
+
+[node name="CrashIntoAsteroid" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("42_027qa")
+
+[connection signal="finished" from="CrashIntoAsteroid" to="." method="_on_crash_into_asteroid_finished"]

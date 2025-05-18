@@ -102,6 +102,7 @@ func ClampPosition():
 
 func DamageRoom(amount : int, _checkParent : bool = false) -> bool:
 	GlobalPlayerInfo.Shake()
+	$CrashIntoAsteroid.play()
 	hitpoints -= amount
 	var thing : float = 1*(clamp(float(hitpoints), 0.1, maxHitpoints)/maxHitpoints)
 	modulate = Color(1,thing, thing , 1)

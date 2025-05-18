@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://dej32hvfh1kc5"]
+[gd_scene load_steps=5 format=3 uid="uid://dej32hvfh1kc5"]
 
 [ext_resource type="Script" uid="uid://dg85xif40hnpr" path="res://Scripts/ShipContruction/cells/connection_cell.gd" id="1_4qv6h"]
+[ext_resource type="AudioStream" uid="uid://c14fjken7t844" path="res://Assets/Audio/Shipyard/Pick Up Object.mp3" id="2_28jac"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_m14t5"]
 size = Vector2(32, 32)
@@ -23,3 +24,6 @@ collision_mask = 2
 shape = SubResource("RectangleShape2D_vrco3")
 
 [node name="DebugSprites" type="Node2D" parent="."]
+
+[node name="PickUpShipPart" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_28jac")

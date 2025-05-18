@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b5iucknrvobeb"]
+[gd_scene load_steps=13 format=3 uid="uid://b5iucknrvobeb"]
 
 [ext_resource type="Script" uid="uid://cm4qa2aqqel8s" path="res://Scripts/LevelScripts/asteroid.gd" id="1_6kneo"]
 [ext_resource type="Texture2D" uid="uid://b1e1crvxp312h" path="res://Assets/Sprites/Asteroids/Asteroid1.png" id="2_nhd0e"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bxmrjrl1r236t" path="res://Assets/Sprites/Asteroids/SmallAsteroid3.png" id="7_5wj5m"]
 [ext_resource type="Texture2D" uid="uid://duvfox05yg8ru" path="res://Assets/Sprites/Asteroids/SmallAsteroid4.png" id="8_2myt5"]
 [ext_resource type="Texture2D" uid="uid://flwpo5fb2ryo" path="res://Assets/Sprites/Asteroids/SmallAsteroid.png" id="9_bb0dr"]
+[ext_resource type="AudioStream" uid="uid://dq7hdygl7yx3s" path="res://Assets/Audio/Level/Crash into Asteroid.mp3" id="10_nhd0e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nq64u"]
 radius = 32.0
@@ -31,3 +32,8 @@ shape = SubResource("CircleShape2D_nq64u")
 
 [node name="SShape" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_nlmno")
+
+[node name="CrashIntoAsteroid" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_nhd0e")
+
+[connection signal="finished" from="CrashIntoAsteroid" to="." method="_on_crash_into_asteroid_finished"]

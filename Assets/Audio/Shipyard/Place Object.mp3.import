@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bjxifp541xctx"
+path="res://.godot/imported/Place Object.mp3-46b2a87a4eeb2f3f6ca9cda51bbb08ca.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Shipyard/Place Object.mp3"
+dest_files=["res://.godot/imported/Place Object.mp3-46b2a87a4eeb2f3f6ca9cda51bbb08ca.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

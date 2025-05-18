@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cc5bb43qo1efw"
+path="res://.godot/imported/Hover Over Map.mp3-bfcd13490fba74c850980c71d532cdef.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/UI/Hover Over Map.mp3"
+dest_files=["res://.godot/imported/Hover Over Map.mp3-bfcd13490fba74c850980c71d532cdef.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
