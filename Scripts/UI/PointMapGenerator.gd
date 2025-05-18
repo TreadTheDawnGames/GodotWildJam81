@@ -208,21 +208,9 @@ func placePointsFromMap() -> void:
 	remove_child(pointsMap)
 
 func pointPressed(clickedPoint: Control, isFinal : bool = false) -> void:
-	print("START OF LOOP____________________________START OF LOOP")
 	for point in pointsConnectedToCruiserPoint():
-		print("point", point)
-		print("clickedPoint", clickedPoint)
-		print("_______GLOBAL POSITION NOW_________")
-		print("point", point.global_position)
-		print("clickedPoint", clickedPoint.global_position)
-		print("----------------SAME POINT????????????---------------------")
-		print(point == clickedPoint)
-		print("::::::::::::::::::::::::::::::::::::::::::::::::::")
 		if point == clickedPoint:
 			var dist: float = get_global_mouse_position().distance_squared_to( clickedPoint.global_position )
-			print(":::::::::::::::::::::::::::MARGIN:::::::::::::::::::::::::::::::::")
-			print(dist > clickedPoint.marg)
-			print(":::::::::::::::::::::::::::MARGIN:::::::::::::::::::::::::::::::::")
 			if dist > clickedPoint.marg:
 				var cruiserButton = clickedPoint.get_node("TextureButton")
 				if(cruiserButton.pressed.is_connected(pointPressed)):
@@ -232,7 +220,6 @@ func pointPressed(clickedPoint: Control, isFinal : bool = false) -> void:
 				moveCruiserToThisPoint( clickedPoint.global_position )
 				GlobalPlayerInfo.SetActiveLevelInfo(dictOfLevelInfos.get(point))
 				GlobalPlayerInfo.ActiveLevelInfo.FinalLevel = isFinal
-				print("END OF ITERATION____________________________END OF ITERATION")
 				pass
 
 func connectPointsOnMap() -> void:
