@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://ma5misc0fo5f"]
 
-[ext_resource type="PackedScene" uid="uid://b3ou0ys527w25" path="res://Scenes/ShipTilemapScenes/Player_Ship.tscn" id="1_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://bhjrdpdfo87g1" path="res://Scenes/ShipTilemapScenes/Player_Ship.tscn" id="1_e2o6t"]
 [ext_resource type="Script" uid="uid://cpt8iweygokjs" path="res://Scenes/debug.gd" id="1_feb5d"]
-[ext_resource type="Script" uid="uid://bbo65ha7vpc3w" path="res://ScreenShake.gd" id="3_7jktm"]
+[ext_resource type="Script" path="res://ScreenShake.gd" id="3_7jktm"]
 [ext_resource type="PackedScene" uid="uid://dxyq5ccvvdfax" path="res://GameInfoPanel.tscn" id="4_fc0e3"]
 
 [node name="game" type="Node2D"]

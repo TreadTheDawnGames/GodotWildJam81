@@ -21,6 +21,7 @@ GlobalPlayerInfo="*res://Scripts/Globals/GlobalPlayerInfo.gd"
 Popups="*res://Scenes/UI/Popups.tscn"
 Global="*res://Scripts/global.gd"
 Background="*res://Scenes/ParalaxBackground.tscn"
+GameSettings="*res://Scripts/Globals/GameSettings.gd"
 
 [input]
 

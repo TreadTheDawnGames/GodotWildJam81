@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyuvros5l54cl"]
+
+[ext_resource type="Script" uid="uid://dxgyg614ibnoc" path="res://Scripts/UI/MainMenu.gd" id="1_g18y6"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g18y6")
+
+[node name="MainMenuContainer" type="VBoxContainer" parent="."]
+top_level = true
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 60.0
+offset_top = -195.0
+offset_right = 260.0
+offset_bottom = -60.0
+grow_vertical = 0
+theme_override_constants/separation = 15
+
+[node name="StartGameButton" type="Button" parent="MainMenuContainer"]
+custom_minimum_size = Vector2(200, 35)
+layout_mode = 2
+text = "Start"
+
+[node name="OptionsButton" type="Button" parent="MainMenuContainer"]
+custom_minimum_size = Vector2(200, 35)
+layout_mode = 2
+text = "Options"
+
+[node name="QuitGameButton" type="Button" parent="MainMenuContainer"]
+custom_minimum_size = Vector2(200, 35)
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="MainMenuContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="MainMenuContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="MainMenuContainer/QuitGameButton" to="." method="_on_quit_game_button_pressed"]

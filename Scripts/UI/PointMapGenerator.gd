@@ -24,6 +24,7 @@ var astar := AStar2D.new()
 var dictOfPoints: Dictionary = {}
 var dictOfIds: Dictionary = {}
 var dictOfLevelInfos: Dictionary = {} #uses the points as indices for the levelinfo
+var gameSettings: Dictionary
 
 func _ready() -> void:
 	randomize()
@@ -33,6 +34,7 @@ func _ready() -> void:
 	nebAstLineHighlighter = $"../nebAstLineHighlighter"
 	astLineHighlighter = $"../astLineHighlighter"
 	nebLineHighlighter = $"../nebLineHighlighter"
+	gameSettings = GameSettings.loadConfigValues()
 	makeMap()
 
 
@@ -117,7 +119,7 @@ func setPopupsOnButton(id: int) -> Control:
 	var pointPosition: Vector2 = point.global_position + randAmtToAdd()
 	var isAsteroidRoute: bool = decideOnMapGoodieAfterHalfwayPoint( point.global_position, 30 )
 	var hasNebula: bool = decideOnMapGoodieAfterHalfwayPoint( point.global_position, 20 )
-	var levelInfo = LevelInfo.generateRandomLevel( hasNebula, pointPosition, isAsteroidRoute, false )
+	var levelInfo = LevelInfo.generateRandomLevel( hasNebula, pointPosition, isAsteroidRoute, gameSettings.DumbMode )
 	levelInfo.Nebula = hasNebula
 	levelInfo.AsteroidRoute = isAsteroidRoute
 	var popupText = levelInfo.makePopupText( levelInfo.TimeToReach, levelInfo.Reputation, levelInfo.SpaceDust, levelInfo.Pirates, levelInfo.AsteroidDensity, levelInfo.Nebula )
