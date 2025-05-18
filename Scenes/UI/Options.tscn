@@ -1,0 +1,137 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxqfrf0bqbnlt"]
+
+[ext_resource type="Script" uid="uid://dsnt447sn7jaw" path="res://Scripts/UI/Options.gd" id="1_h8s0t"]
+[ext_resource type="Script" uid="uid://dwcsbfh4exjvp" path="res://Scripts/UI/VolumeSlider.gd" id="2_tut6h"]
+
+[node name="Options" type="Control"]
+top_level = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h8s0t")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 60.0
+offset_top = -125.0
+offset_right = 530.0
+offset_bottom = 125.0
+grow_vertical = 2
+
+[node name="Container" type="MarginContainer" parent="PanelContainer"]
+custom_minimum_size = Vector2(530, 250)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 30
+
+[node name="OptionsContainer" type="VBoxContainer" parent="PanelContainer/Container"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/Container/OptionsContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Options"
+
+[node name="VolumeContainer" type="HBoxContainer" parent="PanelContainer/Container/OptionsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="VolumeLabel" type="Label" parent="PanelContainer/Container/OptionsContainer/VolumeContainer"]
+layout_mode = 2
+text = "Master Volume"
+
+[node name="VolumeSlider" type="HSlider" parent="PanelContainer/Container/OptionsContainer/VolumeContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 25)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+script = ExtResource("2_tut6h")
+busName = "Master"
+
+[node name="MusicVolumeContainer" type="HBoxContainer" parent="PanelContainer/Container/OptionsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="MusicVolumeLabel" type="Label" parent="PanelContainer/Container/OptionsContainer/MusicVolumeContainer"]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="MusicVolumeSlider" type="HSlider" parent="PanelContainer/Container/OptionsContainer/MusicVolumeContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 25)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+script = ExtResource("2_tut6h")
+busName = "Music"
+
+[node name="SFXVolumeContainer" type="HBoxContainer" parent="PanelContainer/Container/OptionsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="SFXVolumeLabel" type="Label" parent="PanelContainer/Container/OptionsContainer/SFXVolumeContainer"]
+layout_mode = 2
+text = "SFX Volume"
+
+[node name="SFXVolumeSlider" type="HSlider" parent="PanelContainer/Container/OptionsContainer/SFXVolumeContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 25)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+script = ExtResource("2_tut6h")
+busName = "SFX"
+
+[node name="ScreenShakeContainer" type="HBoxContainer" parent="PanelContainer/Container/OptionsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="ScreenShakeLabel" type="Label" parent="PanelContainer/Container/OptionsContainer/ScreenShakeContainer"]
+layout_mode = 2
+text = "Screen Shake"
+
+[node name="ScreenShakeToggle" type="CheckButton" parent="PanelContainer/Container/OptionsContainer/ScreenShakeContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="DumbModeContainer" type="HBoxContainer" parent="PanelContainer/Container/OptionsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="DumbModeLabel" type="Label" parent="PanelContainer/Container/OptionsContainer/DumbModeContainer"]
+layout_mode = 2
+text = "Dumb Mode"
+
+[node name="DumbModeToggle" type="CheckButton" parent="PanelContainer/Container/OptionsContainer/DumbModeContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="QuitOptionsButton" type="Button" parent="."]
+top_level = true
+custom_minimum_size = Vector2(200, 35)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0520833
+anchor_top = 0.853395
+anchor_right = 0.225694
+anchor_bottom = 0.907407
+text = "Quit Options"
+metadata/_edit_use_anchors_ = true
+
+[connection signal="drag_ended" from="PanelContainer/Container/OptionsContainer/VolumeContainer/VolumeSlider" to="." method="_on_volume_slider_drag_ended"]
+[connection signal="drag_ended" from="PanelContainer/Container/OptionsContainer/MusicVolumeContainer/MusicVolumeSlider" to="." method="_on_music_volume_slider_drag_ended"]
+[connection signal="drag_ended" from="PanelContainer/Container/OptionsContainer/SFXVolumeContainer/SFXVolumeSlider" to="." method="_on_sfx_volume_slider_drag_ended"]
+[connection signal="toggled" from="PanelContainer/Container/OptionsContainer/ScreenShakeContainer/ScreenShakeToggle" to="." method="_on_screen_shake_toggle_toggled"]
+[connection signal="toggled" from="PanelContainer/Container/OptionsContainer/DumbModeContainer/DumbModeToggle" to="." method="_on_dumb_mode_toggle_toggled"]
+[connection signal="pressed" from="QuitOptionsButton" to="." method="_on_quit_options_button_pressed"]

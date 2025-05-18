@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://cgunh3kio381l"]
+
+[ext_resource type="AudioStream" uid="uid://b0ukuxaxylgk7" path="res://Assets/Audio/Wild Jam - Menu V2.mp3" id="1_fnn4p"]
+[ext_resource type="Script" uid="uid://cmrnduru8kukp" path="res://Scripts/BackgroundMusic.gd" id="1_mncim"]
+[ext_resource type="AudioStream" uid="uid://jqclu3127w4e" path="res://Assets/Audio/Wild Jam Exploration.mp3" id="3_dq7gm"]
+[ext_resource type="AudioStream" uid="uid://db1dsnlppdiv7" path="res://Assets/Audio/Wild Jam TEST 4.mp3" id="4_h2bjc"]
+
+[node name="BGM" type="Node"]
+script = ExtResource("1_mncim")
+
+[node name="MainMenuBGM" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("1_fnn4p")
+autoplay = true
+bus = &"Music"
+
+[node name="SpaceMapBGM" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("3_dq7gm")
+bus = &"Music"
+
+[node name="LevelBGM" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_h2bjc")
+bus = &"Music"
+
+[connection signal="finished" from="MainMenuBGM" to="." method="_on_main_menu_bgm_finished"]
+[connection signal="finished" from="SpaceMapBGM" to="." method="_on_space_map_bgm_finished"]
+[connection signal="finished" from="LevelBGM" to="." method="_on_level_bgm_finished"]

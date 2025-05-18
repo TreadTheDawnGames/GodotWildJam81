@@ -1,6 +1,6 @@
 [gd_scene load_steps=42 format=3 uid="uid://dv4kwxgdofcnk"]
 
-[ext_resource type="Script" uid="uid://o7b4rrhaxf2g" path="res://Scripts/ShipContruction/ship_builder.gd" id="1_qqxrl"]
+[ext_resource type="Script" path="res://Scripts/ShipContruction/ship_builder.gd" id="1_qqxrl"]
 [ext_resource type="Texture2D" uid="uid://dx5p0yy61fmtg" path="res://Assets/Sprites/ShipBuilder/ShopPanel.png" id="2_irld4"]
 [ext_resource type="Script" uid="uid://26mnybypchly" path="res://Scripts/ShipContruction/room_chooser.gd" id="3_smhu5"]
 [ext_resource type="PackedScene" uid="uid://utqbmwvauaps" path="res://Scenes/ShipTilemapScenes/Rooms/bl_1.tscn" id="4_0uaff"]
