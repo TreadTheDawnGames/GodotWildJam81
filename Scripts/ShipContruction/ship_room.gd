@@ -13,7 +13,7 @@ var globalMouse : Vector2
 var grabbed : bool
 
 var isSetup : bool = false
-
+var LaserCount : int = 0
 enum ShipFaction {Player, Enemy}
 var Faction : ShipFaction
 
@@ -29,7 +29,14 @@ func _ready():
 		add_child(includedCrew)
 		includedCrew.hide()
 		modulate = Color.GOLD
-		
+	
+	Price = randi_range(10, 30)
+	if(includedCrew):
+		Price += 20
+	var numOfLasers = positionIndexedChildren.values().filter(func(a): return a is LaserCell).size()
+	if(numOfLasers > 0):
+		Price += 10 * numOfLasers #positionIndexedChildren.values().filter(func(a): return a is LaserCell).size()
+	
 	Setup.call_deferred()
 	returnToHome = true
 	sprite = get_node("Sprite2D")
@@ -38,6 +45,7 @@ func _ready():
 func Setup():
 	if(isSetup):
 		return
+	modulate = Color.WHITE
 	hitpoints = maxHitpoints
 	sprite = get_node("Sprite2D")
 	var cells = get_children().filter(func(a): return a is Cell)
@@ -175,14 +183,14 @@ func GetCellWithValidOpeningInDirection(dir : ConnectionCell.Direction):
 
 func DamageRoom(amount : int, checkParent : bool = false) -> bool:
 	hitpoints -= amount
-	modulate = Color(1.0,1.0,1.0,float(hitpoints)/float(maxHitpoints))
+	modulate = Color(1 + float(maxHitpoints)/clamp(float(hitpoints), 0.1, maxHitpoints),1,1,1)
 	if(get_parent() is not PirateShip):
 		GlobalPlayerInfo.Shake()
 	if(hitpoints <=0):
 		for cell : Cell in positionIndexedChildren.values():
 			cell.Map.positionIndexedChildren.erase(cell.myCoords)
 			cell.queue_free()
-		if(get_parent() is PlayerShip and !checkParent):
+		if(get_parent() is PlayerShip and get_parent() is not PirateShip and !checkParent):
 			get_parent().CheckRooms()
 		
 		queue_free()

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=4 uid="uid://ddg7dyt4y8f5c"]
+
+[ext_resource type="PackedScene" uid="uid://xpibmoujnlxx" path="res://Scenes/ShipTilemapScenes/Rooms/l_3.tscn" id="1_6mcst"]
+
+[node name="L3L" instance=ExtResource("1_6mcst")]
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAQABAAAAAAAAAAAAAQABAAEAAAAAAAAAAQABAAIAAAAAAAAAAQACAAIAAAAAAAAABAACAAEAAAAAAAAABAACAAAAAAAAAAAABAA=")

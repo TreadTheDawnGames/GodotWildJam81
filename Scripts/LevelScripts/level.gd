@@ -24,15 +24,15 @@ func _ready():
 	planet_sprite.texture = planets.pick_random()
 	
 	
-	level_timer.wait_time = info.TimeToReach
+	level_timer.wait_time = info.TimeToReach if info else 100
 	level_timer.start()
 	level_timer.timeout.connect(TransitionOutOfLevel)
 	
-	Background.useNeb = info.Nebula
-	var playerSpeed : float = float(GlobalPlayerInfo.ThePlayerShip.GetSpeed())
+	Background.useNeb = info.Nebula if info else false
+	var playerSpeed : float = float(GlobalPlayerInfo.ThePlayerShip.GetSpeed()) if GlobalPlayerInfo.ThePlayerShip else 100.0
 	var Dust : CPUParticles2D = CPUParticles2D.new()
 	@warning_ignore("integer_division")
-	Dust.amount = clamp(250 * (info.SpaceDust * int(playerSpeed))/100, 1, 99999)
+	Dust.amount = clamp(250 * (info.SpaceDust * int(playerSpeed))/100, 1, 99999) if info else 100
 	Dust.lifetime = 15.0 * playerSpeed
 	Dust.preprocess = 15.0* playerSpeed
 	Dust.emission_shape = CPUParticles2D.EMISSION_SHAPE_RECTANGLE
@@ -50,15 +50,15 @@ func _ready():
 	
 	Dust.global_position = Vector2(1160, 325)
 	add_child(Dust)
-	Background.ShipScroll()
-	asteroidSpawner.SetDensity(info.AsteroidDensity)
+	#Background.ShipScroll()
+	asteroidSpawner.SetDensity(info.AsteroidDensity if info else 100)
 	pirateTimer.timeout.connect(TrySpawnPirate)
 	pirateTimer.autostart = true
 	
-	var pirateOutTimer = get_tree().create_timer(info.TimeToReach - 20)
+	var pirateOutTimer = get_tree().create_timer(info.TimeToReach if info else 30 - 20)
 	pirateOutTimer.timeout.connect(pirate_spawner.PirateMoveInOut.bind(true))
 
-	var planetInViewTimer = get_tree().create_timer(info.TimeToReach - 40)
+	var planetInViewTimer = get_tree().create_timer(info.TimeToReach if info else 50 - 40)
 	planetInViewTimer.timeout.connect(planet_sprite.Move)
 
 func TrySpawnPirate():

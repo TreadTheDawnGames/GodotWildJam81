@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyeyu38tvbgd8"]
+
+[ext_resource type="PackedScene" uid="uid://qstxmf8vj5hp" path="res://Scenes/ShipBuilder/ship_room.tscn" id="1_afe07"]
+[ext_resource type="Texture2D" uid="uid://dldbiw7aekw4q" path="res://Assets/Tileryr/shipRooms/ship_peice_lflip_270.png" id="2_bo3b1"]
+
+[node name="BL2" instance=ExtResource("1_afe07")]
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0)
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(48, 32)
+texture = ExtResource("2_bo3b1")

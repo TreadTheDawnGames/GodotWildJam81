@@ -38,6 +38,8 @@ func RomanNumeralize(num : int) -> String:
 	if(num > 0):
 		returnStr+=" "
 	match(num):
+		0:
+			returnStr = ""
 		1:
 			returnStr += "I"
 		2:

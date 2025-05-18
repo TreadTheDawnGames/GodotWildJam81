@@ -24,20 +24,23 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAQABAAAAAAAAAAAAAQACAAAAAAAAAAA
 tile_set = SubResource("TileSet_drvej")
 script = ExtResource("4_yq5qd")
 gameArea = Vector2(860, 416)
-gameAreaOffset = Vector2(860, 96)
+gameAreaOffset = Vector2(950, 96)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(48, 32)
 texture = ExtResource("5_yq5qd")
 
 [node name="CapnHal" parent="." instance=ExtResource("6_7dmsk")]
+visible = false
 position = Vector2(16, 16)
 processStates = false
 
 [node name="Crewmate2" parent="." instance=ExtResource("6_7dmsk")]
 position = Vector2(48, 16)
+alliance = 2
 
 [node name="Crewmate3" parent="." instance=ExtResource("6_7dmsk")]
 position = Vector2(79, 16)
+alliance = 2
 
 [node name="MoveTimer" type="Timer" parent="."]

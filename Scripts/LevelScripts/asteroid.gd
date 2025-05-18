@@ -13,11 +13,8 @@ const ASTEROID = preload("res://Scenes/LevelScenes/asteroid.tscn")
 
 var hitpoints : int
 var speed : int = 50
-@onready var debug: Button = $Debug
-
 
 func _ready() -> void:
-	debug.pressed.connect(TakeDamage.bind(1))
 	sprite = get_node("Sprite2D")
 	if(isSmall):
 		sprite.texture = SmallAsteroids.pick_random()
@@ -31,9 +28,6 @@ func _ready() -> void:
 	speed =  randi_range(25,75)
 	#apply_force(Vector2.LEFT * randi_range(1000,7500))
 	#constant_force = Vector2.LEFT * randi_range(10,75)
-	var text: RichTextLabel = $RichTextLabel
-	text.text = str(hitpoints)
-	
 	area_entered.connect(HitSomething)
 	return
 
@@ -45,8 +39,6 @@ func _process(delta: float) -> void:
 		
 func TakeDamage(amount : int):
 	hitpoints-=amount
-	var text: RichTextLabel = $RichTextLabel
-	text.text = str(hitpoints)
 	if(hitpoints<=0):
 		if(isSmall):
 			queue_free()

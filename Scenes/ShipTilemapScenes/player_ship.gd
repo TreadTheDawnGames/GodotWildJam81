@@ -76,12 +76,6 @@ func _process(delta: float) -> void:
 	ClampPosition()
 	
 	Engine.time_scale = GetSpeed()/2.0
-	if(Input.is_action_pressed("DEBUG-Speed++++")):
-		Engine.time_scale = 500
-		savedPos = global_position
-		global_position = Vector2(9999,9999)
-	if(Input.is_action_just_released("DEBUG-Speed++++")):
-		global_position = savedPos
 	return
 	
 	
@@ -109,7 +103,9 @@ func ClampPosition():
 func DamageRoom(amount : int, _checkParent : bool = false) -> bool:
 	GlobalPlayerInfo.Shake()
 	hitpoints -= amount
-	
+	var thing : float = 1*(clamp(float(hitpoints), 0.1, maxHitpoints)/maxHitpoints)
+	modulate = Color(1,thing, thing , 1)
+
 	if(hitpoints <=0):
 		GlobalPlayerInfo.EndGame(false)
 		EnterStorage()

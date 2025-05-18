@@ -30,9 +30,12 @@ func SnapToPlayerShip(otherArea : Area2D):
 func ReturnToShop(otherArea : Area2D):
 	if(addingRoom and otherArea.owner is ConnectionCell and addingRoom == otherArea.owner.Map and otherArea.owner.Map!=playerShip):
 		#addingRoom.reparent.call_deferred(ShopPanel)
-		addingRoom.modulate = Color.WHITE
 		if(!Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)):
 			addingRoom.Ungrab()
+		if(addingRoom.includedCrew):
+			addingRoom.modulate = Color.GOLD
+		else:
+			addingRoom.modulate = Color.WHITE
 		addingRoom = null
 	return
 	

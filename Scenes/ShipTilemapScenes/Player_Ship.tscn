@@ -11,8 +11,7 @@ script = ExtResource("2_ptsrm")
 gameArea = Vector2(725, 648)
 MaxHitpoints = 7
 gameAreaOffset = Vector2(0, 0)
-maxHitpoints = 2
-Price = 0
+maxHitpoints = 7
 
 [node name="CapnHal" parent="." index="0" instance=ExtResource("4_40bts")]
 processStates = false

@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bp0pyqbmssdgb"]
+[gd_scene load_steps=6 format=3 uid="uid://bp0pyqbmssdgb"]
 
 [ext_resource type="Script" uid="uid://nhcq7w6jr5r0" path="res://Scripts/ShipContruction/cells/laser_cell.gd" id="1_umsfn"]
 [ext_resource type="PackedScene" uid="uid://vq2v0mbbgqnx" path="res://Scenes/projectiles/laser.tscn" id="2_rf6v0"]
 [ext_resource type="Texture2D" uid="uid://v2txdedh82lb" path="res://Assets/Sprites/Debug/LaserCell.png" id="2_yp7oj"]
+[ext_resource type="Texture2D" uid="uid://dbfij3u5xs5g4" path="res://Assets/Tileryr/ship_laser.png" id="4_7ooa0"]
 
 [sub_resource type="Curve" id="Curve_rf6v0"]
 _limits = [0.0, 2.5, 0.0, 1.0]
@@ -21,4 +22,7 @@ ignore_time_scale = true
 texture = ExtResource("2_yp7oj")
 
 [node name="LaserInstantiationPoint" type="Marker2D" parent="."]
-position = Vector2(18, 0)
+
+[node name="ShipLaser" type="Sprite2D" parent="."]
+position = Vector2(-8, 0)
+texture = ExtResource("4_7ooa0")

@@ -13,6 +13,11 @@ func AssignLoadOrder():
 
 func Init() -> void:
 	super.Init()
+	if(randi()%3==0):
+		queue_free()
+		Map.RemoveChildByCoords(myCoords)
+		Map.set_cell(myCoords, -1)
+		return
 	var neighbors = GetNeighbors()
 	for neighbor in neighbors:
 		var neighborCell : Cell = Map.GetChildByCoords(neighbor)
@@ -30,7 +35,7 @@ func Init() -> void:
 	shotTimer.timeout.connect(ShootLaser)
 	reparent(Map)
 	$Sprite2D.queue_free()
-
+	Map.LaserCount +=1
 	return
 
 func ShootLaser():

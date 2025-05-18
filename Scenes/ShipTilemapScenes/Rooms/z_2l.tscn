@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=4 uid="uid://c62qo7piir2xf"]
+
+[ext_resource type="PackedScene" uid="uid://bdt8kpxx0bac4" path="res://Scenes/ShipTilemapScenes/Rooms/z_2.tscn" id="1_p44uf"]
+[ext_resource type="Texture2D" uid="uid://dbfij3u5xs5g4" path="res://Assets/Tileryr/ship_laser.png" id="2_j2ky7"]
+
+[node name="Z2L" instance=ExtResource("1_p44uf")]
+tile_map_data = PackedByteArray("AAABAAAAAAAAAAAAAQABAAEAAAAAAAAAAQAAAAEAAAAAAAAAAQAAAAIAAAAAAAAAAQABAAIAAAAAAAAABAACAAAAAAAAAAAABAACAAEAAAAAAAAABAA=")
+
+[node name="ShipLaser" type="Sprite2D" parent="." index="1"]
+position = Vector2(40, 80)
+texture = ExtResource("2_j2ky7")

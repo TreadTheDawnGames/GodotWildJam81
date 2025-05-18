@@ -1,20 +1,45 @@
-[gd_scene load_steps=17 format=3 uid="uid://dv4kwxgdofcnk"]
+[gd_scene load_steps=42 format=3 uid="uid://dv4kwxgdofcnk"]
 
 [ext_resource type="Script" uid="uid://o7b4rrhaxf2g" path="res://Scripts/ShipContruction/ship_builder.gd" id="1_qqxrl"]
 [ext_resource type="Texture2D" uid="uid://dx5p0yy61fmtg" path="res://Assets/Sprites/ShipBuilder/ShopPanel.png" id="2_irld4"]
 [ext_resource type="Script" uid="uid://26mnybypchly" path="res://Scripts/ShipContruction/room_chooser.gd" id="3_smhu5"]
-[ext_resource type="PackedScene" uid="uid://dx5pk3o5psm5b" path="res://Scenes/ShipTilemapScenes/Rooms/long_room.tscn" id="4_0uaff"]
-[ext_resource type="PackedScene" path="res://Scenes/ShipBuilder/shop_slot.tscn" id="4_gwoxb"]
-[ext_resource type="PackedScene" uid="uid://bdfn3fphqnpka" path="res://Scenes/ShipTilemapScenes/cells/DebugConnectionRoom.tscn" id="5_irld4"]
-[ext_resource type="PackedScene" uid="uid://bw34tde0irtv5" path="res://Scenes/ShipTilemapScenes/Rooms/side_s_room.tscn" id="5_qcrg2"]
-[ext_resource type="PackedScene" uid="uid://dcyhhofu2e73n" path="res://Scenes/ShipTilemapScenes/Rooms/side_z_room.tscn" id="6_0f23b"]
-[ext_resource type="PackedScene" uid="uid://dn1fqh38t1biq" path="res://Scenes/ShipTilemapScenes/Rooms/small_room.tscn" id="7_acan7"]
-[ext_resource type="PackedScene" uid="uid://l1777i7v8luq" path="res://Scenes/ShipTilemapScenes/Rooms/s_room.tscn" id="8_i7roo"]
-[ext_resource type="PackedScene" uid="uid://bhd1w6abmhmc5" path="res://Scenes/ShipTilemapScenes/Rooms/tall_room.tscn" id="9_xg6cq"]
-[ext_resource type="PackedScene" uid="uid://c0u5fyv7pcj4o" path="res://Scenes/ShipTilemapScenes/Rooms/TRoom.tscn" id="10_im7sq"]
-[ext_resource type="PackedScene" uid="uid://d3h6ue3f1hj0m" path="res://Scenes/ShipTilemapScenes/Rooms/TRoom_Laser.tscn" id="11_ct2yd"]
-[ext_resource type="PackedScene" uid="uid://cel60yreb76go" path="res://Scenes/ShipTilemapScenes/Rooms/virt_2_room.tscn" id="12_fspdh"]
-[ext_resource type="PackedScene" uid="uid://crir1i5irvqib" path="res://Scenes/ShipTilemapScenes/Rooms/z_room.tscn" id="13_m74k2"]
+[ext_resource type="PackedScene" uid="uid://utqbmwvauaps" path="res://Scenes/ShipTilemapScenes/Rooms/bl_1.tscn" id="4_0uaff"]
+[ext_resource type="PackedScene" uid="uid://be3ipvkcxs7fa" path="res://Scenes/ShipBuilder/shop_slot.tscn" id="4_gwoxb"]
+[ext_resource type="PackedScene" uid="uid://cyeyu38tvbgd8" path="res://Scenes/ShipTilemapScenes/Rooms/bl_2.tscn" id="5_qcrg2"]
+[ext_resource type="PackedScene" uid="uid://bn3ryrjndp6ww" path="res://Scenes/ShipTilemapScenes/Rooms/bl_3.tscn" id="6_m74k2"]
+[ext_resource type="PackedScene" uid="uid://coi4af3vs7q86" path="res://Scenes/ShipTilemapScenes/Rooms/bl_4.tscn" id="7_iijke"]
+[ext_resource type="PackedScene" uid="uid://bongrfuig8f62" path="res://Scenes/ShipTilemapScenes/Rooms/bl_2l.tscn" id="7_sr2t4"]
+[ext_resource type="PackedScene" uid="uid://nclr73guk2yp" path="res://Scenes/ShipTilemapScenes/Rooms/i_1.tscn" id="8_rg5t0"]
+[ext_resource type="PackedScene" uid="uid://bpngdsm322wd0" path="res://Scenes/ShipTilemapScenes/Rooms/bl_3l.tscn" id="9_hs3ok"]
+[ext_resource type="PackedScene" uid="uid://c70f4d36q6e88" path="res://Scenes/ShipTilemapScenes/Rooms/i_2.tscn" id="9_lewbc"]
+[ext_resource type="PackedScene" uid="uid://sf7auibxrtn7" path="res://Scenes/ShipTilemapScenes/Rooms/l_1.tscn" id="10_svjny"]
+[ext_resource type="PackedScene" uid="uid://busbie63b85wy" path="res://Scenes/ShipTilemapScenes/Rooms/bl_4l.tscn" id="11_027qa"]
+[ext_resource type="PackedScene" uid="uid://c210140u1cooj" path="res://Scenes/ShipTilemapScenes/Rooms/l_2.tscn" id="11_i3bop"]
+[ext_resource type="PackedScene" uid="uid://xpibmoujnlxx" path="res://Scenes/ShipTilemapScenes/Rooms/l_3.tscn" id="12_acoit"]
+[ext_resource type="PackedScene" uid="uid://c8ped8qnlackm" path="res://Scenes/ShipTilemapScenes/Rooms/i_1l.tscn" id="13_e7a7g"]
+[ext_resource type="PackedScene" uid="uid://dteswnjc6ns5p" path="res://Scenes/ShipTilemapScenes/Rooms/l_4.tscn" id="13_tndt5"]
+[ext_resource type="PackedScene" uid="uid://b34cchtaj3cdx" path="res://Scenes/ShipTilemapScenes/Rooms/s_1.tscn" id="14_8hel4"]
+[ext_resource type="PackedScene" uid="uid://tgr4p27nj3df" path="res://Scenes/ShipTilemapScenes/Rooms/s_2.tscn" id="15_dcvfc"]
+[ext_resource type="PackedScene" uid="uid://iaobwwlvl3xq" path="res://Scenes/ShipTilemapScenes/Rooms/i_2l.tscn" id="15_e7ai2"]
+[ext_resource type="PackedScene" uid="uid://ba7sap1ilbr5" path="res://Scenes/ShipTilemapScenes/Rooms/t_1.tscn" id="16_886pn"]
+[ext_resource type="PackedScene" uid="uid://c6q26xt5g0v3h" path="res://Scenes/ShipTilemapScenes/Rooms/l_1l.tscn" id="17_7utof"]
+[ext_resource type="PackedScene" uid="uid://fr0rdk6ueaiq" path="res://Scenes/ShipTilemapScenes/Rooms/t_2.tscn" id="17_l1qon"]
+[ext_resource type="PackedScene" uid="uid://5mg6vlnuvw12" path="res://Scenes/ShipTilemapScenes/Rooms/t_3.tscn" id="18_ym6fg"]
+[ext_resource type="PackedScene" uid="uid://cpi75d463ksi3" path="res://Scenes/ShipTilemapScenes/Rooms/t_4.tscn" id="19_7d85u"]
+[ext_resource type="PackedScene" uid="uid://7strbamqm7fh" path="res://Scenes/ShipTilemapScenes/Rooms/l_2l.tscn" id="19_1558d"]
+[ext_resource type="PackedScene" uid="uid://bxtd1wbmt34lj" path="res://Scenes/ShipTilemapScenes/Rooms/z_1.tscn" id="20_brmm4"]
+[ext_resource type="PackedScene" uid="uid://bdt8kpxx0bac4" path="res://Scenes/ShipTilemapScenes/Rooms/z_2.tscn" id="21_icog7"]
+[ext_resource type="PackedScene" uid="uid://ddg7dyt4y8f5c" path="res://Scenes/ShipTilemapScenes/Rooms/l_3l.tscn" id="21_ti64h"]
+[ext_resource type="PackedScene" uid="uid://y7ieh1crbrs6" path="res://Scenes/ShipTilemapScenes/Rooms/l_4l.tscn" id="23_begkk"]
+[ext_resource type="PackedScene" uid="uid://0827dwrw4c2l" path="res://Scenes/ShipTilemapScenes/Rooms/bl_1_laser.tscn" id="23_m74k2"]
+[ext_resource type="PackedScene" uid="uid://cfejccimyg378" path="res://Scenes/ShipTilemapScenes/Rooms/s_1l.tscn" id="25_ogpon"]
+[ext_resource type="PackedScene" uid="uid://dngmcwtluhxmn" path="res://Scenes/ShipTilemapScenes/Rooms/s_2l.tscn" id="27_nyj6r"]
+[ext_resource type="PackedScene" uid="uid://b2s1dicqgegxg" path="res://Scenes/ShipTilemapScenes/Rooms/t_1l.tscn" id="29_e6n0p"]
+[ext_resource type="PackedScene" uid="uid://c281ao57ki8s6" path="res://Scenes/ShipTilemapScenes/Rooms/t_2l.tscn" id="31_crrmb"]
+[ext_resource type="PackedScene" uid="uid://cpgf07sfh35ni" path="res://Scenes/ShipTilemapScenes/Rooms/t_3l.tscn" id="33_xvnpa"]
+[ext_resource type="PackedScene" uid="uid://bmejo1h1q8l4f" path="res://Scenes/ShipTilemapScenes/Rooms/t_4l.tscn" id="35_xc33l"]
+[ext_resource type="PackedScene" uid="uid://f2t63b6egcsn" path="res://Scenes/ShipTilemapScenes/Rooms/z_1l.tscn" id="37_jkclg"]
+[ext_resource type="PackedScene" uid="uid://c62qo7piir2xf" path="res://Scenes/ShipTilemapScenes/Rooms/z_2l.tscn" id="39_37yg4"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_mniq6"]
 normal = Vector2(90, 0)
@@ -35,16 +60,17 @@ shape = SubResource("WorldBoundaryShape2D_mniq6")
 position = Vector2(995, 357)
 texture = ExtResource("2_irld4")
 script = ExtResource("3_smhu5")
-shipParts = Array[PackedScene]([ExtResource("4_0uaff"), ExtResource("5_qcrg2"), ExtResource("6_0f23b"), ExtResource("7_acan7"), ExtResource("8_i7roo"), ExtResource("9_xg6cq"), ExtResource("10_im7sq"), ExtResource("11_ct2yd"), ExtResource("12_fspdh"), ExtResource("13_m74k2")])
+shipParts = Array[PackedScene]([ExtResource("4_0uaff"), ExtResource("23_m74k2"), ExtResource("5_qcrg2"), ExtResource("7_sr2t4"), ExtResource("6_m74k2"), ExtResource("9_hs3ok"), ExtResource("7_iijke"), ExtResource("11_027qa"), ExtResource("8_rg5t0"), ExtResource("13_e7a7g"), ExtResource("9_lewbc"), ExtResource("15_e7ai2"), ExtResource("10_svjny"), ExtResource("17_7utof"), ExtResource("11_i3bop"), ExtResource("19_1558d"), ExtResource("12_acoit"), ExtResource("21_ti64h"), ExtResource("13_tndt5"), ExtResource("23_begkk"), ExtResource("14_8hel4"), ExtResource("25_ogpon"), ExtResource("15_dcvfc"), ExtResource("27_nyj6r"), ExtResource("16_886pn"), ExtResource("29_e6n0p"), ExtResource("17_l1qon"), ExtResource("31_crrmb"), ExtResource("18_ym6fg"), ExtResource("33_xvnpa"), ExtResource("19_7d85u"), ExtResource("35_xc33l"), ExtResource("20_brmm4"), ExtResource("37_jkclg"), ExtResource("21_icog7"), ExtResource("39_37yg4")])
+laserShipParts = Array[PackedScene]([ExtResource("7_sr2t4"), ExtResource("9_hs3ok"), ExtResource("11_027qa"), ExtResource("13_e7a7g"), ExtResource("15_e7ai2"), ExtResource("17_7utof"), ExtResource("19_1558d"), ExtResource("21_ti64h"), ExtResource("23_begkk"), ExtResource("25_ogpon"), ExtResource("27_nyj6r"), ExtResource("29_e6n0p"), ExtResource("31_crrmb"), ExtResource("33_xvnpa"), ExtResource("35_xc33l"), ExtResource("37_jkclg"), ExtResource("39_37yg4")])
 
 [node name="ShopSlot1" parent="ShopPanel" instance=ExtResource("4_gwoxb")]
-position = Vector2(0, -134)
+position = Vector2(0, -142)
 
 [node name="ShopSlot2" parent="ShopPanel" instance=ExtResource("4_gwoxb")]
 position = Vector2(0, 31)
 
 [node name="ShopSlot3" parent="ShopPanel" instance=ExtResource("4_gwoxb")]
-position = Vector2(0, 195)
+position = Vector2(0, 202)
 
 [node name="ShipPositioner" type="Marker2D" parent="."]
 position = Vector2(387, 313)
@@ -56,6 +82,3 @@ offset_right = 112.0
 offset_bottom = 629.0
 text = "Close Shop
 "
-
-[node name="DebugRoom" parent="." instance=ExtResource("5_irld4")]
-position = Vector2(859, 338)

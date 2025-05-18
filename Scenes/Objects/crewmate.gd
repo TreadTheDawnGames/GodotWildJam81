@@ -15,11 +15,18 @@ var movement_speed: float = 200.0
 var movement_target_position: Vector2 = Vector2(60.0,180.0)
 @export var processStates = true
 
+var animSprite : AnimatedSprite2D
+var xOffset : float
+
 func _ready() -> void:
 	if owner is ShipRoom: 
 		navigation_tilemap = owner
-		$Sprite2D.position = (Vector2(randf(), randf()) - Vector2(.5, .5)) * 16.0
+		animSprite = $AnimatedSprite2D
+		xOffset = (randf() - randf()) * 4
+		$AnimatedSprite2D.position = Vector2(xOffset,12)# * 16.0
 		navigation_tilemap.changed.connect(_on_nav_tilemap_changed)
+		if(alliance == Alliance.ALLIANCE_ENEMY):
+			modulate = Color.PURPLE
 
 
 
@@ -68,7 +75,7 @@ func _pathfinding(from: Vector2i, to: Vector2i) -> Array[Vector2i]:
 	if !navigation_tilemap.positionIndexedChildren.has(from):
 		print("nav map doewn't have from")
 		return[]
-	if(navigation_tilemap.positionIndexedChildren.has(to) and navigation_tilemap.positionIndexedChildren[to] is LaserCell):
+	if(navigation_tilemap.positionIndexedChildren.has(to) and is_instance_valid(navigation_tilemap.positionIndexedChildren[to]) and navigation_tilemap.positionIndexedChildren[to] is LaserCell):
 		#print("trying to go to invalid tile")
 		#trying to get to unnavigable tile
 		return []

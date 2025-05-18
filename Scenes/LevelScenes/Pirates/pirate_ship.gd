@@ -40,7 +40,8 @@ func SetNewLocation():
 
 func DamageRoom(amount : int, _checkParent : bool = false):
 	hitpoints -= amount
-	
+	modulate = Color(1 + float(maxHitpoints)/clamp(float(hitpoints), 0.1, maxHitpoints),1,1,1)
+
 	if(hitpoints <=0):
 		GlobalPlayerInfo.Shake()
 		queue_free()

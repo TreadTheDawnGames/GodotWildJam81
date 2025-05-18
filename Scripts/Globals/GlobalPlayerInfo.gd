@@ -76,7 +76,7 @@ func ResetValues():
 	ThePlayerShip.Setup()
 	ActiveLevelInfo = null
 	ActiveLevel = null
-	Money = 20
+	Money = 70
 	Reputation = 0
 	TotalTime = 0
 	retryCount+=1

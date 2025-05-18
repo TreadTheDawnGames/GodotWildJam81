@@ -18,17 +18,20 @@ func _state_init(data: Dictionary) -> void:
 
 	if !_path.is_empty():
 		_to = _path.pop_front()
-
+	if(crewmate.animSprite):
+		crewmate.animSprite.play()
 
 func _state_process(delta: float) -> Dictionary:
 	_walk_timer += delta
 	if _walk_timer >= 1.0 / _speed:
-		crewmate.position = _to
+		crewmate.position = _to + Vector2(crewmate.xOffset, -8)
 		return {"new_state": "Work"}
 	return {}
 
 
 func _state_transition_(_data: Dictionary) -> Dictionary:
+	if(crewmate.animSprite):
+		crewmate.animSprite.stop()
 	if !_path.is_empty():
 		return {"new_state": "Walk"}
 	return {}

@@ -14,7 +14,7 @@ var flightSpeed : int = 1
 func _ready():
 	get_node("PlayerShip").EnterStorage()
 	ResetMap()
-	GlobalPlayerInfo.AddMoney(20)
+	GlobalPlayerInfo.AddMoney(50)
 	TransitionToShop()
 	Background.StopScroll()
 
@@ -30,6 +30,8 @@ func TransitionToLevel():
 	return
 
 func TransitionToShop():
+	for laser in get_children().filter(func(a): return a is Laser):
+		laser.queue_free()
 	Engine.time_scale = 1
 	if(GlobalPlayerInfo.ActiveLevelInfo and GlobalPlayerInfo.ActiveLevelInfo.FinalLevel):
 		GlobalPlayerInfo.EndGame(true)
@@ -48,9 +50,9 @@ func TransitionToSpaceMap():
 func ResetMap():
 	if(space_map):
 		space_map.queue_free()
+	
 	space_map = SPACE_MAP.instantiate()
 	add_child(space_map)
 	space_map.hide()
 	space_map.cruiser.doneMoving.connect(TransitionToLevel)
-	
 	return

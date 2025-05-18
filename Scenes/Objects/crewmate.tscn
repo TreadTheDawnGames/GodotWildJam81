@@ -1,18 +1,62 @@
-[gd_scene load_steps=7 format=3 uid="uid://chax0pgaodrnu"]
+[gd_scene load_steps=13 format=3 uid="uid://chax0pgaodrnu"]
 
 [ext_resource type="Script" uid="uid://c7u4sqqmin8" path="res://Scenes/Objects/crewmate.gd" id="1_rpagk"]
-[ext_resource type="Texture2D" uid="uid://cku1n6l0skf1t" path="res://Assets/Sprites/Placeholders/CrewmateSingle.png" id="2_js6w1"]
+[ext_resource type="Texture2D" uid="uid://bt65evbcopvwa" path="res://Assets/Tileryr/crewmate.png" id="2_5bwah"]
 [ext_resource type="Script" uid="uid://wcqwkfjsc6e5" path="res://Scripts/state_machine.gd" id="3_7kgws"]
 [ext_resource type="Script" uid="uid://c8g6rmdi5vc6b" path="res://Scenes/Objects/CrewmateStates/idle.gd" id="4_7kgws"]
 [ext_resource type="Script" uid="uid://bpo6ak3hlfru5" path="res://Scenes/Objects/CrewmateStates/walk.gd" id="5_5bwah"]
 [ext_resource type="Script" uid="uid://bnvgk0ya3rfbf" path="res://Scenes/Objects/CrewmateStates/work.gd" id="6_5bwah"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_5bwah"]
+atlas = ExtResource("2_5bwah")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2q63w"]
+atlas = ExtResource("2_5bwah")
+region = Rect2(60, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w6in1"]
+atlas = ExtResource("2_5bwah")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwimq"]
+atlas = ExtResource("2_5bwah")
+region = Rect2(40, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0e6ya"]
+atlas = ExtResource("2_5bwah")
+region = Rect2(80, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7hmhw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5bwah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2q63w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w6in1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fwimq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0e6ya")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Crewmate" type="Node2D" node_paths=PackedStringArray("state_machine")]
 script = ExtResource("1_rpagk")
 state_machine = NodePath("StateMachine")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_js6w1")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_7hmhw")
+frame_progress = 0.304529
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("_init_state")]
 script = ExtResource("3_7kgws")

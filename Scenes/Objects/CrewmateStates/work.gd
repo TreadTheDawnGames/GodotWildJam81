@@ -13,7 +13,7 @@ func _state_init(_data: Dictionary) -> void:
 
 func _state_process(delta: float) -> Dictionary:
 	_flash = !_flash
-	crewmate.modulate = Color.RED if _flash else Color.WHITE
+	#crewmate.modulate = Color.RED if _flash else Color.WHITE
 	_worktime -= delta
 	if _worktime < 0.0:
 		return {"new_state": "Idle"}
@@ -22,5 +22,5 @@ func _state_process(delta: float) -> Dictionary:
 
 func _state_transition(_data: Dictionary) -> Dictionary:
 	_flash = false
-	crewmate.modulate = Color.WHITE
+	#crewmate.modulate = Color.WHITE
 	return {}

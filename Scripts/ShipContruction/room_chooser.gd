@@ -9,9 +9,13 @@ static var RoomDirectory : String = "res://Scenes/ShipTilemapScenes/Rooms/"
 @export var shipParts : Array[PackedScene] = []
 static var ShipParts : Array[PackedScene] = []
 
+@export var laserShipParts : Array[PackedScene] = []
+static var LaserShipParts : Array[PackedScene] = []
+
 func _ready() -> void:
 	slots = get_children().filter(func(a): return a is ShopSlot)
 	ShipParts = shipParts
+	LaserShipParts = laserShipParts
 	for slot : ShopSlot in slots:
 		ChooseRoom(slot)
 
@@ -28,11 +32,17 @@ func ChooseRoom(marker : ShopSlot):
 	marker.setPrice(scene.Price)
 	return
 
-static func GetRandomAvailableRoom() -> ShipRoom:
+static func GetRandomAvailableRoom(filterForLasers: bool = false) -> ShipRoom:
 	var files = Array(DirAccess.get_files_at(RoomDirectory))
 	files.shuffle()
-	var scene : ShipRoom = ShipParts.pick_random().instantiate() as ShipRoom
-	if(randi()%2==0):
+	var scene : ShipRoom 
+	if(filterForLasers):
+		scene = LaserShipParts.pick_random().instantiate() as ShipRoom #ShipParts.filter(func(a:PackedScene): return a.resource_name.ends_with("l")).pick_random().instantiate() as ShipRoom
+		#.name.ends_with("l")).pick_random().instantiate() as ShipRoom
+		
+	else:
+		scene = ShipParts.pick_random().instantiate() as ShipRoom
+	if(randi()%5==0):
 		scene.includedCrew=CREWMATE.instantiate()
 		scene.includedCrew.processStates = false
 	return scene

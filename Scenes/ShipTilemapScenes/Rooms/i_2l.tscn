@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://iaobwwlvl3xq"]
+
+[ext_resource type="PackedScene" uid="uid://c70f4d36q6e88" path="res://Scenes/ShipTilemapScenes/Rooms/i_2.tscn" id="1_c1qqa"]
+
+[node name="I2L" instance=ExtResource("1_c1qqa")]
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0)

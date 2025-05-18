@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://ghqjwywqkr1k"]
+[gd_scene load_steps=2 format=3 uid="uid://be3ipvkcxs7fa"]
 
 [ext_resource type="Script" uid="uid://oam3nubf67ce" path="res://Scenes/ShipBuilder/shop_slot.gd" id="1_ta1yw"]
 
@@ -7,9 +7,9 @@ script = ExtResource("1_ta1yw")
 
 [node name="Panel" type="Panel" parent="."]
 offset_left = -60.0
-offset_top = -82.0
+offset_top = -93.0
 offset_right = 60.0
-offset_bottom = -57.0
+offset_bottom = -68.0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
 layout_mode = 0

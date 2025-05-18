@@ -10,8 +10,8 @@ var hasMouse : bool = false
 const ICON = preload("res://icon.svg")
 const ENGINE = preload("res://Assets/Sprites/ConnectionSprites/engine.png")
 const HATCH = preload("res://Assets/Sprites/ConnectionSprites/hatch.png")
-const DOOR = preload("res://Assets/Sprites/ConnectionSprites/door.png")
-
+const DOOR = preload("res://Assets/Tileryr/ship_door.png")
+#const DOOR = preload("res://Assets/Sprites/ConnectionSprites/door.png")
 @export var isDebug : bool = true
 @export var randWeight : int = 4
 static var hoveredParts : Array[ConnectionCell]

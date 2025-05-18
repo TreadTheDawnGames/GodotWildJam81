@@ -31,18 +31,3 @@ shape = SubResource("CircleShape2D_nq64u")
 
 [node name="SShape" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_nlmno")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_left = -15.0
-offset_top = -54.0
-offset_right = 25.0
-offset_bottom = -14.0
-mouse_filter = 2
-text = "asdf"
-metadata/_edit_use_anchors_ = true
-
-[node name="Debug" type="Button" parent="."]
-offset_left = -14.0
-offset_top = -49.0
-offset_right = 19.0
-offset_bottom = -33.0

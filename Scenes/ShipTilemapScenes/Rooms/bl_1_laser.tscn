@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=4 uid="uid://0827dwrw4c2l"]
+
+[ext_resource type="PackedScene" uid="uid://utqbmwvauaps" path="res://Scenes/ShipTilemapScenes/Rooms/bl_1.tscn" id="1_bqckk"]
+
+[node name="BL1 Laser" instance=ExtResource("1_bqckk")]
+tile_map_data = PackedByteArray("AAAAAAIAAAAAAAAAAQABAAIAAAAAAAAAAQABAAEAAAAAAAAAAQABAAAAAAAAAAAAAQACAAEAAAAAAAAABAACAAAAAAAAAAAABAACAAIAAAAAAAAABAA=")
