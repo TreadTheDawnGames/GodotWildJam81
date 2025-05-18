@@ -42,13 +42,16 @@ func _walk_to(target: Vector2):
 	
 
 func get_next_target() -> Vector2:
-	var c: Node2D = navpoints.get_child(randi_range(0, navpoints.get_child_count()-1))
-	return c.position
+	var s = navigation_tilemap.positionIndexedChildren.size()
+	if s > 0:
+		var v = navigation_tilemap.positionIndexedChildren.keys()[randi_range(0, s-1)]
+		return navigation_tilemap.map_to_local(v)
+	return position
 
 
 func create_path(target: Vector2) -> Array[Vector2]:
-	var from: Vector2i = navigation_tilemap.local_to_map(navigation_tilemap.to_local(position))
-	var to: Vector2i = navigation_tilemap.local_to_map(navigation_tilemap.to_local(target))
+	var from: Vector2i = navigation_tilemap.local_to_map(position)
+	var to: Vector2i = navigation_tilemap.local_to_map(target)
 	var arr: Array[Vector2i] = _pathfinding(from, to)
 	var path: Array[Vector2]
 	for i: Vector2i in arr:
@@ -59,24 +62,24 @@ func create_path(target: Vector2) -> Array[Vector2]:
 
 ### Depth-First Search ahh pathfinding
 #
-func _pathfinding(from: Vector2i, to: Vector2i) -> Array[Vector2i]:
-	if (navigation_tilemap.get_cell_source_id(from) < 0):
-		return []
-	
+func _pathfinding(from: Vector2i, to: Vector2i) -> Array[Vector2i]:	
+	if !navigation_tilemap.positionIndexedChildren.has(from):
+		return[]
+		
 	# Prepare the stack
 	var path: Array[Vector2i]
 	var stack: Array[Vector2i]
-	var con_cell: ConnectionCell
+	var con_cell: ConnectionCell = null
 	stack.push_back(from)
 
 	# A function that determines whether a given cell is accessible
-	var filter_connected_rooms = func(i: Vector2i) -> bool:
+	var filter_connected_rooms = func(c: Cell, i: Vector2i) -> bool:
 		var neighbor: ConnectionCell = navigation_tilemap.positionIndexedChildren[i]
 		if neighbor is ConnectionCell:
-			return con_cell.CanConnectTo(ConnectionCell.Direction.North, neighbor) || \
-			con_cell.CanConnectTo(ConnectionCell.Direction.South, neighbor) || \
-			con_cell.CanConnectTo(ConnectionCell.Direction.East, neighbor) || \
-			con_cell.CanConnectTo(ConnectionCell.Direction.West, neighbor)
+			return c.CanConnectTo(ConnectionCell.Direction.North, neighbor) || \
+			c.CanConnectTo(ConnectionCell.Direction.South, neighbor) || \
+			c.CanConnectTo(ConnectionCell.Direction.East, neighbor) || \
+			c.CanConnectTo(ConnectionCell.Direction.West, neighbor)
 		return true
 	
 	var prioritize_branches = func(a: Vector2i, b: Vector2i) -> bool:
@@ -85,19 +88,19 @@ func _pathfinding(from: Vector2i, to: Vector2i) -> Array[Vector2i]:
 	# Recursively find a path
 	while !stack.is_empty():
 		var v: Vector2i = stack.pop_back()
-		con_cell = navigation_tilemap.positionIndexedChildren[v]
-		path.push_back(v)	# Gets added to the line
-		if v == to:
-			path.pop_front()
-			return path;
+		if navigation_tilemap.positionIndexedChildren.has(v):
+			con_cell = navigation_tilemap.positionIndexedChildren[v]
+			path.push_back(v)	# Gets added to the line
+			if v == to:
+				path.pop_front()
+				return path;
 
-		# Push any of the unvisited cells into the node
-		var surround: Array[Vector2i] = navigation_tilemap.get_surrounding_cells(v)
-		var accessible: Array[Vector2i] = surround.filter(func(i): return navigation_tilemap.get_cell_source_id(i) >= 0 && !path.has(i))
-		var filtered: Array[Vector2i] = accessible.filter(filter_connected_rooms)
-		filtered.sort_custom(prioritize_branches)
-		if !filtered.is_empty():
-			filtered.all(func(i): stack.push_back(i); return true)
+			# Push any of the unvisited cells into the node
+			var surround: Array[Vector2i] = con_cell.GetNeighborCells()
+			var filtered: Array[Vector2i] = surround.filter(func(i): return filter_connected_rooms.call(con_cell, i))
+			filtered.sort_custom(prioritize_branches)
+			if !filtered.is_empty():
+				filtered.all(func(i): stack.push_back(i); return true)
 
 	return []
 

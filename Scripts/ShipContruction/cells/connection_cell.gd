@@ -287,3 +287,16 @@ func Vector2iFromDirection(dir : Direction) -> Vector2i:
 
 func GetNeighborInDirection(dir : Direction) -> Cell:
 	return Map.GetChildByCoords(myCoords + Vector2iFromDirection(dir))
+
+
+func GetNeighborCells() -> Array[Vector2i]:
+	var arr: Array[Vector2i]
+	var n: Cell = GetNeighborInDirection(Direction.North)
+	var e: Cell = GetNeighborInDirection(Direction.East)
+	var s: Cell = GetNeighborInDirection(Direction.South)
+	var w: Cell = GetNeighborInDirection(Direction.West)
+	if n: arr.append(n.myCoords)
+	if e: arr.append(e.myCoords)
+	if s: arr.append(s.myCoords)
+	if w: arr.append(w.myCoords)
+	return arr

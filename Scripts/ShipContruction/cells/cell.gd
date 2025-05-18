@@ -1,6 +1,6 @@
 extends Node2D
 class_name Cell
-var myCoords : Vector2i 
+var myCoords : Vector2i  = Vector2i.ZERO
 var Map : ShipRoom
 var loadOrder : int = 0
 
