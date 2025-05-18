@@ -150,7 +150,6 @@ func GetCellWithValidOpeningInDirection(dir : ConnectionCell.Direction):
 
 func DamageRoom(amount : int) -> bool:
 	hitpoints -= amount
-	print("self: ", self)
 	if(hitpoints <=0):
 		for cell : Cell in positionIndexedChildren.values():
 			cell.Map.positionIndexedChildren.erase(cell.myCoords)

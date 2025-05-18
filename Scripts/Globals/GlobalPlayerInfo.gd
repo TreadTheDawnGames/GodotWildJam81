@@ -45,7 +45,6 @@ func ShipExitStorage(position : Vector2) -> PlayerShip:
 		return
 	ThePlayerShip.global_position = position
 	ThePlayerShip.process_mode = Node.PROCESS_MODE_PAUSABLE
-	print("Spawned ship")
 	return ThePlayerShip
 
 func EndGame(win : bool):

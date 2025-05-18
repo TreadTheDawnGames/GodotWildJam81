@@ -24,13 +24,11 @@ func SnapToPlayerShip(otherArea : Area2D):
 	if(!addingRoom and otherArea.owner is ConnectionCell and otherArea.owner.Map!=playerShip):
 		addingRoom = otherArea.owner.Map
 		addingRoomCell = otherArea.owner
-		print("Entered")
 		#addingRoom.reparent.call_deferred(playerShip)
 	return
 
 func ReturnToShop(otherArea : Area2D):
 	if(addingRoom and otherArea.owner is ConnectionCell and addingRoom == otherArea.owner.Map and otherArea.owner.Map!=playerShip):
-		print("Exited")
 		#addingRoom.reparent.call_deferred(ShopPanel)
 		addingRoom.modulate = Color.WHITE
 		if(!Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)):
@@ -70,4 +68,3 @@ func CloseShipyard():
 	playerShip.editing = false
 	ShopClosed.emit()
 	queue_free()
-	print("Closing")

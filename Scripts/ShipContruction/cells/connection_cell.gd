@@ -19,6 +19,11 @@ var hovered : bool = false
 @onready var debugSpritesParent : Node2D = $DebugSprites
 
 
+var northSprite : Sprite2D
+var eastSprite : Sprite2D
+var southSprite : Sprite2D
+var westSprite : Sprite2D
+
 func AssignLoadOrder():
 	loadOrder = 0
 
@@ -49,34 +54,35 @@ func DoDebugSprites(recurse : bool = false):
 		var pos : Vector2 = Vector2.ZERO
 		var addY:int = 0
 		var addX:int = 0
-		sprite.texture = ICON
-		sprite.scale *= 0.1
+		#sprite.texture = ICON
+		#sprite.scale *= 0.1
 		var neighborCell = GetNeighborInDirection(con)
 		#if(!neighborCell or neighborCell is not ConnectionCell):
 		match(con):
 			Direction.North:
-				#sprite.texture = HATCH
+				sprite.texture = HATCH
 				pos = Vector2.UP
-				addY=3
+				addY=2
 				sprite.modulate = Color.RED
 			Direction.South:
-				#sprite.texture = HATCH
+				sprite.texture = HATCH
 				pos = Vector2.DOWN
 				sprite.modulate = Color.GREEN
-				addY=-3
+				addY=-1
 			Direction.West:
-				#sprite.texture = ENGINE
-				sprite.modulate = Color.BLUE
-				addX=3
+				sprite.texture = ENGINE
+				#sprite.modulate = Color.BLUE
+				addX=-16
 				pos = Vector2.LEFT
 			Direction.East:
-				#sprite.texture = DOOR
-				sprite.modulate = Color.YELLOW
+				sprite.texture = DOOR
+				#sprite.modulate = Color.YELLOW
 				pos = Vector2.RIGHT
-				addX=-3
+				#addX=-3
 		sprite.position = (pos * 16) + Vector2(addX, addY)
-		if (neighborCell and Map.HasCell(neighborCell.myCoords) and neighborCell is ConnectionCell):
-			sprite.modulate.a = 0.25
+		
+		#interior
+		
 		
 		if(neighborCell and neighborCell is ConnectionCell and !recurse):
 			neighborCell.DoDebugSprites(true)
@@ -85,10 +91,25 @@ func DoDebugSprites(recurse : bool = false):
 			debugSpritesParent.add_child(sprite)
 		else:
 			sprite.queue_free()
+			
+		if (neighborCell and Map.HasCell(neighborCell.myCoords) and neighborCell is ConnectionCell):
+				sprite.modulate.a = 0.0 #0.25
+		#elif(sprite.texture != ENGINE):
+			#sprite.reparent(debugSpritesParent.get_parent())
+			#sprite.get_parent().move_child(sprite, 0)
+			#match(con):
+				#Direction.North:
+					#northSprite = sprite
+					#pass
+				#Direction.East:
+					#eastSprite = sprite 
+					#pass
+				#Direction.South:
+					#westSprite = sprite 
+					#pass
 
 func AddSurroundingTiles():
 	var surroundingCells = GetNeighbors()
-	#print(myPos, ": ", surroundingCells)
 	for cell in surroundingCells:
 		if(!Map.positionIndexedChildren.has(cell)):
 			continue

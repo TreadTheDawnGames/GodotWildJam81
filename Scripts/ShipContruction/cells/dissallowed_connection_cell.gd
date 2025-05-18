@@ -11,12 +11,15 @@ func Init():
 			match(myCoords - neighbor):
 				Vector2i.RIGHT:
 					neighborCell.RemoveConnection(neighborCell.Direction.East)
+					#neighborCell.eastSprite.queue_free()
 				Vector2i.LEFT:
 					neighborCell.RemoveConnection(neighborCell.Direction.West)
 				Vector2i.UP:
 					neighborCell.RemoveConnection(neighborCell.Direction.North)
+					#neighborCell.northSprite.queue_free()
 				Vector2i.DOWN:
 					neighborCell.RemoveConnection(neighborCell.Direction.South)
+					#neighborCell.southSprite.queue_free()
 					
 	Map.RemoveChildByCoords(myCoords)
 	Map.set_cell(myCoords, -1)

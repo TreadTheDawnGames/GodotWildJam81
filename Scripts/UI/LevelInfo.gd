@@ -54,8 +54,8 @@ func makePopupText(timeToReach: int, reputation: int, spaceDust: int, pirates: i
 
 static func getRandomTimeToReach(levelPosition: Vector2 = IdealStartPos) -> int:
 	var distance = levelPosition.distance_to(IdealStartPos)
-	var minValue = 180
-	var maxValue = 300
+	var minValue = 45
+	var maxValue = 120
 	var distanceFactor = remap(distance, 0.0, 1000.0, minValue, maxValue)
 	return clamp(distanceFactor, minValue, maxValue)
 	#return randi_range(180, 300) # 3 to 5 minValueutes is aight I think
