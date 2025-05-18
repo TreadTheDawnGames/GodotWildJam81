@@ -1,7 +1,7 @@
 extends Area2D
 class_name Laser
 
-@export var speed : int = 500
+@export var speed : int = 750
 
 var direction : int = 1
 

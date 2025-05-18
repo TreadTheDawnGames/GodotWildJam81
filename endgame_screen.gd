@@ -24,12 +24,12 @@ func _ready() -> void:
 	
 	button.pressed.connect(func(): 
 		GlobalPlayerInfo.ResetValues()
-		GlobalPlayerInfo.GetGameRoot().TransitionToShop()
-		GlobalPlayerInfo.GetGameRoot().ResetMap()
+		#GlobalPlayerInfo.GetGameRoot().TransitionToShop()
+		#GlobalPlayerInfo.GetGameRoot().ResetMap()
 		queue_free()
 		)
 	
-	reputation.text = "Your Reputation: " + str(GlobalPlayerInfo.Reputation)
+	reputation.text = "Your Reputation: " + str(GlobalPlayerInfo.Reputation + GlobalPlayerInfo.ThePlayerShip.GetCrewCount())
 		#https://forum.godotengine.org/t/how-to-show-on-a-label-how-much-time-from-a-timer-is-left/13594
 	total_time.text = "Time Traveled: %d:%02d" % [floor(GlobalPlayerInfo.TotalTime / 60.0), int(GlobalPlayerInfo.TotalTime) % 60]
 
@@ -37,11 +37,11 @@ func RomanNumeralize(num : int) -> String:
 	var returnStr : String = ""
 	if(num > 0):
 		returnStr+=" "
-	match(num):
+	match(num+1):
 		0:
 			returnStr = ""
 		1:
-			returnStr += "I"
+			returnStr += ""
 		2:
 			returnStr += "II"
 		3:

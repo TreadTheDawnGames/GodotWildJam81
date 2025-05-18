@@ -59,7 +59,10 @@ func _process(_delta: float) -> void:
 			addingRoomCell = null
 			addingRoom = null
 		else:
-			addingRoom.modulate = Color.WHITE
+			if(addingRoom.includedCrew):
+				addingRoom.modulate = Color.GOLD
+			else:
+				addingRoom.modulate = Color.WHITE
 			addingRoom.Ungrab()
 			addingRoom = null
 

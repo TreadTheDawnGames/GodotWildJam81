@@ -44,7 +44,6 @@ func loadGameSettings():
 func TransitionToLevel():
 	stopAllMusic()
 	BackgroundMusic.get_child(2).play()
-	Engine.time_scale = flightSpeed
 	space_map.hide()
 	GlobalPlayerInfo.ShipExitStorage(shipSpawnMarker.global_position)
 	var level = LEVEL.instantiate() as Level
@@ -55,9 +54,8 @@ func TransitionToLevel():
 	return
 
 func TransitionToShop():
-	for laser in get_children().filter(func(a): return a is Laser):
+	for laser in get_tree().root.get_children().filter(func(a): return a is Laser):
 		laser.queue_free()
-	Engine.time_scale = 1
 	if(GlobalPlayerInfo.ActiveLevelInfo and GlobalPlayerInfo.ActiveLevelInfo.FinalLevel):
 		GlobalPlayerInfo.EndGame(true)
 		return
@@ -89,7 +87,6 @@ func TransitionToOptionsMenu():
 func TransitionToSpaceMap():
 	stopAllMusic()
 	BackgroundMusic.get_child(1).play()
-	Engine.time_scale = 1
 	GlobalPlayerInfo.ShipEnterStorage()
 	space_map.show()
 

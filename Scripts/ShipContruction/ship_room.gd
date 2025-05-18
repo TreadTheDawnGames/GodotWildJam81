@@ -17,18 +17,14 @@ var LaserCount : int = 0
 enum ShipFaction {Player, Enemy}
 var Faction : ShipFaction
 
-@export var maxHitpoints : int = 2
-var hitpoints : int = 2
+@export var maxHitpoints : int = 5
+var hitpoints : int = 5
 
 @export var Price : int = 0
 
 var includedCrew : Crewmate
 
 func _ready():
-	if(includedCrew):
-		add_child(includedCrew)
-		includedCrew.hide()
-		modulate = Color.GOLD
 	
 	Price = randi_range(10, 30)
 	if(includedCrew):
@@ -46,6 +42,11 @@ func Setup():
 	if(isSetup):
 		return
 	modulate = Color.WHITE
+	if(includedCrew):
+		add_child(includedCrew)
+		includedCrew.hide()
+		modulate = Color.GOLD
+
 	hitpoints = maxHitpoints
 	sprite = get_node("Sprite2D")
 	var cells = get_children().filter(func(a): return a is Cell)
@@ -95,7 +96,7 @@ func AddToMap(map : ShipRoom):
 				includedCrew.alliance = Crewmate.Alliance.ALLIANCE_ENEMY
 		includedCrew.processStates = true
 		includedCrew.owner = map
-		includedCrew.position = Vector2(16,16)
+		includedCrew.position = Vector2(48,16)
 		includedCrew._ready()
 		includedCrew.show()
 		modulate = Color.WHITE
@@ -183,7 +184,9 @@ func GetCellWithValidOpeningInDirection(dir : ConnectionCell.Direction):
 
 func DamageRoom(amount : int, checkParent : bool = false) -> bool:
 	hitpoints -= amount
-	modulate = Color(1 + float(maxHitpoints)/clamp(float(hitpoints), 0.1, maxHitpoints),1,1,1)
+	var thing : float = 1*(clamp(float(hitpoints), 0.1, maxHitpoints)/maxHitpoints)
+	sprite.modulate = Color(1,thing, thing , 1)
+	
 	if(get_parent() is not PirateShip):
 		GlobalPlayerInfo.Shake()
 	if(hitpoints <=0):

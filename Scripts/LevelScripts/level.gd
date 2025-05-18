@@ -5,7 +5,8 @@ var info : LevelInfo
 @onready var asteroidSpawner: Node2D = $AsteroidSpawner
 @onready var pirate_spawner: PirateBuilder = $PirateSpawner
 @onready var pirateTimer: Timer = $PirateSpawner/pirateTimer
-@onready var level_timer: Timer = $LevelTimer
+var levelTimerMax : float = 500
+@onready var levelTimerLeft: float #Timer = $LevelTimer
 @onready var planet_sprite: Sprite2D = $planetSprite
 
 @export var planets : Array[Texture2D]
@@ -19,14 +20,12 @@ func _ready():
 	asteroidSpawner = get_node("AsteroidSpawner")
 	pirate_spawner = get_node("PirateSpawner")
 	pirateTimer = get_node("PirateSpawner/pirateTimer")
-	level_timer = get_node("LevelTimer")
+	levelTimerLeft = info.TimeToReach
 	planet_sprite = get_node("planetSprite")
 	planet_sprite.texture = planets.pick_random()
 	
-	
-	level_timer.wait_time = info.TimeToReach if info else 100
-	level_timer.start()
-	level_timer.timeout.connect(TransitionOutOfLevel)
+	if(info.Nebula):
+		info.SpaceDust *=2
 	
 	Background.useNeb = info.Nebula if info else false
 	var playerSpeed : float = float(GlobalPlayerInfo.ThePlayerShip.GetSpeed()) if GlobalPlayerInfo.ThePlayerShip else 100.0
@@ -50,7 +49,7 @@ func _ready():
 	
 	Dust.global_position = Vector2(1160, 325)
 	add_child(Dust)
-	#Background.ShipScroll()
+	Background.ShipScroll()
 	asteroidSpawner.SetDensity(info.AsteroidDensity if info else 100)
 	pirateTimer.timeout.connect(TrySpawnPirate)
 	pirateTimer.autostart = true
@@ -73,6 +72,14 @@ func TrySpawnPirate():
 		
 	return
 
+func _process(delta: float) -> void:
+	levelTimerLeft -= delta * (GlobalPlayerInfo.ThePlayerShip.GetSpeed()/2)
+	if(levelTimerLeft <= 0):
+		TransitionOutOfLevel()
+		pass
+	
+	return
+
 func TransitionOutOfLevel():
 	ExitWithoutShop()
 	LevelComplete.emit()
@@ -82,7 +89,7 @@ func ExitWithoutShop():
 	Background.StopScroll()
 	GlobalPlayerInfo.AddMoney(info.moneyAmt)
 	GlobalPlayerInfo.AddRep(info.Reputation)
-	GlobalPlayerInfo.TotalTime += info.TimeToReach - level_timer.time_left
+	GlobalPlayerInfo.TotalTime += info.TimeToReach - levelTimerLeft
 	
 	complete = true
 	queue_free()

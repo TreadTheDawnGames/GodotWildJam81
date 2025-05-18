@@ -14,6 +14,8 @@ gameAreaOffset = Vector2(0, 0)
 maxHitpoints = 7
 
 [node name="CapnHal" parent="." index="0" instance=ExtResource("4_40bts")]
+visible = false
+position = Vector2(79, 17)
 processStates = false
 
 [node name="Sprite2D" parent="." index="1"]
@@ -21,7 +23,7 @@ position = Vector2(48, 32)
 texture = ExtResource("2_gyrqe")
 
 [node name="Crewmate" parent="." index="2" instance=ExtResource("4_40bts")]
-position = Vector2(10, 10)
+position = Vector2(48, 16)
 
 [node name="Crewmate2" parent="." index="3" instance=ExtResource("4_40bts")]
-position = Vector2(71, 41)
+position = Vector2(46, 48)

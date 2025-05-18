@@ -23,7 +23,7 @@ func _ready() -> void:
 		navigation_tilemap = owner
 		animSprite = $AnimatedSprite2D
 		xOffset = (randf() - randf()) * 4
-		$AnimatedSprite2D.position = Vector2(xOffset,12)# * 16.0
+		$AnimatedSprite2D.position = Vector2(xOffset,5)# * 16.0
 		navigation_tilemap.changed.connect(_on_nav_tilemap_changed)
 		if(alliance == Alliance.ALLIANCE_ENEMY):
 			modulate = Color.PURPLE
@@ -33,7 +33,6 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if(processStates):
 		state_machine.process_states(delta)
-
 
 func _debug_crewmate_test_changed_navpoint(pos: Vector2) -> void:
 	state_machine.transition({

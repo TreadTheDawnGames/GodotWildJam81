@@ -60,25 +60,26 @@ func EndGame(win : bool):
 	return
 
 func ResetValues():
-	for room in ThePlayerShip.SubMaps:
-		if(is_instance_valid(room)):
-			room.DamageRoom(room.hitpoints+1)
-	ThePlayerShip.positionIndexedChildren.clear()
-	ThePlayerShip.isSetup = false
-	for crew in ThePlayerShip.GetCrew():
-		crew.queue_free()
-		
-	for i in 2:
-		var crewmate = CREWMATE.instantiate()
-		crewmate.navigation_tilemap = ThePlayerShip
-		ThePlayerShip.add_child(crewmate)
-	
-	ThePlayerShip.Setup()
-	ActiveLevelInfo = null
-	ActiveLevel = null
-	Money = 70
-	Reputation = 0
-	TotalTime = 0
+	#for room in ThePlayerShip.SubMaps:
+		#if(is_instance_valid(room)):
+			#room.DamageRoom(room.hitpoints+1)
+	#ThePlayerShip.positionIndexedChildren.clear()
+	#ThePlayerShip.isSetup = false
+	#for crew in ThePlayerShip.GetCrew():
+		#crew.queue_free()
+		#
+	#for i in 2:
+		#var crewmate = CREWMATE.instantiate()
+		#crewmate.navigation_tilemap = ThePlayerShip
+		#ThePlayerShip.add_child(crewmate)
+	#ThePlayerShip.Setup()
+	#ThePlayerShip.modulate = Color.WHITE
+	#ActiveLevelInfo = null
+	#ActiveLevel = null
+	#Money = 70
+	#Reputation = 0
+	#TotalTime = 0
+	get_tree().reload_current_scene()
 	retryCount+=1
 
 func GetGameRoot() -> GameRoot:

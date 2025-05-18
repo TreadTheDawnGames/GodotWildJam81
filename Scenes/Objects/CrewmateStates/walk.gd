@@ -23,8 +23,8 @@ func _state_init(data: Dictionary) -> void:
 
 func _state_process(delta: float) -> Dictionary:
 	_walk_timer += delta
-	if _walk_timer >= 1.0 / _speed:
-		crewmate.position = _to + Vector2(crewmate.xOffset, -8)
+	if _walk_timer >= 0.5 / _speed:
+		crewmate.position = _to
 		return {"new_state": "Work"}
 	return {}
 

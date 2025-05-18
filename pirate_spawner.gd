@@ -71,3 +71,11 @@ func AttemptFlip():
 	if(completeness == difficulty):
 		playerShip.scale.x *=-1
 		playerShip.editing = false
+		for room in pirate.SubMaps:
+			for key in room.positionIndexedChildren:
+				key.x *=-1
+		for key in pirate.positionIndexedChildren:
+			key.x *=-1
+		for crew : Crewmate in playerShip.GetCrew():
+			crew.navigation_tilemap = pirate
+		

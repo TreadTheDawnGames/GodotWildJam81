@@ -33,7 +33,7 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	global_position.x -= speed * delta #* float(GlobalPlayerInfo.ThePlayerShip.GetSpeed() / 2.0)
+	global_position.x -= speed * delta * float(GlobalPlayerInfo.ThePlayerShip.GetSpeed() / 2.0)
 	if(global_position.x < -50):
 		queue_free()
 		

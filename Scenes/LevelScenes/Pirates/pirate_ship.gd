@@ -4,6 +4,7 @@ class_name PirateShip
 
 var goDirection : Vector2 = Vector2(0,0)
 var lrDir : float = -0.5
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 func _ready():
 	editing = true
@@ -40,7 +41,8 @@ func SetNewLocation():
 
 func DamageRoom(amount : int, _checkParent : bool = false):
 	hitpoints -= amount
-	modulate = Color(1 + float(maxHitpoints)/clamp(float(hitpoints), 0.1, maxHitpoints),1,1,1)
+	var thing : float = 1*(clamp(float(hitpoints), 0.1, maxHitpoints)/maxHitpoints)
+	sprite.modulate = Color(1,thing, thing , 1)
 
 	if(hitpoints <=0):
 		GlobalPlayerInfo.Shake()

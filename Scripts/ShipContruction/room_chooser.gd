@@ -18,7 +18,8 @@ func _ready() -> void:
 	LaserShipParts = laserShipParts
 	for slot : ShopSlot in slots:
 		ChooseRoom(slot)
-
+	
+	
 func _process(_delta: float) -> void:
 	if(Input.is_action_just_pressed("rotate")):
 		_ready()
@@ -42,7 +43,7 @@ static func GetRandomAvailableRoom(filterForLasers: bool = false) -> ShipRoom:
 		
 	else:
 		scene = ShipParts.pick_random().instantiate() as ShipRoom
-	if(randi()%5==0):
-		scene.includedCrew=CREWMATE.instantiate()
-		scene.includedCrew.processStates = false
+		if(randi()%5==0):
+			scene.includedCrew=CREWMATE.instantiate()
+			scene.includedCrew.processStates = false
 	return scene

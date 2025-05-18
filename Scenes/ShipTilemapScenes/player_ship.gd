@@ -70,12 +70,11 @@ var savedPos
 func _process(delta: float) -> void:
 	if(editing):
 		return
-	var moveDir = Vector2(Input.get_axis("shipLEFT", "shipRIGHT"), Input.get_axis("shipUP", "shipDOWN")).normalized() * 50 * delta# * GetSpeed()
+	var moveDir = Vector2(Input.get_axis("shipLEFT", "shipRIGHT"), Input.get_axis("shipUP", "shipDOWN")).normalized() * 50 * delta * GetSpeed()
 	global_position += moveDir
 	
 	ClampPosition()
 	
-	Engine.time_scale = GetSpeed()/2.0
 	return
 	
 	
@@ -104,7 +103,7 @@ func DamageRoom(amount : int, _checkParent : bool = false) -> bool:
 	GlobalPlayerInfo.Shake()
 	hitpoints -= amount
 	var thing : float = 1*(clamp(float(hitpoints), 0.1, maxHitpoints)/maxHitpoints)
-	modulate = Color(1,thing, thing , 1)
+	sprite.modulate = Color(1,thing, thing , 1)
 
 	if(hitpoints <=0):
 		GlobalPlayerInfo.EndGame(false)

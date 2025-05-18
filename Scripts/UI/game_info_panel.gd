@@ -25,10 +25,10 @@ func UpdateText():
 	firepower_label.text = "Firepower: " + str(ship.GetFirepower())
 	speed_label.text = "Speed: " + str(ship.GetSpeed())
 	if(GlobalPlayerInfo.ActiveLevel and !GlobalPlayerInfo.ActiveLevel.complete):
-		var timer = GlobalPlayerInfo.ActiveLevel.level_timer
+		var timer = GlobalPlayerInfo.ActiveLevel.levelTimerLeft
 		var dustAmount = "Dust: " + str(GlobalPlayerInfo.ActiveLevelInfo.SpaceDust) + "%"
 	#https://forum.godotengine.org/t/how-to-show-on-a-label-how-much-time-from-a-timer-is-left/13594
-		time_left.text = "Time: %d:%02d" % [floor(timer.time_left / 60), int(timer.time_left) % 60]
+		time_left.text = "Time: %d:%02d" % [floor(timer / 60), int(timer) % 60]
 		dust_label.text = dustAmount
 		asteroid_label.text = "AstDense: " + str(GlobalPlayerInfo.ActiveLevelInfo.AsteroidDensity) + "%"
 		reputation_label.text = "RepGain: " + str(GlobalPlayerInfo.ActiveLevelInfo.Reputation)
