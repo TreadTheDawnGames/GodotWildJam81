@@ -18,7 +18,7 @@ position = Vector2(48, 32)
 texture = ExtResource("2_gyrqe")
 
 [node name="Crewmate" parent="." index="1" instance=ExtResource("4_40bts")]
-position = Vector2(16, 14)
+position = Vector2(10, 10)
 
 [node name="Crewmate2" parent="." index="2" instance=ExtResource("4_40bts")]
-position = Vector2(81, 50)
+position = Vector2(71, 41)

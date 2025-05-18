@@ -34,7 +34,7 @@ func Setup():
 	var cells = get_children().filter(func(a): return a is Cell)
 	for child : Cell in cells:
 		var childCoord: Vector2i = local_to_map(child.position)
-		positionIndexedChildren.set(childCoord, child)
+		positionIndexedChildren[childCoord] = child
 	for cell : Cell in positionIndexedChildren.values():
 		cell.AssignLoadOrder()
 	var sortedChildren = positionIndexedChildren.values()

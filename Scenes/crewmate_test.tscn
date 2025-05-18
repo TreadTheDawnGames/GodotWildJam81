@@ -57,64 +57,54 @@ metadata/_custom_type_script = "uid://bratu44wuwsgf"
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(181, -55)
 
-[node name="Crewmate" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
+[node name="Crewmate" parent="." node_paths=PackedStringArray("navpoints") instance=ExtResource("2_udih6")]
 z_index = 2
 position = Vector2(-15, -15)
-navigation_tilemap = NodePath("")
 navpoints = NodePath("../Navpoints")
 
-[node name="Crewmate2" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
+[node name="Crewmate2" parent="." node_paths=PackedStringArray("navpoints") instance=ExtResource("2_udih6")]
 z_index = 2
 position = Vector2(-15, -15)
-navigation_tilemap = NodePath("")
 navpoints = NodePath("../Navpoints")
 
-[node name="Crewmate3" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
+[node name="Crewmate3" parent="." node_paths=PackedStringArray("navpoints") instance=ExtResource("2_udih6")]
 z_index = 2
 position = Vector2(-15, -15)
-navigation_tilemap = NodePath("")
 navpoints = NodePath("../Navpoints")
 
-[node name="Crewmate4" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
+[node name="Crewmate4" parent="." node_paths=PackedStringArray("navpoints") instance=ExtResource("2_udih6")]
 z_index = 2
 position = Vector2(-15, -15)
-navigation_tilemap = NodePath("")
 navpoints = NodePath("../Navpoints")
 
-[node name="Crewmate5" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
+[node name="Crewmate5" parent="." node_paths=PackedStringArray("navpoints") instance=ExtResource("2_udih6")]
 z_index = 2
 position = Vector2(-15, -15)
-navigation_tilemap = NodePath("")
 navpoints = NodePath("../Navpoints")
 
-[node name="Crewmate6" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
+[node name="Crewmate6" parent="." node_paths=PackedStringArray("navpoints") instance=ExtResource("2_udih6")]
 z_index = 2
 position = Vector2(-15, -15)
-navigation_tilemap = NodePath("")
 navpoints = NodePath("../Navpoints")
 
-[node name="Crewmate7" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
+[node name="Crewmate7" parent="." node_paths=PackedStringArray("navpoints") instance=ExtResource("2_udih6")]
 z_index = 2
 position = Vector2(-15, -15)
-navigation_tilemap = NodePath("")
 navpoints = NodePath("../Navpoints")
 
-[node name="Crewmate8" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
+[node name="Crewmate8" parent="." node_paths=PackedStringArray("navpoints") instance=ExtResource("2_udih6")]
 z_index = 2
 position = Vector2(-15, -15)
-navigation_tilemap = NodePath("")
 navpoints = NodePath("../Navpoints")
 
-[node name="Crewmate9" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
+[node name="Crewmate9" parent="." node_paths=PackedStringArray("navpoints") instance=ExtResource("2_udih6")]
 z_index = 2
 position = Vector2(-15, -15)
-navigation_tilemap = NodePath("")
 navpoints = NodePath("../Navpoints")
 
-[node name="Crewmate10" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
+[node name="Crewmate10" parent="." node_paths=PackedStringArray("navpoints") instance=ExtResource("2_udih6")]
 z_index = 2
 position = Vector2(-15, -15)
-navigation_tilemap = NodePath("")
 navpoints = NodePath("../Navpoints")
 
 [node name="Navpoints" type="Node2D" parent="."]
