@@ -148,6 +148,7 @@ func _process(_delta: float) -> void:
 		if(IsOnTop()):
 			Map._grabbedOffset = Map.global_position - Map.globalMouse
 			Map.grabbed = true
+			$PickUpShipPart.play()
 			
 	elif(not Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and Map.grabbed):
 		Unhovered()

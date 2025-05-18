@@ -24,6 +24,7 @@ func SnapToPlayerShip(otherArea : Area2D):
 	if(!addingRoom and otherArea.owner is ConnectionCell and otherArea.owner.Map!=playerShip):
 		addingRoom = otherArea.owner.Map
 		addingRoomCell = otherArea.owner
+		$PlaceShipPart.play()
 		#addingRoom.reparent.call_deferred(playerShip)
 	return
 
@@ -68,7 +69,8 @@ func _process(_delta: float) -> void:
 
 func SnapToShipGrid():
 	addingRoom.global_position = playerShip.to_global(playerShip.to_local(addingRoom.global_position).snapped(Vector2(32,32)))
-	
+
+
 func CloseShipyard():
 	playerShip.EnterStorage()
 	playerShip.editing = false

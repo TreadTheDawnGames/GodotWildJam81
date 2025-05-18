@@ -189,13 +189,13 @@ func DamageRoom(amount : int, checkParent : bool = false) -> bool:
 	
 	if(get_parent() is not PirateShip):
 		GlobalPlayerInfo.Shake()
+		$CrashIntoAsteroid.play()
 	if(hitpoints <=0):
 		for cell : Cell in positionIndexedChildren.values():
 			cell.Map.positionIndexedChildren.erase(cell.myCoords)
 			cell.queue_free()
 		if(get_parent() is PlayerShip and get_parent() is not PirateShip and !checkParent):
 			get_parent().CheckRooms()
-		
 		queue_free()
 		return true
 	return false

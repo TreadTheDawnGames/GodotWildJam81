@@ -60,4 +60,8 @@ func HitSomething(area : Area2D):
 			if(area.owner.Map is ShipRoom):
 				var hitShip : ShipRoom = cell.get_parent()
 				hitShip.DamageRoom(1)
-				queue_free()
+				$CrashIntoAsteroid.play()
+
+
+func _on_crash_into_asteroid_finished() -> void:
+	queue_free()

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dq7hdygl7yx3s"
+path="res://.godot/imported/Crash into Asteroid.mp3-98db33d33fa8a959b707a5d034c86b76.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Level/Crash into Asteroid.mp3"
+dest_files=["res://.godot/imported/Crash into Asteroid.mp3-98db33d33fa8a959b707a5d034c86b76.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
