@@ -21,6 +21,7 @@ func DoCombine(roomToAdd : ShipRoom):
 	roomToAdd.Faction = Faction
 	roomToAdd.AddToMap(self)
 	SubMaps.append(roomToAdd)
+	changed.emit()
 	pass
 
 func AbleToConnectPiece(roomToAdd : ShipRoom, roomPosition : Vector2i) -> bool:

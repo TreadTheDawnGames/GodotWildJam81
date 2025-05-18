@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://baqt4yd2q0fvy"]
+[gd_scene load_steps=9 format=4 uid="uid://baqt4yd2q0fvy"]
 
 [ext_resource type="Texture2D" uid="uid://b081xhyg1yieh" path="res://Assets/Sprites/Placeholders/test-tilemap.png" id="1_blwmn"]
 [ext_resource type="Script" uid="uid://dibnuv2lxbqt5" path="res://Scenes/crewmate_test.gd" id="1_yfc8g"]
 [ext_resource type="Texture2D" uid="uid://dtidrmibctya6" path="res://icon.svg" id="2_2y5pk"]
 [ext_resource type="PackedScene" uid="uid://chax0pgaodrnu" path="res://Scenes/Objects/crewmate.tscn" id="2_udih6"]
+[ext_resource type="Script" uid="uid://bratu44wuwsgf" path="res://Scripts/ShipContruction/ship_room.gd" id="4_bare2"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_udih6"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -50,6 +51,8 @@ trail_texture = ExtResource("2_2y5pk")
 scale = Vector2(2, 2)
 tile_map_data = PackedByteArray("AAD8////AAABAAEAAAD8/wAAAAABAAEAAAD8/wEAAAABAAEAAAD9/wEAAAABAAEAAAD+/wEAAAABAAEAAAD//wEAAAABAAEAAAD//wIAAAABAAEAAAAAAAIAAAABAAEAAAABAAIAAAABAAEAAAACAAIAAAABAAEAAAADAAIAAAABAAEAAAADAAEAAAABAAEAAAAEAAEAAAABAAEAAAAEAAAAAAABAAEAAAAEAP//AAABAAEAAAAEAP7/AAABAAEAAAAEAP3/AAABAAEAAAAEAPz/AAABAAEAAAAEAPv/AAABAAEAAAAFAPv/AAABAAEAAAAGAPv/AAABAAEAAAAGAPz/AAABAAEAAAAHAPz/AAABAAEAAAAHAP3/AAABAAEAAAAHAP7/AAABAAEAAAAIAP7/AAABAAEAAAAIAP//AAABAAEAAAAHAP//AAABAAEAAAAHAAAAAAABAAEAAAD/////AAABAAEAAAD//wAAAAABAAEAAAAAAP//AAABAAEAAAABAP//AAABAAEAAAACAP//AAABAAEAAAADAP//AAABAAEAAAADAPz/AAABAAEAAAACAPz/AAABAAEAAAABAPz/AAABAAEAAAAAAPz/AAABAAEAAAAAAP3/AAABAAEAAAAAAP7/AAABAAEAAAACAP3/AAABAAEAAAACAP7/AAABAAEAAAAFAAEAAAABAAEAAAAGAAEAAAABAAEAAAAHAAEAAAABAAEAAAD+//7/AAABAAEAAAD9//7/AAABAAEAAAD8//7/AAABAAEAAAD///v/AAABAAEAAAD+//v/AAABAAEAAAD9//v/AAABAAEAAAAAAPv/AAABAAEAAAD9//z/AAABAAEAAAD9//3/AAABAAEAAAACAPv/AAABAAEAAAACAPr/AAABAAEAAAACAPn/AAABAAEAAAABAPn/AAABAAEAAAAAAPn/AAABAAEAAAAAAPr/AAABAAEAAAADAPn/AAABAAEAAAAEAPn/AAABAAEAAAAEAPr/AAABAAEAAAAFAPr/AAABAAEAAAAGAPr/AAABAAEAAAAIAPz/AAABAAEAAAAJAPz/AAABAAEAAAAKAP3/AAABAAEAAAAKAP7/AAABAAEAAAAKAPz/AAABAAEAAAAKAP//AAABAAEAAAAKAAAAAAABAAEAAAAKAAEAAAABAAEAAAAJAAEAAAABAAEAAAAIAAEAAAABAAEAAAAFAAAAAAABAAEAAAACAAMAAAABAAEAAAADAAMAAAABAAEAAAAEAAMAAAABAAEAAAAFAAMAAAABAAEAAAAGAAMAAAABAAEAAAAHAAMAAAABAAEAAAAIAAMAAAABAAEAAAAIAAIAAAABAAEAAAD9/wIAAAABAAEAAAD9/wMAAAABAAEAAAD9/wQAAAABAAEAAAD+/wQAAAABAAEAAAD//wQAAAABAAEAAAAAAAQAAAABAAEAAAABAAQAAAABAAEAAAACAAQAAAABAAEAAAADAAQAAAABAAEAAAADAAUAAAABAAEAAAAEAAUAAAABAAEAAAAFAAUAAAABAAEAAAAGAAUAAAABAAEAAAAGAAQAAAABAAEAAAAJAAMAAAABAAEAAAAKAAMAAAABAAEAAAALAAMAAAABAAEAAAAMAAMAAAABAAEAAAAMAAIAAAABAAEAAAAMAAEAAAABAAEAAAANAAEAAAABAAEAAAANAAAAAAABAAEAAAANAP//AAABAAEAAAAMAP//AAABAAEAAAALAP//AAABAAEAAAALAP3/AAABAAEAAAALAP7/AAABAAEAAAAMAP3/AAABAAEAAAANAP3/AAABAAEAAAAOAP3/AAABAAEAAAAOAPz/AAABAAEAAAAOAPv/AAABAAEAAAAOAPr/AAABAAEAAAANAPr/AAABAAEAAAANAPn/AAABAAEAAAAMAPn/AAABAAEAAAALAPn/AAABAAEAAAAKAPn/AAABAAEAAAAKAPr/AAABAAEAAAAKAPv/AAABAAEAAAAJAPr/AAABAAEAAAAIAPr/AAABAAEAAAAHAPr/AAABAAEAAAAIAPn/AAABAAEAAAAIAPj/AAABAAEAAAAIAPv/AAABAAEAAAAHAPj/AAABAAEAAAAGAPj/AAABAAEAAAAFAPj/AAABAAEAAAAEAPj/AAABAAEAAAAGAPf/AAABAAEAAAAGAPb/AAABAAEAAAAHAPb/AAABAAEAAAAIAPb/AAABAAEAAAAJAPb/AAABAAEAAAAKAPb/AAABAAEAAAAKAPf/AAABAAEAAAAKAPj/AAABAAEAAAAFAPb/AAABAAEAAAAEAPb/AAABAAEAAAADAPb/AAABAAEAAAACAPb/AAABAAEAAAABAPb/AAABAAEAAAABAPf/AAABAAEAAAABAPj/AAABAAEAAAACAPj/AAABAAEAAAD+//f/AAABAAEAAAD+//j/AAABAAEAAAD+//n/AAABAAEAAAD+//r/AAABAAEAAAD///f/AAABAAEAAAAAAPf/AAABAAEAAAA=")
 tile_set = SubResource("TileSet_yfc8g")
+script = ExtResource("4_bare2")
+metadata/_custom_type_script = "uid://bratu44wuwsgf"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(181, -55)
@@ -57,61 +60,61 @@ position = Vector2(181, -55)
 [node name="Crewmate" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
 z_index = 2
 position = Vector2(-15, -15)
-navigation_tilemap = NodePath("../TileMapLayer")
+navigation_tilemap = NodePath("")
 navpoints = NodePath("../Navpoints")
 
 [node name="Crewmate2" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
 z_index = 2
 position = Vector2(-15, -15)
-navigation_tilemap = NodePath("../TileMapLayer")
+navigation_tilemap = NodePath("")
 navpoints = NodePath("../Navpoints")
 
 [node name="Crewmate3" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
 z_index = 2
 position = Vector2(-15, -15)
-navigation_tilemap = NodePath("../TileMapLayer")
+navigation_tilemap = NodePath("")
 navpoints = NodePath("../Navpoints")
 
 [node name="Crewmate4" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
 z_index = 2
 position = Vector2(-15, -15)
-navigation_tilemap = NodePath("../TileMapLayer")
+navigation_tilemap = NodePath("")
 navpoints = NodePath("../Navpoints")
 
 [node name="Crewmate5" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
 z_index = 2
 position = Vector2(-15, -15)
-navigation_tilemap = NodePath("../TileMapLayer")
+navigation_tilemap = NodePath("")
 navpoints = NodePath("../Navpoints")
 
 [node name="Crewmate6" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
 z_index = 2
 position = Vector2(-15, -15)
-navigation_tilemap = NodePath("../TileMapLayer")
+navigation_tilemap = NodePath("")
 navpoints = NodePath("../Navpoints")
 
 [node name="Crewmate7" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
 z_index = 2
 position = Vector2(-15, -15)
-navigation_tilemap = NodePath("../TileMapLayer")
+navigation_tilemap = NodePath("")
 navpoints = NodePath("../Navpoints")
 
 [node name="Crewmate8" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
 z_index = 2
 position = Vector2(-15, -15)
-navigation_tilemap = NodePath("../TileMapLayer")
+navigation_tilemap = NodePath("")
 navpoints = NodePath("../Navpoints")
 
 [node name="Crewmate9" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
 z_index = 2
 position = Vector2(-15, -15)
-navigation_tilemap = NodePath("../TileMapLayer")
+navigation_tilemap = NodePath("")
 navpoints = NodePath("../Navpoints")
 
 [node name="Crewmate10" parent="." node_paths=PackedStringArray("navigation_tilemap", "navpoints") instance=ExtResource("2_udih6")]
 z_index = 2
 position = Vector2(-15, -15)
-navigation_tilemap = NodePath("../TileMapLayer")
+navigation_tilemap = NodePath("")
 navpoints = NodePath("../Navpoints")
 
 [node name="Navpoints" type="Node2D" parent="."]
