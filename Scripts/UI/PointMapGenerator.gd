@@ -182,6 +182,7 @@ func _draw() -> void:
 			for c in astar.get_point_connections(p):
 				var pp = astar.get_point_position(p)
 				var cp = astar.get_point_position(c)
+				draw_line(Vector2(pp.x, pp.y+10), Vector2(cp.x, cp.y+10), Color.BLACK, 2, true)
 				draw_line(Vector2(pp.x, pp.y), Vector2(cp.x, cp.y), Color("ebeae6"), 2, true)
 
 
