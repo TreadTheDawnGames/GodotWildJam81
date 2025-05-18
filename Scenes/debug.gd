@@ -30,6 +30,7 @@ func TransitionToLevel():
 	return
 
 func TransitionToShop():
+	Engine.time_scale = 1
 	if(GlobalPlayerInfo.ActiveLevelInfo and GlobalPlayerInfo.ActiveLevelInfo.FinalLevel):
 		GlobalPlayerInfo.EndGame(true)
 		return

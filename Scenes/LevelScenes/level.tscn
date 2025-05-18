@@ -21,7 +21,7 @@ script = ExtResource("7_li8oe")
 [node name="PirateSpawner" parent="." instance=ExtResource("3_f0wf7")]
 
 [node name="pirateTimer" type="Timer" parent="PirateSpawner"]
-wait_time = 30.0
+wait_time = 10.0
 autostart = true
 
 [node name="AsteroidSpawner" parent="." instance=ExtResource("2_54rtb")]

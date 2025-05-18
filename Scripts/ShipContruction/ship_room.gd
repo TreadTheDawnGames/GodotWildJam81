@@ -17,11 +17,19 @@ var isSetup : bool = false
 enum ShipFaction {Player, Enemy}
 var Faction : ShipFaction
 
-@export var hitpoints : int = 2
+@export var maxHitpoints : int = 2
+var hitpoints : int = 2
 
 @export var Price : int = 0
 
+var includedCrew : Crewmate
+
 func _ready():
+	if(includedCrew):
+		add_child(includedCrew)
+		includedCrew.hide()
+		modulate = Color.GOLD
+		
 	Setup.call_deferred()
 	returnToHome = true
 	sprite = get_node("Sprite2D")
@@ -30,6 +38,7 @@ func _ready():
 func Setup():
 	if(isSetup):
 		return
+	hitpoints = maxHitpoints
 	sprite = get_node("Sprite2D")
 	var cells = get_children().filter(func(a): return a is Cell)
 	for child : Cell in cells:
@@ -69,6 +78,20 @@ func AddToMap(map : ShipRoom):
 		set_cell(cell, -1)
 		#if(child is Sprite2D):
 			#continue
+	if(includedCrew):
+		includedCrew.reparent(map)
+		match(map.Faction):
+			ShipRoom.ShipFaction.Player:
+				includedCrew.alliance = Crewmate.Alliance.ALLIANCE_PLAYER
+			ShipRoom.ShipFaction.Enemy:
+				includedCrew.alliance = Crewmate.Alliance.ALLIANCE_ENEMY
+		includedCrew.processStates = true
+		includedCrew.owner = map
+		includedCrew.position = Vector2(16,16)
+		includedCrew._ready()
+		includedCrew.show()
+		modulate = Color.WHITE
+	
 	#queue_free()
 	return
 	
@@ -81,7 +104,9 @@ func ChildStuff(map):
 		if(child is ConnectionCell):
 			conCells.append(child)
 			child.grabArea.monitorable = false
-		
+		#if(includedCrew):
+		#modulate = Color.GOLD
+	#
 		child.reparent(map, true)
 		child.Map = map
 		#sprite.reparent(map, true)
@@ -148,13 +173,16 @@ func GetCellWithValidOpeningInDirection(dir : ConnectionCell.Direction):
 			return cell
 	return null
 
-func DamageRoom(amount : int) -> bool:
+func DamageRoom(amount : int, checkParent : bool = false) -> bool:
 	hitpoints -= amount
+	modulate = Color(1.0,1.0,1.0,float(hitpoints)/float(maxHitpoints))
+	if(get_parent() is not PirateShip):
+		GlobalPlayerInfo.Shake()
 	if(hitpoints <=0):
 		for cell : Cell in positionIndexedChildren.values():
 			cell.Map.positionIndexedChildren.erase(cell.myCoords)
 			cell.queue_free()
-		if(get_parent() is PlayerShip):
+		if(get_parent() is PlayerShip and !checkParent):
 			get_parent().CheckRooms()
 		
 		queue_free()

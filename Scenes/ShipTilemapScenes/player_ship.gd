@@ -9,6 +9,7 @@ var editing = false
 @export var gameArea : Vector2
 @export var MaxHitpoints : int = 7
 @export var gameAreaOffset : Vector2
+@onready var capn_hal: Crewmate = $CapnHal
 
 func _ready() -> void:
 	hitpoints = MaxHitpoints
@@ -16,6 +17,8 @@ func _ready() -> void:
 	Faction = ShipFaction.Player
 	Setup.call_deferred()
 	GlobalPlayerInfo.SetPlayerShip(self)
+	capn_hal.hide()
+	capn_hal.processStates = false
 
 func DoCombine(roomToAdd : ShipRoom):
 	roomToAdd.Faction = Faction
@@ -46,7 +49,10 @@ func GetFirepower() -> int:
 	return firepower
 	
 func GetCrewCount() -> int:
-	return get_children().filter(func(c): return c is Crewmate).size()
+	return get_children().filter(func(c): return c is Crewmate and c.processStates).size()
+
+func GetCrew() -> Array:
+	return get_children().filter(func(c): return c is Crewmate and c.processStates)
 
 func GetSpeed() -> int:
 	var engineCount : int = 0
@@ -100,12 +106,11 @@ func ClampPosition():
 	#for invalidCell in invalid:
 		#positionIndexedChildren.erase(invalidCell)
 
-func DamageRoom(amount : int) -> bool:
+func DamageRoom(amount : int, _checkParent : bool = false) -> bool:
 	GlobalPlayerInfo.Shake()
 	hitpoints -= amount
 	
 	if(hitpoints <=0):
-		GlobalPlayerInfo.ActiveLevel.ExitWithoutShop()
 		GlobalPlayerInfo.EndGame(false)
 		EnterStorage()
 		hitpoints = MaxHitpoints
@@ -114,11 +119,23 @@ func DamageRoom(amount : int) -> bool:
 
 func CheckRooms():
 	for room in SubMaps:
-		var cpnHal :Crewmate = get_children().filter(func(a): return a is Crewmate)[0]
-		print(cpnHal._pathfinding(Vector2(0,0), room.positionIndexedChildren.keys()[0]))
-		#check for connection to me
-		#if no
-			#destroy room
-		
+		if(is_instance_valid(room)):
+			print("room position: ", room.positionIndexedChildren.keys()[0])
+			print(room, " con cells: ", room.positionIndexedChildren.values().filter(func(a): return a is ConnectionCell)[0].myCoords)
+			print("Room: ", room, ", HAL: ", capn_hal._pathfinding(positionIndexedChildren.keys()[0], room.positionIndexedChildren.values().filter(func(a): return a is ConnectionCell)[0].myCoords))#,capn_hal._pathfinding(positionIndexedChildren.keys()[0], room.positionIndexedChildren.values().filter(func(a): a is ConnectionCell)[0].myCoords))
+			#if the pathfinder can't find a path, delete the room
+			if(capn_hal._pathfinding(positionIndexedChildren.keys()[0], room.positionIndexedChildren.values().filter(func(a): return a is ConnectionCell)[0].myCoords).size() == 0):
+				room.DamageRoom(room.hitpoints+1, true)
+				for crew :Crewmate in GetCrew():
+					if(!positionIndexedChildren.has(local_to_map(crew.position))):
+						print("Man overboard!")
+						crew.queue_free()
+						
+						GlobalPlayerInfo.Shake()
+						pass
+	print("CrewSize: ",GetCrew().size())
+	
+	if(GetCrew().filter(func(a): return !a.is_queued_for_deletion()).size() <=0):
+		GlobalPlayerInfo.EndGame(false)
 		pass
 	return

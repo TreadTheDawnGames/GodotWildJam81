@@ -6,7 +6,7 @@
 size = Vector2(32, 96)
 
 [node name="DebugRoom" instance=ExtResource("1_xcde8")]
-tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 4, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 4, 0, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0)
 
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(16, 16)

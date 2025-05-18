@@ -1,6 +1,7 @@
 extends Node
 
 const ENDGAME_SCREEN = preload("res://Scenes/endgame_screen.tscn")
+const CREWMATE = preload("res://Scenes/Objects/crewmate.tscn")
 
 var ThePlayerShip : PlayerShip
 var ActiveLevelInfo : LevelInfo
@@ -50,6 +51,8 @@ func ShipExitStorage(position : Vector2) -> PlayerShip:
 	return ThePlayerShip
 
 func EndGame(win : bool):
+	if(ActiveLevel):
+		ActiveLevel.ExitWithoutShop()
 	var end : EndgameScreen = ENDGAME_SCREEN.instantiate()
 	end.Win = win
 	add_child(end)
@@ -62,6 +65,14 @@ func ResetValues():
 			room.DamageRoom(room.hitpoints+1)
 	ThePlayerShip.positionIndexedChildren.clear()
 	ThePlayerShip.isSetup = false
+	for crew in ThePlayerShip.GetCrew():
+		crew.queue_free()
+		
+	for i in 2:
+		var crewmate = CREWMATE.instantiate()
+		crewmate.navigation_tilemap = ThePlayerShip
+		ThePlayerShip.add_child(crewmate)
+	
 	ThePlayerShip.Setup()
 	ActiveLevelInfo = null
 	ActiveLevel = null

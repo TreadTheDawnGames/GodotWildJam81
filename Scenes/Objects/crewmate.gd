@@ -13,17 +13,19 @@ enum Alliance { ALLIANCE_NONE, ALLIANCE_PLAYER, ALLIANCE_ENEMY }
 
 var movement_speed: float = 200.0
 var movement_target_position: Vector2 = Vector2(60.0,180.0)
-
+@export var processStates = true
 
 func _ready() -> void:
 	if owner is ShipRoom: 
 		navigation_tilemap = owner
-	$Sprite2D.position = (Vector2(randf(), randf()) - Vector2(.5, .5)) * 16.0
-	navigation_tilemap.changed.connect(_on_nav_tilemap_changed)
-	
+		$Sprite2D.position = (Vector2(randf(), randf()) - Vector2(.5, .5)) * 16.0
+		navigation_tilemap.changed.connect(_on_nav_tilemap_changed)
+
+
 
 func _physics_process(delta: float) -> void:
-	state_machine.process_states(delta)
+	if(processStates):
+		state_machine.process_states(delta)
 
 
 func _debug_crewmate_test_changed_navpoint(pos: Vector2) -> void:
@@ -64,8 +66,10 @@ func create_path(target: Vector2) -> Array[Vector2]:
 #
 func _pathfinding(from: Vector2i, to: Vector2i) -> Array[Vector2i]:	
 	if !navigation_tilemap.positionIndexedChildren.has(from):
+		print("nav map doewn't have from")
 		return[]
-	if(navigation_tilemap.positionIndexedChildren[to] is LaserCell):
+	if(navigation_tilemap.positionIndexedChildren.has(to) and navigation_tilemap.positionIndexedChildren[to] is LaserCell):
+		#print("trying to go to invalid tile")
 		#trying to get to unnavigable tile
 		return []
 		
@@ -83,15 +87,17 @@ func _pathfinding(from: Vector2i, to: Vector2i) -> Array[Vector2i]:
 			c.CanConnectTo(ConnectionCell.Direction.South, neighbor) || \
 			c.CanConnectTo(ConnectionCell.Direction.East, neighbor) || \
 			c.CanConnectTo(ConnectionCell.Direction.West, neighbor)
-		return true
+		#print("assuming no")
+		return false #assume you can't connect
 	
 	var prioritize_branches = func(a: Vector2i, b: Vector2i) -> bool:
 		return a.distance_to(to) > b.distance_to(to)
 
 	# Recursively find a path
-	while !stack.is_empty():
-		print("trying to get to: ", navigation_tilemap.positionIndexedChildren[to])
+	var attempts : int = 0
+	while !stack.is_empty() and attempts < 50:
 		var v: Vector2i = stack.pop_back()
+		#print("trying to get to ", v)
 		if navigation_tilemap.positionIndexedChildren.has(v):
 			if(navigation_tilemap.positionIndexedChildren[v] is ConnectionCell):
 				con_cell = navigation_tilemap.positionIndexedChildren[v]
@@ -106,7 +112,8 @@ func _pathfinding(from: Vector2i, to: Vector2i) -> Array[Vector2i]:
 				filtered.sort_custom(prioritize_branches)
 				if !filtered.is_empty():
 					filtered.all(func(i): stack.push_back(i); return true)
-
+					attempts+=1
+					#print("failed to find path")
 	return []
 
 

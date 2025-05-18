@@ -11,14 +11,18 @@ script = ExtResource("2_ptsrm")
 gameArea = Vector2(725, 648)
 MaxHitpoints = 7
 gameAreaOffset = Vector2(0, 0)
-hitpoints = 1
+maxHitpoints = 2
+Price = 0
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="CapnHal" parent="." index="0" instance=ExtResource("4_40bts")]
+processStates = false
+
+[node name="Sprite2D" parent="." index="1"]
 position = Vector2(48, 32)
 texture = ExtResource("2_gyrqe")
 
-[node name="Crewmate" parent="." index="1" instance=ExtResource("4_40bts")]
+[node name="Crewmate" parent="." index="2" instance=ExtResource("4_40bts")]
 position = Vector2(10, 10)
 
-[node name="Crewmate2" parent="." index="2" instance=ExtResource("4_40bts")]
+[node name="Crewmate2" parent="." index="3" instance=ExtResource("4_40bts")]
 position = Vector2(71, 41)
