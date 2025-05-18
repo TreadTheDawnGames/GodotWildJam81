@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://jqclu3127w4e"
+path="res://.godot/imported/Wild Jam Exploration.mp3-d339729593e501ec42e0571e9538b4b1.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/Wild Jam Exploration.mp3"
+dest_files=["res://.godot/imported/Wild Jam Exploration.mp3-d339729593e501ec42e0571e9538b4b1.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://dnycrg3qoywj2"]
+[gd_scene load_steps=5 format=3 uid="uid://dnycrg3qoywj2"]
 
 [ext_resource type="PackedScene" uid="uid://dw7mtb4hfionb" path="res://Scenes/UI/Cruiser.tscn" id="1_ihlxe"]
 [ext_resource type="Script" uid="uid://bk4n62vhu47py" path="res://Scenes/UI/space_map.gd" id="1_yhnua"]
 [ext_resource type="Script" uid="uid://bjxjlx8ds8eq3" path="res://Scripts/UI/PointMapGenerator.gd" id="2_pab8o"]
 [ext_resource type="Texture2D" uid="uid://bdq3v1jk6ms8e" path="res://Assets/UI/SpaceMapBG.png" id="3_pab8o"]
-[ext_resource type="AudioStream" uid="uid://cq70ye3xixbgq" path="res://Assets/Audio/Wild JAM TEST 1.mp3" id="5_6hadx"]
 
 [node name="SpaceMap" type="Control"]
 layout_mode = 3
@@ -36,9 +35,3 @@ texture = ExtResource("3_pab8o")
 script = ExtResource("2_pab8o")
 
 [node name="Cruiser" parent="." instance=ExtResource("1_ihlxe")]
-
-[node name="BGM" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("5_6hadx")
-volume_db = -26.324
-autoplay = true
-bus = &"Music"

@@ -42,6 +42,8 @@ func loadGameSettings():
 	)
 
 func TransitionToLevel():
+	stopAllMusic()
+	BackgroundMusic.get_child(2).play()
 	Engine.time_scale = flightSpeed
 	space_map.hide()
 	GlobalPlayerInfo.ShipExitStorage(shipSpawnMarker.global_position)
@@ -53,6 +55,8 @@ func TransitionToLevel():
 	return
 
 func TransitionToShop():
+	stopAllMusic()
+	BackgroundMusic.get_child(0).play()
 	Engine.time_scale = 1
 	if(GlobalPlayerInfo.ActiveLevelInfo and GlobalPlayerInfo.ActiveLevelInfo.FinalLevel):
 		GlobalPlayerInfo.EndGame(true)
@@ -64,6 +68,8 @@ func TransitionToShop():
 	return
 
 func TransitionToMainMenu():
+	stopAllMusic()
+	BackgroundMusic.get_child(0).play()
 	mainMenu = mainMenuScene.instantiate()
 	add_child(mainMenu)
 	mainMenu.StartClicked.connect(TransitionToShop)
@@ -81,6 +87,8 @@ func TransitionToOptionsMenu():
 	return
 
 func TransitionToSpaceMap():
+	stopAllMusic()
+	BackgroundMusic.get_child(1).play()
 	Engine.time_scale = 1
 	GlobalPlayerInfo.ShipEnterStorage()
 	space_map.show()
@@ -103,6 +111,12 @@ func KillMainMenu():
 func KillOptionsMenu():
 	if(optionsMenu):
 		optionsMenu.queue_free()
+	return
+
+func stopAllMusic():
+	var backgroundSongs = BackgroundMusic.get_children()
+	for song in backgroundSongs:
+		song.stop()
 	return
 
 func CloseGame():
