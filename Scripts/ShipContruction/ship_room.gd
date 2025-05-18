@@ -154,8 +154,9 @@ func DamageRoom(amount : int) -> bool:
 		for cell : Cell in positionIndexedChildren.values():
 			cell.Map.positionIndexedChildren.erase(cell.myCoords)
 			cell.queue_free()
-		#if(get_parent() is PlayerShip):
-			#get_parent().ClearInvalidValues()
+		if(get_parent() is PlayerShip):
+			get_parent().CheckRooms()
+		
 		queue_free()
 		return true
 	return false

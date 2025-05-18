@@ -114,6 +114,8 @@ func DamageRoom(amount : int) -> bool:
 
 func CheckRooms():
 	for room in SubMaps:
+		var cpnHal :Crewmate = get_children().filter(func(a): return a is Crewmate)[0]
+		print(cpnHal._pathfinding(Vector2(0,0), room.positionIndexedChildren.keys()[0]))
 		#check for connection to me
 		#if no
 			#destroy room
