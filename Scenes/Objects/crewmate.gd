@@ -1,10 +1,5 @@
 ### Crewmate
 # A simple AI-controlled crewmate that walks to wherever it's needed
-# 
-# Design guide:
-#  - All public methods (the ones that don't start with an underscore)
-#     must NOT change the state of the FSM!!! 
-# - Events CAN change the state of the FSM
 
 extends Node2D
 class_name Crewmate
@@ -13,7 +8,7 @@ enum Alliance { ALLIANCE_NONE, ALLIANCE_PLAYER, ALLIANCE_ENEMY }
 
 @export var state_machine: StateMachine
 @export var alliance: Alliance
-@export var navigation_tilemap: TileMapLayer
+@export var navigation_tilemap: ShipRoom
 @export var navpoints: Node2D
 
 var movement_speed: float = 200.0
@@ -21,8 +16,10 @@ var movement_target_position: Vector2 = Vector2(60.0,180.0)
 
 
 func _ready() -> void:
-	if owner is TileMapLayer: navigation_tilemap = owner
+	if owner is ShipRoom: 
+		navigation_tilemap = owner
 	$Sprite2D.position = (Vector2(randf(), randf()) - Vector2(.5, .5)) * 16.0
+	navigation_tilemap.changed.connect(_on_nav_tilemap_changed)
 	
 
 func _physics_process(delta: float) -> void:
@@ -69,11 +66,17 @@ func _pathfinding(from: Vector2i, to: Vector2i) -> Array[Vector2i]:
 	# Prepare the stack
 	var path: Array[Vector2i]
 	var stack: Array[Vector2i]
+	var con_cell: ConnectionCell
 	stack.push_back(from)
 
 	# A function that determines whether a given cell is accessible
 	var filter_connected_rooms = func(i: Vector2i) -> bool:
-		var _tiledata: TileData = navigation_tilemap.get_cell_tile_data(i)
+		var neighbor: ConnectionCell = navigation_tilemap.positionIndexedChildren[i]
+		if neighbor is ConnectionCell:
+			return con_cell.CanConnectTo(ConnectionCell.Direction.North, neighbor) || \
+			con_cell.CanConnectTo(ConnectionCell.Direction.South, neighbor) || \
+			con_cell.CanConnectTo(ConnectionCell.Direction.East, neighbor) || \
+			con_cell.CanConnectTo(ConnectionCell.Direction.West, neighbor)
 		return true
 	
 	var prioritize_branches = func(a: Vector2i, b: Vector2i) -> bool:
@@ -82,6 +85,7 @@ func _pathfinding(from: Vector2i, to: Vector2i) -> Array[Vector2i]:
 	# Recursively find a path
 	while !stack.is_empty():
 		var v: Vector2i = stack.pop_back()
+		con_cell = navigation_tilemap.positionIndexedChildren[v]
 		path.push_back(v)	# Gets added to the line
 		if v == to:
 			path.pop_front()
@@ -90,10 +94,14 @@ func _pathfinding(from: Vector2i, to: Vector2i) -> Array[Vector2i]:
 		# Push any of the unvisited cells into the node
 		var surround: Array[Vector2i] = navigation_tilemap.get_surrounding_cells(v)
 		var accessible: Array[Vector2i] = surround.filter(func(i): return navigation_tilemap.get_cell_source_id(i) >= 0 && !path.has(i))
-
 		var filtered: Array[Vector2i] = accessible.filter(filter_connected_rooms)
 		filtered.sort_custom(prioritize_branches)
 		if !filtered.is_empty():
 			filtered.all(func(i): stack.push_back(i); return true)
 
 	return []
+
+
+func _on_nav_tilemap_changed():
+	print("Navigation tilemap has changed!")
+	pass

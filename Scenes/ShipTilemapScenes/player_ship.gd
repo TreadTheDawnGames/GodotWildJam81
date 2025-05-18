@@ -22,6 +22,7 @@ func DoCombine(roomToAdd : ShipRoom):
 	roomToAdd.AddToMap(self)
 	SubMaps.append(roomToAdd)
 	print("Rooms count: ", SubMaps.size())
+	changed.emit()
 	pass
 
 func AbleToConnectPiece(roomToAdd : ShipRoom, roomPosition : Vector2i) -> bool:
