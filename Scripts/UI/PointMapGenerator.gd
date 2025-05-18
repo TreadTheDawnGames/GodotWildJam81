@@ -51,8 +51,10 @@ func pointsConnectedToCruiserPoint(hasVisionUpgrade: bool = false) -> Array:
 		var pointButton: TextureButton = point.get_node("TextureButton")
 		if point.global_position.distance_to(idealStartPos) < pointToGetConnectionsOf.global_position.distance_to(idealStartPos):
 			#pointButton.disabled #This doesn't do anything unless you set it to true or false
-			pointButton.disconnect('mouse_entered', Callable(Popups, "showPitStopPopup"))
-			pointButton.disconnect('pressed', pointPressed)
+			if(pointButton.mouse_entered.is_connected(Popups.showPitStopPopup)):
+				pointButton.disconnect('mouse_entered', Callable(Popups, "showPitStopPopup"))
+			if(pointButton.pressed.is_connected(pointPressed)):
+				pointButton.disconnect('pressed', pointPressed)
 		else:
 			point = setPopupsOnButton(id)
 			arrOfConnectedPoints.append( point )
@@ -79,15 +81,22 @@ func moveCruiserToThisPoint(pos: Vector2) -> void:
 func setPopupsOnButton(id: int) -> Control:
 	var point = dictOfPoints[ id ]
 	var pointButton: TextureButton = point.get_node("TextureButton")
-	pointButton.disconnect('mouse_entered', Callable(Popups, "showPitStopPopup"))
+	if(pointButton.mouse_entered.is_connected(Popups.showPitStopPopup)):
+		pointButton.mouse_entered.disconnect(Popups.showPitStopPopup)
 	var pointPosition: Vector2 = point.global_position + randAmtToAdd()
 	var levelInfo = LevelInfo.generateRandomLevel(false, pointPosition, false, false)
 	var popupText = levelInfo.makePopupText(levelInfo.TimeToReach, levelInfo.Reputation, levelInfo.SpaceDust, levelInfo.Pirates, levelInfo.AsteroidDensity)
 	dictOfLevelInfos[ point ] = levelInfo
 
-	pointButton.mouse_entered.connect(Callable(Popups, "showPitStopPopup").bind(Rect2i(Vector2i(point.global_position), Vector2i(point.size)), popupText))
-	pointButton.mouse_exited.connect(Callable(Popups, "hidePitStopPopup"))
-	pointButton.pressed.connect(pointPressed.bind(point))
+	if(!pointButton.mouse_entered.is_connected(Popups.showPitStopPopup)):
+		pointButton.mouse_entered.connect(Popups.showPitStopPopup.bind(Rect2i(Vector2i(point.global_position), Vector2i(point.size)), popupText))
+		
+	if(!pointButton.mouse_exited.is_connected(Popups.hidePitStopPopup)):
+		pointButton.mouse_exited.connect(Popups.hidePitStopPopup)
+	
+	if(!pointButton.pressed.is_connected(pointPressed)):
+		pointButton.pressed.connect(pointPressed.bind(point))
+	
 	return point
 
 func setLineHighlightToSomeLines(arrOfPoses: Array, centerPos: Vector2) -> void:
@@ -101,10 +110,12 @@ func setLineHighlightToSomeLines(arrOfPoses: Array, centerPos: Vector2) -> void:
 
 
 func placePointsFromMap() -> void:
-	var pointsMap: Node2D = pointMaps[ floor( pointMaps.size() * randf() ) ].instantiate()
+	var pointsMap: Node2D = pointMaps.pick_random().instantiate() # <- built in random from array! pointMaps[ floor( pointMaps.size() * randf() ) ].instantiate()
 	add_child(pointsMap)
+	var eastmostPoint : PitstopPoint = null
+	var TheButton : TextureButton
 	for pointOnPointMap in pointsMap.get_children():
-		var point: Control = load("res://Scenes/UI/PitStopBtn.tscn").instantiate()
+		var point: PitstopPoint = load("res://Scenes/UI/PitStopBtn.tscn").instantiate()
 		var pointPosition: Vector2 = pointOnPointMap.global_position + randAmtToAdd()
 		add_child(point)
 
@@ -112,18 +123,30 @@ func placePointsFromMap() -> void:
 		if pointButton:
 			point.global_position = pointPosition
 			pointButton.pressed.connect(pointPressed.bind(point))
+			
+			if(!eastmostPoint or eastmostPoint.global_position.x < pointButton.global_position.x):
+				eastmostPoint = point
+				TheButton = pointButton
+				pass
+
 		else:
 			printerr("Error: Could not find TextureButton in PitStopBtn.tscn")
 			point.queue_free()
+
+	TheButton.modulate = Color.RED
+	TheButton.pressed.disconnect(pointPressed)
+	TheButton.pressed.connect(pointPressed.bind(eastmostPoint, true))
+	
 	remove_child(pointsMap)
 
-func pointPressed(clickedPoint: Control) -> void:
+func pointPressed(clickedPoint: Control, isFinal : bool = false) -> void:
 	for point in pointsConnectedToCruiserPoint():
 		if point == clickedPoint:
 			var dist: float = get_global_mouse_position().distance_squared_to( clickedPoint.global_position )
 			if dist > clickedPoint.marg:
 				moveCruiserToThisPoint( clickedPoint.global_position )
 				GlobalPlayerInfo.SetActiveLevelInfo(dictOfLevelInfos.get(point))
+				GlobalPlayerInfo.ActiveLevelInfo.FinalLevel = isFinal
 				pass
 
 func connectPointsOnMap() -> void:

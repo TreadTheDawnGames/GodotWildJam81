@@ -15,7 +15,7 @@ func _ready() -> void:
 func UpdateText():
 	var ship : PlayerShip = GlobalPlayerInfo.ThePlayerShip
 	if(!ship):
-		printerr("There is no global playership!")
+		#printerr("There is no global playership!")
 		return
 	money_label.text = "Money: " + str(GlobalPlayerInfo.Money)
 	crew_count_label.text = "Crew: " + str(ship.GetCrewCount())

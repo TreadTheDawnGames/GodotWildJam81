@@ -1,10 +1,14 @@
 extends Node
 
+const ENDGAME_SCREEN = preload("res://Scenes/endgame_screen.tscn")
+
 var ThePlayerShip : PlayerShip
 var ActiveLevelInfo : LevelInfo
 var ActiveLevel : Level
-var Money : int
+var Money : int = 20
 var Reputation : int
+
+var TotalTime : float
 
 func AddRep(amount : int):
 	Reputation += amount
@@ -37,9 +41,34 @@ func ShipEnterStorage():
 	
 func ShipExitStorage(position : Vector2) -> PlayerShip:
 	if(!ThePlayerShip):
-		printerr("THERE IS NO PLAYER SHIP")
+		#printerr("THERE IS NO PLAYER SHIP")
 		return
 	ThePlayerShip.global_position = position
 	ThePlayerShip.process_mode = Node.PROCESS_MODE_PAUSABLE
 	print("Spawned ship")
 	return ThePlayerShip
+
+func EndGame(win : bool):
+	var end : EndgameScreen = ENDGAME_SCREEN.instantiate()
+	end.Win = win
+	add_child(end)
+	GlobalPlayerInfo.ShipEnterStorage()
+	return
+
+func ResetValues():
+	for room in ThePlayerShip.SubMaps:
+		room.DamageRoom(room.hitpoints+1)
+	ThePlayerShip.positionIndexedChildren.clear()
+	ThePlayerShip.isSetup = false
+	ThePlayerShip.Setup()
+	ActiveLevelInfo = null
+	ActiveLevel = null
+	Money = 20
+	Reputation = 0
+	TotalTime = 0
+
+func GetGameRoot() -> GameRoot:
+	return get_tree().root.get_children().filter(func(a): return a is GameRoot)[0]
+
+func Shake():
+	GetGameRoot().get_node("GameCamera").Shake()

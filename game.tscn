@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://ma5misc0fo5f"]
+[gd_scene load_steps=5 format=3 uid="uid://ma5misc0fo5f"]
 
 [ext_resource type="PackedScene" uid="uid://b3ou0ys527w25" path="res://Scenes/ShipTilemapScenes/Player_Ship.tscn" id="1_e2o6t"]
 [ext_resource type="Script" uid="uid://cpt8iweygokjs" path="res://Scenes/debug.gd" id="1_feb5d"]
-[ext_resource type="PackedScene" uid="uid://dnycrg3qoywj2" path="res://Scenes/UI/SpaceMap.tscn" id="2_feb5d"]
 [ext_resource type="Script" uid="uid://bbo65ha7vpc3w" path="res://ScreenShake.gd" id="3_7jktm"]
 [ext_resource type="PackedScene" uid="uid://dxyq5ccvvdfax" path="res://GameInfoPanel.tscn" id="4_fc0e3"]
 
@@ -15,9 +14,6 @@ script = ExtResource("1_feb5d")
 unique_name_in_owner = true
 position = Vector2(576, 324)
 script = ExtResource("3_7jktm")
-
-[node name="SpaceMap" parent="." instance=ExtResource("2_feb5d")]
-visible = false
 
 [node name="MoneyPanel" parent="." instance=ExtResource("4_fc0e3")]
 position = Vector2(995, 34)

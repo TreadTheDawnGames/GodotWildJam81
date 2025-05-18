@@ -1,4 +1,7 @@
 extends Control
+class_name PitstopPoint
+
+var FinalLevel : bool = false
 
 var marg : float
 

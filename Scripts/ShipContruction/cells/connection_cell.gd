@@ -28,8 +28,10 @@ func Init():
 	debugSpritesParent = get_node("DebugSprites")
 	AddRandomConnections()
 	AddSurroundingTiles()
-	grabArea.mouse_entered.connect(Hovered)
-	grabArea.mouse_exited.connect(Unhovered)
+	if(!grabArea.mouse_entered.is_connected(Hovered)):
+		grabArea.mouse_entered.connect(Hovered)
+	if(!grabArea.mouse_exited.is_connected(Unhovered)):
+		grabArea.mouse_exited.connect(Unhovered)
 	DoDebugSprites()
 	
 

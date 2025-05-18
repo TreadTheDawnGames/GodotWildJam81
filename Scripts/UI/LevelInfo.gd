@@ -28,6 +28,7 @@ var AsteroidRoute: bool
 var Nebula: bool
 var DistanceFactor: Variant
 var moneyAmt : int
+var FinalLevel : bool = false
 
 static func generateRandomLevel(nebula: bool = false, levelPosition: Vector2 = IdealStartPos, canBeAsteroidRoute: bool = false, dumbMode: bool = false) -> LevelInfo:
 	return LevelInfo.new(getRandomTimeToReach(levelPosition), getRandomReputation(levelPosition), getRandomSpaceDust(), getRandomPirateChance(levelPosition), getRandomAsteroidDensity(levelPosition, canBeAsteroidRoute, dumbMode), nebula)

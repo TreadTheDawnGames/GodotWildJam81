@@ -6,6 +6,8 @@ var pirate : PirateShip
 var difficulty : int = 1
 
 var completeness : int
+@export var maxLife : int = 20
+@export var minLife : int = 12
 
 func _ready():
 	return
@@ -18,7 +20,8 @@ func SpawnPirate(dif : int):
 	pirate = get_node("PirateShip")
 	for i in difficulty:
 		AssemblePirate(i)
-
+	pirate.hitpoints = randi_range(minLife, maxLife)*difficulty
+ 
 	return
 	
 	

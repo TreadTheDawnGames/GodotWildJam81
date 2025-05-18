@@ -4,7 +4,6 @@ class_name PirateShip
 
 var goDirection : Vector2 = Vector2(0,0)
 
-
 func _ready():
 	editing = true
 	dragNDrop = false
@@ -32,4 +31,13 @@ func _process(delta: float) -> void:
 func SetNewLocation():
 	goDirection = Vector2(-0.5, randf()-randf())
 	move_timer.start(randf_range(0.5,1.0))
+	return
+
+func DamageRoom(amount : int):
+	hitpoints -= amount
+	
+	if(hitpoints <=0):
+		GlobalPlayerInfo.Shake()
+		queue_free()
+		return true
 	return

@@ -8,6 +8,7 @@ var info : LevelInfo
 @onready var level_timer: Timer = $LevelTimer
 var complete : bool = false
 
+
 signal LevelComplete
 
 func _ready():
@@ -18,6 +19,7 @@ func _ready():
 	level_timer.wait_time = info.TimeToReach
 	level_timer.start()
 	level_timer.timeout.connect(TransitionOutOfLevel)
+	
 	
 	Background.useNeb = info.Nebula
 	var playerSpeed : float = float(GlobalPlayerInfo.ThePlayerShip.GetSpeed())
@@ -60,10 +62,16 @@ func TrySpawnPirate():
 	return
 
 func TransitionOutOfLevel():
+	ExitWithoutShop()
+	LevelComplete.emit()
+	return
+
+func ExitWithoutShop():
 	Background.StopScroll()
 	GlobalPlayerInfo.AddMoney(info.moneyAmt)
 	GlobalPlayerInfo.AddRep(info.Reputation)
+	GlobalPlayerInfo.TotalTime += info.TimeToReach - level_timer.time_left
+	
 	complete = true
 	queue_free()
-	LevelComplete.emit()
 	return

@@ -7,10 +7,11 @@ var SubMaps : Array[ShipRoom] = []
 var editing = false
 
 @export var gameArea : Vector2
-
+@export var MaxHitpoints : int = 7
 @export var gameAreaOffset : Vector2
 
 func _ready() -> void:
+	hitpoints = MaxHitpoints
 	dragNDrop = false
 	Faction = ShipFaction.Player
 	Setup.call_deferred()
@@ -60,6 +61,7 @@ func EnterStorage():
 	process_mode = Node.PROCESS_MODE_DISABLED
 	return
 
+var savedPos
 func _process(delta: float) -> void:
 	if(editing):
 		return
@@ -69,7 +71,12 @@ func _process(delta: float) -> void:
 	ClampPosition()
 	
 	Engine.time_scale = GetSpeed()/2.0
-	
+	if(Input.is_action_pressed("DEBUG-Speed++++")):
+		Engine.time_scale = 500
+		savedPos = global_position
+		global_position = Vector2(9999,9999)
+	if(Input.is_action_just_released("DEBUG-Speed++++")):
+		global_position = savedPos
 	return
 	
 	
@@ -95,11 +102,14 @@ func ClampPosition():
 		#positionIndexedChildren.erase(invalidCell)
 
 func DamageRoom(amount : int) -> bool:
-	%GameCamera.Shake()
+	GlobalPlayerInfo.Shake()
 	hitpoints -= amount
 	
 	if(hitpoints <=0):
 		print("YOU LOSE")
-		queue_free()
+		GlobalPlayerInfo.ActiveLevel.ExitWithoutShop()
+		GlobalPlayerInfo.EndGame(false)
+		EnterStorage()
+		hitpoints = MaxHitpoints
 		return true
 	return false
