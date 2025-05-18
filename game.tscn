@@ -16,7 +16,7 @@ position = Vector2(576, 324)
 script = ExtResource("3_7jktm")
 
 [node name="MoneyPanel" parent="." instance=ExtResource("4_fc0e3")]
-position = Vector2(572, 41)
+position = Vector2(540, 41)
 
 [node name="playerShipSpawn" type="Marker2D" parent="."]
 position = Vector2(283, 325)
