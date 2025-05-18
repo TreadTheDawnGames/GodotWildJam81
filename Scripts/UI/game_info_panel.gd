@@ -7,6 +7,9 @@ class_name GameInfoPanel
 @onready var speed_label: RichTextLabel = $SpeedLabel
 @onready var time_left: RichTextLabel = $TimeLeft
 @onready var dust_label: RichTextLabel = $DustLabel
+@onready var asteroid_label: RichTextLabel = $AsteroidLabel
+@onready var reputation_label: RichTextLabel = $ReputationLabel
+@onready var payout_label: RichTextLabel = $PayoutLabel
 
 
 func _ready() -> void:
@@ -25,13 +28,19 @@ func UpdateText():
 		var timer = GlobalPlayerInfo.ActiveLevel.level_timer
 		var dustAmount = "Dust: " + str(GlobalPlayerInfo.ActiveLevelInfo.SpaceDust) + "%"
 	#https://forum.godotengine.org/t/how-to-show-on-a-label-how-much-time-from-a-timer-is-left/13594
-		time_left.text = "%d:%02d" % [floor(timer.time_left / 60), int(timer.time_left) % 60]
+		time_left.text = "Time: %d:%02d" % [floor(timer.time_left / 60), int(timer.time_left) % 60]
 		dust_label.text = dustAmount
+		asteroid_label.text = "AstDense: " + str(GlobalPlayerInfo.ActiveLevelInfo.AsteroidDensity) + "%"
+		reputation_label.text = "RepGain: " + str(GlobalPlayerInfo.ActiveLevelInfo.Reputation)
+		payout_label.text = "Payout: " + str(GlobalPlayerInfo.ActiveLevelInfo.moneyAmt)
+		
+		
 	else:
-		time_left.text = "X:XX"
+		time_left.text = "Time: X:XX"
 		dust_label.text = "Dust: N/A"
-
-	
+		asteroid_label.text = "AstDense: N/A"# + str(GlobalPlayerInfo.ActiveLevelInfo.AsteroidDensity) + "%"
+		reputation_label.text = "RepGain: N/A"# + str(GlobalPlayerInfo.ActiveLevelInfo.Reputation)
+		payout_label.text = "Payout: N/A" #+ str(GlobalPlayerInfo.ActiveLevelInfo.moneyAmt)
 	
 	return
 

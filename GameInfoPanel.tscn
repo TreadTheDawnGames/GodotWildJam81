@@ -8,49 +8,76 @@ texture = ExtResource("1_yh2sq")
 script = ExtResource("2_1x43a")
 
 [node name="MoneyLabel" type="RichTextLabel" parent="."]
-offset_left = -111.0
-offset_top = -33.0
-offset_right = -4.0
-offset_bottom = -8.0
+offset_left = -475.0
+offset_top = -41.0
+offset_right = -355.0
+offset_bottom = -16.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 text = "Money: ERRR"
 
+[node name="SpeedLabel" type="RichTextLabel" parent="."]
+offset_left = -473.0
+offset_top = -21.0
+offset_right = -358.0
+offset_bottom = 8.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "Speed: ERRR"
+
 [node name="CrewCountLabel" type="RichTextLabel" parent="."]
-offset_left = 12.0
-offset_top = -33.0
-offset_right = 109.0
-offset_bottom = -7.0
+offset_left = -468.0
+offset_top = -1.0
+offset_right = -371.0
+offset_bottom = 25.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 text = "Crew: ERRR"
 
 [node name="FirepowerLabel" type="RichTextLabel" parent="."]
-offset_left = 9.0
-offset_top = -9.0
-offset_right = 111.0
-offset_bottom = 24.0
+offset_left = -473.0
+offset_top = 18.0
+offset_right = -364.0
+offset_bottom = 51.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 text = "FirPwr: ERRR"
 
-[node name="SpeedLabel" type="RichTextLabel" parent="."]
-offset_left = -108.0
-offset_top = -8.0
-offset_right = -8.0
-offset_bottom = 21.0
-theme_override_colors/default_color = Color(0, 0, 0, 1)
-text = "Speed: ERRR"
-
 [node name="TimeLeft" type="RichTextLabel" parent="."]
-offset_left = -73.0
-offset_top = 16.0
-offset_right = -33.0
-offset_bottom = 56.0
+offset_left = 410.0
+offset_top = 13.0
+offset_right = 495.0
+offset_bottom = 38.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-text = "E:RR"
+text = "Time: E:RR"
 
 [node name="DustLabel" type="RichTextLabel" parent="."]
-offset_left = 9.0
-offset_top = 14.0
-offset_right = 110.0
-offset_bottom = 54.0
+offset_left = 475.0
+offset_top = -40.0
+offset_right = 576.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 text = "Dust: ERR%"
+
+[node name="AsteroidLabel" type="RichTextLabel" parent="."]
+offset_left = 339.0
+offset_top = -40.0
+offset_right = 487.0
+offset_bottom = -17.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "AstDense: ERR%"
+
+[node name="ReputationLabel" type="RichTextLabel" parent="."]
+offset_left = 341.0
+offset_top = -14.0
+offset_right = 447.0
+offset_bottom = 9.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "RepGain: ERR"
+
+[node name="PayoutLabel" type="RichTextLabel" parent="."]
+offset_left = 459.0
+offset_top = -15.0
+offset_right = 563.0
+offset_bottom = 8.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+text = "Payout: $ERR"
+
+[node name="Container" type="Container" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0

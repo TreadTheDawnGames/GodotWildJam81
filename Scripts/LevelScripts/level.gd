@@ -6,6 +6,10 @@ var info : LevelInfo
 @onready var pirate_spawner: PirateBuilder = $PirateSpawner
 @onready var pirateTimer: Timer = $PirateSpawner/pirateTimer
 @onready var level_timer: Timer = $LevelTimer
+@onready var planet_sprite: Sprite2D = $planetSprite
+
+@export var planets : Array[Texture2D]
+
 var complete : bool = false
 
 signal LevelComplete
@@ -16,6 +20,10 @@ func _ready():
 	pirate_spawner = get_node("PirateSpawner")
 	pirateTimer = get_node("PirateSpawner/pirateTimer")
 	level_timer = get_node("LevelTimer")
+	planet_sprite = get_node("planetSprite")
+	planet_sprite.texture = planets.pick_random()
+	
+	
 	level_timer.wait_time = info.TimeToReach
 	level_timer.start()
 	level_timer.timeout.connect(TransitionOutOfLevel)
@@ -49,6 +57,9 @@ func _ready():
 	
 	var pirateOutTimer = get_tree().create_timer(info.TimeToReach - 20)
 	pirateOutTimer.timeout.connect(pirate_spawner.PirateMoveInOut.bind(true))
+
+	var planetInViewTimer = get_tree().create_timer(info.TimeToReach - 40)
+	planetInViewTimer.timeout.connect(planet_sprite.Move)
 
 func TrySpawnPirate():
 	var rand = randi()%100 +1

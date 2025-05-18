@@ -56,7 +56,8 @@ func EndGame(win : bool):
 
 func ResetValues():
 	for room in ThePlayerShip.SubMaps:
-		room.DamageRoom(room.hitpoints+1)
+		if(is_instance_valid(room)):
+			room.DamageRoom(room.hitpoints+1)
 	ThePlayerShip.positionIndexedChildren.clear()
 	ThePlayerShip.isSetup = false
 	ThePlayerShip.Setup()

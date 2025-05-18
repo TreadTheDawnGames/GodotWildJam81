@@ -1,11 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://d0tav4fm5jwt1"]
+[gd_scene load_steps=8 format=3 uid="uid://d0tav4fm5jwt1"]
 
 [ext_resource type="Script" uid="uid://bxnrgk5dsq5td" path="res://Scripts/LevelScripts/level.gd" id="1_t13wm"]
 [ext_resource type="PackedScene" uid="uid://egkl8ceuwlma" path="res://Scenes/LevelScenes/asteroid_spawner.tscn" id="2_54rtb"]
+[ext_resource type="Texture2D" uid="uid://dtsesrdjvh14w" path="res://Assets/Sprites/Map/Planet1.png" id="2_chq2k"]
 [ext_resource type="PackedScene" uid="uid://b811qksdb0w4k" path="res://Scenes/LevelScenes/Pirates/pirate_spawner.tscn" id="3_f0wf7"]
+[ext_resource type="Texture2D" uid="uid://b63xj06hwdtn6" path="res://Assets/Sprites/Map/Planet2.png" id="3_li8oe"]
+[ext_resource type="Texture2D" uid="uid://cne2bc8a25k5l" path="res://Assets/Sprites/Map/Planet3.png" id="4_bc6g6"]
+[ext_resource type="Script" uid="uid://tcmlocut57jw" path="res://Scenes/LevelScenes/planet_sprite.gd" id="7_li8oe"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_t13wm")
+planets = Array[Texture2D]([ExtResource("2_chq2k"), ExtResource("3_li8oe"), ExtResource("4_bc6g6")])
 
 [node name="PirateSpawner" parent="." instance=ExtResource("3_f0wf7")]
 
@@ -16,3 +21,8 @@ autostart = true
 [node name="AsteroidSpawner" parent="." instance=ExtResource("2_54rtb")]
 
 [node name="LevelTimer" type="Timer" parent="."]
+
+[node name="planetSprite" type="Sprite2D" parent="."]
+position = Vector2(1362, 636)
+texture = ExtResource("4_bc6g6")
+script = ExtResource("7_li8oe")
