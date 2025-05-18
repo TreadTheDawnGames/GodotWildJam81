@@ -77,7 +77,11 @@ func _process(delta: float) -> void:
 	if(levelTimerLeft <= 0):
 		TransitionOutOfLevel()
 		pass
-	
+	if(levelTimerLeft <= 20):
+		planet_sprite.Move()
+		
+	if(levelTimerLeft <= 10):
+		pirate_spawner.PirateMoveInOut(true)
 	return
 
 func TransitionOutOfLevel():

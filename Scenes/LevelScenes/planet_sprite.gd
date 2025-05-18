@@ -5,7 +5,7 @@ var inView : bool = false
 
 func _process(delta: float) -> void:
 	if(inView):
-		position.x -= 20 * delta
+		position.x -= 20 * delta * (GlobalPlayerInfo.ThePlayerShip.GetSpeed()/2)
 
 func Move():
 	inView = true
