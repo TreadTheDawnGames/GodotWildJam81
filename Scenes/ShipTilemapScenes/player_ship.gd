@@ -111,3 +111,12 @@ func DamageRoom(amount : int) -> bool:
 		hitpoints = MaxHitpoints
 		return true
 	return false
+
+func CheckRooms():
+	for room in SubMaps:
+		#check for connection to me
+		#if no
+			#destroy room
+		
+		pass
+	return

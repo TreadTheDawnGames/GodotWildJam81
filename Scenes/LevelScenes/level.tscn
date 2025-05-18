@@ -12,6 +12,12 @@
 script = ExtResource("1_t13wm")
 planets = Array[Texture2D]([ExtResource("2_chq2k"), ExtResource("3_li8oe"), ExtResource("4_bc6g6")])
 
+[node name="planetSprite" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(1362, 636)
+texture = ExtResource("4_bc6g6")
+script = ExtResource("7_li8oe")
+
 [node name="PirateSpawner" parent="." instance=ExtResource("3_f0wf7")]
 
 [node name="pirateTimer" type="Timer" parent="PirateSpawner"]
@@ -21,8 +27,3 @@ autostart = true
 [node name="AsteroidSpawner" parent="." instance=ExtResource("2_54rtb")]
 
 [node name="LevelTimer" type="Timer" parent="."]
-
-[node name="planetSprite" type="Sprite2D" parent="."]
-position = Vector2(1362, 636)
-texture = ExtResource("4_bc6g6")
-script = ExtResource("7_li8oe")

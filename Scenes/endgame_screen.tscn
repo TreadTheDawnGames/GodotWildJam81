@@ -6,9 +6,9 @@
 [node name="EndgameScreen" type="Node2D"]
 script = ExtResource("1_lxwns")
 winHeadline = "TRIUMPHANT HEROES RETURN"
-winArticle = "Placeholder win text"
+winArticle = "The Cordova expedition was a roaring success! The names of the intrepid explorers who risked their lives on this adventure will never be forgotten! The galaxy knew it was a long shot and was proven wrong![/br]To the best of our knowledge, Captain Hal[num]'s first words upon discovering the secret of Cordova were, \"GOOD GRIEF, IT'S A-\" before forsed to run because of some Cordovan animal. Appropriate words in this journalist's opinion.[/br]The call has gone out to search no more! We have brought back the knowledge from the Ancients of Cordova! Now we be at peace, both in our minds and our hearts... but what if Cordova hides more discoveries such as this?"
 loseHeadline = "LOST IN SPACE"
-loseArticle = "The Cordova expedition has failed. Lives have been lost, and secrets will remain uncovered.Our intrepid explorers placeholder text"
+loseArticle = "The Cordova expedition has failed. The names of the intrepid explorers who risked their lives on this adventure will never be forgotten. The galaxy knew it was a long shot and was unfortunately proven correct.[/br]To the best of our knowledge, Captain Hal[num]'s last words were, \"OH NO! IT'S A-\" before being cut off by his untimely death. Unfortunate words in this journalist's opinion.[/br]The call has gone out to try again! We must bring back the knowledge from the Ancients of Cordova. Only then will we be at peace, both in our minds and our hearts. Who will be the next brave explorers to tackle Cordova?"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(555, 336)
@@ -34,6 +34,8 @@ offset_left = 146.0
 offset_top = 254.0
 offset_right = 917.0
 offset_bottom = 542.0
+bbcode_enabled = true
+text = "This is an easter egg :thumbsup:"
 
 [node name="TotalTime" type="RichTextLabel" parent="."]
 offset_left = 424.0

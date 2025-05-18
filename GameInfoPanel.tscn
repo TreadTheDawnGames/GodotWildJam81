@@ -77,7 +77,3 @@ offset_right = 563.0
 offset_bottom = 8.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 text = "Payout: $ERR"
-
-[node name="Container" type="Container" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0

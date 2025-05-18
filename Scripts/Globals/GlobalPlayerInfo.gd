@@ -10,6 +10,8 @@ var Reputation : int
 
 var TotalTime : float
 
+var retryCount:int=0
+
 func AddRep(amount : int):
 	Reputation += amount
 
@@ -66,6 +68,7 @@ func ResetValues():
 	Money = 20
 	Reputation = 0
 	TotalTime = 0
+	retryCount+=1
 
 func GetGameRoot() -> GameRoot:
 	return get_tree().root.get_children().filter(func(a): return a is GameRoot)[0]
