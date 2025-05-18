@@ -3,6 +3,7 @@ class_name PirateShip
 @onready var move_timer: Timer = $MoveTimer
 
 var goDirection : Vector2 = Vector2(0,0)
+var lrDir : float = -0.5
 
 func _ready():
 	editing = true
@@ -26,10 +27,14 @@ func _process(delta: float) -> void:
 	var moveDir = goDirection.normalized()  * 25 * delta  * (GetSpeed()/5.0)
 	global_position += moveDir
 	ClampPosition()
+	
+	if(global_position.x > 1500):
+		queue_free()
+	
 	return
 
 func SetNewLocation():
-	goDirection = Vector2(-0.5, randf()-randf())
+	goDirection = Vector2(lrDir, randf()-randf())
 	move_timer.start(randf_range(0.5,1.0))
 	return
 

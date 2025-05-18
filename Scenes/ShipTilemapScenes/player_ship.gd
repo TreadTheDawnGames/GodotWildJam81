@@ -21,7 +21,6 @@ func DoCombine(roomToAdd : ShipRoom):
 	roomToAdd.Faction = Faction
 	roomToAdd.AddToMap(self)
 	SubMaps.append(roomToAdd)
-	print("Rooms count: ", SubMaps.size())
 	pass
 
 func AbleToConnectPiece(roomToAdd : ShipRoom, roomPosition : Vector2i) -> bool:
@@ -29,7 +28,6 @@ func AbleToConnectPiece(roomToAdd : ShipRoom, roomPosition : Vector2i) -> bool:
 	for cell : ConnectionCell in roomToAdd.positionIndexedChildren.values().filter(func(a): return a is ConnectionCell):
 		var cellCoords : Vector2i = cell.myCoords + roomPosition
 		if(HasCell(cellCoords)):
-			print("Overlapping Cell")
 			return false
 		for neighbor in get_surrounding_cells(cellCoords):
 			var neighborDirection : ConnectionCell.Direction = ConnectionCell.Direction.get(ConnectionCell.DirectionStringFromVec2i(neighbor-cellCoords))
@@ -106,7 +104,6 @@ func DamageRoom(amount : int) -> bool:
 	hitpoints -= amount
 	
 	if(hitpoints <=0):
-		print("YOU LOSE")
 		GlobalPlayerInfo.ActiveLevel.ExitWithoutShop()
 		GlobalPlayerInfo.EndGame(false)
 		EnterStorage()

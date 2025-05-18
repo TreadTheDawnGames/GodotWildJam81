@@ -10,6 +10,7 @@ var completeness : int
 @export var minLife : int = 12
 
 func _ready():
+	pirate = get_node("PirateShip")
 	return
 
 func _process(_delta : float):
@@ -17,14 +18,15 @@ func _process(_delta : float):
 
 func SpawnPirate(dif : int):
 	difficulty = dif
-	pirate = get_node("PirateShip")
 	for i in difficulty:
 		AssemblePirate(i)
 	pirate.hitpoints = randi_range(minLife, maxLife)*difficulty
  
 	return
 	
-	
+func PirateMoveInOut(out : bool):
+	if(pirate):
+		pirate.lrDir =2.0 if out else -0.5
 
 func AssemblePirate(posi : int):
 	var roomToAdd : ShipRoom = RoomChooser.GetRandomAvailableRoom()

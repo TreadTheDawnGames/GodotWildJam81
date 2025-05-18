@@ -16,10 +16,10 @@ func _ready():
 	ResetMap()
 	GlobalPlayerInfo.AddMoney(20)
 	TransitionToShop()
+	Background.StopScroll()
 
 func TransitionToLevel():
 	Engine.time_scale = flightSpeed
-	print("Arrived")
 	space_map.hide()
 	GlobalPlayerInfo.ShipExitStorage(shipSpawnMarker.global_position)
 	var level = LEVEL.instantiate() as Level
