@@ -20,7 +20,7 @@ func _ready():
 	get_node("PlayerShip").EnterStorage()
 	ResetMap()
 	GlobalPlayerInfo.AddMoney(50)
-	TransitionToShop()
+	TransitionToMainMenu()
 	Background.StopScroll()
 
 func loadGameSettings():

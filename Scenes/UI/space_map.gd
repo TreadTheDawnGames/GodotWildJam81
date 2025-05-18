@@ -4,7 +4,6 @@ class_name SpaceMap
 var cruiser : Cruiser
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	%SpaceMapBGM
 	cruiser = get_node("Cruiser")
 	pass
 
