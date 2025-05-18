@@ -16,6 +16,9 @@ const idealEndPos := Vector2( 1024, 300 )
 var marg := 25
 var cruiser: Node2D
 var lineHighlighter: Line2D
+var nebAstLineHighlighter: Line2D
+var astLineHighlighter: Line2D
+var nebLineHighlighter: Line2D
 var mapDone := false
 var astar := AStar2D.new()
 var dictOfPoints: Dictionary = {}
@@ -26,7 +29,10 @@ func _ready() -> void:
 	randomize()
 	cruiser = get_parent().get_node("Cruiser")
 	cruiser.connect('doneMoving', doneMovingCruiser)
-	lineHighlighter = $"../Line2D"
+	lineHighlighter = $"../lineHighlighter"
+	nebAstLineHighlighter = $"../nebAstLineHighlighter"
+	astLineHighlighter = $"../astLineHighlighter"
+	nebLineHighlighter = $"../nebLineHighlighter"
 	makeMap()
 
 
@@ -42,6 +48,9 @@ func makeMap() -> void:
 # however the popups are still recreated, that should be reworked if we manage to work in the upgrade
 func pointsConnectedToCruiserPoint(hasVisionUpgrade: bool = false) -> Array:
 	var arrOfConnectedPoints: Array
+	var arrOfNebAstRoutes: Array
+	var arrOfAstRoutes: Array
+	var arrOfNebRoutes: Array
 	var pointToGetConnectionsOf: Control = getClosestPointToPosPassedIn( cruiser.global_position )
 	var idOfPointToGetConnectionsOf: int = dictOfIds[ pointToGetConnectionsOf ]
 	
@@ -56,18 +65,40 @@ func pointsConnectedToCruiserPoint(hasVisionUpgrade: bool = false) -> Array:
 			if(pointButton.pressed.is_connected(pointPressed)):
 				pointButton.disconnect('pressed', pointPressed)
 		else:
-			point = setPopupsOnButton(id)
-			arrOfConnectedPoints.append( point )
-			setLineHighlightToSomeLines( arrOfConnectedPoints, pointToGetConnectionsOf.global_position )
+			point = setPopupsOnButton( id )
+			var levelInfo = dictOfLevelInfos[ point ]
+			if levelInfo.Nebula and levelInfo.AsteroidRoute:
+				arrOfNebAstRoutes.append( point )
+				arrOfConnectedPoints.append( point )
+			elif levelInfo.AsteroidRoute:
+				arrOfAstRoutes.append( point )
+				arrOfConnectedPoints.append( point )
+			elif levelInfo.Nebula:
+				arrOfNebRoutes.append( point )
+				arrOfConnectedPoints.append( point )
+			else:
+				arrOfConnectedPoints.append( point )
+			setLineHighlightToSomeLines( arrOfConnectedPoints, pointToGetConnectionsOf.global_position, arrOfNebAstRoutes, arrOfAstRoutes, arrOfNebRoutes )
 			if hasVisionUpgrade:
 				var arrayOfConnectionsToConnectedPoint: Array = astar.get_point_connections( id )
 				for secondId in arrayOfConnectionsToConnectedPoint:
 					var _secondPoint = setPopupsOnButton( secondId )
 	if arrOfConnectedPoints.size() == 0:
 		for id in arrOfPointIdThatAreConnectedToTheMainPoint:
-			var point = setPopupsOnButton(id)
-			arrOfConnectedPoints.append( point )
-			setLineHighlightToSomeLines( arrOfConnectedPoints, pointToGetConnectionsOf.global_position )
+			var point = setPopupsOnButton( id )
+			var levelInfo = dictOfLevelInfos[ point ]
+			if levelInfo.Nebula and levelInfo.AsteroidRoute:
+				arrOfNebAstRoutes.append( point )
+				arrOfConnectedPoints.append( point )
+			elif levelInfo.AsteroidRoute:
+				arrOfAstRoutes.append( point )
+				arrOfConnectedPoints.append( point )
+			elif levelInfo.Nebula:
+				arrOfNebRoutes.append( point )
+				arrOfConnectedPoints.append( point )
+			else:
+				arrOfConnectedPoints.append( point )
+			setLineHighlightToSomeLines( arrOfConnectedPoints, pointToGetConnectionsOf.global_position, arrOfNebAstRoutes, arrOfAstRoutes, arrOfNebRoutes )
 			if hasVisionUpgrade:
 				var arrayOfConnectionsToConnectedPoint: Array = astar.get_point_connections( id )
 				for secondId in arrayOfConnectionsToConnectedPoint:
@@ -84,8 +115,12 @@ func setPopupsOnButton(id: int) -> Control:
 	if(pointButton.mouse_entered.is_connected(Popups.showPitStopPopup)):
 		pointButton.mouse_entered.disconnect(Popups.showPitStopPopup)
 	var pointPosition: Vector2 = point.global_position + randAmtToAdd()
-	var levelInfo = LevelInfo.generateRandomLevel(false, pointPosition, false, false)
-	var popupText = levelInfo.makePopupText(levelInfo.TimeToReach, levelInfo.Reputation, levelInfo.SpaceDust, levelInfo.Pirates, levelInfo.AsteroidDensity)
+	var isAsteroidRoute: bool = decideOnMapGoodieAfterHalfwayPoint( point.global_position, 30 )
+	var hasNebula: bool = decideOnMapGoodieAfterHalfwayPoint( point.global_position, 20 )
+	var levelInfo = LevelInfo.generateRandomLevel( hasNebula, pointPosition, isAsteroidRoute, false )
+	levelInfo.Nebula = hasNebula
+	levelInfo.AsteroidRoute = isAsteroidRoute
+	var popupText = levelInfo.makePopupText( levelInfo.TimeToReach, levelInfo.Reputation, levelInfo.SpaceDust, levelInfo.Pirates, levelInfo.AsteroidDensity, levelInfo.Nebula )
 	dictOfLevelInfos[ point ] = levelInfo
 
 	if(!pointButton.mouse_entered.is_connected(Popups.showPitStopPopup)):
@@ -99,13 +134,46 @@ func setPopupsOnButton(id: int) -> Control:
 	
 	return point
 
-func setLineHighlightToSomeLines(arrOfPoses: Array, centerPos: Vector2) -> void:
+func decideOnMapGoodieAfterHalfwayPoint(pointPosition: Vector2, chanceForIt: int) -> bool:
+	var distanceToStart = pointPosition.distance_to(idealStartPos)
+	var distanceToEnd = pointPosition.distance_to(idealEndPos)
+	if distanceToEnd < distanceToStart:
+		var chanceForAsteroidRoute: int = randi_range(0, 100)
+		if chanceForAsteroidRoute < chanceForIt:
+			return true
+		return false 
+	return false
+
+func setLineHighlightToSomeLines(arrOfPoses: Array, centerPos: Vector2, arrOfNebAstRoutes: Array = [], arrOfAstRoutes: Array = [], arrOfNebRoutes: Array = [] ) -> void:
 	lineHighlighter.clear_points()
+	nebAstLineHighlighter.clear_points()
+	astLineHighlighter.clear_points()
+	nebLineHighlighter.clear_points()
+
 	var ind: int = 0
 	for pos in arrOfPoses:
+		lineHighlighter.modulate = Color.WHITE
 		lineHighlighter.add_point( pos.global_position, ind )
 		lineHighlighter.add_point( centerPos, ind + 1 )
 		ind += 2
+	if arrOfNebAstRoutes.size() > 0:
+		for pos in arrOfNebAstRoutes:
+			nebAstLineHighlighter.modulate = Color.FUCHSIA
+			nebAstLineHighlighter.add_point( pos.global_position, ind )
+			nebAstLineHighlighter.add_point( centerPos, ind + 1 )
+			ind += 2
+	if arrOfAstRoutes.size() > 0:
+		for pos in arrOfAstRoutes:
+			astLineHighlighter.modulate = Color.DARK_RED
+			astLineHighlighter.add_point( pos.global_position, ind )
+			astLineHighlighter.add_point( centerPos, ind + 1 )
+			ind += 2
+	if arrOfNebRoutes.size() > 0:
+		for pos in arrOfNebRoutes:
+			nebLineHighlighter.modulate = Color.REBECCA_PURPLE
+			nebLineHighlighter.add_point( pos.global_position, ind )
+			nebLineHighlighter.add_point( centerPos, ind + 1 )
+			ind += 2
 	pass
 
 
@@ -140,13 +208,31 @@ func placePointsFromMap() -> void:
 	remove_child(pointsMap)
 
 func pointPressed(clickedPoint: Control, isFinal : bool = false) -> void:
+	print("START OF LOOP____________________________START OF LOOP")
 	for point in pointsConnectedToCruiserPoint():
+		print("point", point)
+		print("clickedPoint", clickedPoint)
+		print("_______GLOBAL POSITION NOW_________")
+		print("point", point.global_position)
+		print("clickedPoint", clickedPoint.global_position)
+		print("----------------SAME POINT????????????---------------------")
+		print(point == clickedPoint)
+		print("::::::::::::::::::::::::::::::::::::::::::::::::::")
 		if point == clickedPoint:
 			var dist: float = get_global_mouse_position().distance_squared_to( clickedPoint.global_position )
+			print(":::::::::::::::::::::::::::MARGIN:::::::::::::::::::::::::::::::::")
+			print(dist > clickedPoint.marg)
+			print(":::::::::::::::::::::::::::MARGIN:::::::::::::::::::::::::::::::::")
 			if dist > clickedPoint.marg:
+				var cruiserButton = clickedPoint.get_node("TextureButton")
+				if(cruiserButton.pressed.is_connected(pointPressed)):
+					cruiserButton.disconnect('pressed', pointPressed)
+				if(cruiserButton.mouse_entered.is_connected(Popups.showPitStopPopup)):
+					cruiserButton.disconnect('mouse_entered', Callable(Popups, "showPitStopPopup"))
 				moveCruiserToThisPoint( clickedPoint.global_position )
 				GlobalPlayerInfo.SetActiveLevelInfo(dictOfLevelInfos.get(point))
 				GlobalPlayerInfo.ActiveLevelInfo.FinalLevel = isFinal
+				print("END OF ITERATION____________________________END OF ITERATION")
 				pass
 
 func connectPointsOnMap() -> void:
