@@ -65,6 +65,9 @@ func create_path(target: Vector2) -> Array[Vector2]:
 func _pathfinding(from: Vector2i, to: Vector2i) -> Array[Vector2i]:	
 	if !navigation_tilemap.positionIndexedChildren.has(from):
 		return[]
+	if(navigation_tilemap.positionIndexedChildren[to] is LaserCell):
+		#trying to get to unnavigable tile
+		return []
 		
 	# Prepare the stack
 	var path: Array[Vector2i] = []
@@ -74,7 +77,7 @@ func _pathfinding(from: Vector2i, to: Vector2i) -> Array[Vector2i]:
 
 	# A function that determines whether a given cell is accessible
 	var filter_connected_rooms = func(c: Cell, i: Vector2i) -> bool:
-		var neighbor: ConnectionCell = navigation_tilemap.positionIndexedChildren[i]
+		var neighbor = navigation_tilemap.positionIndexedChildren[i]
 		if neighbor is ConnectionCell:
 			return c.CanConnectTo(ConnectionCell.Direction.North, neighbor) || \
 			c.CanConnectTo(ConnectionCell.Direction.South, neighbor) || \
@@ -87,20 +90,22 @@ func _pathfinding(from: Vector2i, to: Vector2i) -> Array[Vector2i]:
 
 	# Recursively find a path
 	while !stack.is_empty():
+		print("trying to get to: ", navigation_tilemap.positionIndexedChildren[to])
 		var v: Vector2i = stack.pop_back()
 		if navigation_tilemap.positionIndexedChildren.has(v):
-			con_cell = navigation_tilemap.positionIndexedChildren[v]
-			path.push_back(v)	# Gets added to the line
-			if v == to:
-				path.pop_front()
-				return path;
+			if(navigation_tilemap.positionIndexedChildren[v] is ConnectionCell):
+				con_cell = navigation_tilemap.positionIndexedChildren[v]
+				path.push_back(v)	# Gets added to the line
+				if v == to:
+					path.pop_front()
+					return path;
 
-			# Push any of the unvisited cells into the node
-			var surround: Array[Vector2i] = con_cell.GetNeighborCells()
-			var filtered: Array[Vector2i] = surround.filter(func(i): return filter_connected_rooms.call(con_cell, i))
-			filtered.sort_custom(prioritize_branches)
-			if !filtered.is_empty():
-				filtered.all(func(i): stack.push_back(i); return true)
+				# Push any of the unvisited cells into the node
+				var surround: Array[Vector2i] = con_cell.GetNeighborCells()
+				var filtered: Array[Vector2i] = surround.filter(func(i): return filter_connected_rooms.call(con_cell, i))
+				filtered.sort_custom(prioritize_branches)
+				if !filtered.is_empty():
+					filtered.all(func(i): stack.push_back(i); return true)
 
 	return []
 
