@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://3uxejpt68813"]
+
+[ext_resource type="PackedScene" uid="uid://c7blm8e5boclc" path="res://Scenes/UI/Tutorial/tutorial_base.tscn" id="1_8b8ve"]
+
+[node name="SpacemapTutorial" instance=ExtResource("1_8b8ve")]
+
+[node name="Body" parent="Panel" index="1"]
+offset_left = 31.0
+text = "This is the space map. Here you choose your path home. 
+
+Time to Travel:
+Reputation
+Money
+Space Dust
+Chance of Pirates
+Astroid Density
+Nebula"

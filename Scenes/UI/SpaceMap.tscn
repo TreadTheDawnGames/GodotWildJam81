@@ -35,3 +35,11 @@ texture = ExtResource("3_pab8o")
 script = ExtResource("2_pab8o")
 
 [node name="Cruiser" parent="." instance=ExtResource("1_ihlxe")]
+
+[node name="HelpButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 600.0
+offset_right = 40.0
+offset_bottom = 631.0
+text = "?"

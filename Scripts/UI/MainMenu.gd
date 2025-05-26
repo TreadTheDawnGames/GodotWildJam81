@@ -4,6 +4,7 @@ class_name MainMenu
 signal StartClicked
 signal OptionsClicked
 signal QuitGame
+signal OpenTutorial
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

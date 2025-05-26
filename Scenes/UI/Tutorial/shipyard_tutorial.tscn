@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://gtm63wqtd66k"]
+
+[ext_resource type="PackedScene" uid="uid://c7blm8e5boclc" path="res://Scenes/UI/Tutorial/tutorial_base.tscn" id="1_e1css"]
+[ext_resource type="Texture2D" uid="uid://dwxxwejh5wlsr" path="res://Assets/Tileryr/ship_blaster.png" id="1_h33lc"]
+[ext_resource type="Texture2D" uid="uid://dvoca3dj0cp74" path="res://Assets/UI/Tutorial/Screenshot 2025-05-23 203829.png" id="1_pj8fd"]
+[ext_resource type="Texture2D" uid="uid://dbfij3u5xs5g4" path="res://Assets/Tileryr/ship_laser.png" id="2_fgwyd"]
+[ext_resource type="SpriteFrames" uid="uid://btl1eyidfo0x6" path="res://Assets/Sprites/CrewmateFrames.tres" id="2_pj8fd"]
+
+[node name="ShipyardTutorial" instance=ExtResource("1_e1css")]
+
+[node name="Body" parent="Panel" index="1"]
+text = "This is the shipyard. Here you can purchase rooms to expand your ship.
+
+Every room always has engines on its left side. The more engines your ship has the faster it goes. It also makes it more maneuverable.
+
+Some parts have lasers on the front. They fire automatically, but their fire rate changes based on the STARDUST value of the mission (chosen in the next phase).
+
+Crewmates (queue amongus) wander the ship doing various jobs (lorewise-they don't actually do anything but walk), but if the room they're in is destroyed they die.
+
+Gold tinted parts add a crew member who spawns in the cockpit.
+
+If your cockpit is destroyed or have zero crewmates, the expedition has failed and you lose."
+
+[node name="Screenshot2025-05-23203830" type="Sprite2D" parent="Panel" index="2"]
+position = Vector2(47.1693, 373)
+scale = Vector2(0.395161, 0.395161)
+texture = ExtResource("1_pj8fd")
+
+[node name="Crewmate2" type="AnimatedSprite2D" parent="Panel" index="3"]
+position = Vector2(47.1693, 301)
+sprite_frames = ExtResource("2_pj8fd")
+
+[node name="ShipBlaster" type="Sprite2D" parent="Panel" index="4"]
+position = Vector2(44, 133)
+texture = ExtResource("1_h33lc")
+
+[node name="ShipLaser" type="Sprite2D" parent="Panel" index="5"]
+position = Vector2(55, 214)
+texture = ExtResource("2_fgwyd")

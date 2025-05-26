@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7blm8e5boclc"]
+
+[ext_resource type="Script" uid="uid://dtcy222h3x4sp" path="res://Scripts/UI/Tutorial/shipyard_tutorial.gd" id="1_vvtbc"]
+
+[node name="ShipyardTutorial" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vvtbc")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 139.0
+offset_top = 109.0
+offset_right = 851.0
+offset_bottom = 595.0
+mouse_filter = 1
+
+[node name="TutorialTitle" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 21.0
+offset_right = 194.0
+offset_bottom = 61.0
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 26
+text = "TUTORIAL"
+
+[node name="Body" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_left = 97.0
+offset_top = 63.0
+offset_right = 683.0
+offset_bottom = 461.0
+mouse_filter = 1
+text = "Placeholder
+"

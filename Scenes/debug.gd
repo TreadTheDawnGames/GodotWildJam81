@@ -53,9 +53,10 @@ func TransitionToLevel():
 	level.LevelComplete.connect(TransitionToShop)
 	return
 
-func TransitionToShop():
+func TransitionToShop(useTutorial : bool = false):
 	for laser in get_tree().root.get_children().filter(func(a): return a is Laser):
 		laser.queue_free()
+	#check to see if the player just played the final level, and if they did, tell them they won.
 	if(GlobalPlayerInfo.ActiveLevelInfo and GlobalPlayerInfo.ActiveLevelInfo.FinalLevel):
 		GlobalPlayerInfo.EndGame(true)
 		return
@@ -63,6 +64,8 @@ func TransitionToShop():
 	var shop = shopScene.instantiate()
 	add_child(shop)
 	shop.ShopClosed.connect(TransitionToSpaceMap)
+	if(useTutorial):
+		print("tutorial")
 	return
 
 func TransitionToMainMenu():
@@ -70,7 +73,7 @@ func TransitionToMainMenu():
 	BackgroundMusic.get_child(0).play()
 	mainMenu = mainMenuScene.instantiate()
 	add_child(mainMenu)
-	mainMenu.StartClicked.connect(TransitionToShop)
+	mainMenu.StartClicked.connect(TransitionToShop.bind(false))
 	mainMenu.StartClicked.connect(KillMainMenu)
 	mainMenu.OptionsClicked.connect(TransitionToOptionsMenu)
 	mainMenu.OptionsClicked.connect(KillMainMenu)

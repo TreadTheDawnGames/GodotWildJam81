@@ -1,0 +1,46 @@
+[gd_resource type="SpriteFrames" load_steps=7 format=3 uid="uid://btl1eyidfo0x6"]
+
+[ext_resource type="Texture2D" uid="uid://bt65evbcopvwa" path="res://Assets/Tileryr/crewmate.png" id="1_qwc82"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5bwah"]
+atlas = ExtResource("1_qwc82")
+region = Rect2(0, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2q63w"]
+atlas = ExtResource("1_qwc82")
+region = Rect2(60, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w6in1"]
+atlas = ExtResource("1_qwc82")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwimq"]
+atlas = ExtResource("1_qwc82")
+region = Rect2(40, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0e6ya"]
+atlas = ExtResource("1_qwc82")
+region = Rect2(80, 0, 20, 20)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5bwah")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2q63w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w6in1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fwimq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0e6ya")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

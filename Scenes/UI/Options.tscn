@@ -126,7 +126,7 @@ anchor_left = 0.0520833
 anchor_top = 0.853395
 anchor_right = 0.225694
 anchor_bottom = 0.907407
-text = "Quit Options"
+text = "Main Menu"
 metadata/_edit_use_anchors_ = true
 
 [connection signal="drag_ended" from="PanelContainer/Container/OptionsContainer/VolumeContainer/VolumeSlider" to="." method="_on_volume_slider_drag_ended"]
