@@ -9,9 +9,15 @@ offset_left = 31.0
 text = "This is the space map. Here you choose your path home. 
 
 Time to Travel:
-Reputation
-Money
-Space Dust
+	How long in minutes/seconds it will take to reach this pit stop. The number of 
+	engines on your ship will effect how fast the time actually passes.
+Reputation:
+	How many end-game points this pit stop is worth.
+Money:
+	How much money will be added to your account to buy rooms in the shipyard 
+	upon mission completion.
+Space Dust:
+	How much dust is in the sector. 
 Chance of Pirates
 Astroid Density
 Nebula"
