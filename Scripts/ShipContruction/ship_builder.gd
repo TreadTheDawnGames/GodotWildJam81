@@ -3,16 +3,16 @@ class_name ShipBuilder
 
 @onready var BuildArea: Area2D
 @onready var ShopPanel: Sprite2D
-@onready var help_button: Button = $HelpButton
 
 var playerShip : PlayerShip
 var addingRoom : ShipRoom
 var addingRoomCell : ConnectionCell
 
 signal ShopClosed
-@onready var tutorial: Control = $HelpButton/ShipyardTutorial
+@onready var tutorial: Control
 
 func _ready() -> void:
+	tutorial = $HelpButton/ShipyardTutorial
 	playerShip = GlobalPlayerInfo.ShipExitStorage(get_node("ShipPositioner").global_position)
 	#playerShip.ClearInvalidValues()
 	playerShip.editing = true
@@ -20,7 +20,6 @@ func _ready() -> void:
 	BuildArea = get_node("Area2D")
 	BuildArea.area_entered.connect(SnapToPlayerShip)
 	BuildArea.area_exited.connect(ReturnToShop)
-	help_button.pressed.connect(func(): tutorial.show())
 	get_node("CloseButton").pressed.connect(CloseShipyard)
 	
 func SnapToPlayerShip(otherArea : Area2D):

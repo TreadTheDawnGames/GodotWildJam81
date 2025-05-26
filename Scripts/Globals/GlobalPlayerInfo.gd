@@ -8,7 +8,7 @@ var ActiveLevelInfo : LevelInfo
 var ActiveLevel : Level
 var Money : int = 20
 var Reputation : int
-
+var hideTutorials : bool = false
 var TotalTime : float
 
 var retryCount:int=0

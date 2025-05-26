@@ -16,17 +16,17 @@ var Win : bool = false
 
 func _ready() -> void:
 	if(Win):
-		headline.text = winHeadline.replace("[/br]", "\n\n").replace("[num]", RomanNumeralize(GlobalPlayerInfo.retryCount))
-		article.text = winArticle
+		headline.text = winHeadline
+		article.text = winArticle.replace("[/br]", "\n\n").replace("[num]", RomanNumeralize(GlobalPlayerInfo.retryCount))
 	else:
 		headline.text = loseHeadline
 		article.text = loseArticle.replace("[/br]", "\n\n").replace("[num]", RomanNumeralize(GlobalPlayerInfo.retryCount))
 	
 	button.pressed.connect(func(): 
+		queue_free()
 		GlobalPlayerInfo.ResetValues()
 		#GlobalPlayerInfo.GetGameRoot().TransitionToShop()
 		#GlobalPlayerInfo.GetGameRoot().ResetMap()
-		queue_free()
 		)
 	
 	reputation.text = "Your Reputation: " + str(GlobalPlayerInfo.Reputation + GlobalPlayerInfo.ThePlayerShip.GetCrewCount())

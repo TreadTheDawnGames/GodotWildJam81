@@ -10,6 +10,7 @@ func _ready() -> void:
 	%SFXVolumeSlider.value = gameSettings.SFX
 	%MusicVolumeSlider.value = gameSettings.Music
 	%VolumeSlider.value = gameSettings.Master
+	%ShowTutsToggle.button_pressed = GlobalPlayerInfo.hideTutorials
 
 func _on_quit_options_button_pressed() -> void:
 	QuitOptions.emit()
@@ -31,3 +32,8 @@ func _on_music_volume_slider_drag_ended(value_changed: bool) -> void:
 func _on_volume_slider_drag_ended(value_changed: bool) -> void:
 	if value_changed:
 		GameSettings.saveValue("Volume", "Master", %VolumeSlider.value)
+
+
+func _on_show_tuts_toggle_toggled(toggled_on: bool) -> void:
+	GlobalPlayerInfo.hideTutorials = !toggled_on
+	pass # Replace with function body.

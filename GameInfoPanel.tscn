@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://dolsv1u3uubem" path="res://Scripts/UI/game_info_panel.gd" id="2_1x43a"]
 
 [node name="MoneyPanel" type="Sprite2D"]
+z_index = -1
 texture = ExtResource("1_yh2sq")
 script = ExtResource("2_1x43a")
 

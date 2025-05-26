@@ -6,18 +6,37 @@
 
 [node name="Body" parent="Panel" index="1"]
 offset_left = 31.0
-text = "This is the space map. Here you choose your path home. 
+offset_top = 58.0
+offset_right = 688.0
+offset_bottom = 259.0
+text = "This is the space map. Here you choose your path home by clicking on the mission you want to do. You can see mission details by hovering each mission. Your goal is to reach Home (the red space at the end.)
+"
 
-Time to Travel:
-	How long in minutes/seconds it will take to reach this pit stop. The number of 
-	engines on your ship will effect how fast the time actually passes.
+[node name="RichTextLabel2" type="RichTextLabel" parent="Panel" index="2"]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 137.0
+offset_right = 699.0
+offset_bottom = 488.0
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 11
+text = "Time to Travel:
+	How long in minutes/seconds it will take to reach this pit stop. The number of engines on your ship will effect how fast the time actually passes. This will tick faster if you have more engines.
+
 Reputation:
 	How many end-game points this pit stop is worth.
+
 Money:
-	How much money will be added to your account to buy rooms in the shipyard 
-	upon mission completion.
+	How much money will be added to your account to buy rooms in the shipyard upon mission completion.
+
 Space Dust:
-	How much dust is in the sector. 
-Chance of Pirates
-Astroid Density
-Nebula"
+	How much dust is in the sector. Effects fire rate of lasers. The more dust there is the slower your lasers shoot.
+
+Chance of Pirates:
+	The chance of pirates spawning.
+
+Astroid Density:
+	How thick the asteroid cloud is.
+
+Nebula:
+	If present, halves speed and doubles Space Dust."

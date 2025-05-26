@@ -38,3 +38,22 @@ offset_bottom = 461.0
 mouse_filter = 1
 text = "Placeholder
 "
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel"]
+layout_mode = 0
+offset_left = 590.0
+offset_top = 464.0
+offset_right = 706.0
+offset_bottom = 479.0
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 9
+text = "Click anywhere to dismiss"
+
+[node name="CheckButton" type="CheckButton" parent="."]
+layout_mode = 0
+offset_left = 747.0
+offset_top = 545.0
+offset_right = 850.0
+offset_bottom = 571.0
+theme_override_font_sizes/font_size = 8
+text = "Hide Tutorials"

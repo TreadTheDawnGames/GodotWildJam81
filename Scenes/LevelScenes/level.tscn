@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://d0tav4fm5jwt1"]
+[gd_scene load_steps=10 format=3 uid="uid://d0tav4fm5jwt1"]
 
 [ext_resource type="Script" uid="uid://bxnrgk5dsq5td" path="res://Scripts/LevelScripts/level.gd" id="1_t13wm"]
 [ext_resource type="PackedScene" uid="uid://egkl8ceuwlma" path="res://Scenes/LevelScenes/asteroid_spawner.tscn" id="2_54rtb"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://b63xj06hwdtn6" path="res://Assets/Sprites/Map/Planet2.png" id="3_li8oe"]
 [ext_resource type="Texture2D" uid="uid://cne2bc8a25k5l" path="res://Assets/Sprites/Map/Planet3.png" id="4_bc6g6"]
 [ext_resource type="Script" uid="uid://tcmlocut57jw" path="res://Scenes/LevelScenes/planet_sprite.gd" id="7_li8oe"]
+[ext_resource type="Script" uid="uid://divjggj5gvkko" path="res://Scripts/UI/Tutorial/tutorial_button.gd" id="8_35wog"]
+[ext_resource type="PackedScene" uid="uid://c6gvfe2oay3e0" path="res://Scenes/UI/Tutorial/mission_tutorial.tscn" id="9_7pt7w"]
 
 [node name="Level" type="Node2D"]
 script = ExtResource("1_t13wm")
@@ -27,3 +29,18 @@ autostart = true
 [node name="AsteroidSpawner" parent="." instance=ExtResource("2_54rtb")]
 
 [node name="LevelTimer" type="Timer" parent="."]
+
+[node name="Button" type="Button" parent="."]
+offset_left = 5.0
+offset_top = 609.0
+offset_right = 37.0
+offset_bottom = 640.0
+text = "?"
+script = ExtResource("8_35wog")
+
+[node name="ShipyardTutorial" parent="Button" instance=ExtResource("9_7pt7w")]
+layout_mode = 1
+offset_left = -80.0
+offset_top = -623.0
+offset_right = 1186.0
+offset_bottom = 57.0

@@ -73,7 +73,7 @@ func TrySpawnPirate():
 	return
 
 func _process(delta: float) -> void:
-	levelTimerLeft -= delta * (GlobalPlayerInfo.ThePlayerShip.GetSpeed()/2)
+	levelTimerLeft -= delta * (float(GlobalPlayerInfo.ThePlayerShip.GetSpeed())/2.0)
 	if(levelTimerLeft <= 0):
 		TransitionOutOfLevel()
 		pass

@@ -59,6 +59,12 @@ func GetSpeed() -> int:
 	for cell : ConnectionCell in positionIndexedChildren.values().filter(func(a): return is_instance_valid(a) and a is ConnectionCell):
 		if(!HasCell(cell.myCoords + cell.Vector2iFromDirection(ConnectionCell.Direction.West))):
 			engineCount +=1
+	
+	if(GlobalPlayerInfo.ActiveLevelInfo):
+		if(GlobalPlayerInfo.ActiveLevelInfo.Nebula):
+			@warning_ignore("narrowing_conversion")
+			engineCount *= 0.5
+	
 	return engineCount
 
 func EnterStorage():

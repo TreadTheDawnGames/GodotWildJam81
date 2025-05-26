@@ -93,6 +93,19 @@ step = 0.001
 script = ExtResource("2_tut6h")
 busName = "SFX"
 
+[node name="ShowTuts" type="HBoxContainer" parent="PanelContainer/Container/OptionsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="ShowTutsLabel" type="Label" parent="PanelContainer/Container/OptionsContainer/ShowTuts"]
+layout_mode = 2
+text = "Hide Tutorials"
+
+[node name="ShowTutsToggle" type="CheckButton" parent="PanelContainer/Container/OptionsContainer/ShowTuts"]
+unique_name_in_owner = true
+layout_mode = 2
+toggle_mode = false
+
 [node name="ScreenShakeContainer" type="HBoxContainer" parent="PanelContainer/Container/OptionsContainer"]
 layout_mode = 2
 theme_override_constants/separation = 15
@@ -132,6 +145,7 @@ metadata/_edit_use_anchors_ = true
 [connection signal="drag_ended" from="PanelContainer/Container/OptionsContainer/VolumeContainer/VolumeSlider" to="." method="_on_volume_slider_drag_ended"]
 [connection signal="drag_ended" from="PanelContainer/Container/OptionsContainer/MusicVolumeContainer/MusicVolumeSlider" to="." method="_on_music_volume_slider_drag_ended"]
 [connection signal="drag_ended" from="PanelContainer/Container/OptionsContainer/SFXVolumeContainer/SFXVolumeSlider" to="." method="_on_sfx_volume_slider_drag_ended"]
+[connection signal="toggled" from="PanelContainer/Container/OptionsContainer/ShowTuts/ShowTutsToggle" to="." method="_on_show_tuts_toggle_toggled"]
 [connection signal="toggled" from="PanelContainer/Container/OptionsContainer/ScreenShakeContainer/ScreenShakeToggle" to="." method="_on_screen_shake_toggle_toggled"]
 [connection signal="toggled" from="PanelContainer/Container/OptionsContainer/DumbModeContainer/DumbModeToggle" to="." method="_on_dumb_mode_toggle_toggled"]
 [connection signal="pressed" from="QuitOptionsButton" to="." method="_on_quit_options_button_pressed"]

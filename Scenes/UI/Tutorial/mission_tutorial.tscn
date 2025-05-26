@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=3 uid="uid://c6gvfe2oay3e0"]
+
+[ext_resource type="PackedScene" uid="uid://c7blm8e5boclc" path="res://Scenes/UI/Tutorial/tutorial_base.tscn" id="1_5vlq8"]
+[ext_resource type="Texture2D" uid="uid://byjdqe8bap7v1" path="res://Assets/Sprites/Asteroids/Asteroid2.png" id="2_1vpct"]
+[ext_resource type="Texture2D" uid="uid://bvtu6om0gqbsw" path="res://Assets/Sprites/Asteroids/SmallAsteroid2.png" id="3_c6acb"]
+[ext_resource type="Texture2D" uid="uid://bxmrjrl1r236t" path="res://Assets/Sprites/Asteroids/SmallAsteroid3.png" id="4_6krka"]
+[ext_resource type="Texture2D" uid="uid://dtsesrdjvh14w" path="res://Assets/Sprites/Map/Planet1.png" id="5_c2ale"]
+[ext_resource type="Texture2D" uid="uid://derce00etgfrj" path="res://Assets/Sprites/Asteroids/Laser.png" id="6_vpesf"]
+[ext_resource type="Texture2D" uid="uid://ba3n0m10d0i16" path="res://Assets/Sprites/PirateShip.png" id="7_uig26"]
+
+[node name="ShipyardTutorial" instance=ExtResource("1_5vlq8")]
+
+[node name="Body" parent="Panel" index="1"]
+offset_left = 36.0
+offset_bottom = 116.0
+text = "This is the mission. Safely fly the ship to the next pit stop through pirate raids and asteroids."
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="Panel" index="2"]
+layout_mode = 0
+offset_left = 134.0
+offset_top = 132.0
+offset_right = 678.0
+offset_bottom = 449.0
+mouse_filter = 1
+text = "Large asteroids have 5 hits. When destroyed they turn into two mini asteroids.
+
+Mini asteroids have 3 hits.
+
+
+Lasers do one damage.
+
+
+Pirates can spawn with 1-3 laser rooms.
+
+
+Planets indicate you're nearing the end of the level."
+
+[node name="Asteroid2" type="Sprite2D" parent="Panel" index="3"]
+position = Vector2(77, 153)
+texture = ExtResource("2_1vpct")
+
+[node name="SmallAsteroid2" type="Sprite2D" parent="Panel" index="4"]
+position = Vector2(103, 213)
+texture = ExtResource("3_c6acb")
+
+[node name="SmallAsteroid3" type="Sprite2D" parent="Panel" index="5"]
+position = Vector2(66, 222)
+texture = ExtResource("4_6krka")
+
+[node name="Planet1" type="Sprite2D" parent="Panel" index="6"]
+position = Vector2(73, 421)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("5_c2ale")
+
+[node name="Laser" type="Sprite2D" parent="." index="2"]
+position = Vector2(219, 390)
+texture = ExtResource("6_vpesf")
+
+[node name="PirateShip" type="Sprite2D" parent="." index="3"]
+position = Vector2(214, 451)
+texture = ExtResource("7_uig26")
+flip_h = true

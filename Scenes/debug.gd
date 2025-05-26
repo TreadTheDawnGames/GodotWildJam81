@@ -41,39 +41,16 @@ func loadGameSettings():
 		linear_to_db(gameSettings.Master)
 	)
 
-func TransitionToLevel():
-	stopAllMusic()
-	BackgroundMusic.get_child(2).play()
-	space_map.hide()
-	GlobalPlayerInfo.ShipExitStorage(shipSpawnMarker.global_position)
-	var level = LEVEL.instantiate() as Level
-	level.info = GlobalPlayerInfo.ActiveLevelInfo
-	add_child(level)
-	GlobalPlayerInfo.ActiveLevel = level
-	level.LevelComplete.connect(TransitionToShop)
-	return
 
-func TransitionToShop(useTutorial : bool = false):
-	for laser in get_tree().root.get_children().filter(func(a): return a is Laser):
-		laser.queue_free()
-	#check to see if the player just played the final level, and if they did, tell them they won.
-	if(GlobalPlayerInfo.ActiveLevelInfo and GlobalPlayerInfo.ActiveLevelInfo.FinalLevel):
-		GlobalPlayerInfo.EndGame(true)
-		return
-	flightSpeed = GlobalPlayerInfo.ThePlayerShip.GetSpeed()
-	var shop = shopScene.instantiate()
-	add_child(shop)
-	shop.ShopClosed.connect(TransitionToSpaceMap)
-	if(useTutorial):
-		print("tutorial")
-	return
+
+
 
 func TransitionToMainMenu():
 	stopAllMusic()
 	BackgroundMusic.get_child(0).play()
 	mainMenu = mainMenuScene.instantiate()
 	add_child(mainMenu)
-	mainMenu.StartClicked.connect(TransitionToShop.bind(false))
+	mainMenu.StartClicked.connect(TransitionToShop)
 	mainMenu.StartClicked.connect(KillMainMenu)
 	mainMenu.OptionsClicked.connect(TransitionToOptionsMenu)
 	mainMenu.OptionsClicked.connect(KillMainMenu)
@@ -87,11 +64,6 @@ func TransitionToOptionsMenu():
 	optionsMenu.QuitOptions.connect(KillOptionsMenu)
 	return
 
-func TransitionToSpaceMap():
-	stopAllMusic()
-	BackgroundMusic.get_child(1).play()
-	GlobalPlayerInfo.ShipEnterStorage()
-	space_map.show()
 
 func ResetMap():
 	if(space_map):
@@ -108,6 +80,40 @@ func KillMainMenu():
 		mainMenu.queue_free()
 	return
 
+func TransitionToShop():
+	for laser in get_tree().root.get_children().filter(func(a): return a is Laser):
+		laser.queue_free()
+	#check to see if the player just played the final level, and if they did, tell them they won.
+	if(GlobalPlayerInfo.ActiveLevelInfo and GlobalPlayerInfo.ActiveLevelInfo.FinalLevel):
+		GlobalPlayerInfo.EndGame(true)
+		return
+	flightSpeed = GlobalPlayerInfo.ThePlayerShip.GetSpeed()
+	var shop = shopScene.instantiate()
+	add_child(shop)
+	shop.ShopClosed.connect(TransitionToSpaceMap)
+	shop.tutorial.Setup(GlobalPlayerInfo.hideTutorials)
+	
+	return
+
+func TransitionToSpaceMap():
+	stopAllMusic()
+	BackgroundMusic.get_child(1).play()
+	GlobalPlayerInfo.ShipEnterStorage()
+	space_map.show()
+	space_map.spacemap_tutorial.Setup(GlobalPlayerInfo.hideTutorials)
+
+func TransitionToLevel():
+	stopAllMusic()
+	BackgroundMusic.get_child(2).play()
+	space_map.hide()
+	GlobalPlayerInfo.ShipExitStorage(shipSpawnMarker.global_position)
+	var level = LEVEL.instantiate() as Level
+	level.info = GlobalPlayerInfo.ActiveLevelInfo
+	add_child(level)
+	GlobalPlayerInfo.ActiveLevel = level
+	level.LevelComplete.connect(TransitionToShop)
+	return
+	
 func KillOptionsMenu():
 	if(optionsMenu):
 		optionsMenu.queue_free()
