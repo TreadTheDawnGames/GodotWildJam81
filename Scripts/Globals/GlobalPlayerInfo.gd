@@ -56,9 +56,11 @@ func ShipExitStorage(position : Vector2) -> PlayerShip:
 func EndGame(win : bool):
 	if(ActiveLevel):
 		ActiveLevel.ExitWithoutShop()
+		ActiveLevel = null
+		ActiveLevelInfo = null
 	var end : EndgameScreen = ENDGAME_SCREEN.instantiate()
 	end.Win = win
-	add_child(end)
+	GlobalPlayerInfo.GetGameRoot().add_child(end)
 	GlobalPlayerInfo.ShipEnterStorage()
 	return
 
@@ -82,7 +84,9 @@ func ResetValues():
 	#Money = 70
 	#Reputation = 0
 	#TotalTime = 0
-	get_tree().reload_current_scene()
+	get_tree().change_scene_to_file("res://game.tscn")
+	Money = 0
+	#get_tree().reload_current_scene()
 	retryCount+=1
 
 func GetGameRoot() -> GameRoot:

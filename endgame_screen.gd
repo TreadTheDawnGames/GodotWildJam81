@@ -12,23 +12,27 @@ class_name EndgameScreen
 @onready var total_time: RichTextLabel = $TotalTime
 @onready var button: Button = $Button
 
+@onready var sprite: Sprite2D = $Sprite2D
+
 var Win : bool = false
 
 func _ready() -> void:
 	if(Win):
 		headline.text = winHeadline
 		article.text = winArticle.replace("[/br]", "\n\n").replace("[num]", RomanNumeralize(GlobalPlayerInfo.retryCount))
+		sprite.modulate = Color.GREEN
 	else:
+		sprite.modulate = Color.RED
 		headline.text = loseHeadline
 		article.text = loseArticle.replace("[/br]", "\n\n").replace("[num]", RomanNumeralize(GlobalPlayerInfo.retryCount))
 	
 	button.pressed.connect(func(): 
-		GlobalPlayerInfo.GetGameRoot().TransitionToMainMenu()
+		GlobalPlayerInfo.GetGameRoot().call_deferred("TransitionToMainMenu")
 		GlobalPlayerInfo.ResetValues()
 		queue_free()
+		)
 		#GlobalPlayerInfo.GetGameRoot().TransitionToShop()
 		#GlobalPlayerInfo.GetGameRoot().ResetMap()
-		)
 	
 	reputation.text = "Your Reputation: " + str((GlobalPlayerInfo.Reputation * GlobalPlayerInfo.ThePlayerShip.GetCrewCount())+GlobalPlayerInfo.Money)
 		#https://forum.godotengine.org/t/how-to-show-on-a-label-how-much-time-from-a-timer-is-left/13594

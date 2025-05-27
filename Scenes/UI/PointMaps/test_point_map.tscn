@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://trj4gpb37v0o"]
+
+[node name="TestPointMap" type="Node2D"]
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(68, 345)
+
+[node name="Marker2D2" type="Marker2D" parent="."]
+position = Vector2(138, 380)
+
+[node name="Marker2D3" type="Marker2D" parent="."]
+position = Vector2(181, 341)
+
+[node name="Marker2D4" type="Marker2D" parent="."]
+position = Vector2(114, 307)

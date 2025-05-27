@@ -18,7 +18,7 @@ func HitSomething(area : Area2D):
 		var ast : Asteroid = area as Asteroid
 		ast.TakeDamage(1)
 		queue_free()
-	if(area.owner is ConnectionCell):
+	if(area.owner is ConnectionCell and !GlobalPlayerInfo.animating):
 		var room = area.owner.get_parent() as ShipRoom
 		room.DamageRoom(1)
 		queue_free()

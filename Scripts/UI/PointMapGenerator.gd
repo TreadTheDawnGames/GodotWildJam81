@@ -10,6 +10,7 @@ const pointMaps := [
 	preload("res://Scenes/UI/PointMaps/PointMap1.tscn"),
 	preload("res://Scenes/UI/PointMaps/PointMap2.tscn"),
 	preload("res://Scenes/UI/PointMaps/PointMap3.tscn"),
+	#preload("res://Scenes/UI/PointMaps/test_point_map.tscn")
 ]
 const idealStartPos := Vector2( 0, 300 )
 const idealEndPos := Vector2( 1024, 300 )
