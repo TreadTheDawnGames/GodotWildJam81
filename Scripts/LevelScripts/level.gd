@@ -75,7 +75,7 @@ func TrySpawnPirate():
 
 func _process(delta: float) -> void:
 	levelTimerLeft -= delta * (float(GlobalPlayerInfo.ThePlayerShip.GetSpeed())/2.0)
-	if(levelTimerLeft <= 0):
+	if(levelTimerLeft <= 0 and !complete):
 		TransitionOutOfLevel()
 		pass
 	if(levelTimerLeft <= 40):
@@ -87,7 +87,9 @@ func _process(delta: float) -> void:
 
 func TransitionOutOfLevel():
 	ExitWithoutShop()
+	#GlobalPlayerInfo.ThePlayerShip.EnterStorage()
 	LevelComplete.emit()
+	complete = true
 	return
 
 func ExitWithoutShop():
@@ -97,5 +99,4 @@ func ExitWithoutShop():
 	GlobalPlayerInfo.TotalTime += info.TimeToReach - levelTimerLeft
 	
 	complete = true
-	queue_free()
 	return

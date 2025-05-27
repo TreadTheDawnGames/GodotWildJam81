@@ -183,6 +183,8 @@ func GetCellWithValidOpeningInDirection(dir : ConnectionCell.Direction):
 	return null
 
 func DamageRoom(amount : int, checkParent : bool = false) -> bool:
+	if (GlobalPlayerInfo.animating):
+		return false
 	hitpoints -= amount
 	var thing : float = 1*(clamp(float(hitpoints), 0.1, maxHitpoints)/maxHitpoints)
 	sprite.modulate = Color(1,thing, thing , 1)

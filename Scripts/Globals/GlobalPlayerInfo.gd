@@ -13,6 +13,8 @@ var TotalTime : float
 var CurrShop : ShipBuilder
 var retryCount:int=0
 
+var animating : bool = false
+
 func AddRep(amount : int):
 	Reputation += amount
 
@@ -47,6 +49,7 @@ func ShipExitStorage(position : Vector2) -> PlayerShip:
 		#printerr("THERE IS NO PLAYER SHIP")
 		return
 	ThePlayerShip.global_position = position
+	#ThePlayerShip.animator.play("RESET")
 	ThePlayerShip.process_mode = Node.PROCESS_MODE_PAUSABLE
 	return ThePlayerShip
 

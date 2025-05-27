@@ -15,6 +15,7 @@ func _ready() -> void:
 	GlobalPlayerInfo.CurrShop = self
 	tutorial = $HelpButton/ShipyardTutorial
 	playerShip = GlobalPlayerInfo.ShipExitStorage(get_node("ShipPositioner").global_position)
+	playerShip.scale = Vector2.ONE
 	for cell : ConnectionCell in playerShip.positionIndexedChildren.values().filter(func(a): return is_instance_valid(a) and a is ConnectionCell):
 		cell.DoDebugSprites(false)
 	#playerShip.ClearInvalidValues()

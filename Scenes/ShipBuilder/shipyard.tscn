@@ -82,8 +82,8 @@ position = Vector2(387, 313)
 [node name="CloseButton" type="Button" parent="."]
 offset_left = 19.0
 offset_top = 598.0
-offset_right = 112.0
-offset_bottom = 629.0
+offset_right = 151.0
+offset_bottom = 630.0
 text = "Close Shipyard
 "
 
@@ -94,18 +94,18 @@ stream = ExtResource("41_hs3ok")
 stream = ExtResource("42_027qa")
 
 [node name="HelpButton" type="Button" parent="."]
-offset_left = 144.0
+offset_left = 157.0
 offset_top = 598.0
-offset_right = 176.0
-offset_bottom = 629.0
+offset_right = 189.0
+offset_bottom = 630.0
 text = "?"
 script = ExtResource("43_e7ai2")
 
 [node name="ShipyardTutorial" parent="HelpButton" instance=ExtResource("43_e7a7g")]
 layout_mode = 1
-offset_left = -193.0
+offset_left = -219.0
 offset_top = -619.0
-offset_right = 1036.0
+offset_right = 1010.0
 offset_bottom = 107.0
 
 [connection signal="finished" from="CrashIntoAsteroid" to="." method="_on_crash_into_asteroid_finished"]

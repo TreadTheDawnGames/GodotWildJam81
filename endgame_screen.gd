@@ -23,13 +23,14 @@ func _ready() -> void:
 		article.text = loseArticle.replace("[/br]", "\n\n").replace("[num]", RomanNumeralize(GlobalPlayerInfo.retryCount))
 	
 	button.pressed.connect(func(): 
-		queue_free()
+		GlobalPlayerInfo.GetGameRoot().TransitionToMainMenu()
 		GlobalPlayerInfo.ResetValues()
+		queue_free()
 		#GlobalPlayerInfo.GetGameRoot().TransitionToShop()
 		#GlobalPlayerInfo.GetGameRoot().ResetMap()
 		)
 	
-	reputation.text = "Your Reputation: " + str(GlobalPlayerInfo.Reputation + GlobalPlayerInfo.ThePlayerShip.GetCrewCount())
+	reputation.text = "Your Reputation: " + str((GlobalPlayerInfo.Reputation * GlobalPlayerInfo.ThePlayerShip.GetCrewCount())+GlobalPlayerInfo.Money)
 		#https://forum.godotengine.org/t/how-to-show-on-a-label-how-much-time-from-a-timer-is-left/13594
 	total_time.text = "Time Traveled: %d:%02d" % [floor(GlobalPlayerInfo.TotalTime / 60.0), int(GlobalPlayerInfo.TotalTime) % 60]
 

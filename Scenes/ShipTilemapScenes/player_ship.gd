@@ -11,6 +11,8 @@ var editing = false
 @export var gameAreaOffset : Vector2
 @onready var capn_hal: Crewmate = $CapnHal
 
+signal EnteredPlanet
+
 func _ready() -> void:
 	hitpoints = MaxHitpoints
 	dragNDrop = false
@@ -72,14 +74,35 @@ func EnterStorage():
 	process_mode = Node.PROCESS_MODE_DISABLED
 	return
 
-var savedPos
+var EnterPlanetAnimation : bool = false
+var animTimer : float = 0
+var goUpTime : float = 0.5
+var shrinkStart : float
+var shrinkStop : float
 func _process(delta: float) -> void:
-	if(editing):
-		return
-	var moveDir = Vector2(Input.get_axis("shipLEFT", "shipRIGHT"), Input.get_axis("shipUP", "shipDOWN")).normalized() * 50 * delta * GetSpeed()
-	global_position += moveDir
+	if(!editing):
+		var moveDir = Vector2(Input.get_axis("shipLEFT", "shipRIGHT"), Input.get_axis("shipUP", "shipDOWN")).normalized() * 50 * delta * GetSpeed()
+		global_position += moveDir
 	
-	ClampPosition()
+		ClampPosition()
+	
+	if (EnterPlanetAnimation):
+		editing = true
+		GlobalPlayerInfo.animating = true
+		animTimer += delta
+		if(animTimer < goUpTime):
+			global_position = lerp(global_position, Vector2(576.0, 324.0), 5*delta)
+			pass
+		elif(animTimer >= goUpTime):
+			global_position.y+=10
+			scale = lerp(scale, Vector2.ZERO, 5*delta)
+		if(scale <= Vector2(0.01, 0.01)):
+			EnteredPlanet.emit()
+			EnterPlanetAnimation = false
+			GlobalPlayerInfo.animating = false
+			animTimer = 0
+			EnterStorage()
+		pass
 	
 	return
 	
