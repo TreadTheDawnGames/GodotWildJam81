@@ -32,6 +32,8 @@ func _state_process(delta: float) -> Dictionary:
 func _state_transition_(_data: Dictionary) -> Dictionary:
 	if(crewmate.animSprite):
 		crewmate.animSprite.stop()
-	if !_path.is_empty():
+	if !_path.is_empty() and crewmate.navigation_tilemap.positionIndexedChildren.has(_to):
 		return {"new_state": "Walk"}
-	return {}
+	else:
+		return {"new_statess":"Work"}
+#	return {}

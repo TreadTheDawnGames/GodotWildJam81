@@ -12,7 +12,7 @@ var levelTimerMax : float = 500
 @export var planets : Array[Texture2D]
 
 var complete : bool = false
-
+var pirateOutTimer
 signal LevelComplete
 
 
@@ -54,10 +54,10 @@ func _ready():
 	pirateTimer.timeout.connect(TrySpawnPirate)
 	pirateTimer.autostart = true
 	
-	var pirateOutTimer = get_tree().create_timer(info.TimeToReach if info else 30 - 20)
+	pirateOutTimer = get_tree().create_timer(info.TimeToReach if info else 30 - 30)
 	pirateOutTimer.timeout.connect(pirate_spawner.PirateMoveInOut.bind(true))
 
-	var planetInViewTimer = get_tree().create_timer(info.TimeToReach if info else 50 - 40)
+	var planetInViewTimer = get_tree().create_timer(info.TimeToReach if info else 50 - 60)
 	planetInViewTimer.timeout.connect(planet_sprite.Move)
 
 func TrySpawnPirate():
@@ -68,7 +68,8 @@ func TrySpawnPirate():
 		pirateTimer.timeout.disconnect(TrySpawnPirate)
 	else:
 		pirate_spawner.hide()
-		pirateTimer.start()
+		if(levelTimerLeft < 20):
+			pirateTimer.start()
 		
 	return
 
@@ -77,10 +78,10 @@ func _process(delta: float) -> void:
 	if(levelTimerLeft <= 0):
 		TransitionOutOfLevel()
 		pass
-	if(levelTimerLeft <= 20):
+	if(levelTimerLeft <= 40):
 		planet_sprite.Move()
 		
-	if(levelTimerLeft <= 10):
+	if(levelTimerLeft <= 20):
 		pirate_spawner.PirateMoveInOut(true)
 	return
 

@@ -12,8 +12,11 @@ signal ShopClosed
 @onready var tutorial: Control
 
 func _ready() -> void:
+	GlobalPlayerInfo.CurrShop = self
 	tutorial = $HelpButton/ShipyardTutorial
 	playerShip = GlobalPlayerInfo.ShipExitStorage(get_node("ShipPositioner").global_position)
+	for cell : ConnectionCell in playerShip.positionIndexedChildren.values().filter(func(a): return is_instance_valid(a) and a is ConnectionCell):
+		cell.DoDebugSprites(false)
 	#playerShip.ClearInvalidValues()
 	playerShip.editing = true
 	ShopPanel = get_node("ShopPanel")
@@ -74,7 +77,7 @@ func SnapToShipGrid():
 
 
 func CloseShipyard():
-	playerShip.EnterStorage()
+	#playerShip.EnterStorage()
 	playerShip.editing = false
 	ShopClosed.emit()
-	queue_free()
+	#queue_free()

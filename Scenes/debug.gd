@@ -81,38 +81,61 @@ func KillMainMenu():
 	return
 
 func TransitionToShop():
-	for laser in get_tree().root.get_children().filter(func(a): return a is Laser):
-		laser.queue_free()
-	#check to see if the player just played the final level, and if they did, tell them they won.
-	if(GlobalPlayerInfo.ActiveLevelInfo and GlobalPlayerInfo.ActiveLevelInfo.FinalLevel):
-		GlobalPlayerInfo.EndGame(true)
-		return
-	flightSpeed = GlobalPlayerInfo.ThePlayerShip.GetSpeed()
-	var shop = shopScene.instantiate()
-	add_child(shop)
-	shop.ShopClosed.connect(TransitionToSpaceMap)
-	shop.tutorial.Setup(GlobalPlayerInfo.hideTutorials)
+	SlideTransition.EmitOnHalfway()
 	
+	for dict in SlideTransition.Halfway.get_connections():
+		SlideTransition.Halfway.disconnect(dict.callable)
+
+	SlideTransition.Halfway.connect(func(): 
+		for laser in get_tree().root.get_children().filter(func(a): return a is Laser):
+			laser.queue_free()
+		#check to see if the player just played the final level, and if they did, tell them they won.
+		if(GlobalPlayerInfo.ActiveLevelInfo and GlobalPlayerInfo.ActiveLevelInfo.FinalLevel):
+			GlobalPlayerInfo.EndGame(true)
+			return
+		flightSpeed = GlobalPlayerInfo.ThePlayerShip.GetSpeed()
+		var shop = shopScene.instantiate()
+		add_child(shop)
+		shop.ShopClosed.connect(TransitionToSpaceMap)
+		shop.tutorial.Setup(GlobalPlayerInfo.hideTutorials))
 	return
 
 func TransitionToSpaceMap():
-	stopAllMusic()
-	BackgroundMusic.get_child(1).play()
-	GlobalPlayerInfo.ShipEnterStorage()
-	space_map.show()
-	space_map.spacemap_tutorial.Setup(GlobalPlayerInfo.hideTutorials)
+	
+	
+	SlideTransition.EmitOnHalfway()
+	
+	for dict in SlideTransition.Halfway.get_connections():
+		SlideTransition.Halfway.disconnect(dict.callable)
 
+	SlideTransition.Halfway.connect(func(): 
+		stopAllMusic()
+		BackgroundMusic.get_child(1).play()
+		GlobalPlayerInfo.ShipEnterStorage()
+		if(GlobalPlayerInfo.CurrShop):
+			GlobalPlayerInfo.CurrShop.queue_free()
+			GlobalPlayerInfo.CurrShop = null
+			GlobalPlayerInfo.ThePlayerShip.EnterStorage()
+		space_map.show()
+		space_map.spacemap_tutorial.Setup(GlobalPlayerInfo.hideTutorials))
+		
 func TransitionToLevel():
-	stopAllMusic()
-	BackgroundMusic.get_child(2).play()
-	space_map.hide()
-	GlobalPlayerInfo.ShipExitStorage(shipSpawnMarker.global_position)
-	var level = LEVEL.instantiate() as Level
-	level.info = GlobalPlayerInfo.ActiveLevelInfo
-	add_child(level)
-	GlobalPlayerInfo.ActiveLevel = level
-	level.LevelComplete.connect(TransitionToShop)
-	return
+	SlideTransition.EmitOnHalfway()
+	
+	for dict in SlideTransition.Halfway.get_connections():
+		SlideTransition.Halfway.disconnect(dict.callable)
+
+	SlideTransition.Halfway.connect(func(): 
+		stopAllMusic()
+		BackgroundMusic.get_child(2).play()
+		space_map.hide()
+		GlobalPlayerInfo.ShipExitStorage(shipSpawnMarker.global_position)
+		var level = LEVEL.instantiate() as Level
+		level.info = GlobalPlayerInfo.ActiveLevelInfo
+		add_child(level)
+		GlobalPlayerInfo.ActiveLevel = level
+		level.LevelComplete.connect(TransitionToShop)
+		return)
 	
 func KillOptionsMenu():
 	if(optionsMenu):

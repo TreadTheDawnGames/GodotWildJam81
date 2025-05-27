@@ -31,7 +31,14 @@ var moneyAmt : int
 var FinalLevel : bool = false
 
 static func generateRandomLevel(nebula: bool = false, levelPosition: Vector2 = IdealStartPos, isAsteroidRoute: bool = false, dumbMode: bool = false) -> LevelInfo:
-	return LevelInfo.new(getRandomTimeToReach(levelPosition), getRandomReputation(levelPosition), getRandomSpaceDust(), getRandomPirateChance(levelPosition), getRandomAsteroidDensity(levelPosition, isAsteroidRoute, dumbMode), nebula)
+	var timeToReach = getRandomTimeToReach(levelPosition)
+	var spacedust = getRandomSpaceDust()
+	var pirateChance = getRandomPirateChance(levelPosition)
+	var asteroidDensity = getRandomAsteroidDensity(levelPosition, isAsteroidRoute, dumbMode)
+	
+	var reputation = timeToReach + (spacedust * 1) + (pirateChance * 1.5) + (asteroidDensity * 2)
+	
+	return LevelInfo.new(timeToReach, reputation, spacedust, pirateChance, asteroidDensity, nebula)
 
 func makePopupText(timeToReach: int, reputation: int, spaceDust: int, pirates: int, asteroidDensity: int, nebula: bool = false) -> String:
 	var popupText: String = ""
@@ -54,8 +61,8 @@ func makePopupText(timeToReach: int, reputation: int, spaceDust: int, pirates: i
 
 static func getRandomTimeToReach(levelPosition: Vector2 = IdealStartPos) -> int:
 	var distance = levelPosition.distance_to(IdealStartPos)
-	var minValue = 45
-	var maxValue = 120
+	var minValue = 60#45
+	var maxValue = 180#120
 	var distanceFactor = remap(distance, 0.0, 1000.0, minValue, maxValue)
 	return clamp(distanceFactor, minValue, maxValue)
 	#return randi_range(180, 300) # 3 to 5 minValueutes is aight I think

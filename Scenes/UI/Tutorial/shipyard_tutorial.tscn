@@ -15,7 +15,7 @@ Every room always has engines on its left side. The more engines your ship has t
 
 Some parts have lasers on the front. They fire automatically, but their fire rate changes based on the STARDUST value of the mission (chosen in the next phase).
 
-Crewmates (queue amongus) wander the ship doing various jobs (lorewise-they don't actually do anything but walk), but if the room they're in is destroyed they die.
+Crewmates wander the ship making sure the lasers work correctly. The more crewmates you have the faster you'll shoot, but if the room they're in is destroyed they'll die.
 
 Gold tinted parts add a crew member who spawns in the cockpit.
 

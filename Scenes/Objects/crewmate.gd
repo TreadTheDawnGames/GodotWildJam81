@@ -22,7 +22,7 @@ func _ready() -> void:
 	if owner is ShipRoom: 
 		navigation_tilemap = owner
 		animSprite = $AnimatedSprite2D
-		xOffset = (randf() - randf()) * 4
+		xOffset = (randf() - randf()) * 12
 		$AnimatedSprite2D.position = Vector2(xOffset,5)# * 16.0
 		navigation_tilemap.changed.connect(_on_nav_tilemap_changed)
 		if(alliance == Alliance.ALLIANCE_ENEMY):

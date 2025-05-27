@@ -10,7 +10,7 @@ var Money : int = 20
 var Reputation : int
 var hideTutorials : bool = false
 var TotalTime : float
-
+var CurrShop : ShipBuilder
 var retryCount:int=0
 
 func AddRep(amount : int):

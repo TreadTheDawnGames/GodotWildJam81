@@ -23,6 +23,7 @@ Global="*res://Scripts/global.gd"
 Background="*res://Scenes/ParalaxBackground.tscn"
 GameSettings="*res://Scripts/Globals/GameSettings.gd"
 BackgroundMusic="*res://Scenes/BackgroundMusic.tscn"
+SlideTransition="*res://Scenes/UI/SlideTransition.tscn"
 
 [input]
 
