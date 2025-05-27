@@ -66,7 +66,7 @@ theme_override_constants/separation = 15
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 32
 text = "Mission Briefing"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
@@ -85,12 +85,10 @@ theme_override_constants/separation = 7
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Movement/Movement2"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
 text = "Controlling the Ship"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/Movement/Movement2"]
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 14
 text = "W	- Move Up
 A	- Move Left
 S	- Move Down
@@ -104,13 +102,12 @@ theme_override_constants/separation = 7
 
 [node name="Label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/BuildingShip"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 16
 text = "Survive and bring home the ancient
 knowledge from Cordova"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/BuildingShip"]
 layout_mode = 2
-theme_override_font_sizes/normal_font_size = 14
 text = "The road to Cordova was rocky and our ship is barely hanging on.
 We will have the ability to build up our ship again at pit stops on the way home. However our resources are limited, we have to be mindful of the parts we decide to acquire!
 

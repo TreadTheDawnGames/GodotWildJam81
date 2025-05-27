@@ -25,6 +25,10 @@ GameSettings="*res://Scripts/Globals/GameSettings.gd"
 BackgroundMusic="*res://Scenes/BackgroundMusic.tscn"
 SlideTransition="*res://Scenes/UI/SlideTransition.tscn"
 
+[gui]
+
+theme/custom_font="uid://gaw130slteqi"
+
 [input]
 
 AOS.debug_left_click={

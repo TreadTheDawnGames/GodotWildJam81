@@ -15,11 +15,11 @@ text = "This is the space map. Here you choose your path home by clicking on the
 [node name="RichTextLabel2" type="RichTextLabel" parent="Panel" index="2"]
 layout_mode = 0
 offset_left = 31.0
-offset_top = 137.0
+offset_top = 133.0
 offset_right = 699.0
 offset_bottom = 488.0
 mouse_filter = 1
-theme_override_font_sizes/normal_font_size = 11
+theme_override_font_sizes/normal_font_size = 8
 text = "Time to Travel:
 	How long in minutes/seconds it will take to reach this pit stop. The number of engines on your ship will effect how fast the time actually passes. This will tick faster if you have more engines.
 

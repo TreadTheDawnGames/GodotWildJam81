@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dxyq5ccvvdfax"]
+[gd_scene load_steps=4 format=3 uid="uid://dxyq5ccvvdfax"]
 
 [ext_resource type="Texture2D" uid="uid://dgmilvislq0j8" path="res://Assets/Sprites/ShipBuilder/MoneyPanel.png" id="1_yh2sq"]
 [ext_resource type="Script" uid="uid://dolsv1u3uubem" path="res://Scripts/UI/game_info_panel.gd" id="2_1x43a"]
+[ext_resource type="FontFile" uid="uid://gaw130slteqi" path="res://Assets/UI/TreadTheDawnPixResize.ttf" id="3_s7y3o"]
 
 [node name="MoneyPanel" type="Sprite2D"]
 z_index = -1
@@ -14,6 +15,7 @@ offset_top = -41.0
 offset_right = -355.0
 offset_bottom = -16.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_s7y3o")
 text = "Money: ERRR"
 
 [node name="SpeedLabel" type="RichTextLabel" parent="."]
@@ -22,6 +24,7 @@ offset_top = -21.0
 offset_right = -358.0
 offset_bottom = 8.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_s7y3o")
 text = "Speed: ERRR"
 
 [node name="CrewCountLabel" type="RichTextLabel" parent="."]
@@ -30,6 +33,7 @@ offset_top = -1.0
 offset_right = -371.0
 offset_bottom = 25.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_s7y3o")
 text = "Crew: ERRR"
 
 [node name="FirepowerLabel" type="RichTextLabel" parent="."]
@@ -38,6 +42,7 @@ offset_top = 18.0
 offset_right = -364.0
 offset_bottom = 51.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_s7y3o")
 text = "FirPwr: ERRR"
 
 [node name="TimeLeft" type="RichTextLabel" parent="."]
@@ -46,6 +51,7 @@ offset_top = 13.0
 offset_right = 495.0
 offset_bottom = 38.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_s7y3o")
 text = "Time: E:RR"
 
 [node name="DustLabel" type="RichTextLabel" parent="."]
@@ -53,6 +59,7 @@ offset_left = 475.0
 offset_top = -40.0
 offset_right = 576.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_s7y3o")
 text = "Dust: ERR%"
 
 [node name="AsteroidLabel" type="RichTextLabel" parent="."]
@@ -61,6 +68,7 @@ offset_top = -40.0
 offset_right = 487.0
 offset_bottom = -17.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_s7y3o")
 text = "AstDense: ERR%"
 
 [node name="ReputationLabel" type="RichTextLabel" parent="."]
@@ -69,12 +77,14 @@ offset_top = -14.0
 offset_right = 447.0
 offset_bottom = 9.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_s7y3o")
 text = "RepGain: ERR"
 
 [node name="PayoutLabel" type="RichTextLabel" parent="."]
 offset_left = 459.0
 offset_top = -15.0
-offset_right = 563.0
+offset_right = 581.0
 offset_bottom = 8.0
 theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_s7y3o")
 text = "Payout: $ERR"

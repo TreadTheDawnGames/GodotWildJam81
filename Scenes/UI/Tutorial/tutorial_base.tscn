@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://c7blm8e5boclc"]
+[gd_scene load_steps=3 format=3 uid="uid://c7blm8e5boclc"]
 
 [ext_resource type="Script" uid="uid://dtcy222h3x4sp" path="res://Scripts/UI/Tutorial/shipyard_tutorial.gd" id="1_vvtbc"]
+[ext_resource type="FontFile" uid="uid://gaw130slteqi" path="res://Assets/UI/TreadTheDawnPixResize.ttf" id="2_dbsbm"]
 
 [node name="ShipyardTutorial" type="Control"]
 layout_mode = 3
@@ -26,6 +27,7 @@ offset_top = 21.0
 offset_right = 194.0
 offset_bottom = 61.0
 mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("2_dbsbm")
 theme_override_font_sizes/normal_font_size = 26
 text = "TUTORIAL"
 
@@ -36,6 +38,7 @@ offset_top = 63.0
 offset_right = 683.0
 offset_bottom = 461.0
 mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("2_dbsbm")
 text = "Placeholder
 "
 
@@ -46,6 +49,7 @@ offset_top = 464.0
 offset_right = 706.0
 offset_bottom = 479.0
 mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("2_dbsbm")
 theme_override_font_sizes/normal_font_size = 9
 text = "Click anywhere to dismiss"
 
@@ -55,5 +59,6 @@ offset_left = 747.0
 offset_top = 545.0
 offset_right = 850.0
 offset_bottom = 571.0
+theme_override_fonts/font = ExtResource("2_dbsbm")
 theme_override_font_sizes/font_size = 8
 text = "Hide Tutorials"

@@ -11,13 +11,20 @@
 [node name="Body" parent="Panel" index="1"]
 text = "This is the shipyard. Here you can purchase rooms to expand your ship.
 
+
 Every room always has engines on its left side. The more engines your ship has the faster it goes. It also makes it more maneuverable.
+
+
 
 Some parts have lasers on the front. They fire automatically, but their fire rate changes based on the STARDUST value of the mission (chosen in the next phase).
 
+
+
 Crewmates wander the ship making sure the lasers work correctly. The more crewmates you have the faster you'll shoot, but if the room they're in is destroyed they'll die.
 
+
 Gold tinted parts add a crew member who spawns in the cockpit.
+
 
 If your cockpit is destroyed or have zero crewmates, the expedition has failed and you lose."
 

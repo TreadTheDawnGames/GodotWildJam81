@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://c6gvfe2oay3e0"]
+[gd_scene load_steps=9 format=3 uid="uid://c6gvfe2oay3e0"]
 
 [ext_resource type="PackedScene" uid="uid://c7blm8e5boclc" path="res://Scenes/UI/Tutorial/tutorial_base.tscn" id="1_5vlq8"]
 [ext_resource type="Texture2D" uid="uid://byjdqe8bap7v1" path="res://Assets/Sprites/Asteroids/Asteroid2.png" id="2_1vpct"]
+[ext_resource type="FontFile" uid="uid://gaw130slteqi" path="res://Assets/UI/TreadTheDawnPixResize.ttf" id="2_c6acb"]
 [ext_resource type="Texture2D" uid="uid://bvtu6om0gqbsw" path="res://Assets/Sprites/Asteroids/SmallAsteroid2.png" id="3_c6acb"]
 [ext_resource type="Texture2D" uid="uid://bxmrjrl1r236t" path="res://Assets/Sprites/Asteroids/SmallAsteroid3.png" id="4_6krka"]
 [ext_resource type="Texture2D" uid="uid://dtsesrdjvh14w" path="res://Assets/Sprites/Map/Planet1.png" id="5_c2ale"]
@@ -22,15 +23,23 @@ offset_top = 132.0
 offset_right = 678.0
 offset_bottom = 449.0
 mouse_filter = 1
+theme_override_fonts/normal_font = ExtResource("2_c6acb")
+theme_override_font_sizes/normal_font_size = 16
 text = "Large asteroids have 5 hits. When destroyed they turn into two mini asteroids.
 
+
+
 Mini asteroids have 3 hits.
+
 
 
 Lasers do one damage.
 
 
+
 Pirates can spawn with 1-3 laser rooms.
+
+
 
 
 Planets indicate you're nearing the end of the level."
