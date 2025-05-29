@@ -19,8 +19,8 @@ anchors_preset = -1
 anchor_top = 0.5
 anchor_bottom = 0.5
 offset_left = 60.0
-offset_top = -125.0
-offset_right = 530.0
+offset_top = 46.0
+offset_right = 590.0
 offset_bottom = 125.0
 grow_vertical = 2
 
@@ -60,6 +60,7 @@ script = ExtResource("2_tut6h")
 busName = "Master"
 
 [node name="MusicVolumeContainer" type="HBoxContainer" parent="PanelContainer/Container/OptionsContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 15
 
@@ -77,6 +78,7 @@ script = ExtResource("2_tut6h")
 busName = "Music"
 
 [node name="SFXVolumeContainer" type="HBoxContainer" parent="PanelContainer/Container/OptionsContainer"]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 15
 
@@ -104,7 +106,6 @@ text = "Hide Tutorials"
 [node name="ShowTutsToggle" type="CheckButton" parent="PanelContainer/Container/OptionsContainer/ShowTuts"]
 unique_name_in_owner = true
 layout_mode = 2
-toggle_mode = false
 
 [node name="ScreenShakeContainer" type="HBoxContainer" parent="PanelContainer/Container/OptionsContainer"]
 layout_mode = 2

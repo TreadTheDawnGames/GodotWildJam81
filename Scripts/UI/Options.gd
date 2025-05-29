@@ -35,5 +35,5 @@ func _on_volume_slider_drag_ended(value_changed: bool) -> void:
 
 
 func _on_show_tuts_toggle_toggled(toggled_on: bool) -> void:
-	GlobalPlayerInfo.hideTutorials = !toggled_on
+	GlobalPlayerInfo.hideTutorials = toggled_on
 	pass # Replace with function body.

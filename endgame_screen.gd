@@ -48,7 +48,7 @@ func RomanNumeralize(num : int) -> String:
 		1:
 			returnStr += ""
 		2:
-			returnStr += "II"
+			returnStr += "JR."
 		3:
 			returnStr += "III"
 		4:
